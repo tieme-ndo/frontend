@@ -6,7 +6,7 @@ import Login from './components/pages/Login';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" data-testid="App">
         <nav>
           <ul>
             <li>
