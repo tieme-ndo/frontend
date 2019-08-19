@@ -2,7 +2,7 @@ import React from 'react';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="App">
       <header>
         <h1>Tieme Ndo</h1>
       </header>
