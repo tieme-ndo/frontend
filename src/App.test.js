@@ -4,5 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 
 it('renders without crashing', () => {
-  render(<App />);
+  const { getByTestId } = render(<App />);
+  const AppComponent = getByTestId('App');
+  expect(AppComponent).toBeInTheDocument();
+
 });
