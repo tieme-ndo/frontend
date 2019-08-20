@@ -18,8 +18,8 @@ function Login(props) {
     changeStatus({ ...status, loading: true });
     axios
       .put("https://tieme-ndo-backend-production.herokuapp.com/", {
-        email: email,
-        password: password
+        email: credentials.email,
+        password: credentials.password
       })
       .then(res => {
         if (res.token) {
@@ -52,13 +52,13 @@ function Login(props) {
         <input
           type="password"
           placeholder="Enter Password"
-          value={state.password}
+          value={credentials.password}
           onChange={e =>
             changeCredentials({ ...credentials, password: e.target.value })
           }
         />
-        <input type="submit" value={loading ? "Loading..." : "Log In"} />
-        {error && <div>Wrong email or password, please try again</div>}
+        <input type="submit" value={status.loading ? "Loading..." : "Log In"} />
+        {status.error && <div>Wrong email or password, please try again</div>}
       </form>
     </div>
   );
