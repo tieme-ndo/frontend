@@ -17,7 +17,7 @@ function Table({ columns, data }) {
 
   // Render the UI for your table
   return (
-    <StyledTable {...getTableProps()}>
+    <StyledTable {...getTableProps()} data-testid="Table-test">
       <thead>
         {headerGroups.map((headerGroup, index) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={index}>
