@@ -6,6 +6,7 @@ const PageHeader = props => {
   const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
   `;
 
   const { leftElement, rightElement } = props;
