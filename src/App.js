@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Index from './components/pages/Index';
 import Login from './components/pages/Login';
+import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Dashboard</Link>
             </li>
             <li>
               <Link to="/login/">Login</Link>
@@ -18,7 +18,7 @@ function App() {
           </ul>
         </nav>
 
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={Dashboard} />
         <Route path="/login/" component={Login} />
       </div>
     </Router>
