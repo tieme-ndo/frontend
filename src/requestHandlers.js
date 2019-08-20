@@ -1,0 +1,2 @@
+
+export const returnTrue = () => true;
