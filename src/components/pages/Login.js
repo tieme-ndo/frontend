@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import {
+  BackgroundDiv,
+  FormContainer,
+  StyledH1,
+  StyledInput
+} from "../styles/styledlogin.js";
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
@@ -25,6 +32,8 @@ function Login(props) {
         if (res.token) {
           localStorage.setItem("token", res.token);
           changeStatus({ ...status, error: false });
+        } else {
+          changeStatus({ ...status, error: true });
         }
       })
       .catch(err => {
@@ -38,29 +47,34 @@ function Login(props) {
   }
 
   return (
-    <div>
-      <h1>Log In</h1>
-      <form onSubmit={submitLogin}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={credentials.email}
-          onChange={e =>
-            changeCredentials({ ...credentials, email: e.target.value })
-          }
-        />
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={credentials.password}
-          onChange={e =>
-            changeCredentials({ ...credentials, password: e.target.value })
-          }
-        />
-        <input type="submit" value={status.loading ? "Loading..." : "Log In"} />
-        {status.error && <div>Wrong email or password, please try again</div>}
-      </form>
-    </div>
+    <BackgroundDiv>
+      <FormContainer>
+        <StyledH1>Log In</StyledH1>
+        <form onSubmit={submitLogin}>
+          <StyledInput
+            type="email"
+            placeholder="Enter Email"
+            value={credentials.email}
+            onChange={e =>
+              changeCredentials({ ...credentials, email: e.target.value })
+            }
+          />
+          <StyledInput
+            type="password"
+            placeholder="Enter Password"
+            value={credentials.password}
+            onChange={e =>
+              changeCredentials({ ...credentials, password: e.target.value })
+            }
+          />
+          <StyledInput
+            type="submit"
+            value={status.loading ? "Loading..." : "Log In"}
+          />
+          {status.error && <div>Wrong email or password, please try again</div>}
+        </form>
+      </FormContainer>
+    </BackgroundDiv>
   );
 }
 
