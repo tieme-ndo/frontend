@@ -70,14 +70,14 @@ const newFarmer = () => {
     address: '17 Tractor Road, Arcadia',
     acres: 5.3,
     crops: ['Wheat', 'Corn'].join(', '),
-    more: (<a href="#">More</a>)
+    more: (<button>More</button>)
   };
 };
 
 function makeData(...lens) {
   const makeDataLevel = (depth = 0) => {
     const len = lens[depth];
-    return range(len).map(d => {
+    return range(len).map(() => {
       return {
         ...newFarmer(),
         subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined

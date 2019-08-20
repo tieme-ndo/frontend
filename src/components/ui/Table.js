@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 function Table({ columns, data }) {
@@ -10,8 +11,8 @@ function Table({ columns, data }) {
   });
 
   const StyledTable = styled.table`
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    text-align: center;
   `;
 
   // Render the UI for your table
@@ -30,7 +31,7 @@ function Table({ columns, data }) {
       </thead>
       <tbody>
         {rows.map(
-          (row, i) =>
+          row =>
             prepareRow(row) || (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell, index) => {
@@ -47,5 +48,10 @@ function Table({ columns, data }) {
     </StyledTable>
   );
 }
+
+Table.propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired
+};
 
 export default Table;
