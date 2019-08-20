@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const PageHeader = props => {
   const StyledHeader = styled.div`
@@ -19,6 +20,11 @@ const PageHeader = props => {
       </div>
     </StyledHeader>
   );
+};
+
+PageHeader.propTypes = {
+  leftElement: PropTypes.element.isRequired,
+  rightElement: PropTypes.element
 };
 
 export default PageHeader;
