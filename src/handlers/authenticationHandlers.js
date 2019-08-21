@@ -35,7 +35,7 @@ export const registrationHandler = ({ email, password }) => {
   .then(res => {
     if (res.data) {
       
-      // Calls login 
+      // Calls login as found above
       loginHandler({
         email, 
         password,
