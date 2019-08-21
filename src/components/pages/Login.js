@@ -47,11 +47,11 @@ function Login(props) {
   }
 
   return (
-    <BackgroundDiv>
-      <FormContainer>
-        <StyledH1>Log In</StyledH1>
+    <div>
+      <div>
+        <h1>Log In</h1>
         <form onSubmit={submitLogin}>
-          <StyledInput
+          <input
             type="email"
             placeholder="Enter Email"
             value={credentials.email}
@@ -59,7 +59,7 @@ function Login(props) {
               changeCredentials({ ...credentials, email: e.target.value })
             }
           />
-          <StyledInput
+          <input
             type="password"
             placeholder="Enter Password"
             value={credentials.password}
@@ -67,14 +67,14 @@ function Login(props) {
               changeCredentials({ ...credentials, password: e.target.value })
             }
           />
-          <StyledInput
+          <input
             type="submit"
             value={status.loading ? "Loading..." : "Log In"}
           />
           {status.error && <div>Wrong email or password, please try again</div>}
         </form>
-      </FormContainer>
-    </BackgroundDiv>
+      </div>
+    </div>
   );
 }
 
