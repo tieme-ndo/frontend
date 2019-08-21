@@ -2,12 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import {
-  BackgroundDiv,
-  FormContainer,
-  StyledH1,
-  StyledInput
-} from "../styles/styledLogin.js";
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
