@@ -7,7 +7,7 @@ import {
   FormContainer,
   StyledH1,
   StyledInput
-} from "../styles/styledlogin.js";
+} from "../styles/styledLogin.js";
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
