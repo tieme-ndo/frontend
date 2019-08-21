@@ -1,6 +1,6 @@
 import React from 'react';
-import PageHeader from '../ui/PageHeader';
-import Table from '../ui/Table';
+import PageHeader from '../common/PageHeader/PageHeader'
+import Table from '../common/Table/Table';
 
 const Dashboard = () => {
   const Title = <h2>Dashboard</h2>;
