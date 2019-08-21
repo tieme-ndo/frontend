@@ -2,15 +2,15 @@ import axios from 'axios';
 
 import { URL } from './../utils/generalVariables';
 
-export const loginHandler = ({ email, password }) => {
-  if (!email || !password || typeof email !== "string" || typeof password !== "string" || password.length < 8 ) {
-    return new Error("Make sure you're passing a valid email address and a password that's at least 8 characters long")
+export const loginHandler = ({ username, password }) => {
+  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 8 ) {
+    return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
 
-  axios.post(`${URL}/login`, { 
-      email, 
-      password,
-    })
+  return axios.post(`${URL}/login`, { 
+    username, 
+    password,
+  })
     .then(res => {
       if (res.token) {
         return checkAndStoreToken(res.data.token);
@@ -23,30 +23,29 @@ export const loginHandler = ({ email, password }) => {
     })
 }
 
-export const registrationHandler = ({ email, password }) => {
-  if (!email || !password || typeof email !== "string" || typeof password !== "string" || password.length < 8 ) {
-    return new Error("Make sure you're passing a valid email address and a password that's at least 8 characters long")
+export const registrationHandler = ({ username, password }) => {
+  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 8 ) {
+    return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
   
-  axios.post(`${URL}/register`, { 
-    email, 
+  return axios.post(`${URL}/register`, { 
+    username, 
     password,
   })
-  .then(res => {
-    if (res.data) {
-      
-      // Calls login as found above
-      loginHandler({
-        email, 
-        password,
-      })
-    } else {
-      return new Error('Something went wrong with your registration. Please try again.')
-    }
-  })
-  .catch(error => {
-    return new Error('The request failed. There might be something wrong with your connection.')
-  })
+    .then(res => {
+      if (res.data) {
+        // Calls login as found above
+        loginHandler({
+          username, 
+          password,
+        })
+      } else {
+        return new Error('Something went wrong with your registration. Please try again.')
+      }
+    })
+    .catch(error => {
+      return new Error('The request failed. There might be something wrong with your connection.')
+    })
 }
 
 export const checkAndStoreToken = (token) => {
