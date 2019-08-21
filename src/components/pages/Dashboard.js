@@ -1,10 +1,11 @@
 import React from 'react';
-import PageHeader from '../common/PageHeader/PageHeader'
+import PageHeader from '../common/PageHeader/PageHeader';
 import Table from '../common/Table/Table';
+import Button from '../common/Button/Button';
 
 const Dashboard = () => {
   const Title = <h2>Dashboard</h2>;
-  const Button = <button>Add Farmer</button>;
+  const buttonText = "Add Farmer";
 
   const columns = React.useMemo(
     () => [
@@ -46,7 +47,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageHeader leftElement={Title} rightElement={Button} />
+      <PageHeader leftElement={Title} rightElement={<Button text={buttonText} />} />
       <Table columns={columns} data={data} />
     </>
   );
