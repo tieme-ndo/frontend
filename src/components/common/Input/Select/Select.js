@@ -17,8 +17,6 @@ const select = props => {
     border-radius: 0.3rem;
     border: 0.07rem solid;
   `
-
-  
   return (
     <Select name={name}>
       {Option[options].map(elem => (
