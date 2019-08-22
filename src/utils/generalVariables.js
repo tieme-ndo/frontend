@@ -1,3 +1,6 @@
+/**
+ * @TODO Add environment variable with URL based on environment
+ */
 const URL = "http://demo0656939.mockable.io"
 
 // Path contains the 'base' of the URL but does not includes params
