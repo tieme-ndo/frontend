@@ -29,7 +29,7 @@ function Login(props) {
     }
   };
 
-  if (localStorage.getItem('token')) {
+  if (localStorage.getItem(tokenKey)) {
     return <Redirect to="/" />;
   }
 
