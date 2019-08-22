@@ -69,7 +69,7 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
   )
     .then(res => {
       if (res.data.successMessage) {
-        return res.data.farmer
+        return res.data
       }
     })
 

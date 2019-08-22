@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { pathObj } from './../utils/generalVariables';
+import { setHeaders } from './../utils/requestHeaders'
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
@@ -8,7 +9,7 @@ export const loginHandler = ({ username, password }) => {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
 
-  return axios.post(`${pathObj.loginPath}`, { 
+  return axios.post(`${pathObj.loginPath}`,  { 
     username, 
     password,
   })
@@ -27,20 +28,22 @@ export const loginHandler = ({ username, password }) => {
 
 // There is no `addUserHandler` since the only avenue for adding new users should be when an admin registers a new user
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
-export const registrationHandler = ({ username, password }) => {
+export const registrationHandler = ({ username, password }, token) => {
   // Once database schema is finalized, this conditional check could be refactored into a separate utility function.
   if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
   
-  return axios.post(`${pathObj.registrationPath}`, { 
-    username, 
-    password,
-  })
+  return axios.post(`${pathObj.registrationPath}`, 
+    setHeaders(token),
+    { 
+      username, 
+      password,
+    }
+  )
     .then(res => {
-      if (res.data) {
-        checkAndStoreToken(res.data.token);
-        return res.data.user
+      if (res.data.successMessage) {
+        return res.data
       } else {
         return new Error('Something went wrong with your registration. Please try again.')
       }
