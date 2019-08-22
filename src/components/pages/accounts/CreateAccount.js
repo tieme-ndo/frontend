@@ -26,12 +26,7 @@ const CreateAccount = () => {
       <form onSubmit={onCreate}>
         <div>
           <label htmlFor="username">Username</label>
-          <input
-            ref={usernameRef}
-            id="username"
-            name="username"
-            type="text"
-          />
+          <input ref={usernameRef} id="username" name="username" type="text" />
         </div>
         <div>
           <label htmlFor="password">Password</label>
