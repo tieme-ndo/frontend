@@ -1,19 +1,20 @@
 import axios from 'axios';
 
-import { URL } from './../utils/generalVariables';
+import { pathObj } from './../utils/generalVariables';
 
 export const loginHandler = ({ username, password }) => {
   if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 8 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
 
-  return axios.post(`${URL}/login`, { 
+  return axios.post(`${pathObj.loginPath}`, { 
     username, 
     password,
   })
     .then(res => {
       if (res.token) {
-        return checkAndStoreToken(res.data.token);
+        checkAndStoreToken(res.data.token);
+        return res.data.user
       } else {
         return new Error('Oh no, there was no token returned by the database!')
       }
@@ -28,17 +29,14 @@ export const registrationHandler = ({ username, password }) => {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
   
-  return axios.post(`${URL}/register`, { 
+  return axios.post(`${pathObj.registrationPath}`, { 
     username, 
     password,
   })
     .then(res => {
       if (res.data) {
-        // Calls login as found above
-        loginHandler({
-          username, 
-          password,
-        })
+        checkAndStoreToken(res.data.token);
+        return res.data.user
       } else {
         return new Error('Something went wrong with your registration. Please try again.')
       }
