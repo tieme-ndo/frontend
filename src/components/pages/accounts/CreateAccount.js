@@ -1,4 +1,5 @@
 import React from 'react';
+import { registrationHandler, getToken } from '../../../handlers/authenticationHandlers';
 
 const CreateAccount = () => {
   const usernameRef = React.useRef();
@@ -9,13 +10,23 @@ const CreateAccount = () => {
   const [message, setMessage] = React.useState(undefined);
   const [loading, setLoading] = React.useState(false);
 
-  const onCreate = event => {
+  const onCreate = async event => {
     event.preventDefault();
     setLoading(true);
-    // To make request using client
-    // if success, setMessage(message)
-    // if error, setErrorMessage(error)
-    // setLoading(false);
+    try {
+      await registrationHandler({
+        username: usernameRef.current.value,
+        password: passwordRef.current.value,
+        isAdmin: isAdminRef.current.checked,
+        token: getToken()
+      });
+      setMessage('Account successfully created');
+    } catch (error) {
+      const errorDescription = error.response.data.error_description;
+      setErrorMessage(errorDescription);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
