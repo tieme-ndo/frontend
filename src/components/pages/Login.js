@@ -14,11 +14,11 @@ function Login(props) {
     error: false
   });
 
-  const submitLogin = event => {
+  const submitLogin = async event => {
     event.preventDefault();
     changeStatus({ ...status, loading: true });
     try {
-      loginHandler({
+      await loginHandler({
         username: credentials.username,
         password: credentials.password
       });
