@@ -1,6 +1,8 @@
 const URL = "http://demo0656939.mockable.io"
 
-export const  pathObj = {
+// Path contains the 'base' of the URL but does not includes params
+// These will have to be included separately in the Axios request
+export const pathObj = {
   loginPath: `${URL}/login`,
   registrationPath: `${URL}/register`,
 
