@@ -11,10 +11,13 @@ export const pathObj = {
 
   getUserPath: `${URL}/users`,
   changePasswordPath: `${URL}/users/change-password`,
+  registrationPath: `${URL}/users/signup`,
   deleteUserPath: `${URL}/users`,
 
   getFarmersPath: `${URL}/farmers`,
   addFarmerPath: `${URL}/farmers`,
   updateFarmerPath: `${URL}/farmers`,
-  deleteFarmerPath: `${URL}/farmers`,
-}
+  deleteFarmerPath: `${URL}/farmers`
+};
+
+export const tokenKey = 'token';
