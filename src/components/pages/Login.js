@@ -61,10 +61,18 @@ function Login(props) {
               changeCredentials({ ...credentials, password: e.target.value })
             }
           />
-          <input
+          {status.loading ? 
+          <button
             type="submit"
-            value={status.loading ? "Loading..." : "Log In"}
+            value="Loading..."
+            disabled
+            />
+            :
+            <button
+            type="submit"
+            value="Log In"
           />
+          }
           {status.error && <div>Wrong email or password, please try again</div>}
         </form>
       </div>
