@@ -4,7 +4,7 @@ import { pathObj } from './../utils/generalVariables';
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
-  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 8 ) {
+  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
 
@@ -29,7 +29,7 @@ export const loginHandler = ({ username, password }) => {
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
 export const registrationHandler = ({ username, password }) => {
   // Once database schema is finalized, this conditional check could be refactored into a separate utility function.
-  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 8 ) {
+  if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
   

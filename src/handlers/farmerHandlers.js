@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { pathObj } from '../utils/generalVariables';
+import { setHeaders } from '../utils/requestHeaders';
 
 export const getFarmersHandler = (token) => {
 
-  return axios.get(`${pathObj.getFarmersPath}`, { 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+  return axios.get(`${pathObj.getFarmersPath}`, 
+    setHeaders(token)
+  )
     .then(res => {
       if (res.data) {
         return res.data.farmers
@@ -24,12 +22,9 @@ export const getIndividualFarmerHandler = (farmerId, token) => {
     return new Error("Make sure you're passing a farmer id!")
   }
 
-  return axios.get(`${pathObj.getFarmersPath}/${farmerId}`, { 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
+  return axios.get(`${pathObj.getFarmersPath}/${farmerId}`, 
+    setHeaders(token)
+  )
     .then(res => {
       if (res.data) {
         return res.data.farmer
@@ -48,12 +43,10 @@ export const addFarmerHandler = (newFarmer, token) => {
     return new Error("Make sure you're passing an object that contains the relevant information for the new farmer!")
   }
 
-  return axios.post(`${pathObj.addFarmerPath}`, { 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  }, newFarmer)
+  return axios.post(`${pathObj.addFarmerPath}`, 
+    setHeaders(token), 
+    newFarmer
+  )
     .then(res => {
       if (res.data.successMessage) {
         return res.data.farmer
@@ -70,12 +63,10 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     return new Error("Make sure you're passing valid changes!")
   }
 
-  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}`, { 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      }
-    }, { changes })
+  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}`, 
+    setHeaders(token), 
+    { changes }
+  )
     .then(res => {
       if (res.data.successMessage) {
         return res.data.farmer
@@ -88,12 +79,9 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
 }
 
 export const deleteFarmerHandler = (farmerId, token) => {
-  return axios.delete(`${pathObj.deleteFarmerPath}/${farmerId}`, { 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      }
-    })
+  return axios.delete(`${pathObj.deleteFarmerPath}/${farmerId}`, 
+    setHeaders(token)
+  )
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage
