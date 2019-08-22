@@ -49,7 +49,7 @@ export const addFarmerHandler = (newFarmer, token) => {
   )
     .then(res => {
       if (res.data.successMessage) {
-        return res.data.farmer
+        return res.data
       }
     })
     .catch(error => {
