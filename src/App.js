@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Dashboard from './components/pages/Dashboard';
 import Login from './components/pages/accounts/Login';
-import CreateAccount from './components/pages/accounts/CreateAccount';
+import CreateAccount from './components/pages/accounts/CreateAccount/CreateAccount';
 
 function App() {
   return (

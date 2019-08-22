@@ -1,5 +1,5 @@
 import React from 'react';
-import { registrationHandler, getToken } from '../../../handlers/authenticationHandlers';
+import { registrationHandler, getToken } from '../../../../handlers/authenticationHandlers';
 
 const CreateAccount = () => {
   const usernameRef = React.useRef();
@@ -42,7 +42,13 @@ const CreateAccount = () => {
       <form onSubmit={onCreate}>
         <div>
           <label htmlFor="username">Username</label>
-          <input ref={usernameRef} id="username" name="username" type="text" />
+          <input
+            ref={usernameRef}
+            id="username"
+            name="username"
+            type="text"
+            data-testid="username-field"
+          />
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -51,6 +57,7 @@ const CreateAccount = () => {
             id="password"
             name="password"
             type="password"
+            data-testid="password-field"
           />
         </div>
         <div>
@@ -60,6 +67,7 @@ const CreateAccount = () => {
             type="checkbox"
             id="is-admin"
             name="is-admin"
+            data-testid="admin-checkbox"
           />
         </div>
         {loading ? (
