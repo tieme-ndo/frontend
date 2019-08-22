@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Index from './components/pages/Index';
 import Login from './components/pages/Login';
+import AddFarmer from '../src/components/pages/AddFarmer.jsx'
 
 function App() {
   return (
@@ -15,11 +16,15 @@ function App() {
             <li>
               <Link to="/login/">Login</Link>
             </li>
+            <li>
+              <Link to="/add-farmer/">Add Farmer</Link>
+            </li>
           </ul>
         </nav>
 
         <Route path="/" exact component={Index} />
         <Route path="/login/" component={Login} />
+        <Route path="/add-farmer/" component={AddFarmer} />
       </div>
     </Router>
   );

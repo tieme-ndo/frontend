@@ -1,22 +1,4 @@
-/** @format */
-
-import React from 'react'
-import styled from 'styled-components'
-
-const select = props => {
-  const {name, options} = props
-  const Select = styled.select`
-    font-size: 1.6rem;
-    outline: none;
-    display: block;
-    margin-bottom: 2rem;
-    padding: 0.5rem;
-    width: 30%;
-    border-radius: 0.3rem;
-    border: 0.07rem solid;
-  `
-
-  const Option = {
+export const Option = {
     title_Options: [
       {
         value: 'Miss',
@@ -102,18 +84,24 @@ const select = props => {
       {
         value: 'More than GHC 1,000',
         displayValue: 'More than GHC 1,000',
-      }
+      },
+    ],
+    id_types: [
+      {
+        value: "Voter's Card",
+        displayValue: "Voter's Card",
+      },
+      {
+        value: 'NHIS',
+        displayValue: 'NHIS',
+      },
+      {
+        value: 'National ID',
+        displayValue: 'National ID',
+      },
+      {
+        value: 'Others',
+        displayValue: 'Others',
+      },
     ],
   }
-  return (
-    <Select name={name}>
-      {Option[options].map(elem => (
-        <option key={elem.value} value={elem.value}>
-          {elem.displayValue}
-        </option>
-      ))}
-    </Select>
-  )
-}
-
-export default select

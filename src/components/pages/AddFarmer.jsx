@@ -3,8 +3,9 @@
 import React from 'react'
 //import PropTypes from 'prop-types'
 //import styled from 'styled-components'
-import Input from '../../common/Input/Input'
-import Select from '../../common/Input/Select'
+import Input from '../common/Input/Input'
+import Select from '../common/Input/Select/Select'
+import Button from '../common/Button/Button'
 
 export const addFarmer = function() {
   return (
@@ -12,12 +13,12 @@ export const addFarmer = function() {
       <header>
         <div>Logo</div>
         <div>
-          <button>Logout</button>
+          <Button handler displayName="LogOut" />
         </div>
       </header>
 
       <section>
-        <button>Back</button>
+        <Button handler displayName="Back" styles/>
         <hr />
 
         <form action="">
@@ -26,11 +27,11 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Title
-                <Select id="" name="title" options="title_Options" />
+                <Select name="title" options="title_Options" />
               </label>
             </div>
             <label htmlFor="">
-              Surname <Input type="text" name="surname" />
+              SurName <Input type="text" name="surname" />
             </label>
             <label htmlFor="">
               First Name <Input type="text" name="first_name" />
@@ -41,31 +42,26 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Marital Status
-                <Select name="marital_status" id="" options="marital_Options" />
+                <Select name="marital_status" options="marital_Options" />
               </label>
             </div>
             <div>
               <label htmlFor="">
                 Gender
-                <Select name="gender" id="" options="gender_Options" />
+                <Select name="gender" options="gender_Options" />
               </label>
             </div>
             <label htmlFor="">
-              Date of Birth <Input type="text" name="place_of_birth" />
+              Date of Birth <Input type="date" name="place_of_birth" />
             </label>
             <div>
               <label htmlFor="">
                 Id Type
-                <select id="" name="id_type">
-                  <option value="">Voter\'s Card</option>
-                  <option value="">NHIS</option>
-                  <option value="">National ID</option>
-                  <option value="">Others</option>
-                </select>
+                <Select name="id_type" options="id_types" />
               </label>
             </div>
             <label htmlFor="">
-              ID Number <Input type="text" name="id_number" />
+              ID Number <Input type="number" name="id_number" />
             </label>
             <label htmlFor="">
               District <Input type="text" name="district" />
@@ -86,10 +82,10 @@ export const addFarmer = function() {
               Nearest Landmark <Input type="text" name="nearest_landmark" />
             </label>
             <label htmlFor="">
-              Phone 1 <Input type="text" name="Phone_1" />
+              Phone 1 <Input type="number" name="Phone_1" />
             </label>
             <label htmlFor="">
-              Phone 2 <Input type="text" name="Phone_2" />
+              Phone 2 <Input type="number" name="Phone_2" />
             </label>
             <label htmlFor="">
               Education <Input type="text" />
@@ -97,7 +93,7 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Educational Level
-                <Select id="" name="education_level" options="education_Options" />
+                <Select name="education_level" options="education_Options" />
               </label>
             </div>
             <label htmlFor="">
@@ -106,21 +102,20 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Expected Income Per Month
-                <Select id="" name="expected_income_per_month" options="income">
-                </Select>
+                <Select name="expected_income_per_month" options="income" />
               </label>
             </div>
             <label htmlFor="">
               Major Income Source <Input type="text" name="major_source_of_income" />
             </label>
             <label htmlFor="">
-              Amount <Input type="text" name="major_source_of_income" />
+              Amount <Input type="number" name="major_source_of_income_amount" />
             </label>
             <label htmlFor="">
               Major Income Source <Input type="text" name="minor_source_of_income" />
             </label>
             <label htmlFor="">
-              Amount <Input type="text" name="minor_source_of_income_amount" />
+              Amount <Input type="number" name="minor_source_of_income_amount" />
             </label>
           </fieldset>
           <hr />
@@ -130,7 +125,7 @@ export const addFarmer = function() {
               Family Size <Input type="text" name="family_size" />
             </label>
             <label htmlFor="">
-              Number Of Dependant <Input type="text" name="number_of_dependant" />
+              Number Of Dependant <Input type="number" name="number_of_dependant" />
             </label>
             <label htmlFor="">
               Highest Level Of Dependant <Input type="text" name="highest_level_of_dependent" />
@@ -138,7 +133,7 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Family Income Per Month
-                <Select id="" name="family_income_per_month" options="income" />
+                <Select name="family_income_per_month" options="income" />
               </label>
             </div>
           </div>
@@ -148,11 +143,11 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Title
-                <Select id="" name="title" options="title_Options" />
+                <Select name="title" options="title_Options" />
               </label>
             </div>
             <label htmlFor="">
-              Surname <Input type="text" name="surname" />
+              SurName <Input type="text" name="surname" />
             </label>
             <label htmlFor="">
               First Name <Input type="text" name="first_name" />
@@ -160,7 +155,7 @@ export const addFarmer = function() {
             <div>
               <label htmlFor="">
                 Gender
-                <Select name="gender" id="" options="gender_Options" />
+                <Select name="gender" options="gender_Options" />
               </label>
             </div>
             <label htmlFor="">
@@ -173,7 +168,7 @@ export const addFarmer = function() {
               Occupation <Input type="text" name="occupation" />
             </label>
             <label htmlFor="">
-              Phone <Input type="text" name="phone" />
+              Phone <Input type="number" name="phone" />
             </label>
             <label htmlFor="">
               District <Input type="text" name="district" />
@@ -195,10 +190,10 @@ export const addFarmer = function() {
               Nearest Landmark <Input type="text" name="nearest_landmark" />
             </label>
             <label htmlFor="">
-              Crops Cultivated <Input type="text" name="crops_cultivated" />
+              Crops Cultivated <Input type="number" name="crops_cultivated" />
             </label>
             <label htmlFor="">
-              Animals Or Birds <Input type="text" name="animals_or_birds" />
+              Animals Or Birds <Input type="number" name="animals_or_birds" />
             </label>
           </div>
         </form>

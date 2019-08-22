@@ -9,6 +9,7 @@ const input = props => {
     font-size: 1.6rem;
     outline: none;
     display: block;
+    margin-top: .5rem;
     margin-bottom: 2rem;
     padding: .5rem;
     width: 100%;
