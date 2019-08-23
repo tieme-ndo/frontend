@@ -9,14 +9,14 @@ export const loginHandler = ({ username, password }) => {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
 
-  return axios.post(`${pathObj.loginPath}`,  { 
-    username, 
+  return axios.post(`${pathObj.loginPath}`,  {
+    username,
     password,
   })
     .then(res => {
-      if (res.token) {
+      if (res.data.token) {
         checkAndStoreToken(res.data.token);
-        return res.data.user
+        return res.data.user;
       } else {
         return new Error('Oh no, there was no token returned by the database!')
       }
@@ -33,11 +33,11 @@ export const registrationHandler = ({ username, password, isAdmin }, token) => {
   if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
-  
-  return axios.post(`${pathObj.registrationPath}`, 
+
+  return axios.post(`${pathObj.registrationPath}`,
     setHeaders(token),
-    { 
-      username, 
+    {
+      username,
       password,
       isAdmin
     }
@@ -57,9 +57,9 @@ export const registrationHandler = ({ username, password, isAdmin }, token) => {
 export const checkAndStoreToken = (token) => {
   // More token validation and checking can be added later
   if (typeof token !== "string") {
-    return new Error('The token is supposed to be a string!')
+    return new Error('The token is supposed to be a string!');
   } else {
-    localStorage.setItem('token', token)
+    localStorage.setItem('token', token);
   }
 }
 
