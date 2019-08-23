@@ -15,15 +15,23 @@ const CreateAccount = () => {
 
   const onCreate = async event => {
     event.preventDefault();
+    setMessage("");
+    setErrorMessage("");
     setLoading(true);
     try {
-      const response = await registrationHandler({
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
-        isAdmin: isAdminRef.current.checked,
-        token: getToken()
-      });
-      setMessage(response);
+      const username = usernameRef.current.value;
+      const password = passwordRef.current.value;
+      if (username && password) {
+        const response = await registrationHandler({
+          username: usernameRef.current.value,
+          password: passwordRef.current.value,
+          isAdmin: isAdminRef.current.checked,
+          token: getToken()
+        });
+        setMessage(response);
+      } else {
+        setErrorMessage("Please, provide a valid username and password");
+      }
     } catch (error) {
       setErrorMessage(error);
     } finally {
