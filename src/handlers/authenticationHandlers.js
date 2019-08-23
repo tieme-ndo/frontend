@@ -22,7 +22,7 @@ export const loginHandler = ({ username, password }) => {
       }
     })
     .catch(error => {
-      return new Error(error)
+      throw new Error(error.response.data.message);
     })
 }
 
