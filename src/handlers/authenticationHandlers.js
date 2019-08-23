@@ -37,7 +37,7 @@ export const loginHandler = ({ username, password }) => {
 
 // There is no `addUserHandler` since the only avenue for adding new users should be when an admin registers a new user
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
-export const registrationHandler = ({ username, password, isAdmin }, token) => {
+export const registrationHandler = ({ username, password, isAdmin, token }) => {
   // Once database schema is finalized, this conditional check could be refactored into a separate utility function.
   if (
     !username ||
@@ -52,14 +52,18 @@ export const registrationHandler = ({ username, password, isAdmin }, token) => {
   }
 
   return axios
-    .post(`${pathObj.registrationPath}`, setHeaders(token), {
-      username,
-      password,
-      isAdmin
-    })
+    .post(
+      `${pathObj.registrationPath}`,
+      {
+        username,
+        password,
+        isAdmin
+      },
+      setHeaders(token)
+    )
     .then(res => {
-      if (res.data.successMessage) {
-        return res.data;
+      if (res.data.success) {
+        return res.data.message;
       } else {
         return new Error(
           'Something went wrong with your registration. Please try again.'
