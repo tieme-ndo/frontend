@@ -115,11 +115,14 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 # 3️⃣ Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+In order for the app to function correctly, the user need not set up their own environment variables at this point in time. However, inspection of the `start` command will reveal that it injects `REACT_APP_API_URL=http://localhost:9000` when starting the app on a local machine (during development). This points to the port the back-end server will run on when ran on the local machine. This is done to pre-seed the environment.
+
+The exact API_URL that's used is dependent on the environment it runs in. As mentioned above, if the app is run on one's local machine, it will look for `http://localhost:9000`. However, on Netlify, it'll target different API URLs, depending on if it's in the deploy-preview or production environment.
+
 
 🚫These are just examples, replace them with the specifics for your app
 
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
+    *  REACT_APP_API_URL - this is your Google API key, which can be generated in the Google Cloud Console
     *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
     *  REACT_APP_databaseURL - in the Firebase dashboard
     *  REACT_APP_projectID - in the Firebase dashboard
