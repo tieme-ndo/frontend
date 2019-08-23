@@ -1,5 +1,5 @@
 // Retrieving URL from environment - compatible with deployment context
-const URL = process.env.API_URL;
+export const URL = process.env.API_URL || process.env.REACT_APP_API_URL;
 
 // Path contains the 'base' of the URL but does not includes params
 // These will have to be included separately in the Axios request

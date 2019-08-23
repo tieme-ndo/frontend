@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
+import { URL } from './../../utils/generalVariables'
+
 function Login(props) {
   const [credentials, changeCredentials] = useState({
     email: "",
@@ -18,7 +20,7 @@ function Login(props) {
     event.preventDefault();
     changeStatus({ ...status, loading: true });
     axios
-      .put(process.env.API_URL, {
+      .put(`${URL}/login`, {
         email: credentials.email,
         password: credentials.password
       })
@@ -39,7 +41,7 @@ function Login(props) {
   if (localStorage.getItem("token")) {
     return <Redirect to="/" />;
   }
-  console.log(process.env.REACT_APP_API_URL)
+
   return (
     <div>
       <div>
