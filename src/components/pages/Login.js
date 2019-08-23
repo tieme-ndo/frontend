@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
+import { loginHandler } from "../../handlers/authenticationHandlers.js";
 
 import { URL } from './../../utils/generalVariables'
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
-    email: "",
+    username: "",
     password: ""
   });
 
@@ -16,26 +16,19 @@ function Login(props) {
     error: false
   });
 
-  const submitLogin = event => {
+  const submitLogin = async event => {
     event.preventDefault();
     changeStatus({ ...status, loading: true });
-    axios
-      .put(`${URL}/login`, {
-        email: credentials.email,
+    try {
+      await loginHandler({
+        username: credentials.username,
         password: credentials.password
-      })
-      .then(res => {
-        if (res.token) {
-          localStorage.setItem("token", res.token);
-          changeStatus({ ...status, error: false });
-        } else {
-          changeStatus({ ...status, error: true });
-        }
-      })
-      .catch(err => {
-        changeStatus({ ...status, error: true });
-      })
-      .finally(changeStatus({ ...status, loading: false }));
+      });
+      changeStatus({ error: false, loading: false });
+      return <Redirect to="/" />;
+    } catch (err) {
+      changeStatus({ error: true, loading: false });
+    }
   };
 
   if (localStorage.getItem("token")) {
@@ -48,11 +41,11 @@ function Login(props) {
         <h1>Log In</h1>
         <form onSubmit={submitLogin}>
           <input
-            type="email"
-            placeholder="Enter Email"
-            value={credentials.email}
+            type="username"
+            placeholder="Enter Username"
+            value={credentials.username}
             onChange={e =>
-              changeCredentials({ ...credentials, email: e.target.value })
+              changeCredentials({ ...credentials, username: e.target.value })
             }
           />
           <input
@@ -63,19 +56,14 @@ function Login(props) {
               changeCredentials({ ...credentials, password: e.target.value })
             }
           />
-          {status.loading ? 
-          <button
-            type="submit"
-            value="Loading..."
-            disabled
-            />
-            :
-            <button
-            type="submit"
-            value="Log In"
-          />
-          }
-          {status.error && <div>Wrong email or password, please try again</div>}
+          {status.loading ? (
+            <input type="submit" value="Loading..." disabled />
+          ) : (
+            <input type="submit" value="Log In" />
+          )}
+          {status.error && (
+            <div>Wrong username or password, please try again</div>
+          )}
         </form>
       </div>
     </div>

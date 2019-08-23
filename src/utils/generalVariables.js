@@ -6,7 +6,7 @@ export const URL = process.env.API_URL || process.env.REACT_APP_API_URL;
 // Path contains the 'base' of the URL but does not includes params
 // These will have to be included separately in the Axios request
 export const pathObj = {
-  loginPath: `${URL}/login`,
+  loginPath: `${URL}/user/login`,
   registrationPath: `${URL}/register`,
 
   getUserPath: `${URL}/users`,
