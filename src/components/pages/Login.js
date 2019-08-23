@@ -39,7 +39,7 @@ function Login(props) {
   if (localStorage.getItem("token")) {
     return <Redirect to="/" />;
   }
-
+  console.log(process.env.REACT_APP_API_URL)
   return (
     <div>
       <div>
