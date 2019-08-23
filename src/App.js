@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Dashboard from './components/pages/Dashboard';
-import Login from './components/pages/accounts/Login';
-import CreateAccount from './components/pages/accounts/CreateAccount/CreateAccount';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Login from './components/pages/Login/Login';
+import CreateAccount from './components/pages/CreateAccount/CreateAccount';
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
         </nav>
 
         <Route path="/" exact component={Dashboard} />
-        <Route path="/login/" component={Login} />
         <Route path="/accounts/new" component={CreateAccount} />
+        <Route path="/login/" component={Login} />
       </div>
     </Router>
   );
