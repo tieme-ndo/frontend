@@ -22,13 +22,7 @@ const CreateAccount = () => {
       });
       setMessage('Account successfully created');
     } catch (error) {
-      let errorDescription;
-      if (error.response.data.error_description) {
-        errorDescription = error.response.data.error_description;
-      } else {
-        errorDescription = 'There was an error, try again';
-      }
-      setErrorMessage(errorDescription);
+      setErrorMessage(error);
     } finally {
       setLoading(false);
     }

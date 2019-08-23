@@ -67,7 +67,7 @@ export const registrationHandler = ({ username, password, isAdmin }, token) => {
       }
     })
     .catch(error => {
-      throw error;
+      throw error.response.data.message;
     });
 };
 
