@@ -32,7 +32,7 @@ function Login(props) {
     }
   };
 
-  if (localStorage.getItem(getToken())) {
+  if (getToken()) {
     return <Redirect to="/" />;
   }
 
