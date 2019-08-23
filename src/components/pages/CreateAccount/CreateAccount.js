@@ -1,5 +1,8 @@
 import React from 'react';
-import { registrationHandler, getToken } from '../../../handlers/authenticationHandlers';
+import {
+  registrationHandler,
+  getToken
+} from '../../../handlers/authenticationHandlers';
 
 const CreateAccount = () => {
   const usernameRef = React.useRef();
@@ -14,13 +17,13 @@ const CreateAccount = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      await registrationHandler({
+      const response = await registrationHandler({
         username: usernameRef.current.value,
         password: passwordRef.current.value,
         isAdmin: isAdminRef.current.checked,
         token: getToken()
       });
-      setMessage('Account successfully created');
+      setMessage(response);
     } catch (error) {
       setErrorMessage(error);
     } finally {
