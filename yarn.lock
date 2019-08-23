@@ -8257,6 +8257,11 @@ react-scripts@3.1.1:
   optionalDependencies:
     fsevents "2.0.7"
 
+react-table@next:
+  version "7.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-alpha.25.tgz#2f501c2fc3aef28ceee7fa7ed67ee000c7a92993"
+  integrity sha512-C0c+ih/mRKvZNnWiFyUPfo+gPZFuB17l1/Rc7MmMxZCx6IK8b35uSxnnG6AnQCOzTWyNy9h1ht3ADP2BDLmCUQ==
+
 react@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
