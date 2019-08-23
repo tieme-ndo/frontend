@@ -12,15 +12,16 @@ export const loginHandler = ({ username, password }) => {
     typeof password !== 'string' ||
     password.length < 6
   ) {
-    return new Error(
+    throw new Error(
       "Make sure you're passing a valid username and a password that's at least 8 characters long"
     );
   }
 
-  return axios.post(`${pathObj.loginPath}`,  {
-    username,
-    password,
-  })
+  return axios
+    .post(`${pathObj.loginPath}`, {
+      username,
+      password
+    })
     .then(res => {
       if (res.data.token) {
         checkAndStoreToken(res.data.token);
@@ -31,8 +32,8 @@ export const loginHandler = ({ username, password }) => {
     })
     .catch(error => {
       throw new Error(error.response.data.message);
-    })
-}
+    });
+};
 
 // There is no `addUserHandler` since the only avenue for adding new users should be when an admin registers a new user
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
@@ -45,14 +46,13 @@ export const registrationHandler = ({ username, password, isAdmin }, token) => {
     typeof password !== 'string' ||
     password.length < 6
   ) {
-    return new Error(
+    throw new Error(
       "Make sure you're passing a valid username and a password that's at least 8 characters long"
     );
   }
 
-  return axios.post(`${pathObj.registrationPath}`,
-    setHeaders(token),
-    {
+  return axios
+    .post(`${pathObj.registrationPath}`, setHeaders(token), {
       username,
       password,
       isAdmin
@@ -88,7 +88,7 @@ export const isLoggedIn = () => {
 
 export const getToken = () => {
   return window.localStorage.getItem(tokenKey);
-}
+};
 
 // DEBATE: adding a separate logoutHandler to account for clearing localStorage, as well as the user objects.
 // However, since we do not use Redux, the use-case for this is limited. Will discuss during stand-up.
