@@ -1,12 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { loginHandler } from "../../handlers/authenticationHandlers.js";
+import React from 'react';
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import {
+  loginHandler,
+  getToken
+} from '../../../handlers/authenticationHandlers';
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
-    username: "",
-    password: ""
+    username: '',
+    password: ''
   });
 
   const [status, changeStatus] = useState({
@@ -29,7 +32,7 @@ function Login(props) {
     }
   };
 
-  if (localStorage.getItem("token")) {
+  if (getToken()) {
     return <Redirect to="/" />;
   }
 
