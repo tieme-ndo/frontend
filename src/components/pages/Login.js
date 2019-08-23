@@ -18,7 +18,7 @@ function Login(props) {
     event.preventDefault();
     changeStatus({ ...status, loading: true });
     axios
-      .put("https://tieme-ndo-backend-production.herokuapp.com/", {
+      .put(process.env.API_URL, {
         email: credentials.email,
         password: credentials.password
       })
