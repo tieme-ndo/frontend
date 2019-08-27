@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import {
   loginHandler,
   getToken
-} from '../../../handlers/authenticationHandlers';
+} from '../../../utils/handlers/authenticationHandlers';
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
