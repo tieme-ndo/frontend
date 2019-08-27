@@ -1,7 +1,3 @@
-
-
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
 # Tieme Ndo
 
 You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/).
