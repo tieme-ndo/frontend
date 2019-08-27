@@ -4,6 +4,7 @@ import Login from './components/pages/Login';
 import Dashboard from './components/pages/Dashboard';
 
 function App() {
+  console.log(process.env)
   return (
     <Router>
       <div className="App" data-testid="App">
