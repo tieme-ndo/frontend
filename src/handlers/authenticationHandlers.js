@@ -1,4 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
+import { pathObj } from "./../utils/generalVariables";
+import { setHeaders } from "./../utils/requestHeaders";
 
 import { pathObj, tokenKey } from './../utils/generalVariables';
 import { setHeaders } from './../utils/requestHeaders';
@@ -81,6 +83,12 @@ export const checkAndStoreToken = token => {
     return new Error('The token is supposed to be a string!');
   } else {
     localStorage.setItem(tokenKey, token);
+  }
+};
+
+export const logout = () => {
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token");
   }
 };
 

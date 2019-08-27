@@ -1,6 +1,7 @@
-import axios from 'axios';
-import { pathObj } from './../utils/generalVariables';
-import { setHeaders } from './../utils/requestHeaders';
+import axios from "axios";
+import { pathObj } from "./../utils/generalVariables";
+import { setHeaders } from "./../utils/requestHeaders";
+import * as jwt_decode from "jwt-decode";
 
 export const getUserHandler = (token, userId) => {
   if (!userId || typeof userId !== 'string') {
@@ -51,4 +52,19 @@ export const deleteUserHandler = (userId, token) => {
     .catch(error => {
       return new Error(error);
     });
+};
+
+export const getUser = () => {
+  let token = localStorage.getItem("token");
+  if (token) {
+    token = jwt_decode(token);
+    if (token.payload.exp < Date.now()) {
+      localStorage.removeItem("token");
+      return false;
+    }
+    return token.payload;
+  }
+  else{
+    return false;
+  }
 };
