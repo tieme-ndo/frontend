@@ -76,5 +76,14 @@ export const getUser = () =>{
   }
 }
 
+export const logout = () =>{
+  if(localStorage.getItem("token")){
+    localStorage.removeItem("token");
+  }
+  else{
+    throw new Error("No user logged in");
+  }
+}
+
 // DEBATE: adding a separate logoutHandler to account for clearing localStorage, as well as the user objects.
 // However, since we do not use Redux, the use-case for this is limited. Will discuss during stand-up.
