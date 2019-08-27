@@ -46,7 +46,7 @@ function Login(props) {
         <h1>Log In</h1>
         <form onSubmit={submitLogin}>
           <input
-            type="email"
+            type="text"
             placeholder="Enter Email"
             value={credentials.email}
             onChange={e =>
