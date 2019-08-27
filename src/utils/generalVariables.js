@@ -7,7 +7,7 @@ export const URL = process.env.API_URL || process.env.REACT_APP_API_URL;
 // These will have to be included separately in the Axios request
 export const pathObj = {
   loginPath: `${URL}/user/login`,
-  registrationPath: `${URL}/register`,
+  registrationPath: `${URL}/user/register`,
 
   getUserPath: `${URL}/users`,
   changePasswordPath: `${URL}/users/change-password`,
