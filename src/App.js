@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Index from './components/pages/Index';
 import Login from './components/pages/Login';
-import AddFarmer from '../src/components/pages/AddFarmer.jsx'
+import AddFarmer from './components/pages/AddFarmer/AddFarmer.jsx'
 
 function App() {
   return (

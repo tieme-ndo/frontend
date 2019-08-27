@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const button = props => {
-  const {handler, displayName, disabled, styles} = props
+  const {handler, displayName, disabled, styles, type} = props
   const Button = styled.button`
     outline: 0;
     padding: .5rem;
@@ -13,7 +13,7 @@ const button = props => {
     ${styles}
   `
   return (
-    <Button onClick={handler} disabled={disabled}>
+    <Button onClick={handler} disabled={disabled} type={type}>
       {displayName}
     </Button>
   )

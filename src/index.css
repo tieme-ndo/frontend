@@ -184,6 +184,7 @@ p {
 }
 label {
   font-size: 1.6rem;
+  opacity: .9;
 }
 
 img {
