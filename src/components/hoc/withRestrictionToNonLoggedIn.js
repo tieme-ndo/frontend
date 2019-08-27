@@ -1,5 +1,11 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 
-export default function withRestrictionToNonLoggedIn(OriginalComponent) {
-  return <OriginalComponent {...this.props} />;
-}
+const withRestrictionToNonLoggedIn = (
+  BaseComponent,
+  onlyForAdmin = false
+) => props => {
+  return <BaseComponent {...props} />;
+};
+
+export default withRestrictionToNonLoggedIn;
