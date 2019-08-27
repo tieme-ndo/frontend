@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import jwtDecode from "jwt-decode";
 import { pathObj } from './../utils/generalVariables';
 import { setHeaders } from './../utils/requestHeaders'
 
@@ -60,6 +60,19 @@ export const checkAndStoreToken = (token) => {
     return new Error('The token is supposed to be a string!')
   } else {
     localStorage.setItem('token', token)
+  }
+}
+
+export const getUser = () =>{
+  const token = jwtDecode.jwt_decode(localStorage.getItem("token"));
+  if(!token || token.payload.exp < Date.now()){
+    if(token.payload.exp < Date.now()){
+      localStorage.removeItem("token");
+    }
+    return false;
+  }
+  else{
+    return token.payload;
   }
 }
 
