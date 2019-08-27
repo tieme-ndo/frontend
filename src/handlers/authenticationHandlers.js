@@ -8,7 +8,7 @@ export const loginHandler = ({ username, password }) => {
   if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
   }
-
+  console.log(pathObj.loginPath)
   return axios.post(`${pathObj.loginPath}`,  {
     username,
     password,
