@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { loginHandler } from "../../handlers/authenticationHandlers.js";
 
-import { URL } from './../../utils/generalVariables'
-
 function Login(props) {
   const [credentials, changeCredentials] = useState({
     username: "",

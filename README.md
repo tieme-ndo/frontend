@@ -117,21 +117,9 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user need not set up their own environment variables at this point in time. However, inspection of the `start` command will reveal that it injects `REACT_APP_API_URL=http://localhost:9000` when starting the app on a local machine (during development). This points to the port the back-end server will run on when ran on the local machine. This is done to pre-seed the environment.
 
-The exact API_URL that's used is dependent on the environment it runs in. As mentioned above, if the app is run on one's local machine, it will look for `http://localhost:9000`. However, on Netlify, it'll target different API URLs, depending on if it's in the deploy-preview or production environment.
+The exact API_URL that's used is dependent on the environment it runs in, so is therefore outside of the scope of local deployment. As mentioned above, if the app is run on one's local machine, it will automatically resolve to the server running on `http://localhost:9000`. However, on Netlify, it'll target different API URLs, depending on if it's in the deploy-preview or production environment.
 
-
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_API_URL - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+    *  REACT_APP_API_URL - As mentioned above, this variable is declared in configuration in the Netlify deployments and is passed through `yarn start` as `REACT_APP_API_URL=http://localhost:9000` on one's local machine. Therefore, it will not have to be declared in a `.env` file.
 
 # 5️⃣ Content Licenses
 
