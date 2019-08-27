@@ -192,13 +192,10 @@ Once again, the installation will take anywhere between 30 seconds and a minute 
 ```
 
 ## Other Scripts
-
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
     * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+    * build - creates a build of the application
+    * test - runs tests in **tests** directory and `.test.js` and `.spec.js` files
+    * eject - copy the configuration files and dependencies into the project so you have full control over them
 
 # Contributing
 
@@ -238,4 +235,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/tieme-ndo/backend) for details on the backend of our project.
