@@ -4,7 +4,6 @@ import { pathObj } from './../utils/generalVariables';
 import { setHeaders } from './../utils/requestHeaders'
 
 export const loginHandler = ({ username, password }) => {
-  console.log(pathObj.loginPath)
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
   if (!username || !password || typeof username !== "string" || typeof password !== "string" || password.length < 6 ) {
     return new Error("Make sure you're passing a valid username and a password that's at least 8 characters long")
