@@ -1,7 +1,7 @@
 import React from 'react';
-import PageHeader from '../common/PageHeader/PageHeader';
-import Table from '../common/Table/Table';
-import Button from '../common/Button/Button';
+import PageHeader from '../../common/PageHeader/PageHeader';
+import Table from '../../common/Table/Table';
+import Button from '../../common/Button/Button';
 
 const Dashboard = () => {
   const Title = <h2>Dashboard</h2>;
