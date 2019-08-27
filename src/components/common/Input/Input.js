@@ -1,7 +1,6 @@
 /** @format */
 import React from 'react'
-import styled from 'styled-components'
-
+import classes from  "./Input.module.css";
 const Input = props => {
   const {
     type,
@@ -15,28 +14,15 @@ const Input = props => {
     checked,
     selected,
     data,
-  } = props
-  const TextField = styled.label`
-    input,
-    select {
-      font-size: 1.6rem;
-      outline: none;
-      display: block;
-      margin-top: 0.5rem;
-      margin-bottom: 2rem;
-      padding: 0.5rem;
-      width: 100%;
-      border-radius: 0.3rem;
-      border: 0.07rem solid;
-      ${styles}
-    }
-  `
+  } = props;
+  
   let inputElement = null
   switch (elementType) {
     case 'input':
       inputElement = (
         <input
           type={type}
+          className={classes.GeneralStyle}
           name={name}
           value={value}
           onChange={(e)=>changeHandler(e, data)}
@@ -48,7 +34,7 @@ const Input = props => {
       inputElement = (
         <>
           {elementConfig.options.map(option => (
-            <label key={option}>
+            <label key={option} style={{padding: '10px'}}>
               {option}
               <input
                 type={type}
@@ -64,7 +50,7 @@ const Input = props => {
       break
     case 'select':
       inputElement = (
-        <select value={value} onChange={(e)=>changeHandler(e, data)} name={name}>
+        <select value={value} onChange={(e)=>changeHandler(e, data)} name={name} className={classes.selectStyle}>
           {elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
@@ -76,10 +62,13 @@ const Input = props => {
     default:
   }
   return (
-    <label htmlFor="">
+    <div>
+        <label htmlFor="" style={{display:'block'}}>
       {labelName}
-      {inputElement}
     </label>
+         {inputElement}
+    </div>
+  
   )
 }
 

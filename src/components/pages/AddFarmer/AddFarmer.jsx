@@ -8,10 +8,10 @@ import styled from 'styled-components'
 
 const AddFarmer = () => {
   const [state, setState] = useState({
-    personalInfo: personalInfo,
-    familyInfo: familyInfo,
-    guarantor: guarantor,
-    farmInfo: farmInfo,
+      personalInfo: personalInfo,
+      familyInfo: familyInfo,
+      guarantor: guarantor,
+      farmInfo: farmInfo,
   })
   const [stateToggle, setStateToggle] = useState({
     toggle1: false,
@@ -44,20 +44,23 @@ const AddFarmer = () => {
   }
   const formHandler = e => {
     e.preventDefault()
-    const formData = {}
-    for (let key in state) {
-      formData[key] = state[key]
-      for (let key2 in state[key]) {
-        if (state[key][key2].selected) {
-          formData[key][key2] = state[key][key2].selected
+    let formData = {}
+
+    const newState = JSON.parse(JSON.stringify(state))
+    for (let key in newState) {
+      formData[key] = newState[key]
+      for (let key2 in newState[key]) {
+        if (newState[key][key2].selected) {
+          formData[key][key2] = newState[key][key2].selected
         } else {
-          formData[key][key2] = state[key][key2].value
+          formData[key][key2] = newState[key][key2].value
         }
       }
     }
+
     const formattedForm = formData.personalInfo
     let incomeSource = formattedForm.minor_source_of_income
-    let incomeAmount = formData.personalInfo.minor_source_of_income_amount
+    let incomeAmount = formattedForm.minor_source_of_income_amount
     let incomeSourceMajor = formattedForm.major_source_of_income
     let incomeAmountMajor = formattedForm.major_source_of_income_amount
 
@@ -73,7 +76,7 @@ const AddFarmer = () => {
       name: incomeSourceMajor,
       amount: incomeAmountMajor,
     }
-    console.log(formData)
+    e.target.reset()
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
@@ -159,4 +162,3 @@ const AddFarmer = () => {
 }
 
 export default AddFarmer
-// setState({...state, personalInfo:{...state.personalInfo, [name]:{...state.personalInfo[name], value: value}}})

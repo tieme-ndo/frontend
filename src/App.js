@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Index from './components/pages/Index';
-import Login from './components/pages/Login';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Login from './components/pages/Login/Login';
+import CreateAccount from './components/pages/CreateAccount/CreateAccount';
 import AddFarmer from './components/pages/AddFarmer/AddFarmer.jsx'
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Dashboard</Link>
             </li>
             <li>
               <Link to="/login/">Login</Link>
@@ -22,7 +23,8 @@ function App() {
           </ul>
         </nav>
 
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/accounts/new" component={CreateAccount} />
         <Route path="/login/" component={Login} />
         <Route path="/add-farmer/" component={AddFarmer} />
       </div>
