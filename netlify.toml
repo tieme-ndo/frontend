@@ -15,9 +15,9 @@
 [context.production]
   command = "yarn build"
   [context.production.environment]
-    API_URL = "https://tieme-ndo-backend-production.herokuapp.com/"
+    API_URL = "https://tieme-ndo-backend-production.herokuapp.com"
 
 # Deploy Preview context: All deploys generated from a pull/merge request
 # will inherit these settings.
 [context.deploy-preview.environment]
-  API_URL = "https://tieme-ndo-backend-staging1.herokuapp.com/"
+  API_URL = "https://tieme-ndo-backend-staging1.herokuapp.com"
