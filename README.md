@@ -42,7 +42,7 @@ You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/)
 
 ### Summary: 
 
-Tieme Ndo
+In the bid to transform smallholder farmers into semi-commercial farmers and agripreneurs, Tieme Ndo empower farmers to take advantage of business opportunities along the agricultural value chain through SAD (Small Agribusiness Development). The aim of SAD is to train farmers on entrepreneurship and value addition.
 
 
 ### 4️⃣ Key Features
@@ -75,31 +75,6 @@ Tieme Ndo
 
 #### Front end deployed to `Netlify`
 
-### [Back end](https://github.com/tieme-ndo/backend) built using:
-
-#### Node.js
-
-🚫 Why did you choose this framework?
-
--    point one
--    point two
--    point three
-
-#### Express.js
-
-🚫 Why did you choose this framework?
-
--    point one
--    point two
--    point three
-
-#### Mongoose
-
-🚫 Why did you choose this framework?
-
--    point one
--    point two
--    point three
 
 
 # APIs
@@ -109,12 +84,6 @@ Tieme Ndo
 🚫Replace text below with a description of the API
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-## 2️⃣ Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
 
 # 3️⃣ Environment Variables
 
