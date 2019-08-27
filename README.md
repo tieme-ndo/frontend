@@ -108,12 +108,6 @@ The exact API_URL that's used is dependent on the environment it runs in, so is 
 
 #### Jest
 
-### Back-end: 
-
-#### Mocha
-
-#### Chai
-
 # Installation Instructions
 
 To get a local version of the Tieme Ndo app up and running, make sure you have a copy of the local server running, in addition to running the front-end app.
