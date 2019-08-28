@@ -11,7 +11,7 @@ function App() {
   const [user, changeUser] = useState(null);
 
   const setUser = () => {
-    changeUser(getUser);
+    changeUser(getUser());
   }
 
   return (
