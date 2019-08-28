@@ -1,76 +1,61 @@
-import React from 'react';
-import { Button } from 'semantic-ui-react'
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
-  loginHandler,
-  getToken
-} from '../../../handlers/authenticationHandlers';
+  Container,
+  Button,
+  Grid,
+  Header,
+  Segment,
+  Form,
+  Image,
+} from 'semantic-ui-react';
+import logo from '../../../assets/images/tiemendo_logo.jpg';
 
-function Login(props) {
-  const [credentials, changeCredentials] = useState({
+const Login = props => {
+  const [state, setState] = useState({
     username: '',
-    password: ''
+    password: '',
+    errors: {},
+    loading: false
   });
-
-  const [status, changeStatus] = useState({
-    loading: false,
-    error: false
-  });
-
-  const submitLogin = async event => {
-    event.preventDefault();
-    changeStatus({ ...status, loading: true });
-    try {
-      await loginHandler({
-        username: credentials.username,
-        password: credentials.password
-      });
-      changeStatus({ error: false, loading: false });
-      return <Redirect to="/" />;
-    } catch (err) {
-      changeStatus({ error: true, loading: false });
-    }
-  };
-
-  if (getToken()) {
-    return <Redirect to="/" />;
-  }
 
   return (
-    <div>
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={submitLogin}>
-          <input
-          className="ui field"
-            type="username"
-            placeholder="Enter Username"
-            value={credentials.username}
-            onChange={e =>
-              changeCredentials({ ...credentials, username: e.target.value })
-            }
-          />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={credentials.password}
-            onChange={e =>
-              changeCredentials({ ...credentials, password: e.target.value })
-            }
-          />
-          {status.loading ? (
-            <input type="submit" value="Loading..." disabled />
-          ) : (
-            <Button content='Primary' primary />
-          )}
-          {status.error && (
-            <div>Wrong username or password, please try again</div>
-          )}
-        </form>
-      </div>
-    </div>
+      <Container>
+        <Grid textAlign='center' style={{ height: '85vh' }} verticalAlign='middle'>
+        <Grid.Column style={{ maxWidth: 350 }}>
+        <Image 
+          src={logo} 
+          centered 
+          alt='tiemendo logo'
+          size='small' />
+        <Header as="h2" icon textAlign="center" style={{marginBottom: "30px"}}>
+              Log in to your account
+          </Header>
+
+            <Form size="large">
+              <Segment width={5}>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="Username"
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+
+                <Button color="teal" fluid size="large">
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Container>
   );
-}
+};
 
 export default Login;
