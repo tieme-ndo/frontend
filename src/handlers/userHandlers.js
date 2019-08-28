@@ -2,6 +2,7 @@ import axios from "axios";
 import { pathObj } from "./../utils/generalVariables";
 import { setHeaders } from "./../utils/requestHeaders";
 import * as jwt_decode from "jwt-decode";
+import { tokenKey } from './../utils/generalVariables';
 
 export const getUserHandler = (token, userId) => {
   if (!userId || typeof userId !== 'string') {
@@ -55,15 +56,14 @@ export const deleteUserHandler = (userId, token) => {
 };
 
 export const getUser = () => {
-  let token = localStorage.getItem("tokenTiemeNdo");
-  debugger;
+  const token = localStorage.getItem(tokenKey);
   if (token) {
-    token = jwt_decode(token);
-    if (token.exp < Date.now()) {
-      localStorage.removeItem("tokenTiemeNdo");
+    const decodedToken = jwt_decode(token);
+    if (decodedToken.exp < Date.now()) {
+      localStorage.removeItem(tokenKey);
       return false;
     }
-    return token;
+    return decodedToken;
   }
   else{
     return false;

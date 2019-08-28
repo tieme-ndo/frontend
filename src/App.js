@@ -36,7 +36,7 @@ function App() {
 
         <Route path="/" exact component={Dashboard} />
         <Route path="/accounts/new" component={CreateAccount} />
-        <Route path="/login/" render={() => <Login setUser={setUser} />} />
+        <Route path="/login/" render={(props) => <Login {...props} setUser={setUser} />} />
       </div>
     </Router>
   );

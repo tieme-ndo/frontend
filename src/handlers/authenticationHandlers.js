@@ -85,8 +85,8 @@ export const checkAndStoreToken = token => {
 };
 
 export const logout = () => {
-  if (localStorage.getItem("token")) {
-    localStorage.removeItem("token");
+  if (localStorage.getItem(tokenKey)) {
+    localStorage.removeItem(tokenKey);
   }
 };
 
