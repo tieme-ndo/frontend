@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Dashboard from "./components/pages/Dashboard/Dashboard";
-import Login from "./components/pages/Login/Login";
-import CreateAccount from "./components/pages/CreateAccount/CreateAccount";
-import { getUser } from "./handlers/userHandlers";
-import { logout } from "./handlers/authenticationHandlers";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import withRestrictedAccess from './components/hoc/withRestrictedAccess';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Login from './components/pages/Login/Login';
+import CreateAccount from './components/pages/CreateAccount/CreateAccount';
+import { getUser } from "./utils/handlers/userHandlers";
+import { logout } from "./utils/handlers/authenticationHandlers";
 
 function App() {
 
@@ -43,8 +44,8 @@ function App() {
           </ul>
         </nav>
 
-        <Route path="/" exact component={Dashboard} />
-        <Route path="/accounts/new" component={CreateAccount} />
+        <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
+        <Route path="/accounts/new" component={withRestrictedAccess(CreateAccount, true)} />
         <Route path="/login/" render={(props) => <Login {...props} setUser={setUser} />} />
       </div>
     </Router>

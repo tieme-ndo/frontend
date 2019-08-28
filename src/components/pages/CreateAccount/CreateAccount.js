@@ -3,7 +3,6 @@ import {
   registrationHandler,
   getToken
 } from '../../../utils/handlers/authenticationHandlers';
-import withRestrictionToNonLoggedIn from '../../hoc/withRestrictionToNonLoggedIn';
 
 const CreateAccount = () => {
   const usernameRef = React.useRef();
@@ -88,4 +87,4 @@ const CreateAccount = () => {
   );
 };
 
-export default withRestrictionToNonLoggedIn(CreateAccount, true);
+export default CreateAccount;
