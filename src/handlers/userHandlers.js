@@ -21,7 +21,7 @@ export const getUserHandler = (token, userId) => {
 };
 
 export const changePasswordHandler = (token, userId, newPassword) => {
-  if (!username || typeof username !== 'string') {
+  if (!userId || typeof userId !== 'string') {
     return new Error("Make sure you're passing a valid user ID!");
   }
 
@@ -55,14 +55,14 @@ export const deleteUserHandler = (userId, token) => {
 };
 
 export const getUser = () => {
-  let token = localStorage.getItem("token");
+  let token = localStorage.getItem("tokenTiemeNdo");
   if (token) {
     token = jwt_decode(token);
-    if (token.payload.exp < Date.now()) {
-      localStorage.removeItem("token");
+    if (token.exp < Date.now()) {
+      localStorage.removeItem("tokenTiemeNdo");
       return false;
     }
-    return token.payload;
+    return token;
   }
   else{
     return false;

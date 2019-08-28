@@ -33,10 +33,6 @@ export const loginHandler = ({ username, password }) => {
     })
     .catch(error => {
       throw new Error(error.response.data.message);
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     });
 };
 
