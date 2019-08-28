@@ -56,6 +56,7 @@ export const deleteUserHandler = (userId, token) => {
 
 export const getUser = () => {
   let token = localStorage.getItem("tokenTiemeNdo");
+  debugger;
   if (token) {
     token = jwt_decode(token);
     if (token.exp < Date.now()) {

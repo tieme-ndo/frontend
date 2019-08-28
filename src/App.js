@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import Login from "./components/pages/Login/Login";
@@ -7,11 +7,12 @@ import { getUser } from "./handlers/userHandlers";
 import { logout } from "./handlers/authenticationHandlers";
 
 function App() {
-  let user = null;
 
-  useEffect(() => {
-    user = getUser();
-  });
+  const [user, changeUser] = useState(null);
+
+  const setUser = () => {
+    changeUser(getUser);
+  }
 
   return (
     <Router>
@@ -35,7 +36,7 @@ function App() {
 
         <Route path="/" exact component={Dashboard} />
         <Route path="/accounts/new" component={CreateAccount} />
-        <Route path="/login/" component={Login} />
+        <Route path="/login/" render={() => <Login setUser={setUser} />} />
       </div>
     </Router>
   );

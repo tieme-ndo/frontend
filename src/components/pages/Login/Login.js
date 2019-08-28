@@ -26,6 +26,7 @@ function Login(props) {
         password: credentials.password
       });
       changeStatus({ error: false, loading: false });
+      props.setUser();
       return <Redirect to="/" />;
     } catch (err) {
       changeStatus({ error: true, loading: false });
