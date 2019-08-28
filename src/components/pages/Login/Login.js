@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
@@ -42,6 +43,7 @@ function Login(props) {
         <h1>Log In</h1>
         <form onSubmit={submitLogin}>
           <input
+          className="ui field"
             type="username"
             placeholder="Enter Username"
             value={credentials.username}
@@ -60,7 +62,7 @@ function Login(props) {
           {status.loading ? (
             <input type="submit" value="Loading..." disabled />
           ) : (
-            <input type="submit" value="Log In" />
+            <Button content='Primary' primary />
           )}
           {status.error && (
             <div>Wrong username or password, please try again</div>
