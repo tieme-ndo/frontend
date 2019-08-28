@@ -5,19 +5,20 @@ import Input from '../../common/Input/Input'
 import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
 import Button from '../../common/Button/StyledButton'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const AddFarmer = () => {
   const [state, setState] = useState({
-      personalInfo: personalInfo,
-      familyInfo: familyInfo,
-      guarantor: guarantor,
-      farmInfo: farmInfo,
+    personalInfo: personalInfo,
+    familyInfo: familyInfo,
+    guarantor: guarantor,
+    farmInfo: farmInfo,
   })
   const [stateToggle, setStateToggle] = useState({
-    toggle1: false,
-    toggle2: true,
-    toggle3: true,
-    toggle4: true,
+    personalInfoToggle: false,
+    familyInfoToggle: true,
+    guarantorToggle: true,
+    farmInfoToggle: true,
   })
 
   const onChangeHandler = (e, data) => {
@@ -30,7 +31,7 @@ const AddFarmer = () => {
       } else {
         newEntry.selected = [...newEntry.selected, value]
       }
-    } else if (type !== 'checkbox') {
+    } else {
       newEntry.value = value
     }
     newData[name] = newEntry
@@ -57,26 +58,21 @@ const AddFarmer = () => {
         }
       }
     }
-
-    const formattedForm = formData.personalInfo
-    let incomeSource = formattedForm.minor_source_of_income
-    let incomeAmount = formattedForm.minor_source_of_income_amount
-    let incomeSourceMajor = formattedForm.major_source_of_income
-    let incomeAmountMajor = formattedForm.major_source_of_income_amount
-
-    delete formattedForm.minor_source_of_income
-    delete formattedForm.minor_source_of_income_amount
-    delete formattedForm.major_source_of_income
-    delete formattedForm.major_source_of_income_amount
-    formattedForm.minor_source_of_income = {
-      name: incomeSource,
-      amount: incomeAmount,
-    }
-    formattedForm.major_source_of_income = {
-      name: incomeSourceMajor,
-      amount: incomeAmountMajor,
-    }
     e.target.reset()
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('tokenTiemeNdo'),
+    }
+    axios
+      .post('https://tieme-ndo-backend-staging1.herokuapp.com/api/v1/farmers/create', formData, {
+        headers: headers,
+      })
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+        throw err.response
+      })
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
@@ -97,10 +93,10 @@ const AddFarmer = () => {
     return form
   }
 
-  let form = inputCreator(state.personalInfo, 'personalInfo')
-  let form2 = inputCreator(state.familyInfo, 'familyInfo')
-  let form3 = inputCreator(state.guarantor, 'guarantor')
-  let form4 = inputCreator(state.farmInfo, 'farmInfo')
+  let personalInfoInputs = inputCreator(state.personalInfo, 'personalInfo')
+  let familyInfoInputs = inputCreator(state.familyInfo, 'familyInfo')
+  let guarantorInputs = inputCreator(state.guarantor, 'guarantor')
+  let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo')
 
   const DivToggle = styled.div`
     display: flex;
@@ -123,35 +119,35 @@ const AddFarmer = () => {
 
         <form action="" onSubmit={formHandler} style={{padding: '2rem'}}>
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'toggle1')}>
+            <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
               <h2>Personnel Information</h2>
               <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.toggle1}>{form}</div>
+            <div hidden={stateToggle.personalInfoToggle}>{personalInfoInputs}</div>
           </fieldset>
 
           <hr />
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'toggle2')}>
+            <DivToggle onClick={toggleHandler.bind(this, 'familyInfoToggle')}>
               <h2>Family</h2> <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.toggle2}>{form2}</div>
+            <div hidden={stateToggle.familyInfoToggle}>{familyInfoInputs}</div>
           </fieldset>
 
           <hr />
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'toggle3')}>
+            <DivToggle onClick={toggleHandler.bind(this, 'guarantorToggle')}>
               <h2>Guarantor</h2> <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.toggle3}>{form3}</div>
+            <div hidden={stateToggle.guarantorToggle}>{guarantorInputs}</div>
           </fieldset>
           <hr />
 
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'toggle4')}>
+            <DivToggle onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
               <h2>Farm Information</h2> <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.toggle4}>{form4}</div>
+            <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
 
           <Button displayName="Add Farmer" type="submit" />

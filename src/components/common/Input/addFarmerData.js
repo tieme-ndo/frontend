@@ -318,36 +318,36 @@ export const personalInfo = {
     value: '',
     valid: true,
   },
-  major_source_of_income: {
+  'major_source_of_income.name': {
     elementType: 'input',
-    name: 'major_source_of_income',
+    name: 'major_source_of_income.name',
     type: 'text',
     labelName: 'Major Source Of Income',
     value: '',
     valid: false,
     touched: false,
   },
-  major_source_of_income_amount: {
+  'major_source_of_income.amount': {
     elementType: 'input',
-    name: 'major_source_of_income_amount',
+    name: 'major_source_of_income.amount',
     type: 'number',
     labelName: 'Major Source Of Income Amount',
     value: '',
     valid: false,
     touched: false,
   },
-  minor_source_of_income: {
+  'minor_source_of_income.name': {
     elementType: 'input',
-    name: 'minor_source_of_income',
+    name: 'minor_source_of_income.name',
     type: 'text',
     labelName: 'Minor Source Of Income',
     value: '',
     valid: false,
     touched: false,
   },
-  minor_source_of_income_amount: {
+  'minor_source_of_income.amount': {
     elementType: 'input',
-    name: 'minor_source_of_income_amount',
+    name: 'minor_source_of_income.amount',
     type: 'number',
     labelName: 'Minor Source Of Income Amount',
     value: '',
@@ -382,6 +382,10 @@ export const familyInfo = {
     elementConfig: {
       options: [
         {
+          value: '',
+          displayValue: 'Please select',
+        },
+        {
           value: 'Tertiary',
           displayValue: 'Tertiary',
         },
@@ -403,6 +407,8 @@ export const familyInfo = {
         },
       ],
     },
+    value: '',
+    valid: true,
   },
   family_income_per_month: {
     elementType: 'select',
@@ -410,6 +416,10 @@ export const familyInfo = {
     labelName: 'Family Income Per Month',
     elementConfig: {
       options: [
+        {
+          value: '',
+          displayValue: 'Please select',
+        },
         {
           value: 'Less than GHC 500',
           displayValue: 'Less than GHC 500',
@@ -424,7 +434,7 @@ export const familyInfo = {
         },
       ],
     },
-    value: 'Less than GHC 500',
+    value: '',
     valid: true,
   },
 }
@@ -436,6 +446,10 @@ export const guarantor = {
     labelName: 'Title',
     elementConfig: {
       options: [
+        {
+          value: '',
+          displayValue: 'Please select',
+        },
         {
           value: 'Miss',
           displayValue: 'Miss',
@@ -454,7 +468,7 @@ export const guarantor = {
         },
       ],
     },
-    value: 'Title',
+    value: '',
     valid: true,
   },
   grt_surname: {
@@ -482,6 +496,10 @@ export const guarantor = {
     elementConfig: {
       options: [
         {
+          value: '',
+          displayValue: 'Please select',
+        },
+        {
           value: 'Male',
           displayValue: 'Male',
         },
@@ -495,7 +513,7 @@ export const guarantor = {
         },
       ],
     },
-    value: 'Male',
+    value: '',
     valid: true,
   },
   grt_relations: {

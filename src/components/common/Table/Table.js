@@ -1,19 +1,18 @@
-import React from 'react';
-import useTable from 'react-table';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+/** @format */
 
-function Table({ columns, data }) {
+import React from 'react'
+import {useTable} from 'react-table'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+function Table({columns, data}) {
   // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable({
-    columns,
-    data
-  });
+  const {getTableProps, headerGroups, rows, prepareRow} = useTable({columns, data})
 
   const StyledTable = styled.table`
     width: 100%;
     text-align: center;
-  `;
+  `
 
   // Render the UI for your table
   return (
@@ -39,19 +38,19 @@ function Table({ columns, data }) {
                     <td {...cell.getCellProps()} key={index}>
                       {cell.render('Cell')}
                     </td>
-                  );
+                  )
                 })}
               </tr>
-            )
+            ),
         )}
       </tbody>
     </StyledTable>
-  );
+  )
 }
 
 Table.propTypes = {
   columns: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired
-};
+  data: PropTypes.array.isRequired,
+}
 
-export default Table;
+export default Table
