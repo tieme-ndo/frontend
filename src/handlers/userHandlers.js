@@ -4,7 +4,7 @@ import { setHeaders } from "./../utils/requestHeaders";
 import * as jwt_decode from "jwt-decode";
 
 export const getUserHandler = (token, userId) => {
-  if (!userId || typeof userId !== "string") {
+  if (!userId || typeof userId !== 'string') {
     return new Error("Make sure you're passing a valid user ID!");
   }
 
@@ -16,17 +16,17 @@ export const getUserHandler = (token, userId) => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw error;
     });
 };
 
-export const changePasswordHandler = (token, username, newPassword) => {
-  if (!username || typeof username !== "string") {
+export const changePasswordHandler = (token, userId, newPassword) => {
+  if (!username || typeof username !== 'string') {
     return new Error("Make sure you're passing a valid user ID!");
   }
 
   return axios
-    .put(`${pathObj.changePasswordPath}/${username}`, setHeaders(token), {
+    .put(`${pathObj.changePasswordPath}/${userId}`, setHeaders(token), {
       newPassword
     })
     .then(res => {
@@ -36,7 +36,7 @@ export const changePasswordHandler = (token, username, newPassword) => {
     })
 
     .catch(error => {
-      return new Error(error);
+      throw error;
     });
 };
 
