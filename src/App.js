@@ -5,28 +5,22 @@ import Dashboard from './components/pages/Dashboard/Dashboard';
 import Login from './components/pages/Login/Login';
 import CreateAccount from './components/pages/CreateAccount/CreateAccount';
 import { getUser } from './utils/handlers/authenticationHandlers';
-import { isLoggedIn, logout } from './utils/handlers/authenticationHandlers';
+import { logout } from './utils/handlers/authenticationHandlers';
 
 function App() {
-  const [user, changeUser] = useState(null);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
-    setUser(isLoggedIn());
-  }, []);
-
-  const setUser = bool => {
-    if (bool) {
-      changeUser(getUser());
-    } else {
-      changeUser(null);
+    if (!user) {
+      const retrievedUser = getUser();
+      setUser(retrievedUser);
     }
-  };
+  }, [user]);
 
   const logOut = () => {
     setUser(false);
     logout();
   };
-
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -37,6 +31,11 @@ function App() {
                 <li>
                   <Link to="/">Dashboard</Link>
                 </li>
+                {user.isAdmin ? (
+                  <li>
+                    <Link to="/accounts/new">Add Account</Link>
+                  </li>
+                ) : null}
                 <li>
                   <Link to="/" onClick={logOut}>
                     Log out

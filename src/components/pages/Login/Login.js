@@ -6,6 +6,7 @@ import {
   loginHandler,
   getToken
 } from '../../../utils/handlers/authenticationHandlers';
+import PropTypes from 'prop-types';
 
 function Login(props) {
   const [credentials, changeCredentials] = useState({
@@ -22,12 +23,12 @@ function Login(props) {
     event.preventDefault();
     changeStatus({ ...status, loading: true });
     try {
-      await loginHandler({
+      const receivedUser = await loginHandler({
         username: credentials.username,
         password: credentials.password
       });
       changeStatus({ error: false, loading: false });
-      props.setUser(true);
+      props.setUser(receivedUser);
       return <Redirect to="/" />;
     } catch (err) {
       changeStatus({ error: true, loading: false });
@@ -73,5 +74,10 @@ function Login(props) {
     </div>
   );
 }
+
+Login.propTypes = {
+  setUser: PropTypes.func.isRequired
+};
+
 
 export default Login;
