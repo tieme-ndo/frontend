@@ -25,13 +25,13 @@ export const loginHandler = ({ username, password }) => {
     .then(res => {
       if (res.data.token) {
         checkAndStoreToken(res.data.token);
-        return res.data.user;
+        return res.data;
       } else {
         return new Error('Oh no, there was no token returned by the database!');
       }
     })
     .catch(error => {
-      throw new Error(error.response.data.message);
+      return error.response.data;
     });
 };
 
