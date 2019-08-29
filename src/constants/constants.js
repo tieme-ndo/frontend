@@ -1,1 +1,1 @@
-export const BASE_API_URL = 'https://tieme-ndo-backend-staging1.herokuapp.com/api/v1';
+export const BASE_API_URL = 'https://tndo-temp-staging.herokuapp.com/api/v1';
