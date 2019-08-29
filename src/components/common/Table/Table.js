@@ -1,57 +1,52 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { Table } from 'semantic-ui-react'
 
-function Table({ columns, data }) {
+export function StyledTable({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
     data
   });
+  console.log(headerGroups);
 
-  const StyledTable = styled.table`
-    width: 100%;
-    text-align: center;
-  `;
 
   // Render the UI for your table
   return (
-    <StyledTable {...getTableProps()} data-testid="Table-test">
-      <thead>
+    <Table celled {...getTableProps()} data-testid="Table-test">
+      <Table.Header>
         {headerGroups.map((headerGroup, index) => (
-          <tr {...headerGroup.getHeaderGroupProps()} key={index}>
+          <Table.Row {...headerGroup.getHeaderGroupProps()} key={index}>
             {headerGroup.headers.map((column, index2) => (
-              <th {...column.getHeaderProps()} key={index2}>
+              <Table.HeaderCell {...column.getHeaderProps()} key={index2}>
                 {column.render('Header')}
-              </th>
+              </Table.HeaderCell>
             ))}
-          </tr>
+          </Table.Row>
         ))}
-      </thead>
-      <tbody>
+      </Table.Header>
+      <Table.Body>
         {rows.map(
           row =>
             prepareRow(row) || (
-              <tr {...row.getRowProps()}>
+              <Table.Row {...row.getRowProps()}>
                 {row.cells.map((cell, index) => {
                   return (
-                    <td {...cell.getCellProps()} key={index}>
+                    <Table.Cell {...cell.getCellProps()} key={index}>
                       {cell.render('Cell')}
-                    </td>
+                    </Table.Cell>
                   );
                 })}
-              </tr>
+              </Table.Row>
             )
         )}
-      </tbody>
-    </StyledTable>
+      </Table.Body>
+    </Table>
   );
 }
 
-Table.propTypes = {
+StyledTable.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired
 };
-
-export default Table;

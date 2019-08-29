@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from '../../common/PageHeader/PageHeader';
-import Table from '../../common/Table/Table';
+import {StyledTable} from '../../common/Table/Table';
 import Button from '../../common/Button/Button';
 
 const Dashboard = () => {
@@ -38,8 +38,7 @@ const Dashboard = () => {
           }
         ]
       }
-    ],
-    []
+    ]
   );
 
   // To change with data coming from API
@@ -48,7 +47,7 @@ const Dashboard = () => {
   return (
     <>
       <PageHeader leftElement={Title} rightElement={<Button text={buttonText} />} />
-      <Table columns={columns} data={data} />
+      <StyledTable columns={columns} data={data} />
     </>
   );
 };

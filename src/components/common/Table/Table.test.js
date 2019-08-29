@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Table from './Table';
+import StyledTable from './StyledTable';
 
 const columns = [
   {
@@ -27,7 +27,7 @@ const data = [
 ];
 
 it('renders without crashing', () => {
-  const { getByTestId } = render(<Table columns={columns} data={data} />);
+  const { getByTestId } = render(<StyledTable columns={columns} data={data} />);
   const TableComponent = getByTestId('Table-test');
   expect(TableComponent).toBeInTheDocument();
   expect(document.querySelector('[data-testid="test1"]')).toBeInTheDocument();
