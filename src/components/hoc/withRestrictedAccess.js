@@ -3,15 +3,14 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import { isLoggedIn } from '../../utils/handlers/authenticationHandlers';
 
-const withRestrictedAccess = (BaseComponent, onlyForAdmin = false) => props => {
+const withRestrictedAccess = (BaseComponent, onlyForAdmin = false, user) => props => {
   if (!isLoggedIn()) {
     return <Redirect to="/login" />;
   }
 
- /*
-      TODO: Until admin validation is ready, all the users will be treated as admins
- */
- const isAdmin = true;
+ let isAdmin;
+
+ if (user) isAdmin = user.isAdmin;
 
   if (onlyForAdmin && !isAdmin) {
     return <Redirect to="/" />;

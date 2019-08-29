@@ -49,7 +49,7 @@ function App() {
         <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
         <Route
           path="/accounts/new"
-          component={withRestrictedAccess(CreateAccount, true)}
+          component={withRestrictedAccess(CreateAccount, true, user)}
         />
         <Route
           path="/login/"
