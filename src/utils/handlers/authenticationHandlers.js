@@ -1,6 +1,6 @@
-import axios from "axios";
-import { setHeaders } from '../../utils/requestHeaders';
-import { pathObj, tokenKey } from '../../utils/generalVariables';
+import axios from 'axios';
+import { pathObj, tokenKey } from '../generalVariables';
+import { setHeaders } from '../requestHeaders';
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
