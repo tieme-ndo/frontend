@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
+import { pathObj } from "./../utils/generalVariables";
+import { setHeaders } from "./../utils/requestHeaders";
+import { tokenKey } from './../utils/generalVariables';
 
-import { pathObj, tokenKey } from './../utils/generalVariables';
-import { setHeaders } from './../utils/requestHeaders';
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
@@ -50,7 +51,6 @@ export const registrationHandler = ({ username, password, isAdmin, token }) => {
       "Make sure you're passing a valid username and a password that's at least 8 characters long"
     );
   }
-
   return axios
     .post(
       `${pathObj.registrationPath}`,
@@ -81,6 +81,12 @@ export const checkAndStoreToken = token => {
     return new Error('The token is supposed to be a string!');
   } else {
     localStorage.setItem(tokenKey, token);
+  }
+};
+
+export const logout = () => {
+  if (localStorage.getItem(tokenKey)) {
+    localStorage.removeItem(tokenKey);
   }
 };
 
