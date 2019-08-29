@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './App/App';
 import 'semantic-ui-less/semantic.less';
-import * as serviceWorker from './utils/serviceWorker';
+import * as serviceWorker from './util/serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

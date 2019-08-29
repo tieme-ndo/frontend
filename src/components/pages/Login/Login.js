@@ -1,38 +1,75 @@
 import React, { useState } from 'react';
-import { Container, Button, Grid, Header, Segment, Form, Image } from 'semantic-ui-react';
-import logo from '../../../assets/images/tiemendo_logo.jpg';
+import axios from 'axios';
+import LoginForm from './LoginForm.jsx';
+import validateLoginForm from '../../../validations/login';
+import { BASE_API_URL } from '../../../constants/constants';
 
-const Login = (props) => {
-	const [ state, setState ] = useState({
-		username: '',
-		password: '',
-		errors: {},
-		loading: false
-	});
+const Login = props => {
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+    errors: {},
+    loginIn: false
+  });
 
-	return (
-		<Container>
-			<Grid textAlign="center" style={{ height: '85vh' }} verticalAlign="middle">
-				<Grid.Column style={{ maxWidth: 350 }} mobile={16} tablet={16}>
-					<Image src={logo} centered alt="tiemendo logo" size="small" />
-					<Header as="h2" icon textAlign="center" style={{ marginBottom: '30px' }}>
-						log in to your account
-					</Header>
+  const handleChange = (e, { name, value }) => {
+    setState(prevState => ({ ...prevState, [name]: value }));
+  };
 
-					<Form size="large">
-						<Segment width={5}>
-							<Form.Input fluid icon="user" iconPosition="left" placeholder="Username" />
-							<Form.Input fluid icon="lock" iconPosition="left" placeholder="Password" type="password" />
+  const handleSubmit = async () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        loginIn: true
+      };
+    });
 
-							<Button color="teal" fluid size="large">
-								Login
-							</Button>
-						</Segment>
-					</Form>
-				</Grid.Column>
-			</Grid>
-		</Container>
-	);
+    const credential = {
+      username: state.username,
+      password: state.password
+    };
+
+    const { errors, isValid } = await validateLoginForm(credential);
+
+    if (!isValid) {
+      return setState(prevState => ({
+        ...prevState,
+        errors,
+        loginIn: false
+      }));
+    }
+
+    axios
+      .post(`${BASE_API_URL}/user/login`, credential)
+      .then(res => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            loginIn: false,
+            errors: {}
+          };
+        });
+
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        props.history.push('/dashboard');
+      })
+      .catch(error => {
+        setState(prevState => ({
+          ...prevState,
+          errors: { error: 'Could not log user in' },
+          loginIn: false
+        }));
+      });
+  };
+
+  return (
+    <LoginForm
+      state={state}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+    />
+  );
 };
 
 export default Login;

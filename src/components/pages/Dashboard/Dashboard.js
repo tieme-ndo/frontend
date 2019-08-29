@@ -1,11 +1,10 @@
 import React from 'react';
 import PageHeader from '../../common/PageHeader/PageHeader';
 import Table from '../../common/Table/Table';
-import Button from '../../common/Button/Button';
 
 const Dashboard = () => {
   const Title = <h2>Dashboard</h2>;
-  const buttonText = "Add Farmer";
+  const buttonText = 'Add Farmer';
 
   const columns = React.useMemo(
     () => [
@@ -33,7 +32,7 @@ const Dashboard = () => {
             accessor: 'crops'
           },
           {
-            Header: " ",
+            Header: ' ',
             accessor: 'more'
           }
         ]
@@ -47,7 +46,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageHeader leftElement={Title} rightElement={<Button text={buttonText} />} />
+      <PageHeader
+        leftElement={Title}
+        rightElement={<button>{buttonText}</button>}
+      />
       <Table columns={columns} data={data} />
     </>
   );
@@ -71,7 +73,7 @@ const newFarmer = () => {
     address: '17 Tractor Road, Arcadia',
     acres: 5.3,
     crops: ['Wheat', 'Corn'].join(', '),
-    more: (<button>More</button>)
+    more: <button>More</button>
   };
 };
 
