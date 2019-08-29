@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { pathObj } from '../utils/generalVariables';
-import { setHeaders } from '../utils/requestHeaders';
+import { pathObj } from '../generalVariables';
+import { setHeaders } from '../requestHeaders';
 
 export const getFarmersHandler = (token) => {
 
-  return axios.get(`${pathObj.getFarmersPath}`, 
+  return axios.get(`${pathObj.getFarmersPath}`,
     setHeaders(token)
   )
     .then(res => {
@@ -22,7 +22,7 @@ export const getIndividualFarmerHandler = (farmerId, token) => {
     return new Error("Make sure you're passing a farmer id!")
   }
 
-  return axios.get(`${pathObj.getFarmersPath}/${farmerId}`, 
+  return axios.get(`${pathObj.getFarmersPath}/${farmerId}`,
     setHeaders(token)
   )
     .then(res => {
@@ -43,8 +43,8 @@ export const addFarmerHandler = (newFarmer, token) => {
     return new Error("Make sure you're passing an object that contains the relevant information for the new farmer!")
   }
 
-  return axios.post(`${pathObj.addFarmerPath}`, 
-    setHeaders(token), 
+  return axios.post(`${pathObj.addFarmerPath}`,
+    setHeaders(token),
     newFarmer
   )
     .then(res => {
@@ -63,8 +63,8 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     return new Error("Make sure you're passing valid changes!")
   }
 
-  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}`, 
-    setHeaders(token), 
+  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}`,
+    setHeaders(token),
     { changes }
   )
     .then(res => {
@@ -79,7 +79,7 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
 }
 
 export const deleteFarmerHandler = (farmerId, token) => {
-  return axios.delete(`${pathObj.deleteFarmerPath}/${farmerId}`, 
+  return axios.delete(`${pathObj.deleteFarmerPath}/${farmerId}`,
     setHeaders(token)
   )
     .then(res => {

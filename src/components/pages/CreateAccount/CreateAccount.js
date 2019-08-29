@@ -2,7 +2,7 @@ import React from 'react';
 import {
   registrationHandler,
   getToken
-} from '../../../handlers/authenticationHandlers';
+} from '../../../utils/handlers/authenticationHandlers';
 
 const CreateAccount = () => {
   const usernameRef = React.useRef();
