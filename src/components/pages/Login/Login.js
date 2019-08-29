@@ -8,7 +8,7 @@ import {
 } from '../../../utils/handlers/authenticationHandlers';
 import PropTypes from 'prop-types';
 
-function Login(props) {
+function Login({ setUser }) {
   const [credentials, changeCredentials] = useState({
     username: '',
     password: ''
@@ -28,7 +28,7 @@ function Login(props) {
         password: credentials.password
       });
       changeStatus({ error: false, loading: false });
-      props.setUser(receivedUser);
+      setUser(receivedUser);
       return <Redirect to="/" />;
     } catch (err) {
       changeStatus({ error: true, loading: false });
