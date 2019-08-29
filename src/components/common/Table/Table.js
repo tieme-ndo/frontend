@@ -9,8 +9,6 @@ export function StyledTable({ columns, data }) {
     columns,
     data
   });
-  console.log(headerGroups);
-
 
   // Render the UI for your table
   return (
