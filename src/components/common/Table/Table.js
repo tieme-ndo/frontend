@@ -14,7 +14,6 @@ export default function StyledTable({ columns, data }) {
     <Table
       celled
       {...getTableProps()}
-      TheadComponent={() => null}
       data-testid="Table-test"
     >
       <Table.Header>
