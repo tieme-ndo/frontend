@@ -9,20 +9,29 @@ export default function StyledTable({ columns, data }) {
     columns,
     data
   });
-
   // Render the UI for your table
   return (
-    <Table celled {...getTableProps()} data-testid="Table-test">
+    <Table
+      celled
+      {...getTableProps()}
+      TheadComponent={() => null}
+      data-testid="Table-test"
+    >
       <Table.Header>
-        {headerGroups.map((headerGroup, index) => (
-          <Table.Row {...headerGroup.getHeaderGroupProps()} key={index}>
-            {headerGroup.headers.map((column, index2) => (
-              <Table.HeaderCell {...column.getHeaderProps()} key={index2}>
-                {column.render('Header')}
-              </Table.HeaderCell>
-            ))}
-          </Table.Row>
-        ))}
+        {headerGroups.map((headerGroup, index) => {
+          if (index > 0) {
+            // ignoring the first empty header
+            return (
+              <Table.Row {...headerGroup.getHeaderGroupProps()} key={index}>
+                {headerGroup.headers.map((column, index2) => (
+                  <Table.HeaderCell {...column.getHeaderProps()} key={index2}>
+                    {column.render('Header')}
+                  </Table.HeaderCell>
+                ))}
+              </Table.Row>
+            );
+          }
+        })}
       </Table.Header>
       <Table.Body>
         {rows.map(
