@@ -10,8 +10,17 @@ function App() {
 
   const [user, changeUser] = useState(null);
 
-  const setUser = () => {
-    changeUser(getUser());
+  const setUser = (bool) => {
+    if(bool){
+      changeUser(getUser());
+    } else{
+      changeUser(null);
+    }
+  }
+
+  const logOut = () => {
+    setUser(false);
+    logout();
   }
 
   return (
@@ -24,7 +33,7 @@ function App() {
             </li>
             {user ? (
               <li>
-                <button onClick={logout}>Log out</button>
+                <Link to="/" onClick={logOut}>Log out</Link>
               </li>
             ) : (
               <li>

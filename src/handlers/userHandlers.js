@@ -59,7 +59,7 @@ export const getUser = () => {
   const token = localStorage.getItem(tokenKey);
   if (token) {
     const decodedToken = jwt_decode(token);
-    if (decodedToken.exp < Date.now()) {
+    if (decodedToken.exp * 1000 < Date.now()) {
       localStorage.removeItem(tokenKey);
       return false;
     }
