@@ -1,8 +1,8 @@
 import axios from "axios";
-import { pathObj } from "./../utils/generalVariables";
-import { setHeaders } from "./../utils/requestHeaders";
+import { pathObj } from "../generalVariables";
+import { setHeaders } from "../requestHeaders";
 import * as jwt_decode from "jwt-decode";
-import { tokenKey } from './../utils/generalVariables';
+import { tokenKey } from '../generalVariables';
 
 export const getUserHandler = (token, userId) => {
   if (!userId || typeof userId !== 'string') {
