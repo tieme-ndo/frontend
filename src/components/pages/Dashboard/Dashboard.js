@@ -1,44 +1,46 @@
-import React from 'react';
-import PageHeader from '../../common/PageHeader/PageHeader';
-import {StyledTable} from '../../common/Table/Table';
-import Button from '../../common/Button/Button';
+import React from "react";
+import PageHeader from "../../common/PageHeader/PageHeader";
+import { StyledTable } from "../../common/Table/Table";
+import { Header, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom"
 
 const Dashboard = () => {
-  const Title = <h2>Dashboard</h2>;
-  const buttonText = "Add Farmer";
+  const Title = <Header as="h1">All Farmers</Header>;
+  const buttonText = "Sort By(not functional)";
 
   const columns = React.useMemo(
     () => [
       {
-        Header: ' ',
+        Header: " ",
         columns: [
           {
-            Header: 'Name',
-            accessor: 'name'
+            Header: "Name",
+            accessor: "name"
           },
           {
-            Header: 'Sex',
-            accessor: 'sex'
+            Header: "Sex",
+            accessor: "sex"
           },
           {
-            Header: 'Phone Number',
-            accessor: 'phoneNumber'
+            Header: "Phone Number",
+            accessor: "phoneNumber"
           },
           {
-            Header: 'Acres',
-            accessor: 'acres'
+            Header: "Acres",
+            accessor: "acres"
           },
           {
-            Header: 'Crops',
-            accessor: 'crops'
+            Header: "Crops",
+            accessor: "crops"
           },
           {
             Header: " ",
-            accessor: 'more'
+            accessor: "more"
           }
         ]
       }
-    ]
+    ],
+    []
   );
 
   // To change with data coming from API
@@ -46,8 +48,12 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageHeader leftElement={Title} rightElement={<Button text={buttonText} />} />
+      <PageHeader
+        leftElement={Title}
+        rightElement={<Button>{buttonText}</Button>}
+      />
       <StyledTable columns={columns} data={data} />
+      <Button primary fixed="right"><Link to="/add-farmer/">Add Farmer</Link></Button>
     </>
   );
 };
@@ -64,13 +70,13 @@ const range = len => {
 
 const newFarmer = () => {
   return {
-    name: 'David Test',
-    sex: 'M',
-    phoneNumber: '+3348484884',
-    address: '17 Tractor Road, Arcadia',
+    name: "David Test",
+    sex: "M",
+    phoneNumber: "+3348484884",
+    address: "17 Tractor Road, Arcadia",
     acres: 5.3,
-    crops: ['Wheat', 'Corn'].join(', '),
-    more: (<button>More</button>)
+    crops: ["Wheat", "Corn"].join(", "),
+    more: <Button>More</Button>
   };
 };
 
