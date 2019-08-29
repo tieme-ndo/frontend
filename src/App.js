@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import withRestrictedAccess from './components/hoc/withRestrictedAccess';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import Login from './components/pages/Login/Login';
 import CreateAccount from './components/pages/CreateAccount/CreateAccount';
 import { getUser } from "./utils/handlers/userHandlers";
-import { logout } from "./utils/handlers/authenticationHandlers";
+import { isLoggedIn, logout } from "./utils/handlers/authenticationHandlers";
 
 function App() {
 
   const [user, changeUser] = useState(null);
+
+  useEffect(() => {
+    setUser(isLoggedIn());
+  }, []);
 
   const setUser = (bool) => {
     if(bool){
@@ -17,7 +21,7 @@ function App() {
     } else{
       changeUser(null);
     }
-  }
+  };
 
   const logOut = () => {
     setUser(false);
