@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import PropTypes from 'prop-types';
-import { Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
 
-export function StyledTable({ columns, data }) {
+export default function StyledTable({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
