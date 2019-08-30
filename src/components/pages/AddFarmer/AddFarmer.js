@@ -1,11 +1,11 @@
-/** @format */
-
 import React, {useState} from 'react'
 import Input from '../../common/Input/Input'
 import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
 import Button from '../../common/Button/StyledButton'
 import styled from 'styled-components'
 import axios from 'axios'
+import {pathObj, tokenKey} from '../../../utils/generalVariables'
+import {setHeaders} from '../../../utils/requestHeaders'
 
 const AddFarmer = () => {
   const [state, setState] = useState({
@@ -59,13 +59,9 @@ const AddFarmer = () => {
       }
     }
     e.target.reset()
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('tokenTiemeNdo'),
-    }
     axios
-      .post('https://tieme-ndo-backend-staging1.herokuapp.com/api/v1/farmers/create', formData, {
-        headers: headers,
+      .post(`${pathObj.addFarmerPath}/create`, formData, {
+        headers: setHeaders(localStorage.getItem(tokenKey)),
       })
       .then(res => {
         return res

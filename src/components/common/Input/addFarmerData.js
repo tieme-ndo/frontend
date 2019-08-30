@@ -1,5 +1,3 @@
-/** @format */
-
 export const personalInfo = {
   title: {
     elementType: 'select',
