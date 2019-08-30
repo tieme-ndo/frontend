@@ -8,7 +8,7 @@ import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
 const Dashboard = () => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
-  const buttonText = 'Sort By(not functional)';
+  /* Commented out until feature is complete const buttonText = 'Sort By(not functional)'; */
 
   const columns = React.useMemo(
     () => [
@@ -74,7 +74,7 @@ const Dashboard = () => {
     <>
       <PageHeader
         leftElement={Title}
-        rightElement={<Button>{buttonText}</Button>}
+        /* Commented out until feature is complete rightElement={<Button>{buttonText}</Button>} */
       />
       <StyledTable
         columns={columns}
