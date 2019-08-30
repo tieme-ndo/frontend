@@ -1,4 +1,3 @@
-// Track state changes
 // If new state !== old state pass data to submit form handler
 // Create PUT farmer axios request helper
 // Refactor accordian to tabs
@@ -12,22 +11,26 @@ import Button from '../../common/Button/StyledButton';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const UpdateFarmer = (props) => {
-  const { personalInfo, familyInfo, guarantor, farmInfo } = props.location.state;
+const UpdateFarmer = ({ location }) => {
+  const hydrateFormInputValues = () => {
+    const farmerData = location.state;
+    let hydratedFormInputs = {};
 
-  const [formElementsState, setFormElementsState] = useState({
-    personalInfo: form.personalInfo,
-    familyInfo: form.familyInfo,
-    guarantor: form.guarantor,
-    farmInfo: form.farmInfo,
-  });
+    for (const inputSection in form) {
+      const inputSectionData = form[inputSection];
 
-  const [formState, setFormData] = useState({
-    ...personalInfo,
-    ...familyInfo,
-    ...guarantor,
-    ...farmInfo
-  });
+      for (const input in inputSectionData) {
+        inputSectionData[input].value = farmerData[inputSection][input];
+        hydratedFormInputs = {
+          ...form
+        };
+      }
+    }
+
+    return hydratedFormInputs;
+  }
+
+  const [formElementsState, setFormElementsState] = useState(hydrateFormInputValues());
 
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
@@ -95,7 +98,6 @@ const UpdateFarmer = (props) => {
       formElementsArray.push({
         id: key,
         config: data[key],
-        value: formState[key]
       })
     }
     let form = formElementsArray.map(formElement => (
@@ -104,7 +106,6 @@ const UpdateFarmer = (props) => {
         {...formElement.config}
         data={index}
         changeHandler={onChangeHandler}
-        value={formElement.value}
       />
     ))
     return form
@@ -137,7 +138,7 @@ const UpdateFarmer = (props) => {
         <form action="" onSubmit={formHandler} style={{ padding: '2rem' }}>
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
-              <h2>Personnel Information</h2>
+              <h2>Personal Information</h2>
               <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
             <div hidden={stateToggle.personalInfoToggle}>{personalInfoInputs}</div>
@@ -167,7 +168,7 @@ const UpdateFarmer = (props) => {
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
 
-          <Button displayName="Add Farmer" type="submit" />
+          <Button displayName="Save" type="submit" />
         </form>
       </section>
     </div>
