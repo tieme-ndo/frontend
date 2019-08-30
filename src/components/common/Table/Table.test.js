@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import {render} from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import StyledTable from './Table';
 const columns = [
@@ -28,7 +28,7 @@ const data = [
   },
 ];
 it('renders without crashing', () => {
-  const {getByTestId} = render(<StyledTable columns={columns} data={data} />);
+  const { getByTestId } = render(<StyledTable columns={columns} data={data} />);
   const TableComponent = getByTestId('Table-test');
   expect(TableComponent).toBeInTheDocument();
   expect(document.querySelector('[data-testid="Table-test-header"]')).toBeInTheDocument();
