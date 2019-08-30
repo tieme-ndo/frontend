@@ -1,4 +1,3 @@
-// Copy Add Farmer Form Here
 // Receive a farmer ID when clicking on the farmer dashboard row
 // GET farmer by the received ID
 // Populate the state with the farmer data
@@ -11,28 +10,29 @@
   // Show clicked tab content on tab click
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
-import { personalInfo, familyInfo, guarantor, farmInfo } from '../../common/Input/addFarmerData';
+import * as form from '../../common/Input/addFarmerData';
 import Button from '../../common/Button/StyledButton';
 import styled from 'styled-components';
 import axios from 'axios';
 
 const UpdateFarmer = () => {
-  const [state, setState] = useState({
-    personalInfo: personalInfo,
-    familyInfo: familyInfo,
-    guarantor: guarantor,
-    farmInfo: farmInfo,
-  })
+  const [formElementsState, setFormElementsState] = useState({
+    personalInfo: form.personalInfo,
+    familyInfo: form.familyInfo,
+    guarantor: form.guarantor,
+    farmInfo: form.farmInfo,
+  });
+
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
     guarantorToggle: true,
     farmInfoToggle: true,
-  })
+  });
 
   const onChangeHandler = (e, data) => {
     const { name, value, type } = e.target
-    const newData = { ...state[data] }
+    const newData = { ...formElementsState[data] }
     const newEntry = { ...newData[name] }
     if (type === 'checkbox') {
       if (newEntry.selected.indexOf(value) > -1) {
@@ -44,7 +44,7 @@ const UpdateFarmer = () => {
       newEntry.value = value
     }
     newData[name] = newEntry
-    setState({ ...state, [data]: newData })
+    setFormElementsState({ ...formElementsState, [data]: newData })
   }
   const toggleHandler = data => {
     setStateToggle(prevState => ({
@@ -56,7 +56,7 @@ const UpdateFarmer = () => {
     e.preventDefault()
     let formData = {}
 
-    const newState = JSON.parse(JSON.stringify(state))
+    const newState = JSON.parse(JSON.stringify(formElementsState));
     for (let key in newState) {
       formData[key] = newState[key]
       for (let key2 in newState[key]) {
@@ -102,10 +102,10 @@ const UpdateFarmer = () => {
     return form
   }
 
-  let personalInfoInputs = inputCreator(state.personalInfo, 'personalInfo')
-  let familyInfoInputs = inputCreator(state.familyInfo, 'familyInfo')
-  let guarantorInputs = inputCreator(state.guarantor, 'guarantor')
-  let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo')
+  let personalInfoInputs = inputCreator(formElementsState.personalInfo, 'personalInfo')
+  let familyInfoInputs = inputCreator(formElementsState.familyInfo, 'familyInfo')
+  let guarantorInputs = inputCreator(formElementsState.guarantor, 'guarantor')
+  let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo')
 
   const DivToggle = styled.div`
     display: flex;
