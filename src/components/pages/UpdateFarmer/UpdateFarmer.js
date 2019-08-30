@@ -1,13 +1,10 @@
-// Receive a farmer ID when clicking on the farmer dashboard row
-// GET farmer by the received ID
-// Populate the state with the farmer data
 // Track state changes
 // If new state !== old state pass data to submit form handler
 // Create PUT farmer axios request helper
 // Refactor accordian to tabs
-  // Reposition elements
-  // Hide all on tab click
-  // Show clicked tab content on tab click
+// Reposition elements
+// Hide all on tab click
+// Show clicked tab content on tab click
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
@@ -15,12 +12,21 @@ import Button from '../../common/Button/StyledButton';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const UpdateFarmer = () => {
+const UpdateFarmer = (props) => {
+  const { personalInfo, familyInfo, guarantor, farmInfo } = props.location.state;
+
   const [formElementsState, setFormElementsState] = useState({
     personalInfo: form.personalInfo,
     familyInfo: form.familyInfo,
     guarantor: form.guarantor,
     farmInfo: form.farmInfo,
+  });
+
+  const [formState, setFormData] = useState({
+    ...personalInfo,
+    ...familyInfo,
+    ...guarantor,
+    ...farmInfo
   });
 
   const [stateToggle, setStateToggle] = useState({
@@ -89,6 +95,7 @@ const UpdateFarmer = () => {
       formElementsArray.push({
         id: key,
         config: data[key],
+        value: formState[key]
       })
     }
     let form = formElementsArray.map(formElement => (
@@ -97,6 +104,7 @@ const UpdateFarmer = () => {
         {...formElement.config}
         data={index}
         changeHandler={onChangeHandler}
+        value={formElement.value}
       />
     ))
     return form
