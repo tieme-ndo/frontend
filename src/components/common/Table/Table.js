@@ -11,12 +11,8 @@ export default function StyledTable({ columns, data }) {
   });
   // Render the UI for your table
   return (
-    <Table
-      celled
-      {...getTableProps()}
-      data-testid="Table-test"
-    >
-      <Table.Header>
+    <Table celled {...getTableProps()} data-testid="Table-test">
+      <Table.Header data-testid="Table-test-header">
         {headerGroups.map((headerGroup, index) => {
           if (index > 0) {
             // ignoring the first empty header
@@ -29,6 +25,8 @@ export default function StyledTable({ columns, data }) {
                 ))}
               </Table.Row>
             );
+          } else {
+            return undefined;
           }
         })}
       </Table.Header>
@@ -45,7 +43,7 @@ export default function StyledTable({ columns, data }) {
                   );
                 })}
               </Table.Row>
-            )
+            ),
         )}
       </Table.Body>
     </Table>

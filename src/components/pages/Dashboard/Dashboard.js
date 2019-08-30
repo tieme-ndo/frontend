@@ -17,7 +17,7 @@ const Dashboard = () => {
         columns: [
           {
             Header: 'Name',
-            accessor: 'name'
+            accessor: 'name',
           },
           {
             Header: 'Community Name',
@@ -42,7 +42,7 @@ const Dashboard = () => {
         ]
       }
     ],
-    []
+    [],
   );
 
   const prepareData = farmers => {
@@ -84,7 +84,7 @@ const Dashboard = () => {
         <Link to="/addfarmer">Add Farmer</Link>
       </Button>
     </>
-  );
-};
+  )
+}
 
 export default Dashboard;
