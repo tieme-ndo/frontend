@@ -81,7 +81,7 @@ const Dashboard = () => {
         data={React.useMemo(() => data, [data])}
       />
       <Button primary fixed="right">
-        <Link to="/add-farmer/">Add Farmer</Link>
+        <Link to="/addfarmer">Add Farmer</Link>
       </Button>
     </>
   );
