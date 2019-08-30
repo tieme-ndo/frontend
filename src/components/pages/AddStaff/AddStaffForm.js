@@ -1,6 +1,5 @@
 import React from 'react';
 import uuid from 'uuid';
-import styled from 'styled-components';
 import {
   Container,
   Button,
@@ -12,9 +11,8 @@ import {
   Checkbox
 } from 'semantic-ui-react';
 
-const CreateAccount = props => {
+const AddStaff = props => {
   const { state, handleSubmit, handleChange, checkboxChange } = props;
-  setTimeout(300, () => (state.message = ''));
   return (
     <Container>
       <Grid style={{ height: '85vh' }} centered>
@@ -62,7 +60,7 @@ const CreateAccount = props => {
               </Form.Field>
               <Form.Field>
                 <Checkbox
-                  label='Is Admin?'
+                  label='Check this box to make this user Admin'
                   name='isAdmin'
                   type='checkbox'
                   id='is-admin'
@@ -91,4 +89,4 @@ const CreateAccount = props => {
   );
 };
 
-export default CreateAccount;
+export default AddStaff;

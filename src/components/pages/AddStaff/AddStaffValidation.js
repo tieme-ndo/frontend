@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const createAccountSchema = yup.object().shape({
+const addStaffSchema = yup.object().shape({
   username: yup
     .string()
     .min(3)
@@ -29,7 +29,7 @@ const errorFormatter = err => {
 
 // validate against schema
 const validatecreateAccountForm = credential => {
-  return createAccountSchema
+  return addStaffSchema
     .validate(credential, { abortEarly: false })
     .then(values => {
       const isValid = true;
