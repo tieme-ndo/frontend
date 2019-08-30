@@ -10,23 +10,23 @@ import LoginForm from './LoginForm';
 import validateLoginForm from './loginValidation';
 
 function Login({ setUser, ...props}) {
-  const [state, setState] = useState({
+  const [state, updateState] = useState({
     username: '',
     password: '',
     errors: {},
-    loginIn: false
+    loading: false
   });
 
 
   const handleChange = (e, { name, value }) => {
-    setState(prevState => ({ ...prevState, [name]: value }));
+    updateState(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async () => {
-    setState(prevState => {
+    updateState(prevState => {
       return {
         ...prevState,
-        loginIn: true
+        loading: true
       };
     });
 
@@ -38,10 +38,10 @@ function Login({ setUser, ...props}) {
     const { errors, isValid } = await validateLoginForm(credential);
     // if validation fails, stop loading and render error msg
     if (!isValid) {
-      return setState(prevState => ({
+      return updateState(prevState => ({
         ...prevState,
         errors,
-        loginIn: false
+        loading: false
       }));
     }
     // send request to server
@@ -57,10 +57,10 @@ function Login({ setUser, ...props}) {
         props.history.push('/');
     } else {
         // on unsuccessful login, render server error message
-        setState(prevState => ({
+        updateState(prevState => ({
             ...prevState,
             errors: [{ error: receivedUser.message }],
-            loginIn: false
+            loading: false
         }))
     }
   }
