@@ -20,7 +20,9 @@ function CreateAccount() {
   const handleChange = (e, { name, value }) => {
     setState(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
+      message: '',
+      errors: {}
     }));
   };
 

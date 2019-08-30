@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import withRestrictedAccess from './components/hoc/withRestrictedAccess';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import Login from './components/pages/Login/Login';
@@ -25,21 +23,21 @@ function App() {
   };
   return (
     <Router>
-      <div className='App' data-testid='App'>
+      <div className="App" data-testid="App">
         <nav>
           <ul>
             {user ? (
               <>
                 <li>
-                  <Link to='/'>Dashboard</Link>
+                  <Link to="/">Dashboard</Link>
                 </li>
                 {user.isAdmin ? (
                   <li>
-                    <Link to='/accounts/new'>Add Account</Link>
+                    <Link to="/accounts/new">Add Account</Link>
                   </li>
                 ) : null}
                 <li>
-                  <Link to='/' onClick={logOut}>
+                  <Link to="/" onClick={logOut}>
                     Log out
                   </Link>
                 </li>
@@ -48,16 +46,15 @@ function App() {
           </ul>
         </nav>
 
-        <Route path='/' exact component={withRestrictedAccess(Dashboard)} />
+        <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
         <Route
-          path='/accounts/new'
+          path="/accounts/new"
           component={withRestrictedAccess(CreateAccount, true, user)}
         />
         <Route
-          path='/login/'
+          path="/login/"
           render={props => <Login {...props} setUser={setUser} />}
         />
-        <ToastContainer position='top-right' />
       </div>
     </Router>
   );

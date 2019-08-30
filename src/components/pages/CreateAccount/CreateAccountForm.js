@@ -1,7 +1,6 @@
 import React from 'react';
 import uuid from 'uuid';
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
 import {
   Container,
   Button,
@@ -15,14 +14,12 @@ import {
 
 const CreateAccount = props => {
   const { state, handleSubmit, handleChange, checkboxChange } = props;
-  if (state.message) {
-    toast.success(state.message);
-  }
+  setTimeout(300, () => (state.message = ''));
   return (
-    <Div>
-      {/* <Container> */}
-      <Grid style={{ height: '85vh', width: '100%' }} centered>
-        <Grid.Column mobile={5} tablet={5} computer={5}>
+    <Container>
+      <Grid style={{ height: '85vh' }} centered>
+        <Grid.Column style={{ maxWidth: 350 }}>
+          {state.message && <Message success>{state.message}</Message>}
           {state.errors.length && (
             <Message error>
               <Message.List>
@@ -90,17 +87,8 @@ const CreateAccount = props => {
           </Form>
         </Grid.Column>
       </Grid>
-      {/* </Container> */}
-    </Div>
+    </Container>
   );
 };
-
-const Div = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export default CreateAccount;
