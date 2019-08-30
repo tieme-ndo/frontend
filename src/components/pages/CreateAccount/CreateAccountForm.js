@@ -11,20 +11,16 @@ import {
   Message,
   Checkbox
 } from 'semantic-ui-react';
-import { ToastContainer, toast } from 'react-toastify';
 
 const CreateAccount = props => {
   const { state, handleSubmit, handleChange, checkboxChange } = props;
-  if (state.message) {
-    console.log('heere');
-    console.log(toast);
-    toast.success('Success Notification !');
-  }
+
   return (
     <Div>
       {/* <Container> */}
       <Grid style={{ height: '85vh', width: '100%' }} centered>
-        <Grid.Column mobile={5} tablet={8} computer={8}>
+        <Grid.Column mobile={5} tablet={5} computer={5}>
+          {state.message && <Message success>{state.message}</Message>}
           {state.errors.length && (
             <Message error>
               <Message.List>
@@ -36,7 +32,7 @@ const CreateAccount = props => {
               </Message.List>
             </Message>
           )}{' '}
-          <Header as='h3' style={{ marginBottom: '30px' }} centered>
+          <Header as='h3' style={{ marginBottom: '30px', textAlign: 'center' }}>
             Create New Account
           </Header>
           <Form onSubmit={handleSubmit}>
