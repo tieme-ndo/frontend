@@ -1,90 +1,98 @@
 import React from 'react';
+import { useState } from 'react';
 import {
   registrationHandler,
   getToken
 } from '../../../utils/handlers/authenticationHandlers';
+import CreateAccountForm from './CreateAccountForm';
+import validateCreateAccountForm from './createAccountValidation';
 
-const CreateAccount = () => {
-  const usernameRef = React.useRef();
-  const passwordRef = React.useRef();
-  const isAdminRef = React.useRef();
+function CreateAccount() {
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+    isAdmin: false,
+    errors: {},
+    createAccount: false,
+    message: ''
+  });
 
-  const [errorMessage, setErrorMessage] = React.useState(undefined);
-  const [message, setMessage] = React.useState(undefined);
-  const [loading, setLoading] = React.useState(false);
+  const handleChange = (e, { name, value }) => {
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
-  const onCreate = async event => {
-    event.preventDefault();
-    setMessage("");
-    setErrorMessage("");
-    setLoading(true);
-    try {
-      const username = usernameRef.current.value;
-      const password = passwordRef.current.value;
-      if (username && password) {
-        const response = await registrationHandler({
-          username: usernameRef.current.value,
-          password: passwordRef.current.value,
-          isAdmin: isAdminRef.current.checked,
-          token: getToken()
-        });
-        setMessage(response);
-      } else {
-        setErrorMessage("Please, provide a valid username and password");
-      }
-    } catch (error) {
-      setErrorMessage(error);
-    } finally {
-      setLoading(false);
+  const checkboxChange = (e, { name, checked }) => {
+    setState(prevState => ({ ...prevState, isAdmin: checked }));
+  };
+
+  const handleSubmit = async () => {
+    setState(prevState => {
+      return {
+        ...prevState,
+        createAccount: true
+      };
+    });
+
+    const credential = {
+      username: state.username,
+      password: state.password
+    };
+
+    const { errors, isValid } = await validateCreateAccountForm(credential);
+
+    if (!isValid) {
+      return setState(prevState => ({
+        ...prevState,
+        errors,
+        createAccount: false
+      }));
+    }
+
+    const response = await registrationHandler({
+      username: state.username,
+      password: state.password,
+      isAdmin: state.isAdmin,
+      token: getToken()
+    });
+
+    if (Array.isArray(response)) {
+      const [errors] = response;
+      delete errors.key;
+      return setState(prevState => ({
+        ...prevState,
+        createAccount: true,
+        errors: [errors]
+      }));
+    } else if (response && response.message === 'username already exists') {
+      return setState(prevState => ({
+        ...prevState,
+        createAccount: true,
+        errors: [response]
+      }));
+    } else if (response === 'New user created') {
+      return setState(prevState => ({
+        ...prevState,
+        message: 'New user created',
+        username: '',
+        password: '',
+        isAdmin: false,
+        errors: {},
+        createAccount: false
+      }));
     }
   };
 
   return (
-    <div>
-      <h2>Create New Account</h2>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      {message && <div className="message">{message}</div>}
-      <form onSubmit={onCreate}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            ref={usernameRef}
-            id="username"
-            name="username"
-            type="text"
-            data-testid="username-field"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            ref={passwordRef}
-            id="password"
-            name="password"
-            type="password"
-            data-testid="password-field"
-          />
-        </div>
-        <div>
-          <label htmlFor="is-admin">Is Admin?</label>
-          <input
-            ref={isAdminRef}
-            type="checkbox"
-            id="is-admin"
-            name="is-admin"
-            data-testid="admin-checkbox"
-          />
-        </div>
-        {loading ? (
-          <button type="submit" disabled>
-            Loading...
-          </button>
-        ) : (
-          <button type="submit">Create Account</button>
-        )}
-      </form>
-    </div>
+    <CreateAccountForm
+      state={state}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+      checkboxChange={checkboxChange}
+    />
   );
-};
+}
 
 export default CreateAccount;

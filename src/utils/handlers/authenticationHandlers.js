@@ -39,17 +39,6 @@ export const loginHandler = ({ username, password }) => {
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
 export const registrationHandler = ({ username, password, isAdmin, token }) => {
   // Once database schema is finalized, this conditional check could be refactored into a separate utility function.
-  if (
-    !username ||
-    !password ||
-    typeof username !== 'string' ||
-    typeof password !== 'string' ||
-    password.length < 6
-  ) {
-    throw new Error(
-      "Make sure you're passing a valid username and a password that's at least 8 characters long"
-    );
-  }
   return axios
     .post(
       `${pathObj.registrationPath}`,
@@ -63,14 +52,11 @@ export const registrationHandler = ({ username, password, isAdmin, token }) => {
     .then(res => {
       if (res.data.success) {
         return res.data.message;
-      } else {
-        return new Error(
-          'Something went wrong with your registration. Please try again.'
-        );
       }
     })
     .catch(error => {
-      throw error.response.data.message;
+      delete error.response.data.errors.status;
+      return error.response.data.errors;
     });
 };
 
