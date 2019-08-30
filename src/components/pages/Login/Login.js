@@ -59,13 +59,13 @@ function Login({ setUser, ...props}) {
     } else {
         setState(prevState => ({
             ...prevState,
-            errors: { error: receivedUser.message },
+            errors: [{ error: receivedUser.message }],
             loginIn: false
         }))
     }
 }
 
-  if (isLoggedIn()) {
+  if (getUser()) {
     return <Redirect to="/" />;
   }
 
