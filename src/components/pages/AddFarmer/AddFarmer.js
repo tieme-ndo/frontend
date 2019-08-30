@@ -1,3 +1,5 @@
+/** @format */
+
 import React, {useState, useEffect} from 'react'
 import Input from '../../common/Input/Input'
 import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
@@ -12,13 +14,16 @@ import {toast} from 'react-toastify'
 const AddFarmer = () => {
   const [state, setState] = useState({})
 
-  useEffect(() => {
+  const defaultState = () => {
     setState({
       personalInfo: personalInfo,
       familyInfo: familyInfo,
       guarantor: guarantor,
       farmInfo: farmInfo,
     })
+  }
+  useEffect(() => {
+    defaultState()
   }, [])
 
   const [stateToggle, setStateToggle] = useState({
@@ -53,7 +58,6 @@ const AddFarmer = () => {
   const formHandler = e => {
     e.preventDefault()
     let formData = {}
-
     const newState = JSON.parse(JSON.stringify(state))
     for (let key in newState) {
       formData[key] = newState[key]
@@ -68,13 +72,15 @@ const AddFarmer = () => {
     axios
       .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
-        e.target.reset()
         toast.success('Farmer Added Successfully')
+        defaultState()
+        return
       })
       .catch(err => {
         err.response.data.errors.forEach(element => {
           toast.error(element.message)
         })
+        return
       })
   }
   const inputCreator = (data, index) => {
