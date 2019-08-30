@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
   loginHandler,
-  getUser,
-  isLoggedIn
+  getUser
 } from '../../../utils/handlers/authenticationHandlers';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
@@ -37,7 +36,7 @@ function Login({ setUser, ...props}) {
     };
 
     const { errors, isValid } = await validateLoginForm(credential);
-
+    // if validation fails, stop loading and render error msg
     if (!isValid) {
       return setState(prevState => ({
         ...prevState,
@@ -45,7 +44,7 @@ function Login({ setUser, ...props}) {
         loginIn: false
       }));
     }
-
+    // send request to server
     const receivedUser = await loginHandler({
         username: state.username,
         password: state.password
@@ -57,14 +56,15 @@ function Login({ setUser, ...props}) {
 
         props.history.push('/');
     } else {
+        // on unsuccessful login, render server error message
         setState(prevState => ({
             ...prevState,
             errors: [{ error: receivedUser.message }],
             loginIn: false
         }))
     }
-}
-
+  }
+  // check if user already exists, if yes (logged in), redirect to root
   if (getUser()) {
     return <Redirect to="/" />;
   }
