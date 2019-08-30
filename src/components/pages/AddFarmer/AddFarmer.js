@@ -1,19 +1,26 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Input from '../../common/Input/Input'
 import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
 import Button from '../../common/Button/StyledButton'
 import styled from 'styled-components'
 import axios from 'axios'
-import {pathObj, tokenKey} from '../../../utils/generalVariables'
+import {pathObj} from '../../../utils/generalVariables'
+import {getToken} from '../../../utils/handlers/authenticationHandlers'
 import {setHeaders} from '../../../utils/requestHeaders'
+import {toast} from 'react-toastify'
 
 const AddFarmer = () => {
-  const [state, setState] = useState({
-    personalInfo: personalInfo,
-    familyInfo: familyInfo,
-    guarantor: guarantor,
-    farmInfo: farmInfo,
-  })
+  const [state, setState] = useState({})
+
+  useEffect(() => {
+    setState({
+      personalInfo: personalInfo,
+      familyInfo: familyInfo,
+      guarantor: guarantor,
+      farmInfo: farmInfo,
+    })
+  }, [])
+
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
@@ -58,16 +65,16 @@ const AddFarmer = () => {
         }
       }
     }
-    e.target.reset()
     axios
-      .post(`${pathObj.addFarmerPath}/create`, formData, {
-        headers: setHeaders(localStorage.getItem(tokenKey)),
-      })
+      .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
-        return res
+        e.target.reset()
+        toast.success('Farmer Added Successfully')
       })
       .catch(err => {
-        throw err.response
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message)
+        })
       })
   }
   const inputCreator = (data, index) => {
@@ -103,14 +110,7 @@ const AddFarmer = () => {
   `
   return (
     <div>
-      <header>
-        <div>Logo</div>
-        <div>
-          <Button displayName="LogOut" />
-        </div>
-      </header>
       <section>
-        <Button displayName="Back" styles={{backgroundColor: 'green'}} />
         <hr />
 
         <form action="" onSubmit={formHandler} style={{padding: '2rem'}}>

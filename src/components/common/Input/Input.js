@@ -7,7 +7,6 @@ const Input = props => {
     name,
     changeHandler,
     value,
-    styles,
     labelName,
     elementConfig,
     checked,
