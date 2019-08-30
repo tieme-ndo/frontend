@@ -4,7 +4,7 @@ import * as yup from 'yup';
 // login schema
 const loginSchema = yup.object().shape({
   username: yup.string().min(5).required(),
-  password: yup.string().min(5).required()
+  password: yup.string().min(6).required()
 });
 
 
