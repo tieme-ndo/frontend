@@ -17,7 +17,7 @@ const Dashboard = () => {
         columns: [
           {
             Header: 'Name',
-            accessor: 'name',
+            accessor: 'name'
           },
           {
             Header: 'Community Name',
@@ -42,7 +42,7 @@ const Dashboard = () => {
         ]
       }
     ],
-    [],
+    []
   );
 
   const prepareData = farmers => {
@@ -76,15 +76,12 @@ const Dashboard = () => {
         leftElement={Title}
         /* Commented out until feature is complete rightElement={<Button>{buttonText}</Button>} */
       />
-      <StyledTable
-        columns={columns}
-        data={React.useMemo(() => data, [data])}
-      />
+      <StyledTable columns={columns} data={React.useMemo(() => data, [data])} />
       <Button primary fixed="right">
         <Link to="/addfarmer">Add Farmer</Link>
       </Button>
     </>
-  )
-}
+  );
+};
 
 export default Dashboard;
