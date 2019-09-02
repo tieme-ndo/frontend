@@ -8,7 +8,7 @@ import { getToken } from '../../../utils/handlers/authenticationHandlers';
 
 const UpdateFarmer = ({ location }) => {
   const hydrateFormInputValues = () => {
-    const farmerData = location.state;
+    const farmerData = location.state.farmer;
     let hydratedFormInputs = {};
 
     // Deep copy of form input data objects
@@ -79,7 +79,7 @@ const UpdateFarmer = ({ location }) => {
     }
 
     const token = getToken()
-    updateFarmerHandler(formData, location.state._id, token);
+    updateFarmerHandler(formData, location.state.farmer._id, token);
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
