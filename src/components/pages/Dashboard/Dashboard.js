@@ -74,8 +74,8 @@ const Dashboard = () => {
       <PageHeader
         leftElement={Title}
         rightElement={
-          <Button primary fixed="right">
-            <Link to="/addfarmer">Add Farmer</Link>
+          <Button color="teal" fixed="right">
+            <Link style={{color: 'white'}} to="/addfarmer">Add Farmer</Link>
           </Button>
         }
       />
