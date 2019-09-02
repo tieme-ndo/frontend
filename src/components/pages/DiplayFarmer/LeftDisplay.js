@@ -1,11 +1,11 @@
 import React from 'react';
-import { Segment, Button, Placeholder, Header } from 'semantic-ui-react';
+import { Responsive, Segment, Button, Placeholder, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const LeftDisplay = ({ farmer, history }) => {
   return (
     <>
-      <Segment>
+      <Responsive as={Segment}>
         <Placeholder style={{ height: 150, width: 150 }}>
           <Placeholder.Image />
         </Placeholder>
@@ -26,7 +26,7 @@ const LeftDisplay = ({ farmer, history }) => {
           {farmer.personalInfo.house_name} {farmer.personalInfo.house_number},{' '}
           {farmer.personalInfo.region}
         </Header>
-      </Segment>
+      </Responsive>
       <Button
         style={{ width: '100%', marginBottom: '0.75rem' }}
         onClick={() => {

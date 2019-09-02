@@ -22,7 +22,7 @@ const DisplayFarmer = ({ history, location }) => {
 
   return (
     <Container>
-      <Grid>
+      <Grid stackable columns={2}>
         <Grid.Column width={5}>
           <LeftDisplay farmer={farmer} history={history} />
         </Grid.Column>
