@@ -3,23 +3,34 @@ import * as yup from 'yup';
 
 // login schema
 const loginSchema = yup.object().shape({
-  username: yup.string().min(5).required(),
-  password: yup.string().min(6).required()
+  username: yup
+    .string()
+    .min(3)
+    .max(20)
+    .trim()
+    .matches(/^\S+$/)
+    .required(),
+  password: yup
+    .string()
+    .min(6)
+    .max(40)
+    .trim()
+    .required()
 });
 
 
 const errorFormatter = err => {
-    const errors = err.errors.map(error => {
-      const key = error.split(' ')[0];
+  const errors = err.errors.map(error => {
+    const key = error.split(' ')[0];
 
-      return {
-        [key]: error
-      };
-    });
+    return {
+      [key]: error
+    };
+  });
 
-    const isValid = false;
+  const isValid = false;
 
-    return { errors, isValid };
+  return { errors, isValid };
 };
 
 
