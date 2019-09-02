@@ -9,7 +9,8 @@ import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
 import Button from '../../common/Button/StyledButton';
 import styled from 'styled-components';
-import axios from 'axios';
+import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
+import { getToken } from '../../../utils/handlers/authenticationHandlers';
 
 const UpdateFarmer = ({ location }) => {
   const hydrateFormInputValues = () => {
@@ -82,21 +83,10 @@ const UpdateFarmer = ({ location }) => {
         }
       }
     }
-    e.target.reset()
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('tokenTiemeNdo'),
-    }
-    axios
-      .post('https://tieme-ndo-backend-staging1.herokuapp.com/api/v1/farmers/create', formData, {
-        headers: headers,
-      })
-      .then(res => {
-        return res
-      })
-      .catch(err => {
-        throw err.response
-      })
+
+    const token = getToken()
+    
+    updateFarmerHandler(formData, location.state._id, token);
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
