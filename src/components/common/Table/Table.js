@@ -5,7 +5,7 @@ import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 // eslint-disable-next-line react/prop-types
-function DashboardTable({ className, history, columns, data }) {
+function DashboardTable({ className, history, columns, data, getFarmer }) {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -39,7 +39,10 @@ function DashboardTable({ className, history, columns, data }) {
               prepareRow(row) || (
                 <Table.Row
                   onClick={() => {
-                    history.push(`/farmers/${row.original.id}`);
+                    history.push({
+                      pathname: `/farmers/${row.original.id}`,
+                      state: { farmer: getFarmer(row.original.id)}
+                    });
                   }}
                   {...row.getRowProps()}
                 >
@@ -62,6 +65,7 @@ function DashboardTable({ className, history, columns, data }) {
 DashboardTable.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
+  getFarmer: PropTypes.func,
   history: PropTypes.object
 };
 
