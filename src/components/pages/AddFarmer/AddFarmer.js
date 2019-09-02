@@ -1,97 +1,100 @@
 /** @format */
 
-import React, {useState, useEffect} from 'react'
-import Input from '../../common/Input/Input'
-import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
-import Button from '../../common/Button/StyledButton'
-import styled from 'styled-components'
-import axios from 'axios'
-import {pathObj} from '../../../utils/generalVariables'
-import {getToken} from '../../../utils/handlers/authenticationHandlers'
-import {setHeaders} from '../../../utils/requestHeaders'
-import {toast} from 'react-toastify'
+import React, { useState, useEffect } from 'react';
+import Input from '../../common/Input/Input';
+import {
+  personalInfo,
+  familyInfo,
+  guarantor,
+  farmInfo
+} from '../../common/Input/addFarmerData';
+import Button from '../../common/Button/StyledButton';
+import styled from 'styled-components';
+import axios from 'axios';
+import { pathObj } from '../../../utils/generalVariables';
+import { getToken } from '../../../utils/handlers/authenticationHandlers';
+import { setHeaders } from '../../../utils/requestHeaders';
+import { toast } from 'react-toastify';
 
 const AddFarmer = () => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState({});
 
   const defaultState = () => {
     setState({
       personalInfo: personalInfo,
       familyInfo: familyInfo,
       guarantor: guarantor,
-      farmInfo: farmInfo,
-    })
-  }
+      farmInfo: farmInfo
+    });
+  };
   useEffect(() => {
-    defaultState()
-  }, [])
+    defaultState();
+  }, []);
 
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
     guarantorToggle: true,
-    farmInfoToggle: true,
-  })
+    farmInfoToggle: true
+  });
 
   const onChangeHandler = (e, data) => {
-    const {name, value, type} = e.target
-    const newData = {...state[data]}
-    const newEntry = {...newData[name]}
+    const { name, value, type } = e.target;
+    const newData = { ...state[data] };
+    const newEntry = { ...newData[name] };
     if (type === 'checkbox') {
       if (newEntry.selected.indexOf(value) > -1) {
-        newEntry.selected = newEntry.selected.filter(s => s !== value)
+        newEntry.selected = newEntry.selected.filter(s => s !== value);
       } else {
-        newEntry.selected = [...newEntry.selected, value]
+        newEntry.selected = [...newEntry.selected, value];
       }
     } else {
-      newEntry.value = value
+      newEntry.value = value;
     }
-    newData[name] = newEntry
-    setState({...state, [data]: newData})
-  }
-
+    newData[name] = newEntry;
+    setState({ ...state, [data]: newData });
+  };
   const toggleHandler = data => {
     setStateToggle(prevState => ({
       ...prevState,
-      [data]: !prevState[data],
-    }))
-  }
-
+      [data]: !prevState[data]
+    }));
+  };
   const formHandler = e => {
-    e.preventDefault()
-    let formData = {}
-    const newState = JSON.parse(JSON.stringify(state))
+    e.preventDefault();
+    let formData = {};
+    const newState = JSON.parse(JSON.stringify(state));
     for (let key in newState) {
-      formData[key] = newState[key]
+      formData[key] = newState[key];
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
-          formData[key][key2] = newState[key][key2].selected
+          formData[key][key2] = newState[key][key2].selected;
         } else {
-          formData[key][key2] = newState[key][key2].value
+          formData[key][key2] = newState[key][key2].value;
         }
       }
     }
     axios
       .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
-        toast.success('Farmer Added Successfully')
-        defaultState()
-        return
+        toast.success('Farmer Added Successfully');
+        defaultState();
+        return;
       })
       .catch(err => {
         err.response.data.errors.forEach(element => {
-          toast.error(element.message)
-        })
-        return
-      })
-  }
+          toast.error(element.message);
+        });
+        return;
+      });
+  };
   const inputCreator = (data, index) => {
-    const formElementsArray = []
+    const formElementsArray = [];
     for (let key in data) {
       formElementsArray.push({
         id: key,
-        config: data[key],
-      })
+        config: data[key]
+      });
     }
     let form = formElementsArray.map(formElement => (
       <Input
@@ -100,14 +103,14 @@ const AddFarmer = () => {
         data={index}
         changeHandler={onChangeHandler}
       />
-    ))
-    return form
-  }
+    ));
+    return form;
+  };
 
-  let personalInfoInputs = inputCreator(state.personalInfo, 'personalInfo')
-  let familyInfoInputs = inputCreator(state.familyInfo, 'familyInfo')
-  let guarantorInputs = inputCreator(state.guarantor, 'guarantor')
-  let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo')
+  let personalInfoInputs = inputCreator(state.personalInfo, 'personalInfo');
+  let familyInfoInputs = inputCreator(state.familyInfo, 'familyInfo');
+  let guarantorInputs = inputCreator(state.guarantor, 'guarantor');
+  let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo');
 
   const DivToggle = styled.div`
     display: flex;
@@ -115,19 +118,21 @@ const AddFarmer = () => {
     &:hover {
       cursor: pointer;
     }
-  `
+  `;
   return (
     <div>
       <section>
         <hr />
 
-        <form action="" onSubmit={formHandler} style={{padding: '2rem'}}>
+        <form action="" onSubmit={formHandler} style={{ padding: '2rem' }}>
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
               <h2>Personnel Information</h2>
               <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.personalInfoToggle}>{personalInfoInputs}</div>
+            <div hidden={stateToggle.personalInfoToggle}>
+              {personalInfoInputs}
+            </div>
           </fieldset>
 
           <hr />
@@ -141,7 +146,8 @@ const AddFarmer = () => {
           <hr />
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'guarantorToggle')}>
-              <h2>Guarantor</h2> <i className="fas fa-angle-double-down fa-2x" />
+              <h2>Guarantor</h2>{' '}
+              <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
             <div hidden={stateToggle.guarantorToggle}>{guarantorInputs}</div>
           </fieldset>
@@ -149,7 +155,8 @@ const AddFarmer = () => {
 
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
-              <h2>Farm Information</h2> <i className="fas fa-angle-double-down fa-2x" />
+              <h2>Farm Information</h2>{' '}
+              <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
@@ -158,7 +165,7 @@ const AddFarmer = () => {
         </form>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default AddFarmer
+export default AddFarmer;
