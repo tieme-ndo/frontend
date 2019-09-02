@@ -8,7 +8,6 @@ import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
 const Dashboard = () => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
-  /* Commented out until feature is complete const buttonText = 'Sort By(not functional)'; */
 
   const columns = React.useMemo(
     () => [
@@ -74,12 +73,13 @@ const Dashboard = () => {
     <>
       <PageHeader
         leftElement={Title}
-        /* Commented out until feature is complete rightElement={<Button>{buttonText}</Button>} */
+        rightElement={
+          <Button primary fixed="right">
+            <Link to="/addfarmer">Add Farmer</Link>
+          </Button>
+        }
       />
       <StyledTable columns={columns} data={React.useMemo(() => data, [data])} />
-      <Button primary fixed="right">
-        <Link to="/addfarmer">Add Farmer</Link>
-      </Button>
     </>
   );
 };
