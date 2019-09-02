@@ -31,7 +31,7 @@ function App() {
         />
         <Route exact path="/reset-password" component={ResetPassword} />
         <Route
-          path="/login/"
+          path="/login"
           render={props => <Login {...props} setUser={setUser} />}
         />
         <Route path="/addfarmer" component={AddFarmer} />

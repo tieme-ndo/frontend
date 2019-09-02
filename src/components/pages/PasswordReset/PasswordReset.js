@@ -6,6 +6,8 @@ import PasswordResetForm from './PasswordResetForm';
 const PasswordReset = props => {
   const [state, updateState] = useState({
     newPassword: '',
+    confirmNewPassword: '',
+    oldPassword: '',
     errors: {},
     resetting: false
   });
