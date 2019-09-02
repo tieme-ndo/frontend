@@ -8,16 +8,16 @@ const API_VERSION = 'api/v1';
 // Path contains the 'base' of the URL but does not includes params
 // These will have to be included separately in the Axios request
 export const pathObj = {
-         getUserPath: `${URL}/${API_VERSION}/user`,
-         loginPath: `${URL}/${API_VERSION}/user/login`,
-         changePasswordPath: `${URL}/${API_VERSION}/user/change-password`,
-         registrationPath: `${URL}/${API_VERSION}/user/signup`,
-         deleteUserPath: `${URL}/${API_VERSION}/user`,
+  getUserPath: `${URL}/${API_VERSION}/user`,
+  loginPath: `${URL}/${API_VERSION}/user/login`,
+  changePasswordPath: `${URL}/${API_VERSION}/user/change-password`,
+  registrationPath: `${URL}/${API_VERSION}/user/signup`,
+  deleteUserPath: `${URL}/${API_VERSION}/user`,
 
-         getFarmersPath: `${URL}/${API_VERSION}/farmers`,
-         addFarmerPath: `${URL}/${API_VERSION}/farmers`,
-         updateFarmerPath: `${URL}/${API_VERSION}/farmers`,
-         deleteFarmerPath: `${URL}/${API_VERSION}/farmers`
-       };
+  getFarmersPath: `${URL}/${API_VERSION}/farmers`,
+  addFarmerPath: `${URL}/${API_VERSION}/farmers`,
+  updateFarmerPath: `${URL}/${API_VERSION}/farmers`,
+  deleteFarmerPath: `${URL}/${API_VERSION}/farmers`
+};
 
 export const tokenKey = 'tokenTiemeNdo';

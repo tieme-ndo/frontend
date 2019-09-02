@@ -164,12 +164,12 @@ const UpdateFarmer = ({ location }) => {
             </DivToggle>
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
-
         </form>
           
-          <div onClick={(e) => formHandler(e)}>
-            <Button displayName="Save"  />
-          </div>
+        {/* Button is wrapped in a div to get onClick to work */}
+        <div onClick={(e) => formHandler(e)}>
+          <Button displayName="Save" />
+        </div>
       </section>
     </div>
   )
