@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import PasswordResetForm from './PasswordResetForm';
 
-const PasswordReset = props => {
+const PasswordReset = () => {
   const [state, updateState] = useState({
     newPassword: '',
     confirmNewPassword: '',
