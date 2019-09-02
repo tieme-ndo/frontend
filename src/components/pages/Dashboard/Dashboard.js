@@ -1,14 +1,14 @@
 /** @format */
 
-import React from 'react'
-import PageHeader from '../../common/PageHeader/PageHeader'
-import Table from '../../common/Table/Table'
-import Button from '../../common/Button/Button'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import PageHeader from '../../common/PageHeader/PageHeader';
+import Table from '../../common/Table/Table';
+import Button from '../../common/Button/Button';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const Title = <h2>Dashboard</h2>
-  const buttonText = 'Add Farmer'
+  const Title = <h2>Dashboard</h2>;
+  const buttonText = 'Add Farmer';
 
   const columns = React.useMemo(
     () => [
@@ -17,61 +17,54 @@ const Dashboard = () => {
         columns: [
           {
             Header: 'Name',
-            accessor: 'name',
+            accessor: 'name'
           },
           {
             Header: 'Sex',
-            accessor: 'sex',
+            accessor: 'sex'
           },
           {
             Header: 'Phone Number',
-            accessor: 'phoneNumber',
+            accessor: 'phoneNumber'
           },
           {
             Header: 'Acres',
-            accessor: 'acres',
+            accessor: 'acres'
           },
           {
             Header: 'Crops',
-            accessor: 'crops',
+            accessor: 'crops'
           },
           {
             Header: ' ',
-            accessor: 'more',
-          },
-        ],
-      },
+            accessor: 'more'
+          }
+        ]
+      }
     ],
-    [],
-  )
+    []
+  );
 
   // To change with data coming from API
-  const data = React.useMemo(() => makeData(20), [])
+  const data = React.useMemo(() => makeData(20), []);
 
   return (
     <>
-      <PageHeader
-        leftElement={Title}
-        rightElement={
-          <Link to="/addfarmer">
-            <Button text={buttonText} />
-          </Link>
-        }
-      />
+      <PageHeader />
       <Table columns={columns} data={data} />
     </>
-  )
-}
+  );
+};
 
 //// TO DELETE, THIS IS TO MOCK DATA
 
 const range = len => {
-  const arr = []
+  const arr = [];
   for (let i = 0; i < len; i++) {
-    arr.push(i)
+    arr.push(i);
   }
-  return arr
-}
+  return arr;
+};
 
 const newFarmer = () => {
   return {
@@ -81,24 +74,24 @@ const newFarmer = () => {
     address: '17 Tractor Road, Arcadia',
     acres: 5.3,
     crops: ['Wheat', 'Corn'].join(', '),
-    more: <button>More</button>,
-  }
-}
+    more: <button>More</button>
+  };
+};
 
 function makeData(...lens) {
   const makeDataLevel = (depth = 0) => {
-    const len = lens[depth]
+    const len = lens[depth];
     return range(len).map(() => {
       return {
         ...newFarmer(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-      }
-    })
-  }
+        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined
+      };
+    });
+  };
 
-  return makeDataLevel()
+  return makeDataLevel();
 }
 
 ////
 
-export default Dashboard
+export default Dashboard;
