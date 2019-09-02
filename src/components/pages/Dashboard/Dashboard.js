@@ -44,27 +44,8 @@ const Dashboard = ({ farmers }) => {
     []
   );
 
-  const prepareData = farmers => {
-    let cleanedData = farmers.map(farmer => {
-      const farmerData = {
-        name: `${farmer.personalInfo.first_name} ${farmer.personalInfo.surname}`,
-        communityName: farmer.personalInfo.community_name,
-        farmLocation: farmer.farmInfo.location_of_farm,
-        phoneNumber: farmer.personalInfo.Phone_1,
-        guarantorName: `${farmer.guarantor.grt_first_name} ${farmer.guarantor.grt_surname}`,
-        guarantorPhoneNumber: farmer.guarantor.grt_phone
-      };
-      return farmerData;
-    });
-    return cleanedData;
-  };
-
   React.useEffect(() => {
-    let isSubscribed = true;
-    if (isSubscribed && farmers) {
-      setData(prepareData(farmers));
-    }
-    return () => (isSubscribed = false);
+    setData(farmers);
   }, [farmers]);
 
   return (
@@ -73,7 +54,9 @@ const Dashboard = ({ farmers }) => {
         leftElement={Title}
         rightElement={
           <Button color="teal" fixed="right">
-            <Link style={{color: 'white'}} to="/addfarmer">Add Farmer</Link>
+            <Link style={{ color: 'white' }} to="/addfarmer">
+              Add Farmer
+            </Link>
           </Button>
         }
       />

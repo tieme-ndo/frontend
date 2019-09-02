@@ -9,13 +9,16 @@ import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
-import { getFarmersHandler } from '../../utils/handlers/farmerHandlers';
+import {
+  getFarmersHandler,
+  cleanFarmersData
+} from '../../utils/handlers/farmerHandlers';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [farmers, setFarmers] = useState([]);
+  const [farmers, setFarmers] = useState({ data: [], cleanedData: [] });
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -28,7 +31,10 @@ function App() {
   useEffect(() => {
     // Hook to load the farmers in the table
     getFarmersHandler().then(retrievedFarmers => {
-      setFarmers(retrievedFarmers);
+      setFarmers({
+        data: retrievedFarmers,
+        cleanedData: cleanFarmersData(retrievedFarmers)
+      });
     });
   }, []);
 
@@ -64,7 +70,9 @@ function App() {
           <Route
             path="/"
             exact
-            render={props => <Dashboard {...props} farmers={farmers} />}
+            render={props => (
+              <Dashboard {...props} farmers={farmers.cleanedData} />
+            )}
           />
           <Route
             path="/accounts/new"
