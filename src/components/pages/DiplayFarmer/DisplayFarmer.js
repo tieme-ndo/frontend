@@ -1,13 +1,17 @@
 /** @format */
 
 import React, { useState } from 'react';
-import { Container, Grid, Segment, Menu, Button } from 'semantic-ui-react';
+import {
+  Container,
+  Grid,
+  Segment,
+  Menu
+} from 'semantic-ui-react';
+import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
-import { Header, Placeholder } from 'semantic-ui-react';
 
 const DisplayFarmer = ({ history, location }) => {
   const farmer = location.state.farmer;
-  console.log(farmer);
   const [selected, setSelected] = useState('Personal');
 
   /*   useEffect(() => {}); */
@@ -20,42 +24,7 @@ const DisplayFarmer = ({ history, location }) => {
     <Container>
       <Grid>
         <Grid.Column width={5}>
-          <Segment>
-            <Placeholder style={{ height: 150, width: 150 }}>
-              <Placeholder.Image />
-            </Placeholder>
-            <Header size="medium">
-              {farmer.personalInfo.title} {farmer.personalInfo.first_name}{' '}
-              {farmer.personalInfo.middle_name} {farmer.personalInfo.surname}
-            </Header>
-            <Header.Subheader>Phone</Header.Subheader>
-            <Header
-              size="tiny"
-              style={{ marginTop: '0.1rem', marginBottom: '-1.5rem' }}
-            >
-              {farmer.personalInfo.Phone_1}
-            </Header>
-            <Header size="tiny">{farmer.personalInfo.Phone_2}</Header>
-            <Header.Subheader>Address</Header.Subheader>
-            <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-              {farmer.personalInfo.house_name}{' '}
-              {farmer.personalInfo.house_number}, {farmer.personalInfo.region}
-            </Header>
-          </Segment>
-          <Button
-            style={{ width: '100%', marginBottom: '0.75rem' }}
-            onClick={() => {
-              history.push({
-                pathname: `/farmers/${farmer._id}/edit`,
-                state: { farmer }
-              });
-            }}
-          >
-            Edit Farmer
-          </Button>
-          <Button style={{ width: '100%' }} color={'red'}>
-            Remove Farmer
-          </Button>
+          <LeftDisplay farmer={farmer} history={history} />
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
