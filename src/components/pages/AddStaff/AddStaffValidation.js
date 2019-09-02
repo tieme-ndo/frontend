@@ -6,6 +6,7 @@ const addStaffSchema = yup.object().shape({
     .min(3)
     .max(20)
     .trim()
+    .matches(/^\S+$/)
     .required(),
   password: yup
     .string()
