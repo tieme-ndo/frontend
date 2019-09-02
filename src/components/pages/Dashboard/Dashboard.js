@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react'
 import PageHeader from '../../common/PageHeader/PageHeader'
 import Table from '../../common/Table/Table'
@@ -48,7 +50,14 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageHeader leftElement={Title} rightElement={ <Link to="/addfarmer"><Button text={buttonText} /></Link>} />
+      <PageHeader
+        leftElement={Title}
+        rightElement={
+          <Link to="/addfarmer">
+            <Button text={buttonText} />
+          </Link>
+        }
+      />
       <Table columns={columns} data={data} />
     </>
   )
