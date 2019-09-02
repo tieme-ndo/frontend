@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { pathObj } from './../utils/generalVariables';
-import { setHeaders } from './../utils/requestHeaders';
+import axios from "axios";
+import { pathObj } from "../generalVariables";
+import { setHeaders } from "../requestHeaders";
 
 export const getUserHandler = (token, userId) => {
   if (!userId || typeof userId !== 'string') {
@@ -20,7 +20,7 @@ export const getUserHandler = (token, userId) => {
 };
 
 export const changePasswordHandler = (token, userId, newPassword) => {
-  if (!username || typeof username !== 'string') {
+  if (!userId || typeof userId !== 'string') {
     return new Error("Make sure you're passing a valid user ID!");
   }
 

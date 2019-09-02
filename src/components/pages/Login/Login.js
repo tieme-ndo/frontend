@@ -3,72 +3,83 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
   loginHandler,
-  getToken
-} from '../../../handlers/authenticationHandlers';
+  getUser
+} from '../../../utils/handlers/authenticationHandlers';
+import PropTypes from 'prop-types';
+import LoginForm from './LoginForm';
+import validateLoginForm from './loginValidation';
 
-function Login(props) {
-  const [credentials, changeCredentials] = useState({
+function Login({ setUser, ...props}) {
+  const [state, updateState] = useState({
     username: '',
-    password: ''
+    password: '',
+    errors: {},
+    loading: false
   });
 
-  const [status, changeStatus] = useState({
-    loading: false,
-    error: false
-  });
 
-  const submitLogin = async event => {
-    event.preventDefault();
-    changeStatus({ ...status, loading: true });
-    try {
-      await loginHandler({
-        username: credentials.username,
-        password: credentials.password
-      });
-      changeStatus({ error: false, loading: false });
-      return <Redirect to="/" />;
-    } catch (err) {
-      changeStatus({ error: true, loading: false });
-    }
+  const handleChange = (e, { name, value }) => {
+    updateState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  if (getToken()) {
+  const handleSubmit = async () => {
+    updateState(prevState => {
+      return {
+        ...prevState,
+        loading: true
+      };
+    });
+
+    const credential = {
+      username: state.username,
+      password: state.password
+    };
+
+    const { errors, isValid } = await validateLoginForm(credential);
+    // if validation fails, stop loading and render error msg
+    if (!isValid) {
+      return updateState(prevState => ({
+        ...prevState,
+        errors,
+        loading: false
+      }));
+    }
+    // send request to server
+    const receivedUser = await loginHandler({
+        username: state.username,
+        password: state.password
+    });
+
+    // if the response has token => successful login
+    if (receivedUser.hasOwnProperty('token')) {
+        setUser(getUser());
+
+        props.history.push('/');
+    } else {
+        // on unsuccessful login, render server error message
+        updateState(prevState => ({
+            ...prevState,
+            errors: [{ error: receivedUser.message }],
+            loading: false
+        }))
+    }
+  }
+  // check if user already exists, if yes (logged in), redirect to root
+  if (getUser()) {
     return <Redirect to="/" />;
   }
 
   return (
-    <div>
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={submitLogin}>
-          <input
-            type="username"
-            placeholder="Enter Username"
-            value={credentials.username}
-            onChange={e =>
-              changeCredentials({ ...credentials, username: e.target.value })
-            }
-          />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={credentials.password}
-            onChange={e =>
-              changeCredentials({ ...credentials, password: e.target.value })
-            }
-          />
-          {status.loading ? (
-            <input type="submit" value="Loading..." disabled />
-          ) : (
-            <input type="submit" value="Log In" />
-          )}
-          {status.error && (
-            <div>Wrong username or password, please try again</div>
-          )}
-        </form>
-      </div>
-    </div>
+    <LoginForm
+    state={state}
+    handleSubmit={handleSubmit}
+    handleChange={handleChange}
+  />
   );
 }
+
+Login.propTypes = {
+  setUser: PropTypes.func.isRequired
+};
 
 export default Login;

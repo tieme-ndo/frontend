@@ -1,19 +1,31 @@
 /** @format */
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Input from '../../common/Input/Input'
 import {personalInfo, familyInfo, guarantor, farmInfo} from '../../common/Input/addFarmerData'
 import Button from '../../common/Button/StyledButton'
 import styled from 'styled-components'
 import axios from 'axios'
+import {pathObj} from '../../../utils/generalVariables'
+import {getToken} from '../../../utils/handlers/authenticationHandlers'
+import {setHeaders} from '../../../utils/requestHeaders'
+import {toast} from 'react-toastify'
 
 const AddFarmer = () => {
-  const [state, setState] = useState({
-    personalInfo: personalInfo,
-    familyInfo: familyInfo,
-    guarantor: guarantor,
-    farmInfo: farmInfo,
-  })
+  const [state, setState] = useState({})
+
+  const defaultState = () => {
+    setState({
+      personalInfo: personalInfo,
+      familyInfo: familyInfo,
+      guarantor: guarantor,
+      farmInfo: farmInfo,
+    })
+  }
+  useEffect(() => {
+    defaultState()
+  }, [])
+
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
@@ -46,7 +58,6 @@ const AddFarmer = () => {
   const formHandler = e => {
     e.preventDefault()
     let formData = {}
-
     const newState = JSON.parse(JSON.stringify(state))
     for (let key in newState) {
       formData[key] = newState[key]
@@ -58,20 +69,18 @@ const AddFarmer = () => {
         }
       }
     }
-    e.target.reset()
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('tokenTiemeNdo'),
-    }
     axios
-      .post('https://tieme-ndo-backend-staging1.herokuapp.com/api/v1/farmers/create', formData, {
-        headers: headers,
-      })
+      .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
-        return res
+        toast.success('Farmer Added Successfully')
+        defaultState()
+        return
       })
       .catch(err => {
-        throw err.response
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message)
+        })
+        return
       })
   }
   const inputCreator = (data, index) => {
@@ -107,14 +116,7 @@ const AddFarmer = () => {
   `
   return (
     <div>
-      <header>
-        <div>Logo</div>
-        <div>
-          <Button displayName="LogOut" />
-        </div>
-      </header>
       <section>
-        <Button displayName="Back" styles={{backgroundColor: 'green'}} />
         <hr />
 
         <form action="" onSubmit={formHandler} style={{padding: '2rem'}}>
