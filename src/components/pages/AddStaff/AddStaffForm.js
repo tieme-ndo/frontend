@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react'
-import {Container, Button, Grid, Header, Segment, Form, Checkbox} from 'semantic-ui-react'
+import { Container, Button, Grid, Header, Segment, Form, Checkbox } from 'semantic-ui-react'
 
 const AddStaff = props => {
   const {state, handleSubmit, handleChange, checkboxChange} = props
@@ -49,8 +49,8 @@ const AddStaff = props => {
                   data-testid="admin-checkbox"
                 />
               </Form.Field>
-              {state.CreateAccount ? (
-                <Button loading disabled color="teal" fluid size="large" content="Add Staff" />
+              {state.createAccount ? (
+                <Button loading disabled color="teal" fluid size="large" content="Loading..." />
               ) : (
                 <Button color="teal" fluid content="Add Staff" />
               )}

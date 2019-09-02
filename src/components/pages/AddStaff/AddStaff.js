@@ -13,14 +13,12 @@ function AddStaff() {
     password: '',
     isAdmin: false,
     createAccount: false,
-    message: '',
   })
 
   const handleChange = (e, {name, value}) => {
     updateState(prevState => ({
       ...prevState,
       [name]: value,
-      message: '',
     }))
   }
 
@@ -63,19 +61,18 @@ function AddStaff() {
       toast.error(errors.message)
       return updateState(prevState => ({
         ...prevState,
-        createAccount: true,
+        createAccount: false,
       }))
     } else if (response && response.message === 'username already exists') {
       toast.error('username already exists')
       return updateState(prevState => ({
         ...prevState,
-        createAccount: true,
+        createAccount: false,
       }))
     } else if (response === 'New user created') {
       toast.success('New user created')
       return updateState(prevState => ({
         ...prevState,
-        message: 'New user created',
         username: '',
         password: '',
         isAdmin: false,
