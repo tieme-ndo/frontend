@@ -4,8 +4,8 @@
 // When running on a local machine, the URL will default to REACT_APP_API_URL - provided the app is run using `yarn start`
 // When hosted on Netlify, it'll retrieve the requisite environmental URL and target the appropriate API
 // eslint-disable-next-line no-undef
-export const URL = 'https://tndo-temp-staging.herokuapp.com'
-const API_VERSION = 'api/v1'
+export const URL = 'https://tndo-temp-staging.herokuapp.com';
+const API_VERSION = 'api/v1';
 
 // Path contains the 'base' of the URL but does not includes params
 // These will have to be included separately in the Axios request
@@ -19,7 +19,7 @@ export const pathObj = {
   getFarmersPath: `${URL}/${API_VERSION}/farmers`,
   addFarmerPath: `${URL}/${API_VERSION}/farmers`,
   updateFarmerPath: `${URL}/${API_VERSION}/farmers`,
-  deleteFarmerPath: `${URL}/${API_VERSION}/farmers`,
-}
+  deleteFarmerPath: `${URL}/${API_VERSION}/farmers`
+};
 
 export const tokenKey = 'tokenTiemeNdo'
