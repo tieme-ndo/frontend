@@ -3,13 +3,8 @@
 import React from 'react';
 import PageHeader from '../../common/PageHeader/PageHeader';
 import Table from '../../common/Table/Table';
-import Button from '../../common/Button/Button';
-import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const Title = <h2>Dashboard</h2>;
-  const buttonText = 'Add Farmer';
-
   const columns = React.useMemo(
     () => [
       {
@@ -91,7 +86,5 @@ function makeData(...lens) {
 
   return makeDataLevel();
 }
-
-////
 
 export default Dashboard;
