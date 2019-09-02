@@ -1,15 +1,75 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { Container, Grid, Segement, Button, Menu } from "semantic-ui-react";
-import { withRestrictedAccess } from "../../hoc/withRestrictedAccess.js";
+import { Container, Grid, Segement, Menu } from "semantic-ui-react";
 import Input from "../../common/Input/Input";
 import * as form from "../../common/Input/addFarmerData";
 import Button from "../../common/Button/StyledButton";
 import styled from "styled-components";
 
-const DisplayFarmer = (props) => {
-  const hydrateFormInputValues = () => {
+const DisplayFarmer = props => {
+    
+  const farmer = props.location.state.farmer;
+
+  const [selected, setSelected] = useState("Personal");
+
+/*   useEffect(() => {}); */
+
+  function handleSelected(e, { name }) {
+    setSelected(name);
+  }
+
+  return (
+    <Container>
+      <Grid>
+        <Grid.Column width={33}>
+          <Segement></Segement>
+          <Button color="grey">Edit Farmer</Button>
+          <Button color="red">Remove Farmer</Button>
+        </Grid.Column>
+        <Grid.Column width={66}>
+          <Segement>
+            <Menu>
+              <Menu.Item
+                name="Personal"
+                active={selected === "Personal"}
+                onClick={handleSelected}
+              >
+                Personal
+              </Menu.Item>
+              <Menu.Item
+                name="Farm"
+                active={selected === "Farm"}
+                onClick={handleSelected}
+              >
+                Farm
+              </Menu.Item>
+              <Menu.Item
+                name="Guarantor"
+                active={selected === "Guarantor"}
+                onClick={handleSelected}
+              >
+                Guarantor
+              </Menu.Item>
+              <Menu.Item
+                name="Declaration"
+                active={selected === "Declaration"}
+                onClick={handleSelected}
+              >
+                Declaration
+              </Menu.Item>
+            </Menu>
+          </Segement>
+          <Segement></Segement>
+        </Grid.Column>
+      </Grid>
+    </Container>
+  );
+};
+
+export default DisplayFarmer;
+
+/* const hydrateFormInputValues = () => {
     const farmerData = props.location.state.farmer;
     let hydratedFormInputs = {};
 
@@ -94,16 +154,6 @@ const DisplayFarmer = (props) => {
 
   return (
     <div>
-      <header>
-        <div>Logo</div>
-        <div>
-          <Button displayName="LogOut" />
-        </div>
-      </header>
-      <section>
-        <Button displayName="Back" styles={{ backgroundColor: "green" }} />
-        <hr />
-
         <form action="" style={{ padding: "2rem" }}>
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, "personalInfoToggle")}>
@@ -140,33 +190,7 @@ const DisplayFarmer = (props) => {
             </DivToggle>
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
-
-          <Button displayName="Save" type="submit" />
         </form>
-      </section>
     </div>
   );
-};
-
-/* return (
-    <Container>
-      <Grid>
-        <Segement></Segement>
-        <Button color="grey">Edit Farmer</Button>
-        <Button color="red">Remove Farmer</Button>
-      </Grid>
-      <Grid>
-        <Segement>
-          <Menu>
-            <Menu.Item>Personal</Menu.Item>
-            <Menu.Item>Farm</Menu.Item>
-            <Menu.Item>Guarantor</Menu.Item>
-            <Menu.Item>Declaration</Menu.Item>
-          </Menu>
-        </Segement>
-        <Segement></Segement>
-      </Grid>
-    </Container>
-  ) */
-
-export default withRestrictedAccess(DisplayFarmer);
+}; */

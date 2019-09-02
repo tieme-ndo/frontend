@@ -7,7 +7,7 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
-/* import DisplayFarmer from '../pages/DiplayFarmer/DisplayFarmer'; */
+import DisplayFarmer from '../pages/DiplayFarmer/DisplayFarmer';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
 import {
@@ -87,8 +87,8 @@ function App() {
             path="/login/"
             render={props => <Login {...props} setUser={setUser} />}
           />
-          <Route path="/addfarmer" component={AddFarmer} />
-          {/* <Route path="/farmers/:id" component={DisplayFarmer} /> */}
+          <Route path="/addfarmer" component={withRestrictedAccess(AddFarmer)} />
+          <Route path="/farmers/:id" component={withRestrictedAccess(DisplayFarmer)} />
           <ToastContainer position="top-right" />
         </Container>
       </div>
