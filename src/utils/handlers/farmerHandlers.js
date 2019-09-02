@@ -9,6 +9,7 @@ export const getFarmersHandler = (token) => {
   )
     .then(res => {
       if (res.data) {
+        console.log(res.data.fdamers[0]);
         return res.data.farmers
       }
     })

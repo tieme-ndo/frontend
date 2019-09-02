@@ -49,12 +49,14 @@ const AddFarmer = () => {
     newData[name] = newEntry
     setState({...state, [data]: newData})
   }
+
   const toggleHandler = data => {
     setStateToggle(prevState => ({
       ...prevState,
       [data]: !prevState[data],
     }))
   }
+
   const formHandler = e => {
     e.preventDefault()
     let formData = {}
