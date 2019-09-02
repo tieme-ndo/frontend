@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react'
 import {Container, Grid, Segement, Button, Menu} from 'semantic-ui-react'
-import {withRestrictedAccess} from '../../hoc/withRestrictedAccess.js'
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
 const DisplayFarmer = props => {
   //const [farmer, setFarmer] = useState(props.farmer)
