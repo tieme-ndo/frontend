@@ -1,9 +1,9 @@
-// If new state !== old state pass data to submit form handler
 // Create PUT farmer axios request helper
 // Refactor accordian to tabs
 // Reposition elements
 // Hide all on tab click
 // Show clicked tab content on tab click
+// If new state !== old state pass data to submit form handler
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
@@ -24,6 +24,9 @@ const UpdateFarmer = ({ location }) => {
 
       for (const input in inputSectionData) {
         inputSectionData[input].value = farmerData[inputSection][input];
+        if ('selected' in inputSectionData[input]) {
+          inputSectionData[input].selected = farmerData[inputSection][input];
+        }
         hydratedFormInputs = {
           ...formInputData
         };
