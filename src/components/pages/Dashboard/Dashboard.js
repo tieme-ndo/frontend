@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
 
-const Dashboard = ({ farmers, history }) => {
+const Dashboard = ({ farmers, rawFarmers, history }) => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -49,6 +49,11 @@ const Dashboard = ({ farmers, history }) => {
     setData(farmers);
   }, [farmers]);
 
+  const getFarmer = id => {
+    const farmer = rawFarmers.find(farmer => farmer._id === id);
+    return farmer;
+  };
+
   return (
     <>
       <PageHeader
@@ -61,13 +66,20 @@ const Dashboard = ({ farmers, history }) => {
           </Button>
         }
       />
-      <StyledTable history={history} columns={columns} data={React.useMemo(() => data, [data])} />
+      <StyledTable
+        history={history}
+        columns={columns}
+        getFarmer={getFarmer}
+        data={React.useMemo(() => data, [data])}
+      />
     </>
   );
 };
 
 Dashboard.propTypes = {
-  farmers: PropTypes.array.isRequired
+  farmers: PropTypes.array.isRequired,
+  rawFarmers: PropTypes.array.isRequired,
+  history: PropTypes.object
 };
 
 export default withRestrictedAccess(Dashboard, false);
