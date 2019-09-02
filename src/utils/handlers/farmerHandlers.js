@@ -17,7 +17,8 @@ export const getFarmersHandler = () => {
     });
 };
 
-export const getIndividualFarmerHandler = (farmerId, token) => {
+export const getIndividualFarmerHandler = farmerId => {
+  const token = getToken();
   if (!farmerId || typeof farmerId !== 'string') {
     return new Error("Make sure you're passing a farmer id!");
   }
