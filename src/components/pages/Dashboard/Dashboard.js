@@ -4,8 +4,9 @@ import StyledTable from '../../common/Table/Table';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import PropTypes from 'prop-types';
 
-const Dashboard = ({ farmers }) => {
+const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -60,9 +61,13 @@ const Dashboard = ({ farmers }) => {
           </Button>
         }
       />
-      <StyledTable columns={columns} data={React.useMemo(() => data, [data])} />
+      <StyledTable history={history} columns={columns} data={React.useMemo(() => data, [data])} />
     </>
   );
+};
+
+Dashboard.propTypes = {
+  farmers: PropTypes.array.isRequired
 };
 
 export default withRestrictedAccess(Dashboard, false);
