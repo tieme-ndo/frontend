@@ -6,8 +6,8 @@ import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
 import styled from 'styled-components';
 
-const DisplayFarmer = props => {
-  const farmer = props.location.state.farmer;
+const DisplayFarmer = ({ history, location }) => {
+  const farmer = location.state.farmer;
 
   const [selected, setSelected] = useState('Personal');
 
@@ -22,7 +22,16 @@ const DisplayFarmer = props => {
       <Grid>
         <Grid.Column fluid width={5}>
           <Segment>
-            <Button>Edit Farmer</Button>
+            <Button
+              onClick={() => {
+                history.push({
+                  pathname: `/farmers/${farmer._id}/edit`,
+                  state: { farmer }
+                });
+              }}
+            >
+              Edit Farmer
+            </Button>
             <Button color={'red'}>Remove Farmer</Button>
           </Segment>
         </Grid.Column>
