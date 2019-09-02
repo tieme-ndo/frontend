@@ -1,9 +1,3 @@
-// Create PUT farmer axios request helper
-// Refactor accordian to tabs
-// Reposition elements
-// Hide all on tab click
-// Show clicked tab content on tab click
-// If new state !== old state pass data to submit form handler
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
