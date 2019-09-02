@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
@@ -16,7 +16,10 @@ const PageHeader = () => {
           <Dropdown text="settings" pointing className="link item">
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="/accounts/new">Create new account</Link>
+                <NavLink to="/accounts/new">Create new account</NavLink>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <NavLink to="/reset-password">Change password</NavLink>
               </Dropdown.Item>
               <Dropdown.Item>Logout</Dropdown.Item>
             </Dropdown.Menu>
