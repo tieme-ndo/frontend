@@ -1,19 +1,17 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
-import { Container, Grid, Segment, Menu } from "semantic-ui-react";
-import Input from "../../common/Input/Input";
-import * as form from "../../common/Input/addFarmerData";
-import Button from "../../common/Button/StyledButton";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { Container, Grid, Segment, Menu, Button } from 'semantic-ui-react';
+import Input from '../../common/Input/Input';
+import * as form from '../../common/Input/addFarmerData';
+import styled from 'styled-components';
 
 const DisplayFarmer = props => {
-
   const farmer = props.location.state.farmer;
 
-  const [selected, setSelected] = useState("Personal");
+  const [selected, setSelected] = useState('Personal');
 
-/*   useEffect(() => {}); */
+  /*   useEffect(() => {}); */
 
   function handleSelected(e, { name }) {
     setSelected(name);
@@ -22,38 +20,39 @@ const DisplayFarmer = props => {
   return (
     <Container>
       <Grid>
-        <Grid.Column width={33}>
-          <Segment></Segment>
-          <Button color="grey">Edit Farmer</Button>
-          <Button color="red">Remove Farmer</Button>
+        <Grid.Column fluid width={5}>
+          <Segment>
+            <Button>Edit Farmer</Button>
+            <Button color={'red'}>Remove Farmer</Button>
+          </Segment>
         </Grid.Column>
-        <Grid.Column width={66}>
+        <Grid.Column fluid width={11}>
           <Segment>
             <Menu>
               <Menu.Item
                 name="Personal"
-                active={selected === "Personal"}
+                active={selected === 'Personal'}
                 onClick={handleSelected}
               >
                 Personal
               </Menu.Item>
               <Menu.Item
                 name="Farm"
-                active={selected === "Farm"}
+                active={selected === 'Farm'}
                 onClick={handleSelected}
               >
                 Farm
               </Menu.Item>
               <Menu.Item
                 name="Guarantor"
-                active={selected === "Guarantor"}
+                active={selected === 'Guarantor'}
                 onClick={handleSelected}
               >
                 Guarantor
               </Menu.Item>
               <Menu.Item
                 name="Declaration"
-                active={selected === "Declaration"}
+                active={selected === 'Declaration'}
                 onClick={handleSelected}
               >
                 Declaration
