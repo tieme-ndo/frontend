@@ -1,19 +1,14 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { Container, Grid, Segement, Menu } from "semantic-ui-react";
-import Input from "../../common/Input/Input";
-import * as form from "../../common/Input/addFarmerData";
-import Button from "../../common/Button/StyledButton";
-import styled from "styled-components";
+import { Container, Grid, Segment, Menu, Button } from "semantic-ui-react";
 
 const DisplayFarmer = props => {
     
   const farmer = props.location.state.farmer;
+  console.log(farmer);
 
   const [selected, setSelected] = useState("Personal");
-
-/*   useEffect(() => {}); */
 
   function handleSelected(e, { name }) {
     setSelected(name);
@@ -22,13 +17,13 @@ const DisplayFarmer = props => {
   return (
     <Container>
       <Grid>
-        <Grid.Column width={33}>
-          <Segement></Segement>
+        <Grid.Column width={5}>
+          <Segment></Segment>
           <Button color="grey">Edit Farmer</Button>
           <Button color="red">Remove Farmer</Button>
         </Grid.Column>
-        <Grid.Column width={66}>
-          <Segement>
+        <Grid.Column width={10}>
+          <Segment>
             <Menu>
               <Menu.Item
                 name="Personal"
@@ -59,8 +54,8 @@ const DisplayFarmer = props => {
                 Declaration
               </Menu.Item>
             </Menu>
-          </Segement>
-          <Segement></Segement>
+          </Segment>
+          <Segment></Segment>
         </Grid.Column>
       </Grid>
     </Container>
