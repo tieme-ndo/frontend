@@ -90,7 +90,7 @@ function App() {
           />
           <Route path="/farmers/:id/edit" component={withRestrictedAccess(UpdateFarmer)} />
           <Route path="/addfarmer" component={withRestrictedAccess(AddFarmer)} />
-          <Route path="/farmers/:id" component={withRestrictedAccess(DisplayFarmer)} />
+          <Route exact path="/farmers/:id" component={withRestrictedAccess(DisplayFarmer)} />
           <ToastContainer position="top-right" />
         </Container>
       </div>
