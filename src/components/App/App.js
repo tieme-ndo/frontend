@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
