@@ -85,7 +85,6 @@ const UpdateFarmer = ({ location }) => {
     }
 
     const token = getToken()
-    
     updateFarmerHandler(formData, location.state._id, token);
   }
   const inputCreator = (data, index) => {
@@ -131,7 +130,9 @@ const UpdateFarmer = ({ location }) => {
         <Button displayName="Back" styles={{ backgroundColor: 'green' }} />
         <hr />
 
-        <form action="" onSubmit={formHandler} style={{ padding: '2rem' }}>
+        <form action="" onSubmit={(e) => {
+          e.preventDefault();
+        }} style={{ padding: '2rem' }}>
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
               <h2>Personal Information</h2>
@@ -164,8 +165,11 @@ const UpdateFarmer = ({ location }) => {
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
 
-          <Button displayName="Save" type="submit" />
         </form>
+          
+          <div onClick={(e) => formHandler(e)}>
+            <Button displayName="Save"  />
+          </div>
       </section>
     </div>
   )
