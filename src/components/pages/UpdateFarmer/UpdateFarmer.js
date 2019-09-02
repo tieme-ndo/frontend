@@ -16,13 +16,16 @@ const UpdateFarmer = ({ location }) => {
     const farmerData = location.state;
     let hydratedFormInputs = {};
 
-    for (const inputSection in form) {
-      const inputSectionData = form[inputSection];
+    // Deep copy of form input data objects
+    const formInputData = JSON.parse(JSON.stringify(form));
+
+    for (const inputSection in formInputData) {
+      const inputSectionData = formInputData[inputSection];
 
       for (const input in inputSectionData) {
         inputSectionData[input].value = farmerData[inputSection][input];
         hydratedFormInputs = {
-          ...form
+          ...formInputData
         };
       }
     }
