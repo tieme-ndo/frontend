@@ -2,26 +2,35 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
-import { getUser } from '../../utils/handlers/authenticationHandlers';
-import { logout } from '../../utils/handlers/authenticationHandlers';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
+import withRestrictedAccess from '../hoc/withRestrictedAccess';
+import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
+import { getFarmersHandler } from '../../utils/handlers/farmerHandlers';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState(undefined);
+  const [farmers, setFarmers] = useState([]);
 
   useEffect(() => {
+    // Hook to retrieve the current logged in user from token
     if (!user) {
       const retrievedUser = getUser();
       setUser(retrievedUser);
     }
   }, [user]);
+
+  useEffect(() => {
+    // Hook to load the farmers in the table
+    getFarmersHandler().then(retrievedFarmers => {
+      setFarmers(retrievedFarmers);
+    });
+  }, []);
 
   const logOut = () => {
     setUser(false);
@@ -52,7 +61,11 @@ function App() {
           </ul>
         </nav>
         <Container>
-          <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
+          <Route
+            path="/"
+            exact
+            render={props => <Dashboard {...props} farmers={farmers} />}
+          />
           <Route
             path="/accounts/new"
             component={withRestrictedAccess(AddStaff, true, user)}

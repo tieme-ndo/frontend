@@ -3,9 +3,9 @@ import PageHeader from '../../common/PageHeader/PageHeader';
 import StyledTable from '../../common/Table/Table';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
-const Dashboard = () => {
+const Dashboard = ({ farmers }) => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -61,13 +61,11 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     let isSubscribed = true;
-    getFarmersHandler().then(farmers => {
-      if (isSubscribed) {
-        setData(prepareData(farmers));
-      }
-    });
+    if (isSubscribed && farmers) {
+      setData(prepareData(farmers));
+    }
     return () => (isSubscribed = false);
-  }, []);
+  }, [farmers]);
 
   return (
     <>
@@ -84,4 +82,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withRestrictedAccess(Dashboard, false);
