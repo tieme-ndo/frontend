@@ -27,17 +27,16 @@ function App() {
       const retrievedUser = getUser();
       setUser(retrievedUser);
     }
-  }, [user]);
 
-  useEffect(() => {
-    // Hook to load the farmers in the table
     getFarmersHandler().then(retrievedFarmers => {
       setFarmers({
         data: retrievedFarmers,
         cleanedData: cleanFarmersData(retrievedFarmers)
       });
+    }).catch(error => {
+      console.error(error);
     });
-  }, []);
+  }, [user]);
 
   const logOut = () => {
     setUser(false);
