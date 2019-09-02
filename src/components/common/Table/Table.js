@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-function DashboardTable({ className, columns, data, history }) {
+// eslint-disable-next-line react/prop-types
+function DashboardTable({ className, history, columns, data }) {
   // Use the state and functions returned from useTable to build your UI
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -60,7 +61,8 @@ function DashboardTable({ className, columns, data, history }) {
 
 DashboardTable.propTypes = {
   columns: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  history: PropTypes.object
 };
 
 const StyledDashboardTable = styled(DashboardTable)`
