@@ -10,6 +10,7 @@ import AddStaff from '../pages/AddStaff/AddStaff';
 import { getUser } from '../../utils/handlers/authenticationHandlers';
 import { logout } from '../../utils/handlers/authenticationHandlers';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
+import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -62,6 +63,7 @@ function App() {
             render={props => <Login {...props} setUser={setUser} />}
           />
           <Route path="/addfarmer" component={AddFarmer} />
+          <Route path="/farmers/:id/edit" component={UpdateFarmer} />
           <ToastContainer position="top-right" />
         </Container>
       </div>
