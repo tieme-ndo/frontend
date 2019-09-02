@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import withRestrictedAccess from '../hoc/withRestrictedAccess'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Login from '../pages/Login/Login'
-import CreateAccount from '../pages/CreateAccount/CreateAccount'
+import AddStaff from '../pages/AddStaff/AddStaff'
 import {getUser} from '../../utils/handlers/authenticationHandlers'
 import {logout} from '../../utils/handlers/authenticationHandlers'
 import AddFarmer from '../pages/AddFarmer/AddFarmer'
@@ -52,7 +52,7 @@ function App() {
         </nav>
 
         <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
-        <Route path="/accounts/new" component={withRestrictedAccess(CreateAccount, true, user)} />
+        <Route path="/accounts/new" component={withRestrictedAccess(AddStaff, true, user)} />
         <Route path="/login/" render={props => <Login {...props} setUser={setUser} />} />
         <Route path="/addfarmer" component={AddFarmer} />
         <ToastContainer position="top-right" />
