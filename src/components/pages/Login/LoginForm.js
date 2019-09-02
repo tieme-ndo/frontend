@@ -22,7 +22,7 @@ const LoginForm = props => {
         style={{ height: '85vh' }}
         verticalAlign="middle"
       >
-        <Grid.Column style={{ maxWidth: 300 }}>
+        <Grid.Column style={{ maxWidth: 330 }}>
           {state.errors.length && (
             <Message error>
               <Message.List>
@@ -35,50 +35,52 @@ const LoginForm = props => {
             </Message>
           )}
 
-          <Image src={logo} centered alt="tiemendo logo" size="small" />
+          <Segment>
+            <Image src={logo} centered alt="tiemendo logo" size="small" />
 
-          <Header as="h3" style={{ marginBottom: '30px' }}>
-            Log in to your account
-          </Header>
+            <Header as="h3" style={{ marginBottom: '30px' }}>
+              Log in to your account
+            </Header>
 
-          <Form size="large" onSubmit={handleSubmit}>
-            <Segment width={5}>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="Username"
-                name="username"
-                type="text"
-                value={state.username}
-                onChange={handleChange}
-              />
-
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                name="password"
-                value={state.password}
-                onChange={handleChange}
-              />
-
-              {state.loginIn ? (
-                <Button
-                  loading
-                  disabled
-                  color="teal"
+            <Form size="large" onSubmit={handleSubmit}>
+              <Segment width={5}>
+                <Form.Input
                   fluid
-                  size="large"
-                  content="Login"
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="Username"
+                  name="username"
+                  type="text"
+                  value={state.username}
+                  onChange={handleChange}
                 />
-              ) : (
-                <Button color="teal" fluid content="Login" />
-              )}
-            </Segment>
-          </Form>
+
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  value={state.password}
+                  onChange={handleChange}
+                />
+
+                {state.loginIn ? (
+                  <Button
+                    loading
+                    disabled
+                    color="teal"
+                    fluid
+                    size="large"
+                    content="Login"
+                  />
+                ) : (
+                  <Button color="teal" fluid content="Login" />
+                )}
+              </Segment>
+            </Form>
+          </Segment>
         </Grid.Column>
       </Grid>
     </Container>
