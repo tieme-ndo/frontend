@@ -106,7 +106,9 @@ function App() {
           />
           <Route
             path="/farmers/:id"
-            component={withRestrictedAccess(DisplayFarmer)}
+            render={props => (
+              <DisplayFarmer {...props} needsUpdate={setNeedsUpdate} />
+            )}
           />
           <ToastContainer position="top-right" />
         </Container>

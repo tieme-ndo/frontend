@@ -1,13 +1,23 @@
 /** @format */
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
+=======
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import {
+  Container,
+  Grid,
+  Segment,
+  Menu
+} from 'semantic-ui-react';
+>>>>>>> Allow DisplayFarmer to request update of farmers state
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
 import DisplayTabTemplate from './DisplayTabTemplate.js';
 import PersonalTab from './PersonalTab.js'
 
-const DisplayFarmer = ({ history, location }) => {
+const DisplayFarmer = ({ history, location, needsUpdate }) => {
   const farmer = location.state.farmer;
   const [selected, setSelected] = useState('Personal');
 
@@ -35,7 +45,7 @@ const DisplayFarmer = ({ history, location }) => {
     <Container>
       <Grid stackable columns={2}>
         <Grid.Column width={5}>
-          <LeftDisplay farmer={farmer} history={history} />
+          <LeftDisplay farmer={farmer} history={history} needsUpdate={needsUpdate} />
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
@@ -79,10 +89,11 @@ const DisplayFarmer = ({ history, location }) => {
 
 DisplayFarmer.propTypes = {
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  needsUpdate: PropTypes.func
 };
 
-export default DisplayFarmer;
+export default withRestrictedAccess(DisplayFarmer);
 
 /* const hydrateFormInputValues = () => {
     const farmerData = props.location.state.farmer;
