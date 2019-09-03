@@ -1,10 +1,14 @@
-/** @format */
-
 import React from 'react';
 import PageHeader from '../../common/PageHeader/PageHeader';
-import Table from '../../common/Table/Table';
+import StyledTable from '../../common/Table/Table';
+import { Header, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
 
 const Dashboard = () => {
+  const [data, setData] = React.useState([]);
+  const Title = <Header as="h1">All Farmers</Header>;
+
   const columns = React.useMemo(
     () => [
       {
@@ -15,24 +19,24 @@ const Dashboard = () => {
             accessor: 'name'
           },
           {
-            Header: 'Sex',
-            accessor: 'sex'
+            Header: 'Community Name',
+            accessor: 'communityName'
+          },
+          {
+            Header: 'Farm Location',
+            accessor: 'farmLocation'
           },
           {
             Header: 'Phone Number',
             accessor: 'phoneNumber'
           },
           {
-            Header: 'Acres',
-            accessor: 'acres'
+            Header: 'Guarantor Name',
+            accessor: 'guarantorName'
           },
           {
-            Header: 'Crops',
-            accessor: 'crops'
-          },
-          {
-            Header: ' ',
-            accessor: 'more'
+            Header: 'Guarantor Phone Number',
+            accessor: 'guarantorPhoneNumber'
           }
         ]
       }
@@ -40,51 +44,46 @@ const Dashboard = () => {
     []
   );
 
-  // To change with data coming from API
-  const data = React.useMemo(() => makeData(20), []);
+  const prepareData = farmers => {
+    let cleanedData = farmers.map(farmer => {
+      const farmerData = {
+        name: `${farmer.personalInfo.first_name} ${farmer.personalInfo.surname}`,
+        communityName: farmer.personalInfo.community_name,
+        farmLocation: farmer.farmInfo.location_of_farm,
+        phoneNumber: farmer.personalInfo.Phone_1,
+        guarantorName: `${farmer.guarantor.grt_first_name} ${farmer.guarantor.grt_surname}`,
+        guarantorPhoneNumber: farmer.guarantor.grt_phone
+      };
+      return farmerData;
+    });
+    return cleanedData;
+  };
+
+  React.useEffect(() => {
+    let isSubscribed = true;
+    getFarmersHandler().then(farmers => {
+      if (isSubscribed) {
+        setData(prepareData(farmers));
+      }
+    });
+    return () => (isSubscribed = false);
+  }, []);
 
   return (
     <>
-      <PageHeader />
-      <Table columns={columns} data={data} />
+      <PageHeader
+        leftElement={Title}
+        rightElement={
+          <Button color="teal" fixed="right">
+            <Link style={{ color: 'white' }} to="/addfarmer">
+              Add Farmer
+            </Link>
+          </Button>
+        }
+      />
+      <StyledTable columns={columns} data={React.useMemo(() => data, [data])} />
     </>
   );
 };
-
-//// TO DELETE, THIS IS TO MOCK DATA
-
-const range = len => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-const newFarmer = () => {
-  return {
-    name: 'David Test',
-    sex: 'M',
-    phoneNumber: '+3348484884',
-    address: '17 Tractor Road, Arcadia',
-    acres: 5.3,
-    crops: ['Wheat', 'Corn'].join(', '),
-    more: <button>More</button>
-  };
-};
-
-function makeData(...lens) {
-  const makeDataLevel = (depth = 0) => {
-    const len = lens[depth];
-    return range(len).map(() => {
-      return {
-        ...newFarmer(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined
-      };
-    });
-  };
-
-  return makeDataLevel();
-}
 
 export default Dashboard;

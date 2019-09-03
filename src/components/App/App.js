@@ -1,10 +1,14 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
+import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
-import CreateAccount from '../pages/CreateAccount/CreateAccount';
+import AddStaff from '../pages/AddStaff/AddStaff';
 import { getUser } from '../../utils/handlers/authenticationHandlers';
+import { logout } from '../../utils/handlers/authenticationHandlers';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,16 +23,20 @@ function App() {
     }
   }, [user]);
 
+  const logOut = () => {
+    setUser(false);
+    logout();
+  };
   return (
     <Router>
       <div className="App" data-testid="App">
         <Route path="/" exact component={withRestrictedAccess(Dashboard)} />
         <Route
           path="/accounts/new"
-          component={withRestrictedAccess(CreateAccount, true, user)}
+          component={withRestrictedAccess(AddStaff, true, user)}
         />
         <Route
-          path="/login/"
+          path="/login"
           render={props => <Login {...props} setUser={setUser} />}
         />
         <Route path="/addfarmer" component={AddFarmer} />

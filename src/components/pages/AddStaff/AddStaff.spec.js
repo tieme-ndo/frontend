@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import CreateAccount from './CreateAccount';
+import AddStaff from './AddStaff';
 
 it('renders without crashing', () => {
-  const { getByTestId } = render(<CreateAccount />);
+  const { getByTestId } = render(<AddStaff />);
   const usernameField = getByTestId('username-field');
   expect(usernameField).toBeInTheDocument();
   const passwordField = getByTestId('password-field');
