@@ -1,15 +1,11 @@
 /** @format */
 
 import React, { useState } from 'react';
-import {
-  Container,
-  Grid,
-  Segment,
-  Menu
-} from 'semantic-ui-react';
+import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
-import DisplayTabTemplate from "./DisplayTabTemplate.js";
+import DisplayTabTemplate from './DisplayTabTemplate.js';
+import PersonalTab from './PersonalTab.js'
 
 const DisplayFarmer = ({ history, location }) => {
   const farmer = location.state.farmer;
@@ -17,6 +13,22 @@ const DisplayFarmer = ({ history, location }) => {
 
   function handleSelected(e, { name }) {
     setSelected(name);
+  }
+
+  function renderConditionally() {
+    console.log(farmer);
+    switch (selected) {
+      case 'Personal':
+        return <DisplayTabTemplate farmer={farmer}/>;
+      case 'Family':
+        return <DisplayTabTemplate farmer={farmer}/>;
+      case 'Guarantor':
+        return <DisplayTabTemplate farmer={farmer}/>;
+      case 'Farm':
+        return <DisplayTabTemplate farmer={farmer}/>;
+      default:
+        return ;
+    }
   }
 
   return (
@@ -36,11 +48,11 @@ const DisplayFarmer = ({ history, location }) => {
                 Personal
               </Menu.Item>
               <Menu.Item
-                name="Farm"
-                active={selected === 'Farm'}
+                name="Family"
+                active={selected === 'Family'}
                 onClick={handleSelected}
               >
-                Farm
+                Family
               </Menu.Item>
               <Menu.Item
                 name="Guarantor"
@@ -50,24 +62,15 @@ const DisplayFarmer = ({ history, location }) => {
                 Guarantor
               </Menu.Item>
               <Menu.Item
-                name="Declaration"
-                active={selected === 'Declaration'}
+                name="Farm"
+                active={selected === 'Farm'}
                 onClick={handleSelected}
               >
-                Declaration
+                Farm
               </Menu.Item>
             </Menu>
           </Segment>
-          <Segment>{DisplayTabTemplate(farmer)}</Segment>
-            {/* switch(selected){
-              case "Personal":
-                <Segment>
-                  </Segment>
-
-              break;
-              case "Family"
-            } */}
-          
+          <Segment>{renderConditionally()}</Segment>
         </Grid.Column>
       </Grid>
     </Container>
