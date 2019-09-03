@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import {
   loginHandler,
@@ -9,14 +10,13 @@ import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import validateLoginForm from './loginValidation';
 
-function Login({ setUser, ...props}) {
+function Login({ setUser, ...props }) {
   const [state, updateState] = useState({
     username: '',
     password: '',
     errors: {},
     loading: false
   });
-
 
   const handleChange = (e, { name, value }) => {
     updateState(prevState => ({ ...prevState, [name]: value }));
@@ -46,24 +46,28 @@ function Login({ setUser, ...props}) {
     }
     // send request to server
     const receivedUser = await loginHandler({
-        username: state.username,
-        password: state.password
+      username: state.username,
+      password: state.password
     });
 
     // if the response has token => successful login
     if (receivedUser.hasOwnProperty('token')) {
-        setUser(getUser());
+      toast.success('Logged in successfully', {
+        position: toast.POSITION.TOP_CENTER
+      });
 
-        props.history.push('/');
+      setUser(getUser());
+
+      props.history.push('/');
     } else {
-        // on unsuccessful login, render server error message
-        updateState(prevState => ({
-            ...prevState,
-            errors: [{ error: receivedUser.message }],
-            loading: false
-        }))
+      // on unsuccessful login, render server error message
+      updateState(prevState => ({
+        ...prevState,
+        errors: [{ error: receivedUser.message }],
+        loading: false
+      }));
     }
-  }
+  };
   // check if user already exists, if yes (logged in), redirect to root
   if (getUser()) {
     return <Redirect to="/" />;
@@ -71,10 +75,10 @@ function Login({ setUser, ...props}) {
 
   return (
     <LoginForm
-    state={state}
-    handleSubmit={handleSubmit}
-    handleChange={handleChange}
-  />
+      state={state}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+    />
   );
 }
 
