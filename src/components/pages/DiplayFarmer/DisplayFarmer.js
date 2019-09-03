@@ -1,12 +1,17 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
-import { Container, Grid, Segment, Menu, Button } from "semantic-ui-react";
+import React, { useState } from 'react';
+import {
+  Container,
+  Grid,
+  Segment,
+  Menu
+} from 'semantic-ui-react';
+import LeftDisplay from './LeftDisplay';
+import PropTypes from 'prop-types';
 
-const DisplayFarmer = props => {
-  const farmer = props.location.state.farmer;
-  console.log(farmer);
-
+const DisplayFarmer = ({ history, location }) => {
+  const farmer = location.state.farmer;
   const [selected, setSelected] = useState('Personal');
 
   function handleSelected(e, { name }) {
@@ -15,14 +20,11 @@ const DisplayFarmer = props => {
 
   return (
     <Container>
-      <Grid>
-        <Grid.Column fluid width={5}>
-          <Segment>
-            <Button>Edit Farmer</Button>
-            <Button color={'red'}>Remove Farmer</Button>
-          </Segment>
+      <Grid stackable columns={2}>
+        <Grid.Column width={5}>
+          <LeftDisplay farmer={farmer} history={history} />
         </Grid.Column>
-        <Grid.Column fluid width={11}>
+        <Grid.Column width={11}>
           <Segment>
             <Menu>
               <Menu.Item
@@ -67,6 +69,11 @@ const DisplayFarmer = props => {
       </Grid>
     </Container>
   );
+};
+
+DisplayFarmer.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default DisplayFarmer;
