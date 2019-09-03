@@ -7,28 +7,28 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
           value: 'Miss',
-          displayValue: 'Miss',
+          displayValue: 'Miss'
         },
         {
           value: 'Mrs',
-          displayValue: 'Mrs',
+          displayValue: 'Mrs'
         },
         {
           value: 'Mr',
-          displayValue: 'Mr',
+          displayValue: 'Mr'
         },
         {
           value: 'Chief',
-          displayValue: 'Chief',
-        },
-      ],
+          displayValue: 'Chief'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   surname: {
     elementType: 'input',
@@ -37,7 +37,7 @@ export const personalInfo = {
     labelName: 'Surname',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   first_name: {
     elementType: 'input',
@@ -46,7 +46,7 @@ export const personalInfo = {
     labelName: 'First Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   middle_name: {
     elementType: 'input',
@@ -55,7 +55,7 @@ export const personalInfo = {
     labelName: 'Middle Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   image_url: {
     elementType: 'input',
@@ -64,7 +64,7 @@ export const personalInfo = {
     labelName: 'Farmer Image',
     imageUrl: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   marital_status: {
     elementType: 'select',
@@ -74,28 +74,28 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Single',
-          displayValue: 'Single',
+          value: 'single',
+          displayValue: 'single'
         },
         {
-          value: 'Married',
-          displayValue: 'Married',
+          value: 'married',
+          displayValue: 'married'
         },
         {
-          value: 'Widowed',
-          displayValue: 'Widowed',
+          value: 'widowed',
+          displayValue: 'widowed'
         },
         {
-          value: 'Divorced',
-          displayValue: 'Divorced',
-        },
-      ],
+          value: 'divorced',
+          displayValue: 'divorced'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   gender: {
     elementType: 'select',
@@ -105,24 +105,24 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Male',
-          displayValue: 'Male',
+          value: 'male',
+          displayValue: 'male'
         },
         {
-          value: 'Female',
-          displayValue: 'Female',
+          value: 'female',
+          displayValue: 'female'
         },
         {
-          value: 'Others',
-          displayValue: 'Others',
-        },
-      ],
+          value: 'others',
+          displayValue: 'others'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   place_of_birth: {
     elementType: 'input',
@@ -131,7 +131,7 @@ export const personalInfo = {
     labelName: 'Place Of Birth',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   date_of_birth: {
     elementType: 'input',
@@ -140,7 +140,7 @@ export const personalInfo = {
     labelName: 'Date Of Birth',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   id_type: {
     elementType: 'select',
@@ -150,37 +150,37 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Voters Card',
-          displayValue: 'Voters Card',
+          value: 'voters card',
+          displayValue: 'voters card'
         },
         {
           value: 'NHIS',
-          displayValue: 'NHIS',
+          displayValue: 'NHIS'
         },
         {
           value: 'National ID',
-          displayValue: 'National ID',
+          displayValue: 'National ID'
         },
         {
-          value: 'Others',
-          displayValue: 'Others',
-        },
-      ],
+          value: 'others',
+          displayValue: 'others'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   id_number: {
     elementType: 'input',
     name: 'id_number',
-    type: 'number',
+    type: 'text',
     labelName: 'Id Number',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   district: {
     elementType: 'input',
@@ -189,7 +189,7 @@ export const personalInfo = {
     labelName: 'District',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   region: {
     elementType: 'input',
@@ -198,7 +198,7 @@ export const personalInfo = {
     labelName: 'Region',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   community_name: {
     elementType: 'input',
@@ -207,7 +207,7 @@ export const personalInfo = {
     labelName: 'Community Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   house_name: {
     elementType: 'input',
@@ -216,7 +216,7 @@ export const personalInfo = {
     labelName: 'House Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   house_number: {
     elementType: 'input',
@@ -225,7 +225,7 @@ export const personalInfo = {
     labelName: 'House Number',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   nearest_landmark: {
     elementType: 'input',
@@ -234,25 +234,25 @@ export const personalInfo = {
     labelName: 'Nearest Landmark',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  Phone_1: {
+  phone_1: {
     elementType: 'input',
-    name: 'Phone_1',
-    type: 'number',
+    name: 'phone_1',
+    type: 'text',
     labelName: ' Phone 1',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  Phone_2: {
+  phone_2: {
     elementType: 'input',
-    name: 'Phone_2',
-    type: 'number',
+    name: 'phone_2',
+    type: 'text',
     labelName: 'Phone 2',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   education_level: {
     elementType: 'select',
@@ -262,32 +262,32 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
           value: 'Tertiary',
-          displayValue: 'Tertiary',
+          displayValue: 'Tertiary'
         },
         {
           value: 'SHS',
-          displayValue: 'SHS',
+          displayValue: 'SHS'
         },
         {
           value: 'JHS',
-          displayValue: 'JHS',
+          displayValue: 'JHS'
         },
         {
           value: 'Primary',
-          displayValue: 'Primary',
+          displayValue: 'Primary'
         },
         {
           value: 'Not Educated',
-          displayValue: 'Not Educated',
-        },
-      ],
+          displayValue: 'Not Educated'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   occupation: {
     elementType: 'input',
@@ -296,7 +296,7 @@ export const personalInfo = {
     labelName: 'Occupation',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   expected_income_per_month: {
     elementType: 'select',
@@ -306,62 +306,62 @@ export const personalInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Less than GHC 500',
-          displayValue: 'Less than GHC 500',
+          value: 'less than GHC 500',
+          displayValue: 'less than GHC 500'
         },
         {
           value: '501 to GHC 1,000',
-          displayValue: '501 to GHC 1,000',
+          displayValue: '501 to GHC 1,000'
         },
         {
-          value: 'More than GHC 1,000',
-          displayValue: 'More than GHC 1,000',
-        },
-      ],
+          value: 'more than GHC 1,000',
+          displayValue: 'more than GHC 1,000'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
-  'major_source_of_income.name': {
+  major_source_of_income_name: {
     elementType: 'input',
-    name: 'major_source_of_income.name',
+    name: 'major_source_of_income_name',
     type: 'text',
     labelName: 'Major Source Of Income',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  'major_source_of_income.amount': {
+  major_source_of_income_amount: {
     elementType: 'input',
-    name: 'major_source_of_income.amount',
+    name: 'major_source_of_income_amount',
     type: 'number',
     labelName: 'Major Source Of Income Amount',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  'minor_source_of_income.name': {
+  minor_source_of_income_name: {
     elementType: 'input',
-    name: 'minor_source_of_income.name',
+    name: 'minor_source_of_income_name',
     type: 'text',
     labelName: 'Minor Source Of Income',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  'minor_source_of_income.amount': {
+  minor_source_of_income_amount: {
     elementType: 'input',
-    name: 'minor_source_of_income.amount',
+    name: 'minor_source_of_income_amount',
     type: 'number',
     labelName: 'Minor Source Of Income Amount',
     value: '',
     valid: false,
-    touched: false,
-  },
-}
+    touched: false
+  }
+};
 
 export const familyInfo = {
   family_size: {
@@ -371,51 +371,51 @@ export const familyInfo = {
     labelName: 'Family Size',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  number_of_dependant: {
+  number_of_dependants: {
     elementType: 'input',
-    name: 'number_of_dependant',
+    name: 'number_of_dependants',
     type: 'number',
-    labelName: 'Number Of Dependant',
+    labelName: 'Number Of Dependants',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
-  highest_level_of_dependent: {
+  highest_level_of_dependants: {
     elementType: 'select',
-    name: 'highest_level_of_dependent',
-    labelName: 'Highest Level Of Education Level',
+    name: 'highest_level_of_dependants',
+    labelName: 'Highest Level Of Education Level of Dependants',
     elementConfig: {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
           value: 'Tertiary',
-          displayValue: 'Tertiary',
+          displayValue: 'Tertiary'
         },
         {
           value: 'SHS',
-          displayValue: 'SHS',
+          displayValue: 'SHS'
         },
         {
           value: 'JHS',
-          displayValue: 'JHS',
+          displayValue: 'JHS'
         },
         {
           value: 'Primary',
-          displayValue: 'Primary',
+          displayValue: 'Primary'
         },
         {
           value: 'Not Educated',
-          displayValue: 'Not Educated',
-        },
-      ],
+          displayValue: 'Not Educated'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   family_income_per_month: {
     elementType: 'select',
@@ -425,26 +425,26 @@ export const familyInfo = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Less than GHC 500',
-          displayValue: 'Less than GHC 500',
+          value: 'less than GHC 500',
+          displayValue: 'less than GHC 500'
         },
         {
           value: '501 to GHC 1,000',
-          displayValue: '501 to GHC 1,000',
+          displayValue: '501 to GHC 1,000'
         },
         {
-          value: 'More than GHC 1,000',
-          displayValue: 'More than GHC 1,000',
-        },
-      ],
+          value: 'more than GHC 1,000',
+          displayValue: 'more than GHC 1,000'
+        }
+      ]
     },
     value: '',
-    valid: true,
-  },
-}
+    valid: true
+  }
+};
 
 export const guarantor = {
   grt_title: {
@@ -455,28 +455,28 @@ export const guarantor = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
           value: 'Miss',
-          displayValue: 'Miss',
+          displayValue: 'Miss'
         },
         {
           value: 'Mrs',
-          displayValue: 'Mrs',
+          displayValue: 'Mrs'
         },
         {
           value: 'Mr',
-          displayValue: 'Mr',
+          displayValue: 'Mr'
         },
         {
           value: 'Chief',
-          displayValue: 'Chief',
-        },
-      ],
+          displayValue: 'Chief'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   grt_surname: {
     elementType: 'input',
@@ -485,7 +485,7 @@ export const guarantor = {
     labelName: 'Surname',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_first_name: {
     elementType: 'input',
@@ -494,7 +494,7 @@ export const guarantor = {
     labelName: 'First Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_gender: {
     elementType: 'select',
@@ -504,24 +504,24 @@ export const guarantor = {
       options: [
         {
           value: '',
-          displayValue: 'Please select',
+          displayValue: 'Please select'
         },
         {
-          value: 'Male',
-          displayValue: 'Male',
+          value: 'male',
+          displayValue: 'male'
         },
         {
-          value: 'Female',
-          displayValue: 'Female',
+          value: 'female',
+          displayValue: 'female'
         },
         {
-          value: 'Others',
-          displayValue: 'Others',
-        },
-      ],
+          value: 'others',
+          displayValue: 'others'
+        }
+      ]
     },
     value: '',
-    valid: true,
+    valid: true
   },
   grt_relations: {
     elementType: 'input',
@@ -530,7 +530,7 @@ export const guarantor = {
     labelName: 'Relations',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_residential_address: {
     elementType: 'input',
@@ -539,7 +539,7 @@ export const guarantor = {
     labelName: 'Residential Address',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_occupation: {
     elementType: 'input',
@@ -548,7 +548,7 @@ export const guarantor = {
     labelName: 'Occupation',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_phone: {
     elementType: 'input',
@@ -557,7 +557,7 @@ export const guarantor = {
     labelName: 'Phone',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_district: {
     elementType: 'input',
@@ -566,7 +566,7 @@ export const guarantor = {
     labelName: 'District',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_region: {
     elementType: 'input',
@@ -575,9 +575,9 @@ export const guarantor = {
     labelName: 'Region',
     value: '',
     valid: false,
-    touched: false,
-  },
-}
+    touched: false
+  }
+};
 
 export const farmInfo = {
   number_of_acres: {
@@ -587,7 +587,7 @@ export const farmInfo = {
     labelName: 'Number Of Acres',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   location_of_farm: {
     elementType: 'input',
@@ -596,7 +596,7 @@ export const farmInfo = {
     labelName: 'Location Of Farm',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   farm_nearest_landmark: {
     elementType: 'input',
@@ -605,7 +605,7 @@ export const farmInfo = {
     labelName: 'Farm Nearest landmark',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   crops_cultivated: {
     elementType: 'checkbox',
@@ -613,13 +613,23 @@ export const farmInfo = {
     type: 'checkbox',
     labelName: 'Crops Cultivated',
     elementConfig: {
-      options: ['Maize','Rice','Sorghum', 'Millet','Groundnuts','Beans','SoyaBeans','Yam','Guinea Corn']
+      options: [
+        'Maize',
+        'Rice',
+        'Sorghum',
+        'Millet',
+        'Groundnuts',
+        'Beans',
+        'SoyaBeans',
+        'Yam',
+        'Guinea Corn'
+      ]
     },
-    selected:[],
+    selected: [],
     value: '',
     checked: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   // crops_cultivated_optional: {
   //   elementType: 'input',
@@ -636,14 +646,23 @@ export const farmInfo = {
     type: 'checkbox',
     labelName: 'Animals/Birds Own',
     elementConfig: {
-      options: ['Goat','Cow','Sheep', 'Pig','Donkey','Fowl','Guinea Pig','Turkey']
+      options: [
+        'Goat',
+        'Cow',
+        'Sheep',
+        'Pig',
+        'Donkey',
+        'Fowl',
+        'Guinea Pig',
+        'Turkey'
+      ]
     },
-    selected:[],
+    selected: [],
     value: '',
     checked: '',
     valid: false,
-    touched: false,
-  },
+    touched: false
+  }
   // animal_birds_other: {
   //   elementType: 'input',
   //   name: 'animal_birds_optional',
@@ -653,4 +672,4 @@ export const farmInfo = {
   //   valid: false,
   //   touched: false,
   // },
-}
+};
