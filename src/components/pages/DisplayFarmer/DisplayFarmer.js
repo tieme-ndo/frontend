@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
+import DisplayTabTemplate from "./DisplayTabTemplate.js";
 
 const DisplayFarmer = ({ history, location }) => {
   const farmer = location.state.farmer;
@@ -57,14 +58,16 @@ const DisplayFarmer = ({ history, location }) => {
               </Menu.Item>
             </Menu>
           </Segment>
-          <Segment>
-            {switch(selected){
+          <Segment>{DisplayTabTemplate(farmer)}</Segment>
+            {/* switch(selected){
               case "Personal":
+                <Segment>
+                  </Segment>
 
               break;
               case "Family"
-            }}
-          </Segment>
+            } */}
+          
         </Grid.Column>
       </Grid>
     </Container>

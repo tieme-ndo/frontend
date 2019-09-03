@@ -7,7 +7,7 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
-import DisplayFarmer from '../pages/DiplayFarmer/DisplayFarmer';
+import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
 import {
