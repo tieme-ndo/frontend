@@ -29,7 +29,11 @@ function App() {
           path="/accounts/new"
           component={withRestrictedAccess(CreateAccount, true, user)}
         />
-        <Route exact path="/reset-password" component={ResetPassword} />
+        <Route
+          exact
+          path="/reset-password"
+          component={withRestrictedAccess(ResetPassword)}
+        />
         <Route
           path="/login"
           render={props => <Login {...props} setUser={setUser} />}

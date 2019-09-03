@@ -4,8 +4,10 @@ import { useState } from 'react';
 
 import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
+import axiosWithHeader from '../../../utils/axiosWithHeaders';
+import { pathObj } from '../../../utils/generalVariables';
 
-const PasswordReset = () => {
+const PasswordReset = props => {
   const [state, updateState] = useState({
     newPassword: '',
     confirmNewPassword: '',
@@ -45,6 +47,31 @@ const PasswordReset = () => {
         resetting: false
       }));
     }
+
+    axiosWithHeader()
+      .put(`${pathObj.changePasswordPath}`, { password: state.newPassword })
+      .then(res => {
+        toast.success('Password reset successfully', {
+          position: toast.POSITION.TOP_CENTER
+        });
+
+        updateState(prevState => ({
+          ...prevState,
+          errors: {},
+          resetting: false
+        }));
+
+        localStorage.removeItem('tokenTiemeNdo');
+
+        props.history.push('/');
+      })
+      .catch(error => {
+        updateState(prevState => ({
+          ...prevState,
+          errors: error,
+          resetting: false
+        }));
+      });
   };
 
   return (

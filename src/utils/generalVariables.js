@@ -10,7 +10,7 @@ const API_VERSION = 'api/v1';
 export const pathObj = {
   getUserPath: `${URL}/${API_VERSION}/user`,
   loginPath: `${URL}/${API_VERSION}/user/login`,
-  changePasswordPath: `${URL}/${API_VERSION}/user/change-password`,
+  changePasswordPath: `${URL}/${API_VERSION}/user/reset-password`,
   registrationPath: `${URL}/${API_VERSION}/user/signup`,
   deleteUserPath: `${URL}/${API_VERSION}/user`,
 
