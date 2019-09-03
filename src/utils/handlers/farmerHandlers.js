@@ -17,6 +17,22 @@ export const getFarmersHandler = () => {
     });
 };
 
+export const cleanFarmersData = farmers => {
+  let cleanedData = farmers.map(farmer => {
+    const farmerData = {
+      id: farmer._id,
+      name: `${farmer.personalInfo.first_name} ${farmer.personalInfo.surname}`,
+      communityName: farmer.personalInfo.community_name,
+      farmLocation: farmer.farmInfo.location_of_farm,
+      phoneNumber: farmer.personalInfo.Phone_1,
+      guarantorName: `${farmer.guarantor.grt_first_name} ${farmer.guarantor.grt_surname}`,
+      guarantorPhoneNumber: farmer.guarantor.grt_phone
+    };
+    return farmerData;
+  });
+  return cleanedData;
+};
+
 export const getIndividualFarmerHandler = farmerId => {
   const token = getToken();
   if (!farmerId || typeof farmerId !== 'string') {
@@ -77,9 +93,10 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     });
 };
 
-export const deleteFarmerHandler = (farmerId, token) => {
+export const deleteFarmerHandler = (farmerId) => {
+  const token = getToken();
   return axios
-    .delete(`${pathObj.deleteFarmerPath}/${farmerId}`, setHeaders(token))
+    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders(token))
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage;
