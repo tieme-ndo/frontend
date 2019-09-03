@@ -1,8 +1,11 @@
 import React from "react";
-import StyledTable from "../../common/Table/Table";
-import { Header } from "semantic-ui-react";
-import withRestrictedAccess from "../../hoc/withRestrictedAccess";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
+import StyledTable from "../../common/Table/Table";
+import { Header, Button } from "semantic-ui-react";
+import withRestrictedAccess from "../../hoc/withRestrictedAccess";
+import DashboardHeader from "./DashboardHeader";
 
 const Dashboard = ({ farmers, rawFarmers, history }) => {
   const [data, setData] = React.useState([]);
@@ -54,6 +57,16 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
 
   return (
     <>
+      <DashboardHeader
+        leftElement={Title}
+        rightElement={
+          <Link style={{ color: "white" }} to="/addfarmer">
+            <Button color="teal" fixed="right">
+              Add Farmer
+            </Button>
+          </Link>
+        }
+      />
       <StyledTable
         history={history}
         columns={columns}
