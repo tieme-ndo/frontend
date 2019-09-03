@@ -6,7 +6,7 @@ export default function DisplayTabTemplate(props) { //Props will contain the far
   // const data = farmer.xyz
 
   return (
-    <Grid columns={2}>
+    <Grid columns={2} stackable>
       <Grid.Column >
         <Header.Subheader>Grey Title</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>

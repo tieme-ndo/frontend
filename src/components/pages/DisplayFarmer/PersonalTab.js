@@ -2,11 +2,11 @@ import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 
 export default function PersonalTab(props) {
+
   const data = props.farmer.personalInfo;
-  console.log(data.minor_source_of_income);
 
   return (
-    <Grid columns={2}>
+    <Grid columns={2} stackable>
       <Grid.Column>
         <Header.Subheader>Title</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
@@ -63,7 +63,7 @@ export default function PersonalTab(props) {
           {data.Phone_2}
         </Header>
         <Header.Subheader>Identification</Header.Subheader>
-        <Header size="tiny" style={{ marginTop: '0.1rem', marginBottom: '3.5rem' }}>
+        <Header size="tiny" style={{ marginTop: '0.1rem', marginBottom: '3.571425rem' }}>
           {data.id_type + ': ' + data.id_number}
         </Header>
         <Header.Subheader>Education</Header.Subheader>

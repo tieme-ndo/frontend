@@ -2,16 +2,12 @@
 
 import React, { useState } from 'react';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
-import {
-  Container,
-  Grid,
-  Segment,
-  Menu
-} from 'semantic-ui-react';
+import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
 import DisplayTabTemplate from './DisplayTabTemplate.js';
-import PersonalTab from './PersonalTab.js'
+import PersonalTab from './PersonalTab.js';
+import FarmTab from './FarmTab';
 
 const DisplayFarmer = ({ history, location, needsUpdate }) => {
   const farmer = location.state.farmer;
@@ -22,18 +18,17 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
   }
 
   function renderConditionally() {
-    console.log(farmer);
     switch (selected) {
       case 'Personal':
-        return <PersonalTab farmer={farmer}/>;
+        return <PersonalTab farmer={farmer} />;
       case 'Family':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <DisplayTabTemplate farmer={farmer} />;
       case 'Guarantor':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <DisplayTabTemplate farmer={farmer} />;
       case 'Farm':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <FarmTab farmer={farmer} />;
       default:
-        return ;
+        return;
     }
   }
 
@@ -41,7 +36,11 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
     <Container>
       <Grid stackable columns={2}>
         <Grid.Column width={5}>
-          <LeftDisplay farmer={farmer} history={history} needsUpdate={needsUpdate} />
+          <LeftDisplay
+            farmer={farmer}
+            history={history}
+            needsUpdate={needsUpdate}
+          />
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
