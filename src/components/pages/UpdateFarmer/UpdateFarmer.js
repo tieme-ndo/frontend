@@ -7,9 +7,12 @@ import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
-const UpdateFarmer = ({ location, appStateShouldUpdate }) => {
+const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
+
+  // Prevents errors when location state is empty
+  const { farmer: farmerData } = location.state || {};
+
   const hydrateFormInputValues = () => {
-    const farmerData = location.state.farmer;
     let hydratedFormInputs = {};
 
     // Deep copy of form input data objects
@@ -80,10 +83,15 @@ const UpdateFarmer = ({ location, appStateShouldUpdate }) => {
     }
 
     const token = getToken();
-    updateFarmerHandler(formData, location.state.farmer._id, token)
-      .then(response => {
-        appStateShouldUpdate(true);
+    updateFarmerHandler(formData, farmerData._id, token).then(() => {
+      appStateShouldUpdate(true);
+      // removes "/edit" dynamically from the route pathname
+      history.replace(`${location.pathname.split('/edit')[0]}`, {
+        // Passes back the updated farmer data to the location state of the DisplayFarmers component
+        // Added "_id" because formData doesn't have/need an _id property
+        farmer: { ...formData, _id: farmerData._id }
       });
+    });
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
