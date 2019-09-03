@@ -1,5 +1,7 @@
 /** @format */
 
+// Convert functionality from toggle content to show tab content
+
 import React, { useState, useEffect } from 'react';
 import Input from '../../common/Input/Input';
 import {
@@ -55,10 +57,13 @@ const AddFarmer = () => {
     setState({ ...state, [data]: newData });
   };
   const toggleHandler = data => {
-    setStateToggle(prevState => ({
-      ...prevState,
-      [data]: !prevState[data]
-    }));
+    setStateToggle({
+      personalInfoToggle: true,
+      familyInfoToggle: true,
+      guarantorToggle: true,
+      farmInfoToggle: true,
+      [data]: false
+    });
   };
   const formHandler = e => {
     e.preventDefault();
@@ -112,56 +117,48 @@ const AddFarmer = () => {
   let guarantorInputs = inputCreator(state.guarantor, 'guarantor');
   let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo');
 
-  const DivToggle = styled.div`
-    display: flex;
-    justify-content: space-between;
-    &:hover {
-      cursor: pointer;
-    }
-  `;
   return (
     <div>
       <section>
         <hr />
 
-        <form action="" onSubmit={formHandler} style={{ padding: '2rem' }}>
+        <form onSubmit={formHandler} style={{ padding: '2rem' }}>
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
+            <div onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
               <h2>Personnel Information</h2>
               <i className="fas fa-angle-double-down fa-2x" />
-            </DivToggle>
+            </div>
             <div hidden={stateToggle.personalInfoToggle}>
               {personalInfoInputs}
             </div>
           </fieldset>
 
-          <hr />
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'familyInfoToggle')}>
+            <div onClick={toggleHandler.bind(this, 'familyInfoToggle')}>
               <h2>Family</h2> <i className="fas fa-angle-double-down fa-2x" />
-            </DivToggle>
+            </div>
             <div hidden={stateToggle.familyInfoToggle}>{familyInfoInputs}</div>
           </fieldset>
 
-          <hr />
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'guarantorToggle')}>
+            <div onClick={toggleHandler.bind(this, 'guarantorToggle')}>
               <h2>Guarantor</h2>{' '}
               <i className="fas fa-angle-double-down fa-2x" />
-            </DivToggle>
+            </div>
             <div hidden={stateToggle.guarantorToggle}>{guarantorInputs}</div>
           </fieldset>
-          <hr />
 
           <fieldset>
-            <DivToggle onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
+            <div onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
               <h2>Farm Information</h2>{' '}
               <i className="fas fa-angle-double-down fa-2x" />
-            </DivToggle>
+            </div>
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
 
-          <Button displayName="Add Farmer" type="submit" />
+          <button type="submit">
+            Add Farmer
+          </button>
         </form>
       </section>
     </div>

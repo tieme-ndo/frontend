@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from  "./Input.module.css";
+
 const Input = props => {
   const {
     type,
@@ -20,7 +20,6 @@ const Input = props => {
       inputElement = (
         <input
           type={type}
-          className={classes.GeneralStyle}
           name={name}
           value={value}
           onChange={(e)=>changeHandler(e, data)}
@@ -48,7 +47,7 @@ const Input = props => {
       break
     case 'select':
       inputElement = (
-        <select value={value} onChange={(e)=>changeHandler(e, data)} name={name} className={classes.selectStyle}>
+        <select value={value} onChange={(e)=>changeHandler(e, data)} name={name}>
           {elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
