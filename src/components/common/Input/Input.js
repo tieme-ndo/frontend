@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Input as SemanticInput, Dropdown, Form, Container, Checkbox } from 'semantic-ui-react'
 const Input = props => {
   const {
     type,
@@ -12,59 +12,62 @@ const Input = props => {
     checked,
     selected,
     data,
+    placeholder,
+    elementConfigObj
   } = props;
   
   let inputElement = null
   switch (elementType) {
     case 'input':
       inputElement = (
-        <input
+        <SemanticInput
           type={type}
           name={name}
           value={value}
-          onChange={(e)=>changeHandler(e, data)}
+          onChange={e => changeHandler(e, data, type)}
           checked={checked}
         />
-      )
+      );
       break
     case 'checkbox':
       inputElement = (
         <>
-          {elementConfig.options.map(option => (
-            <label key={option} style={{padding: '10px'}}>
-              {option}
-              <input
-                type={type}
+          {elementConfig.options.map((option, index) => (
+              <Checkbox
+                key={index}
                 name={name}
+                type={type}
+                label={<label>{option}</label>}
                 value={option}
-                onChange={(e)=>changeHandler(e, data)}
+                onChange={e => changeHandler(e, data, type)}
                 checked={selected.indexOf(option) > -1}
               />
-            </label>
           ))}
         </>
-      )
+      );
       break
     case 'select':
       inputElement = (
-        <select value={value} onChange={(e)=>changeHandler(e, data)} name={name}>
-          {elementConfig.options.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.displayValue}
-            </option>
-          ))}
-        </select>
-      )
+        <Dropdown
+          selection
+          placeholder={placeholder}
+          onChange={e => changeHandler(e, data, elementType, elementConfigObj)}
+          options={elementConfig.options}
+          data-name={name}
+          value={value}
+        />
+      );
       break
     default:
   }
   return (
-    <div>
-        <label htmlFor="" style={{display:'block'}}>
-      {labelName}
-    </label>
+    <Container fluid>
+        <label>
+          {labelName}
+        </label>
+        <br/>
          {inputElement}
-    </div>
+    </Container>
   
   )
 }

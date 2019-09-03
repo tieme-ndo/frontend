@@ -1,7 +1,5 @@
 /** @format */
 
-// Convert functionality from toggle content to show tab content
-
 import React, { useState, useEffect } from 'react';
 import Input from '../../common/Input/Input';
 import {
@@ -10,8 +8,6 @@ import {
   guarantor,
   farmInfo
 } from '../../common/Input/addFarmerData';
-import Button from '../../common/Button/StyledButton';
-import styled from 'styled-components';
 import axios from 'axios';
 import { pathObj } from '../../../utils/generalVariables';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
@@ -40,8 +36,28 @@ const AddFarmer = () => {
     farmInfoToggle: true
   });
 
-  const onChangeHandler = (e, data) => {
-    const { name, value, type } = e.target;
+  const onChangeHandler = (e, data, elementType, elementConfigObj) => {
+    let name, value, type;
+
+    if (elementType === 'checkbox') {
+      // This is for the checkboxes to work as Semantic UI uses the :before pseudoelement
+      // which causes the event target to be the checkbox's label instead of the checkbox element
+      name = e.target.previousElementSibling.name;
+      value = e.target.previousElementSibling.value;
+      type = e.target.previousElementSibling.type;
+    } else if (elementType === 'select') {
+      // This is for the dropdowns to work as Semantic UI uses divs
+      // which do not have appropriate name, value, and type properties
+      name = elementConfigObj.name;
+      value = e.target.textContent;
+      type = elementConfigObj.elementType;
+    } else {
+      // For all other input types
+      name = e.target.name;
+      value = e.target.value;
+      type = e.target.type;
+    }  
+
     const newData = { ...state[data] };
     const newEntry = { ...newData[name] };
     if (type === 'checkbox') {
@@ -93,7 +109,7 @@ const AddFarmer = () => {
         return;
       });
   };
-  const inputCreator = (data, index) => {
+  const inputCreator = (data, tabName) => {
     const formElementsArray = [];
     for (let key in data) {
       formElementsArray.push({
@@ -101,11 +117,13 @@ const AddFarmer = () => {
         config: data[key]
       });
     }
-    let form = formElementsArray.map(formElement => (
+    let form = formElementsArray.map((formElement, idx) => (
       <Input
-        key={formElement.config.name}
+        key={idx}
+        elementConfigObj={formElement.configObj}
         {...formElement.config}
-        data={index}
+        elementConfigObj={formElement.config}
+        data={tabName}
         changeHandler={onChangeHandler}
       />
     ));
@@ -121,7 +139,6 @@ const AddFarmer = () => {
     <div>
       <section>
         <hr />
-
         <form onSubmit={formHandler} style={{ padding: '2rem' }}>
           <fieldset>
             <div onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
