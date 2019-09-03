@@ -6,7 +6,7 @@ import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const PageHeader = () => {
   return (
-    <Menu style={{ borderRadius: '0', margin: '0' }}>
+    <Menu style={{ borderRadius: '0', margin: '0', marginBottom: '30px' }}>
       <Container>
         <Menu.Item>
           <Image style={{ width: '55px' }} src={logo} alt="tiemendo logo" />

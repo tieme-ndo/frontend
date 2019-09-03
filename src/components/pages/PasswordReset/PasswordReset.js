@@ -1,6 +1,8 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 
+import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
 
 const PasswordReset = () => {
@@ -16,9 +18,34 @@ const PasswordReset = () => {
     updateState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    updateState(prevState => {
+      return {
+        ...prevState,
+        resetting: true
+      };
+    });
 
-  // const { errors, isValid } = await validateLoginForm(credential);
+    const { oldPassword, newPassword, confirmNewPassword } = state;
+
+    const { errors, isValid } = await validateResetPassword({
+      oldPassword,
+      newPassword,
+      confirmNewPassword
+    });
+
+    if (!isValid) {
+      toast.error('All fields are required', {
+        position: toast.POSITION.TOP_CENTER
+      });
+
+      return updateState(prevState => ({
+        ...prevState,
+        errors,
+        resetting: false
+      }));
+    }
+  };
 
   return (
     <PasswordResetForm

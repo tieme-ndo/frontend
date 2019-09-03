@@ -2,18 +2,15 @@ import * as yup from 'yup';
 
 // reset password schema
 const resetPasswordSchema = yup.object().shape({
-  oldPassword: yup
-    .string()
-    .min(6)
-    .required(),
+  oldPassword: yup.string().required('Old Password is required'),
   newPassword: yup
     .string()
-    .min(6)
-    .required(),
+    .required('New Password is required')
+    .min(6),
   confirmNewPassword: yup
     .string()
-    .min(6)
-    .required()
+    .oneOf([yup.ref('newPassword'), null], "Passwords don't match")
+    .required('Confirm Password is required')
 });
 
 const errorFormatter = err => {
