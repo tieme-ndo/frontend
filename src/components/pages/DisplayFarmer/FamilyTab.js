@@ -16,6 +16,9 @@ export default function FamilyTab(props) {
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
           {data.family_size}
         </Header>
+
+      </Grid.Column>
+      <Grid.Column>
         <Header.Subheader>Number of Dependant</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
           {data.number_of_dependant}
