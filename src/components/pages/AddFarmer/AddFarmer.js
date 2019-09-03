@@ -38,8 +38,8 @@ const AddFarmer = () => {
     farmInfoToggle: true
   });
 
-  const onChangeHandler = (e, data) => {
-    const { name, value, type } = e.target;
+  const onChangeHandler = async (e, data) => {
+    const { name, value, type, files } = e.target;
     const newData = { ...state[data] };
     const newEntry = { ...newData[name] };
     if (type === 'checkbox') {
@@ -48,6 +48,18 @@ const AddFarmer = () => {
       } else {
         newEntry.selected = [...newEntry.selected, value];
       }
+    } else if (type === 'file') {
+      const imageFile = new FormData();
+      imageFile.append('file', files[0]);
+      imageFile.append(
+        'upload_preset',
+        process.env.REACT_APP_CLOUDINARY_PRESET
+      );
+      const imageUrl = await axios
+        .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
+        .then(data => data.data.secure_url)
+        .catch(err => err);
+      newEntry.imageUrl = imageUrl;
     } else {
       newEntry.value = value;
     }
@@ -69,11 +81,14 @@ const AddFarmer = () => {
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
           formData[key][key2] = newState[key][key2].selected;
+        } else if (newState[key][key2].imageUrl) {
+          formData[key][key2] = newState[key][key2].imageUrl;
         } else {
           formData[key][key2] = newState[key][key2].value;
         }
       }
     }
+
     axios
       .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
