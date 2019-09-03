@@ -1,10 +1,11 @@
-import React from 'react';
-import PageHeader from '../../common/PageHeader/PageHeader';
-import StyledTable from '../../common/Table/Table';
-import { Header, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import StyledTable from "../../common/Table/Table";
+import { Header, Button } from "semantic-ui-react";
+import withRestrictedAccess from "../../hoc/withRestrictedAccess";
+import DashboardHeader from "./DashboardHeader";
 
 const Dashboard = ({ farmers, rawFarmers, history }) => {
   const [data, setData] = React.useState([]);
@@ -13,31 +14,31 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: ' ',
+        Header: " ",
         columns: [
           {
-            Header: 'Name',
-            accessor: 'name'
+            Header: "Name",
+            accessor: "name"
           },
           {
-            Header: 'Community Name',
-            accessor: 'communityName'
+            Header: "Community Name",
+            accessor: "communityName"
           },
           {
-            Header: 'Farm Location',
-            accessor: 'farmLocation'
+            Header: "Farm Location",
+            accessor: "farmLocation"
           },
           {
-            Header: 'Phone Number',
-            accessor: 'phoneNumber'
+            Header: "Phone Number",
+            accessor: "phoneNumber"
           },
           {
-            Header: 'Guarantor Name',
-            accessor: 'guarantorName'
+            Header: "Guarantor Name",
+            accessor: "guarantorName"
           },
           {
-            Header: 'Guarantor Phone Number',
-            accessor: 'guarantorPhoneNumber'
+            Header: "Guarantor Phone Number",
+            accessor: "guarantorPhoneNumber"
           }
         ]
       }
@@ -56,16 +57,14 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
 
   return (
     <>
-      <PageHeader
+      <DashboardHeader
         leftElement={Title}
         rightElement={
-          
-            <Link style={{ color: 'white' }} to="/addfarmer">
-              <Button color="teal" fixed="right">
+          <Link style={{ color: "white" }} to="/addfarmer">
+            <Button color="teal" fixed="right">
               Add Farmer
-              </Button>
-            </Link>
-          
+            </Button>
+          </Link>
         }
       />
       <StyledTable

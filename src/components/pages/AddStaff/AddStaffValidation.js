@@ -6,7 +6,6 @@ const addStaffSchema = yup.object().shape({
     .min(3)
     .max(20)
     .trim()
-    .matches(/^\S+$/)
     .required(),
   password: yup
     .string()
@@ -30,7 +29,7 @@ const errorFormatter = err => {
 };
 
 // validate against schema
-const validatecreateAccountForm = credential => {
+const validateAddStaffForm = credential => {
   return addStaffSchema
     .validate(credential, { abortEarly: false })
     .then(values => {
@@ -40,4 +39,4 @@ const validatecreateAccountForm = credential => {
     .catch(err => errorFormatter(err));
 };
 
-export default validatecreateAccountForm;
+export default validateAddStaffForm;
