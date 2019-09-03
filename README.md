@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/tieme-ndo/frontend.svg?branch=master)](https://travis-ci.org/tieme-ndo/frontend)
+[![Coverage Status](https://coveralls.io/repos/github/tieme-ndo/frontend/badge.svg?branch=master)](https://coveralls.io/github/tieme-ndo/frontend?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/767299a260b0abc79d0f/maintainability)](https://codeclimate.com/github/tieme-ndo/frontend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/767299a260b0abc79d0f/test_coverage)](https://codeclimate.com/github/tieme-ndo/frontend/test_coverage)
+
 # Tieme Ndo
 
 You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/).
