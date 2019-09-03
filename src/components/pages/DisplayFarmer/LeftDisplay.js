@@ -1,8 +1,14 @@
 import React from 'react';
-import { Responsive, Segment, Button, Placeholder, Header } from 'semantic-ui-react';
+import {
+  Responsive,
+  Segment,
+  Button,
+  Placeholder,
+  Header
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const LeftDisplay = ({ farmer, history }) => {
+const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <>
       <Responsive as={Segment}>
@@ -38,7 +44,13 @@ const LeftDisplay = ({ farmer, history }) => {
       >
         Edit Farmer
       </Button>
-      <Button style={{ width: '100%' }} color={'red'}>
+      <Button
+        style={{ width: '100%' }}
+        color={'red'}
+        onClick={() => {
+          needsUpdate(true);
+        }}
+      >
         Remove Farmer
       </Button>
     </>
@@ -47,7 +59,8 @@ const LeftDisplay = ({ farmer, history }) => {
 
 LeftDisplay.propTypes = {
   farmer: PropTypes.object.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  needsUpdate: PropTypes.func
 };
 
 export default LeftDisplay;
