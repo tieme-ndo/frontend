@@ -59,11 +59,13 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
       <PageHeader
         leftElement={Title}
         rightElement={
-          <Button color="teal" fixed="right">
+          
             <Link style={{ color: 'white' }} to="/addfarmer">
+              <Button color="teal" fixed="right"></Button>
               Add Farmer
+              </Button>
             </Link>
-          </Button>
+          
         }
       />
       <StyledTable
