@@ -61,7 +61,7 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
         rightElement={
           
             <Link style={{ color: 'white' }} to="/addfarmer">
-              <Button color="teal" fixed="right"></Button>
+              <Button color="teal" fixed="right">
               Add Farmer
               </Button>
             </Link>
