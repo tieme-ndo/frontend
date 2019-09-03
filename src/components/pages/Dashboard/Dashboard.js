@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardHeader from "./DashboardHeader";
+import DashboardHeader from './DashboardHeader';
 import StyledTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
@@ -14,31 +14,31 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: " ",
+        Header: ' ',
         columns: [
           {
-            Header: "Name",
-            accessor: "name"
+            Header: 'Name',
+            accessor: 'name'
           },
           {
-            Header: "Community Name",
-            accessor: "communityName"
+            Header: 'Community Name',
+            accessor: 'communityName'
           },
           {
-            Header: "Farm Location",
-            accessor: "farmLocation"
+            Header: 'Farm Location',
+            accessor: 'farmLocation'
           },
           {
-            Header: "Phone Number",
-            accessor: "phoneNumber"
+            Header: 'Phone Number',
+            accessor: 'phoneNumber'
           },
           {
-            Header: "Guarantor Name",
-            accessor: "guarantorName"
+            Header: 'Guarantor Name',
+            accessor: 'guarantorName'
           },
           {
-            Header: "Guarantor Phone Number",
-            accessor: "guarantorPhoneNumber"
+            Header: 'Guarantor Phone Number',
+            accessor: 'guarantorPhoneNumber'
           }
         ]
       }
@@ -64,20 +64,24 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
       <DashboardHeader
         leftElement={Title}
         rightElement={
-          <Link style={{ color: "white" }} to="/addfarmer">
+          <Link style={{ color: 'white' }} to="/addfarmer">
             <Button color="teal" fixed="right">
               Add Farmer
             </Button>
           </Link>
         }
       />
-      <StyledTable
-        history={history}
-        columns={columns}
-        getFarmer={getFarmer}
-        data={React.useMemo(() => data, [data])}
-      />
-      {!data.length ? <LoadingIndicator /> : null}
+
+      {data.length ? (
+        <StyledTable
+          history={history}
+          columns={columns}
+          getFarmer={getFarmer}
+          data={data}
+        />
+      ) : (
+        <LoadingIndicator />
+      )}
     </>
   );
 };
