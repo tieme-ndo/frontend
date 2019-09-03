@@ -93,9 +93,10 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     });
 };
 
-export const deleteFarmerHandler = (farmerId, token) => {
+export const deleteFarmerHandler = (farmerId) => {
+  const token = getToken();
   return axios
-    .delete(`${pathObj.deleteFarmerPath}/${farmerId}`, setHeaders(token))
+    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders(token))
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage;
