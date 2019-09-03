@@ -46,7 +46,7 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
-            <Menu>
+            <Menu stackable>
               <Menu.Item
                 name="Personal"
                 active={selected === 'Personal'}
