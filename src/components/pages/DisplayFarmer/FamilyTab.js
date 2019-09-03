@@ -6,21 +6,25 @@ export default function FamilyTab(props) {
   console.log(data);
 
   return (
-    <Grid columns={2}>
+    <Grid columns={2} stackable>
       <Grid.Column>
-        <Header.Subheader>Family Income Per Month</Header.Subheader>
-        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.family_income_per_month}
-        </Header>
         <Header.Subheader>Family Size</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
           {data.family_size}
         </Header>
-        <Header.Subheader>Number of Dependant</Header.Subheader>
+        <Header.Subheader>Family Income Per Month</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.family_income_per_month}
+        </Header>
+      </Grid.Column>
+      <Grid.Column>
+        <Header.Subheader>Number of Dependants</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
           {data.number_of_dependant}
         </Header>
-        <Header.Subheader>Highest Level of Education of Dependants</Header.Subheader>
+        <Header.Subheader>
+          Highest Level of Education of Dependants
+        </Header.Subheader>
         <Header
           size="tiny"
           style={{ marginTop: '0.1rem', marginBottom: '0rem' }}
