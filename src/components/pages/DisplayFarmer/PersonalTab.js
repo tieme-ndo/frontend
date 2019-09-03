@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 
 export default function PersonalTab(props) {
-
   const data = props.farmer.personalInfo;
   console.log(data.minor_source_of_income);
 
@@ -22,22 +21,21 @@ export default function PersonalTab(props) {
           {data.Phone_1}
         </Header>
         <Header.Subheader>Address</Header.Subheader>
-        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.house_name +
-            ' ' +
-            data.house_number +
-            '/n' +
-            data.region +
-            ' ' +
-            data.district +
-            ' ' +
-            data.community_name +
-            '/n Landmark: ' +
-            data.nearest_landmark}
+        <Header
+          size="tiny"
+          style={{ marginTop: '0.1rem', marginBottom: '0rem' }}
+        >
+          {data.house_name + ' ' + data.house_number}
         </Header>
-        <Header.Subheader>Birth data</Header.Subheader>
+        <Header size="tiny" style={{ margin: '0rem' }}>
+          {data.region + ', ' + data.district + ', ' + data.community_name}
+        </Header>
+        <Header size="tiny" style={{ marginTop: '0rem' }}>
+          {' Landmark: ' + data.nearest_landmark}
+        </Header>
+        <Header.Subheader>Birth Data</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.date_of_birth + ", " + data.place_of_birth}
+          {data.date_of_birth + ', ' + data.place_of_birth}
         </Header>
         <Header.Subheader>Occupation</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
@@ -45,7 +43,10 @@ export default function PersonalTab(props) {
         </Header>
         <Header.Subheader>Major Source Of Income</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.major_source_of_income.name + ": " + data.major_source_of_income.amount + " GHC"}
+          {data.major_source_of_income_name +
+            ': ' +
+            data.major_source_of_income_amount +
+            ' GHC'}
         </Header>
       </Grid.Column>
       <Grid.Column>
@@ -62,8 +63,8 @@ export default function PersonalTab(props) {
           {data.Phone_2}
         </Header>
         <Header.Subheader>Identification</Header.Subheader>
-        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.id_type + ": " + data.id_number}
+        <Header size="tiny" style={{ marginTop: '0.1rem', marginBottom: '3.5rem' }}>
+          {data.id_type + ': ' + data.id_number}
         </Header>
         <Header.Subheader>Education</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
@@ -75,7 +76,10 @@ export default function PersonalTab(props) {
         </Header>
         <Header.Subheader>Minor Source Of Income</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.minor_source_of_income.name + ": " + data.minor_source_of_income.amount + " GHC"}
+          {data.minor_source_of_income_name +
+            ': ' +
+            data.minor_source_of_income_amount +
+            ' GHC'}
         </Header>
       </Grid.Column>
     </Grid>
