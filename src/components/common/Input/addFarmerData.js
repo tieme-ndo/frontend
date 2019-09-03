@@ -1,29 +1,30 @@
 export const personalInfo = {
   title: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'title',
     labelName: 'Title',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Miss',
           value: 'Miss',
-          displayValue: 'Miss',
+          text: 'Miss',
         },
         {
+          key: 'Mrs',
           value: 'Mrs',
-          displayValue: 'Mrs',
+          text: 'Mrs',
         },
         {
+          key: 'Mr',
           value: 'Mr',
-          displayValue: 'Mr',
+          text: 'Mr',
         },
         {
+          key: 'Chief',
           value: 'Chief',
-          displayValue: 'Chief',
+          text: 'Chief',
         },
       ],
     },
@@ -59,29 +60,30 @@ export const personalInfo = {
   },
   marital_status: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'marital_status',
     labelName: 'Marital Status',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Single',
           value: 'Single',
-          displayValue: 'Single',
+          text: 'Single',
         },
         {
+          key: 'Married',
           value: 'Married',
-          displayValue: 'Married',
+          text: 'Married',
         },
         {
+          key: 'Widowed',
           value: 'Widowed',
-          displayValue: 'Widowed',
+          text: 'Widowed',
         },
         {
+          key: 'Divorced',
           value: 'Divorced',
-          displayValue: 'Divorced',
+          text: 'Divorced',
         },
       ],
     },
@@ -90,25 +92,30 @@ export const personalInfo = {
   },
   gender: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'gender',
     labelName: 'Gender',
     elementConfig: {
       options: [
         {
+          key: 3,
           value: '',
-          displayValue: 'Please select',
+          text: 'Please select',
         },
         {
+          key: 'Male',
           value: 'Male',
-          displayValue: 'Male',
+          text: 'Male',
         },
         {
+          key: 'Female',
           value: 'Female',
-          displayValue: 'Female',
+          text: 'Female',
         },
         {
+          key: 'Others',
           value: 'Others',
-          displayValue: 'Others',
+          text: 'Others',
         },
       ],
     },
@@ -135,29 +142,30 @@ export const personalInfo = {
   },
   id_type: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'id_type',
     labelName: 'Id Type',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Voters Card',
           value: 'Voters Card',
-          displayValue: 'Voters Card',
+          text: 'Voters Card',
         },
         {
+          key: 'NHIS',
           value: 'NHIS',
-          displayValue: 'NHIS',
+          text: 'NHIS',
         },
         {
+          key: 'National ID',
           value: 'National ID',
-          displayValue: 'National ID',
+          text: 'National ID',
         },
         {
+          key: 'Others',
           value: 'Others',
-          displayValue: 'Others',
+          text: 'Others',
         },
       ],
     },
@@ -247,33 +255,35 @@ export const personalInfo = {
   },
   education_level: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'education_level',
     labelName: 'Education Level',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Tertiary',
           value: 'Tertiary',
-          displayValue: 'Tertiary',
+          text: 'Tertiary',
         },
         {
+          key: 'SHS',
           value: 'SHS',
-          displayValue: 'SHS',
+          text: 'SHS',
         },
         {
+          key: 'JHS',
           value: 'JHS',
-          displayValue: 'JHS',
+          text: 'JHS',
         },
         {
+          key: 'Primary',
           value: 'Primary',
-          displayValue: 'Primary',
+          text: 'Primary',
         },
         {
+          key: 'Not Educated',
           value: 'Not Educated',
-          displayValue: 'Not Educated',
+          text: 'Not Educated',
         },
       ],
     },
@@ -291,25 +301,25 @@ export const personalInfo = {
   },
   expected_income_per_month: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'expected_income_per_month',
     labelName: 'Expected Income Per Month',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Less than GHC 500',
           value: 'Less than GHC 500',
-          displayValue: 'Less than GHC 500',
+          text: 'Less than GHC 500',
         },
         {
+          key: '501 to GHC 1,000',
           value: '501 to GHC 1,000',
-          displayValue: '501 to GHC 1,000',
+          text: '501 to GHC 1,000',
         },
         {
+          key: 'More than GHC 1,000',
           value: 'More than GHC 1,000',
-          displayValue: 'More than GHC 1,000',
+          text: 'More than GHC 1,000',
         },
       ],
     },
@@ -375,33 +385,35 @@ export const familyInfo = {
   },
   highest_level_of_dependent: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'highest_level_of_dependent',
     labelName: 'Highest Level Of Education Level',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Tertiary',
           value: 'Tertiary',
-          displayValue: 'Tertiary',
+          text: 'Tertiary',
         },
         {
+          key: 'SHS',
           value: 'SHS',
-          displayValue: 'SHS',
+          text: 'SHS',
         },
         {
+          key: 'JHS',
           value: 'JHS',
-          displayValue: 'JHS',
+          text: 'JHS',
         },
         {
+          key: 'Primary',
           value: 'Primary',
-          displayValue: 'Primary',
+          text: 'Primary',
         },
         {
+          key: 'Not Educated',
           value: 'Not Educated',
-          displayValue: 'Not Educated',
+          text: 'Not Educated',
         },
       ],
     },
@@ -410,25 +422,25 @@ export const familyInfo = {
   },
   family_income_per_month: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'family_income_per_month',
     labelName: 'Family Income Per Month',
     elementConfig: {
       options: [
         {
-          value: '',
-          displayValue: 'Please select',
-        },
-        {
+          key: 'Less than GHC 500',
           value: 'Less than GHC 500',
-          displayValue: 'Less than GHC 500',
+          text: 'Less than GHC 500',
         },
         {
+          key: '501 to GHC 1,000',
           value: '501 to GHC 1,000',
-          displayValue: '501 to GHC 1,000',
+          text: '501 to GHC 1,000',
         },
         {
+          key: 'More than GHC 1,000',
           value: 'More than GHC 1,000',
-          displayValue: 'More than GHC 1,000',
+          text: 'More than GHC 1,000',
         },
       ],
     },
@@ -440,29 +452,35 @@ export const familyInfo = {
 export const guarantor = {
   grt_title: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'grt_title',
     labelName: 'Title',
     elementConfig: {
       options: [
         {
+          key: 8,
           value: '',
-          displayValue: 'Please select',
+          text: 'Please select',
         },
         {
+          key: 'Miss',
           value: 'Miss',
-          displayValue: 'Miss',
+          text: 'Miss',
         },
         {
+          key: 'Mrs',
           value: 'Mrs',
-          displayValue: 'Mrs',
+          text: 'Mrs',
         },
         {
+          key: 'Mr',
           value: 'Mr',
-          displayValue: 'Mr',
+          text: 'Mr',
         },
         {
+          key: 'Chief',
           value: 'Chief',
-          displayValue: 'Chief',
+          text: 'Chief',
         },
       ],
     },
@@ -489,25 +507,30 @@ export const guarantor = {
   },
   grt_gender: {
     elementType: 'select',
+    placeholder: 'Please Select',
     name: 'grt_gender',
     labelName: 'Gender',
     elementConfig: {
       options: [
         {
+          key: 9,
           value: '',
-          displayValue: 'Please select',
+          text: 'Please select',
         },
         {
+          key: 'Male',
           value: 'Male',
-          displayValue: 'Male',
+          text: 'Male',
         },
         {
+          key: 'Female',
           value: 'Female',
-          displayValue: 'Female',
+          text: 'Female',
         },
         {
+          key: 'Others',
           value: 'Others',
-          displayValue: 'Others',
+          text: 'Others',
         },
       ],
     },
@@ -608,7 +631,7 @@ export const farmInfo = {
     },
     selected:[],
     value: '',
-    checked: '',
+    checked: false,
     valid: false,
     touched: false,
   },
@@ -631,7 +654,7 @@ export const farmInfo = {
     },
     selected:[],
     value: '',
-    checked: '',
+    checked: false,
     valid: false,
     touched: false,
   },
