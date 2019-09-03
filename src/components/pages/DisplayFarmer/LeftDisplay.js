@@ -6,6 +6,8 @@ import {
   Placeholder,
   Header
 } from 'semantic-ui-react';
+import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
+import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
 
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
@@ -44,15 +46,19 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
       >
         Edit Farmer
       </Button>
-      <Button
-        style={{ width: '100%' }}
-        color={'red'}
-        onClick={() => {
+      <ConfirmationModal
+        TriggerElement={Button}
+        triggerText={'Remove Farmer'}
+        triggerStyle={{ width: '100%' }}
+        triggerColor={'red'}
+        action={() => {
+          deleteFarmerHandler(farmer._id);
           needsUpdate(true);
+          history.push('/');
         }}
-      >
-        Remove Farmer
-      </Button>
+        message={"This can't be undone"}
+        title={'Do you want to delete that farmer?'}
+      />
     </>
   );
 };
