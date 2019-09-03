@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '../../common/PageHeader/PageHeader';
 import StyledTable from '../../common/Table/Table';
+import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
@@ -46,7 +47,11 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
   );
 
   React.useEffect(() => {
-    setData(farmers);
+    if (farmers) {
+      setData(farmers);
+    } else {
+      setData([]);
+    }
   }, [farmers]);
 
   const getFarmer = id => {
@@ -59,13 +64,11 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
       <PageHeader
         leftElement={Title}
         rightElement={
-          
-            <Link style={{ color: 'white' }} to="/addfarmer">
-              <Button color="teal" fixed="right">
+          <Link style={{ color: 'white' }} to="/addfarmer">
+            <Button color="teal" fixed="right">
               Add Farmer
-              </Button>
-            </Link>
-          
+            </Button>
+          </Link>
         }
       />
       <StyledTable
@@ -74,13 +77,14 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
         getFarmer={getFarmer}
         data={React.useMemo(() => data, [data])}
       />
+      {!data.length ? <LoadingIndicator /> : null}
     </>
   );
 };
 
 Dashboard.propTypes = {
-  farmers: PropTypes.array.isRequired,
-  rawFarmers: PropTypes.array.isRequired,
+  farmers: PropTypes.array,
+  rawFarmers: PropTypes.array,
   history: PropTypes.object
 };
 

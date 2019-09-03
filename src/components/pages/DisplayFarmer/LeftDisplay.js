@@ -52,9 +52,10 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
         triggerStyle={{ width: '100%' }}
         triggerColor={'red'}
         action={() => {
-          deleteFarmerHandler(farmer._id);
-          needsUpdate(true);
-          history.push('/');
+          deleteFarmerHandler(farmer._id).then(() => {
+            needsUpdate(true);
+            history.push('/');
+          });
         }}
         message={"This can't be undone"}
         title={'Do you want to delete that farmer?'}
