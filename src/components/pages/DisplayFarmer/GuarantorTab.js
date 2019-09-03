@@ -3,7 +3,6 @@ import { Grid, Header } from 'semantic-ui-react';
 
 export default function GuarantorTab(props) {
   const data = props.farmer.guarantor;
-  console.log(data);
 
   return (
     <Grid columns={2} stackable>
