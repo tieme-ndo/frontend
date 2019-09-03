@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 /** @format */
 
 import React, { useState } from 'react';
@@ -11,7 +12,8 @@ import {
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
 import DisplayTabTemplate from './DisplayTabTemplate.js';
-import PersonalTab from './PersonalTab.js'
+import PersonalTab from './PersonalTab.js';
+import FamilyTab from './FamilyTab.js';
 
 const DisplayFarmer = ({ history, location, needsUpdate }) => {
   const farmer = location.state.farmer;
@@ -25,15 +27,15 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
     console.log(farmer);
     switch (selected) {
       case 'Personal':
-        return <PersonalTab farmer={farmer}/>;
+        return <PersonalTab farmer={farmer} />;
       case 'Family':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <FamilyTab farmer={farmer} />;
       case 'Guarantor':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <DisplayTabTemplate farmer={farmer} />;
       case 'Farm':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <DisplayTabTemplate farmer={farmer} />;
       default:
-        return ;
+        return;
     }
   }
 
