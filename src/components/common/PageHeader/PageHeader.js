@@ -1,28 +1,36 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { logout } from '../../../utils/handlers/authenticationHandlers';
-import logo from '../../../assets/images/tiemendo_logo.jpg';
-import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
+import logo from "../../../assets/images/tiemendo_logo.jpg";
+import { Container, Dropdown, Image, Menu } from "semantic-ui-react";
 
-const PageHeader = props => {
+const PageHeader = ({ logOut, user }) => {
   return (
-    <Menu style={{ borderRadius: '0', margin: '0' }}>
+    <Menu style={{ borderRadius: "0", margin: "0" }}>
       <Container>
         <Menu.Item>
-          <Image style={{ width: '55px' }} src={logo} alt="tiemendo logo" />
+          <Image style={{ width: "55px" }} src={logo} alt="tiemendo logo" />
         </Menu.Item>
 
         <Menu.Menu position="right">
           <Dropdown text="settings" pointing className="link item">
             <Dropdown.Menu>
-              <Dropdown.Item>
-                <NavLink to="/accounts/new">Create new account</NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <NavLink to="/reset-password">Change password</NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
+              <Link to="/">
+                <Dropdown.Item>Dashboard</Dropdown.Item>
+              </Link>
+              {user && user.isAdmin ? (
+                <Link to="/accounts/new">
+                  <Dropdown.Item>Create new account</Dropdown.Item>
+                </Link>
+              ) : null}
+
+              <Link to="/reset-password">
+                <Dropdown.Item>Change password</Dropdown.Item>
+              </Link>
+
+              <Link to="/">
+                <Dropdown.Item onClick={logOut}>Logout</Dropdown.Item>
+              </Link>
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
