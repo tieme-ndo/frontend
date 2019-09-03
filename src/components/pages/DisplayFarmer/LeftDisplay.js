@@ -18,8 +18,8 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
           <Placeholder.Image />
         </Placeholder>
         <Header size="medium">
-          {farmer.personalInfo.title} {farmer.personalInfo.first_name}{' '}
-          {farmer.personalInfo.middle_name} {farmer.personalInfo.surname}
+          {farmer.personalInfo.first_name} {farmer.personalInfo.middle_name}{' '}
+          {farmer.personalInfo.surname}
         </Header>
         <Header.Subheader>Phone</Header.Subheader>
         <Header
