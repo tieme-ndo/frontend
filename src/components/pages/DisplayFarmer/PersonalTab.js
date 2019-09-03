@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 
 export default function PersonalTab(props) {
-
   const data = props.farmer.personalInfo;
 
   return (
@@ -35,7 +34,9 @@ export default function PersonalTab(props) {
         </Header>
         <Header.Subheader>Birth Data</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          {data.date_of_birth + ', ' + data.place_of_birth}
+          {new Date(data.date_of_birth).toLocaleDateString() +
+            ' in ' +
+            data.place_of_birth}
         </Header>
         <Header.Subheader>Occupation</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
@@ -63,7 +64,10 @@ export default function PersonalTab(props) {
           {data.Phone_2}
         </Header>
         <Header.Subheader>Identification</Header.Subheader>
-        <Header size="tiny" style={{ marginTop: '0.1rem', marginBottom: '3.571425rem' }}>
+        <Header
+          size="tiny"
+          style={{ marginTop: '0.1rem', marginBottom: '3.571425rem' }}
+        >
           {data.id_type + ': ' + data.id_number}
         </Header>
         <Header.Subheader>Education</Header.Subheader>
