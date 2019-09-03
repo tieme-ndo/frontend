@@ -1,7 +1,6 @@
-import React from 'react';
-import uuid from 'uuid';
+import React from "react";
+import uuid from "uuid";
 
-import PageHeader from '../../common/PageHeader/PageHeader';
 import {
   Container,
   Button,
@@ -11,18 +10,16 @@ import {
   Form,
   Checkbox,
   Message
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
 
 const AddStaff = props => {
   const { state, handleSubmit, handleChange, checkboxChange } = props;
   return (
     <>
-      <PageHeader />
-
       <Container>
         <Grid
           textAlign="center"
-          style={{ height: '85vh' }}
+          style={{ height: "85vh" }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 330 }}>
@@ -40,7 +37,7 @@ const AddStaff = props => {
 
             <Header
               as="h3"
-              style={{ marginBottom: '30px', textAlign: 'center' }}
+              style={{ marginBottom: "30px", textAlign: "center" }}
             >
               Create New Account
             </Header>
