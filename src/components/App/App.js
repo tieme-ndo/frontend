@@ -107,6 +107,7 @@ function App() {
             component={withRestrictedAccess(AddFarmer)}
           />
           <Route
+            exact
             path="/farmers/:id"
             render={props => (
               <DisplayFarmer {...props} needsUpdate={setNeedsUpdate} />
