@@ -5,8 +5,9 @@ import Button from '../../common/Button/StyledButton';
 import styled from 'styled-components';
 import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
-const UpdateFarmer = ({ location }) => {
+const UpdateFarmer = ({ location, appStateShouldUpdate }) => {
   const hydrateFormInputValues = () => {
     const farmerData = location.state.farmer;
     let hydratedFormInputs = {};
@@ -78,8 +79,11 @@ const UpdateFarmer = ({ location }) => {
       }
     }
 
-    const token = getToken()
-    updateFarmerHandler(formData, location.state.farmer._id, token);
+    const token = getToken();
+    updateFarmerHandler(formData, location.state.farmer._id, token)
+      .then(response => {
+        appStateShouldUpdate(true);
+      });
   }
   const inputCreator = (data, index) => {
     const formElementsArray = []
@@ -169,4 +173,4 @@ const UpdateFarmer = ({ location }) => {
   )
 }
 
-export default UpdateFarmer;
+export default withRestrictedAccess(UpdateFarmer);

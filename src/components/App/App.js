@@ -101,7 +101,12 @@ function App() {
             path="/login/"
             render={props => <Login {...props} setUser={setUser} />}
           />
-          <Route path="/farmers/:id/edit" component={withRestrictedAccess(UpdateFarmer)} />
+          <Route
+            path="/farmers/:id/edit"
+            render={props => (
+              <UpdateFarmer {...props} appStateShouldUpdate={setNeedsUpdate} />
+            )}
+          />
           <Route
             path="/addfarmer"
             component={withRestrictedAccess(AddFarmer)}
