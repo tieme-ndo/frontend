@@ -6,7 +6,7 @@ import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const PageHeader = ({ logOut, user }) => {
   return (
-    <Menu style={{ borderRadius: '0', margin: '0' }}>
+    <Menu style={{ borderRadius: '0', margin: '0 0 2rem' }}>
       <Container>
         <Link to="/">
           <Menu.Item>
