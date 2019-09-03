@@ -6,7 +6,6 @@ import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
-import DisplayTabTemplate from './DisplayTabTemplate.js';
 import PersonalTab from './PersonalTab.js';
 import FamilyTab from './FamilyTab.js';
 import FarmTab from './FarmTab';
