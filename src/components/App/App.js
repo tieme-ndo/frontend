@@ -20,23 +20,36 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [user, setUser] = useState(undefined);
   const [farmers, setFarmers] = useState({ data: [], cleanedData: [] });
+  const [needsUpdate, setNeedsUpdate] = useState(true);
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
     if (!user) {
       const retrievedUser = getUser();
+      setNeedsUpdate(true);
       setUser(retrievedUser);
     }
-
-    getFarmersHandler().then(retrievedFarmers => {
-      setFarmers({
-        data: retrievedFarmers,
-        cleanedData: cleanFarmersData(retrievedFarmers)
-      });
-    }).catch(error => {
-      console.error(error);
-    });
   }, [user]);
+
+  useEffect(() => {
+    if (user && needsUpdate) {
+      updateFarmers();
+      setNeedsUpdate(false);
+    }
+  }, [user, needsUpdate]);
+
+  const updateFarmers = () => {
+    getFarmersHandler()
+      .then(retrievedFarmers => {
+        setFarmers({
+          data: retrievedFarmers,
+          cleanedData: cleanFarmersData(retrievedFarmers)
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
   const logOut = () => {
     setUser(false);
@@ -87,8 +100,14 @@ function App() {
             path="/login/"
             render={props => <Login {...props} setUser={setUser} />}
           />
-          <Route path="/addfarmer" component={withRestrictedAccess(AddFarmer)} />
-          <Route path="/farmers/:id" component={withRestrictedAccess(DisplayFarmer)} />
+          <Route
+            path="/addfarmer"
+            component={withRestrictedAccess(AddFarmer)}
+          />
+          <Route
+            path="/farmers/:id"
+            component={withRestrictedAccess(DisplayFarmer)}
+          />
           <ToastContainer position="top-right" />
         </Container>
       </div>
