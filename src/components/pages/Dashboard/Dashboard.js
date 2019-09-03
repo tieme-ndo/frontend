@@ -1,90 +1,74 @@
-/** @format */
-
 import React from 'react';
+import styled from 'styled-components';
+import { Header, Container, Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 import PageHeader from '../../common/PageHeader/PageHeader';
-import Table from '../../common/Table/Table';
+import StyledTable from '../../common/Table/Table';
+import tableColumLabels from './tableColumLabels';
+import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
+import parseObjectContentToString from './parseObjectContentToString';
 
 const Dashboard = () => {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: ' ',
-        columns: [
-          {
-            Header: 'Name',
-            accessor: 'name'
-          },
-          {
-            Header: 'Sex',
-            accessor: 'sex'
-          },
-          {
-            Header: 'Phone Number',
-            accessor: 'phoneNumber'
-          },
-          {
-            Header: 'Acres',
-            accessor: 'acres'
-          },
-          {
-            Header: 'Crops',
-            accessor: 'crops'
-          },
-          {
-            Header: ' ',
-            accessor: 'more'
-          }
-        ]
-      }
-    ],
-    []
-  );
+  const [data, setData] = React.useState([]);
 
-  // To change with data coming from API
-  const data = React.useMemo(() => makeData(20), []);
+  const columns = React.useMemo(tableColumLabels, []);
+
+  React.useEffect(() => {
+    let isSubscribed = true;
+
+    getFarmersHandler().then(farmers => {
+      if (isSubscribed) {
+        setData(parseObjectContentToString(farmers));
+      }
+    });
+    return () => (isSubscribed = false);
+  }, []);
 
   return (
     <>
       <PageHeader />
-      <Table columns={columns} data={data} />
+
+      <Menu secondary>
+        <Container>
+          <Menu.Item>
+            <Header as="h1">All Farmers</Header>
+          </Menu.Item>
+
+          <Menu.Menu position="right">
+            <AddFarmerLink to="/addfarmer">Add farmer</AddFarmerLink>
+          </Menu.Menu>
+        </Container>
+      </Menu>
+
+      <Container>
+        <StyledTable
+          columns={columns}
+          data={React.useMemo(() => data, [data])}
+        />
+      </Container>
     </>
   );
 };
 
-//// TO DELETE, THIS IS TO MOCK DATA
-
-const range = len => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-const newFarmer = () => {
-  return {
-    name: 'David Test',
-    sex: 'M',
-    phoneNumber: '+3348484884',
-    address: '17 Tractor Road, Arcadia',
-    acres: 5.3,
-    crops: ['Wheat', 'Corn'].join(', '),
-    more: <button>More</button>
-  };
-};
-
-function makeData(...lens) {
-  const makeDataLevel = (depth = 0) => {
-    const len = lens[depth];
-    return range(len).map(() => {
-      return {
-        ...newFarmer(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined
-      };
-    });
-  };
-
-  return makeDataLevel();
-}
-
 export default Dashboard;
+
+const AddFarmerLink = styled(Link)`
+  color: #fff;
+  background-color: #00b5ad;
+  display: block;
+  border-radius: 5px;
+  transition: color 0.2s ease;
+  line-height: 40px;
+  height: 40px;
+  width: 120px;
+  text-align: center;
+  font-size: 1.2rem;
+  box-shadow: 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+
+  &:hover {
+    background-color: #009c95;
+    color: #fff;
+    text-shadow: none;
+  }
+`;

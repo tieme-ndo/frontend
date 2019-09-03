@@ -1,8 +1,6 @@
 import * as yup from 'yup';
 
-
-// login schema
-const loginSchema = yup.object().shape({
+const addStaffSchema = yup.object().shape({
   username: yup
     .string()
     .min(3)
@@ -14,10 +12,8 @@ const loginSchema = yup.object().shape({
     .string()
     .min(6)
     .max(40)
-    .trim()
     .required()
 });
-
 
 const errorFormatter = err => {
   const errors = err.errors.map(error => {
@@ -33,10 +29,9 @@ const errorFormatter = err => {
   return { errors, isValid };
 };
 
-
 // validate against schema
-const validateLoginForm = credential => {
-  return loginSchema
+const validatecreateAccountForm = credential => {
+  return addStaffSchema
     .validate(credential, { abortEarly: false })
     .then(values => {
       const isValid = true;
@@ -45,4 +40,4 @@ const validateLoginForm = credential => {
     .catch(err => errorFormatter(err));
 };
 
-export default validateLoginForm;
+export default validatecreateAccountForm;
