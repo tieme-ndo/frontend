@@ -10,6 +10,7 @@ import DisplayTabTemplate from './DisplayTabTemplate.js';
 import PersonalTab from './PersonalTab.js';
 import FamilyTab from './FamilyTab.js';
 import FarmTab from './FarmTab';
+import GuarantorTab from './GuarantorTab.js';
 
 const DisplayFarmer = ({ history, location, needsUpdate }) => {
   const farmer = location.state.farmer;
@@ -26,7 +27,7 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
       case 'Family':
         return <FamilyTab farmer={farmer} />;
       case 'Guarantor':
-        return <DisplayTabTemplate farmer={farmer} />;
+        return <GuarantorTab farmer={farmer} />;
       case 'Farm':
         return <DisplayTabTemplate farmer={farmer} />;
       default:
