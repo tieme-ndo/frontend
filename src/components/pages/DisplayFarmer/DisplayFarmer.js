@@ -19,7 +19,7 @@ const DisplayFarmer = ({ history, location }) => {
     console.log(farmer);
     switch (selected) {
       case 'Personal':
-        return <DisplayTabTemplate farmer={farmer}/>;
+        return <PersonalTab farmer={farmer}/>;
       case 'Family':
         return <DisplayTabTemplate farmer={farmer}/>;
       case 'Guarantor':

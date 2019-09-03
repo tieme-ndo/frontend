@@ -1,38 +1,81 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 
-export default function DisplayTabTemplate(props) { //Props will contain the farmer object
+export default function PersonalTab(props) {
 
   const data = props.farmer.personalInfo;
+  console.log(data.minor_source_of_income);
 
   return (
     <Grid columns={2}>
-      <Grid.Column >
-        <Header.Subheader>Grey Title</Header.Subheader>
+      <Grid.Column>
+        <Header.Subheader>Title</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Content
+          {data.title}
         </Header>
-        <Header.Subheader> Grey Title</Header.Subheader>
+        <Header.Subheader>Gender</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Content
+          {data.gender}
         </Header>
-        <Header.Subheader> Grey Title</Header.Subheader>
+        <Header.Subheader>Phone 1</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Content
+          {data.Phone_1}
+        </Header>
+        <Header.Subheader>Address</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.house_name +
+            ' ' +
+            data.house_number +
+            '/n' +
+            data.region +
+            ' ' +
+            data.district +
+            ' ' +
+            data.community_name +
+            '/n Landmark: ' +
+            data.nearest_landmark}
+        </Header>
+        <Header.Subheader>Birth data</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.date_of_birth + ", " + data.place_of_birth}
+        </Header>
+        <Header.Subheader>Occupation</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.occupation}
+        </Header>
+        <Header.Subheader>Major Source Of Income</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.major_source_of_income.name + ": " + data.major_source_of_income.amount + " GHC"}
         </Header>
       </Grid.Column>
-      <Grid.Column >
-        <Header.Subheader> Grey Title</Header.Subheader>
+      <Grid.Column>
+        <Header.Subheader>Name</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Contnet
+          {data.first_name + ' ' + data.middle_name + ' ' + data.surname}
         </Header>
-        <Header.Subheader> Grey Title</Header.Subheader>
+        <Header.Subheader>Marital Status</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Content
+          {data.marital_status}
         </Header>
-        <Header.Subheader> Grey Title</Header.Subheader>
+        <Header.Subheader>Phone 2</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>
-          Farmer Content
+          {data.Phone_2}
+        </Header>
+        <Header.Subheader>Identification</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.id_type + ": " + data.id_number}
+        </Header>
+        <Header.Subheader>Education</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.education_level}
+        </Header>
+        <Header.Subheader>Expected Income Per Month</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.expected_income_per_month}
+        </Header>
+        <Header.Subheader>Minor Source Of Income</Header.Subheader>
+        <Header size="tiny" style={{ marginTop: '0.1rem' }}>
+          {data.minor_source_of_income.name + ": " + data.minor_source_of_income.amount + " GHC"}
         </Header>
       </Grid.Column>
     </Grid>
