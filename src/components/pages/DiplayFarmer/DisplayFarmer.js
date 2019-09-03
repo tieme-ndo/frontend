@@ -55,7 +55,14 @@ const DisplayFarmer = props => {
               </Menu.Item>
             </Menu>
           </Segment>
-          <Segment></Segment>
+          <Segment>
+            {switch(selected){
+              case "Personal":
+
+              break;
+              case "Family"
+            }}
+          </Segment>
         </Grid.Column>
       </Grid>
     </Container>
