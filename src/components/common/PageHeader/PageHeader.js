@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { logout } from '../../../utils/handlers/authenticationHandlers';
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
-const PageHeader = () => {
+const PageHeader = props => {
   return (
     <Menu style={{ borderRadius: '0', margin: '0' }}>
       <Container>
@@ -21,7 +22,7 @@ const PageHeader = () => {
               <Dropdown.Item>
                 <NavLink to="/reset-password">Change password</NavLink>
               </Dropdown.Item>
-              <Dropdown.Item>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
