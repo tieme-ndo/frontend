@@ -1,9 +1,6 @@
 /** @format */
 
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
-=======
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import {
   Container,
@@ -11,7 +8,6 @@ import {
   Segment,
   Menu
 } from 'semantic-ui-react';
->>>>>>> Allow DisplayFarmer to request update of farmers state
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
 import DisplayTabTemplate from './DisplayTabTemplate.js';
