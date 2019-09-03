@@ -20,7 +20,7 @@ import PageHeader from "../common/PageHeader/PageHeader";
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [farmers, setFarmers] = useState({ data: [], cleanedData: [] });
+  const [farmers, setFarmers] = useState({ data: undefined, cleanedData: undefined });
   const [needsUpdate, setNeedsUpdate] = useState(true);
 
   useEffect(() => {
@@ -34,6 +34,11 @@ function App() {
 
   useEffect(() => {
     if (user && needsUpdate) {
+      setFarmers({
+        // Setting this allows the dashboard to know that something is being loaded
+        data: undefined,
+        cleanedData: undefined
+      });
       updateFarmers();
       setNeedsUpdate(false);
     }
