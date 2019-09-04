@@ -181,28 +181,28 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
             active={stateToggle.personalInfoToggle === false}
             onClick={() => toggleHandler('personalInfoToggle')}
           >
-            <b>1. Personal</b>
+            <b>Personal</b>
           </Menu.Item>
           <Menu.Item
             name="Family"
             active={stateToggle.familyInfoToggle === false}
             onClick={() => toggleHandler('familyInfoToggle')}
           >
-            <b>2. Family</b>
+            <b>Family</b>
           </Menu.Item>
           <Menu.Item
             name="Guarantor"
             active={stateToggle.guarantorToggle === false}
             onClick={() => toggleHandler('guarantorToggle')}
           >
-            <b>3. Guarantor</b>
+            <b>Guarantor</b>
           </Menu.Item>
           <Menu.Item
             name="Farm"
             active={stateToggle.farmInfoToggle === false}
             onClick={() => toggleHandler('farmInfoToggle')}
           >
-            <b>4. Farm</b>
+            <b>Farm</b>
           </Menu.Item>
         </Menu>
       </Segment>
