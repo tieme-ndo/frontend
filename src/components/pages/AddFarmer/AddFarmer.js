@@ -146,9 +146,7 @@ const AddFarmer = () => {
     let form = formElementsArray.map((formElement, idx) => (
       <Input
         key={idx}
-        elementConfigObj={formElement.configObj}
         {...formElement.config}
-        // eslint-disable-next-line react/jsx-no-duplicate-props
         elementConfigObj={formElement.config}
         data={tabName}
         changeHandler={onChangeHandler}
