@@ -53,7 +53,7 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
-            <Menu stackable>
+            <Menu stackable widths={4}>
               <Menu.Item
                 name="Personal"
                 active={selected === 'Personal'}
