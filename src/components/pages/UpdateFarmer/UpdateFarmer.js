@@ -171,7 +171,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
         </form>
-          
+
         {/* Button is wrapped in a div to get onClick to work */}
         <div onClick={(e) => formHandler(e)}>
           <Button displayName="Save" />
