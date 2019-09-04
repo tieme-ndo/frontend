@@ -1,7 +1,7 @@
 import React from 'react';
 import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
-import StyledTable from '../../common/Table/Table';
+import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -42,7 +42,7 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
       />
 
       {data.length ? (
-        <StyledTable
+        <DashboardTable
           history={history}
           columns={columns}
           getFarmer={getFarmer}
