@@ -7,9 +7,11 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
+import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
+
 import {
   getFarmersHandler,
   cleanFarmersData
@@ -56,7 +58,7 @@ function App() {
         });
       })
       .catch(error => {
-        console.error(error);
+        return new Error(error);
       });
   };
 
@@ -98,10 +100,17 @@ function App() {
             render={props => <Login {...props} setUser={setUser} />}
           />
           <Route
+            path="/farmers/:id/edit"
+            render={props => (
+              <UpdateFarmer {...props} appStateShouldUpdate={setNeedsUpdate} />
+            )}
+          />
+          <Route
             path="/addfarmer"
             component={withRestrictedAccess(AddFarmer)}
           />
           <Route
+            exact
             path="/farmers/:id"
             render={props => (
               <DisplayFarmer

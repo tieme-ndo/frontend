@@ -78,10 +78,10 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     return new Error("Make sure you're passing valid changes!");
   }
 
-  return axios
-    .put(`${pathObj.updateFarmerPath}/${farmerId}`, setHeaders(token), {
-      changes
-    })
+  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}/update`,
+    changes,
+    setHeaders(token),
+  )
     .then(res => {
       if (res.data.successMessage) {
         return res.data;
