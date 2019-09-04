@@ -18,15 +18,15 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
         {
           farmer.personalInfo.image_url 
             ? 
-          <Image style={{ height: 150, width: 150, margin: '0 auto' }} 
+          <Image style={{ height: 150, width: 150}} 
             src={farmer.personalInfo.image_url} 
             alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`} />
             :
           <>
-            <Placeholder style={{ height: 150, width: 150, margin: '0 auto' }}>
+            <Placeholder style={{ height: 150, width: 150 }}>
               <Placeholder.Image />
             </Placeholder>
-            <Header.Subheader style={{ textAlign: 'center', color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
+            <Header.Subheader style={{ color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
           </>
         }
         
