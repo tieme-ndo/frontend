@@ -5,9 +5,8 @@ import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
-import axios from 'axios'
+import axios from 'axios';
 const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
-
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
 
@@ -34,15 +33,17 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     }
 
     return hydratedFormInputs;
-  }
+  };
 
-  const [formElementsState, setFormElementsState] = useState(hydrateFormInputValues());
+  const [formElementsState, setFormElementsState] = useState(
+    hydrateFormInputValues()
+  );
 
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
     guarantorToggle: true,
-    farmInfoToggle: true,
+    farmInfoToggle: true
   });
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
@@ -95,8 +96,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
       newEntry.value = value;
     }
     newData[name] = newEntry;
-    setFormElementsState({ ...formElementsState, [data]: newData })
-  }
+    setFormElementsState({ ...formElementsState, [data]: newData });
+  };
 
   const toggleHandler = data => {
     setStateToggle({
@@ -112,18 +113,18 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
   };
 
   const formHandler = e => {
-    e.preventDefault()
-    let formData = {}
+    e.preventDefault();
+    let formData = {};
     const newState = JSON.parse(JSON.stringify(formElementsState));
     // eslint-disable-next-line no-unused-vars
     for (let key in newState) {
-      formData[key] = newState[key]
+      formData[key] = newState[key];
       // eslint-disable-next-line no-unused-vars
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
-          formData[key][key2] = newState[key][key2].selected
+          formData[key][key2] = newState[key][key2].selected;
         } else {
-          formData[key][key2] = newState[key][key2].value
+          formData[key][key2] = newState[key][key2].value;
         }
       }
     }
@@ -138,32 +139,38 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         farmer: { ...formData, _id: farmerData._id }
       });
     });
-  }
+  };
   const inputCreator = (data, tabName) => {
-    const formElementsArray = []
+    const formElementsArray = [];
     // eslint-disable-next-line no-unused-vars
     for (let key in data) {
       formElementsArray.push({
         id: key,
-        config: data[key],
-      })
+        config: data[key]
+      });
     }
     let form = formElementsArray.map((formElement, idx) => (
       <Input
-      key={idx}
-      {...formElement.config}
-      elementConfigObj={formElement.config}
-      data={tabName}
-      changeHandler={onChangeHandler}
+        key={idx}
+        {...formElement.config}
+        elementConfigObj={formElement.config}
+        data={tabName}
+        changeHandler={onChangeHandler}
       />
-    ))
-    return form
-  }
+    ));
+    return form;
+  };
 
-  let personalInfoInputs = inputCreator(formElementsState.personalInfo, 'personalInfo')
-  let familyInfoInputs = inputCreator(formElementsState.familyInfo, 'familyInfo')
-  let guarantorInputs = inputCreator(formElementsState.guarantor, 'guarantor')
-  let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo')
+  let personalInfoInputs = inputCreator(
+    formElementsState.personalInfo,
+    'personalInfo'
+  );
+  let familyInfoInputs = inputCreator(
+    formElementsState.familyInfo,
+    'familyInfo'
+  );
+  let guarantorInputs = inputCreator(formElementsState.guarantor, 'guarantor');
+  let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo');
 
   return (
     <div>
@@ -214,23 +221,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           >
             {personalInfoInputs}
           </div>
-          <div
-            style={{
-              maxWidth: '500px',
-              margin: '0 auto',
-              textAlign: 'center',
-              marginTop: '2rem'
-            }}
-          >
-            <Button
-              type="button"
-              onClick={() => toggleHandler('familyInfoToggle')}
-              size="large"
-              content="Next"
-              icon="right arrow"
-              labelPosition="right"
-            />
-          </div>
         </Segment>
 
         <Segment
@@ -241,23 +231,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
             style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
           >
             {familyInfoInputs}
-          </div>
-          <div
-            style={{
-              maxWidth: '500px',
-              margin: '0 auto',
-              textAlign: 'center',
-              marginTop: '2rem'
-            }}
-          >
-            <Button
-              type="button"
-              onClick={() => toggleHandler('guarantorToggle')}
-              size="large"
-              content="Next"
-              icon="right arrow"
-              labelPosition="right"
-            />
           </div>
         </Segment>
 
@@ -270,23 +243,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           >
             {guarantorInputs}
           </div>
-          <div
-            style={{
-              maxWidth: '500px',
-              margin: '0 auto',
-              textAlign: 'center',
-              marginTop: '2rem'
-            }}
-          >
-            <Button
-              type="button"
-              onClick={() => toggleHandler('farmInfoToggle')}
-              size="large"
-              content="Next"
-              icon="right arrow"
-              labelPosition="right"
-            />
-          </div>
         </Segment>
 
         <Segment
@@ -296,25 +252,27 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           <div style={{ maxWidth: '500px', margin: '0 auto' }}>
             {farmInfoInputs}
           </div>
-          <div
-            style={{
-              maxWidth: '500px',
-              margin: '0 auto',
-              textAlign: 'center',
-              marginTop: '2rem'
-            }}
-          >
-            <Button
-              primary
-              type="submit"
-              size="large"
-              content="Submit Changes"
-              icon="check"
-              labelPosition="right"
-            />
-          </div>
         </Segment>
       </Form>
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '0',
+          left: '0',
+          padding: '1.5rem 0',
+          width: '100%',
+          textAlign: 'center'
+        }}
+      >
+        <Button
+          primary
+          type="submit"
+          size="large"
+          content="Submit Changes"
+          icon="check"
+          labelPosition="right"
+        />
+      </div>
     </div>
   );
 };
