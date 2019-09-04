@@ -13,6 +13,7 @@ import { pathObj } from '../../../utils/generalVariables';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import { setHeaders } from '../../../utils/requestHeaders';
 import { toast } from 'react-toastify';
+import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
 const AddFarmer = () => {
   const [state, setState] = useState({});
@@ -156,46 +157,65 @@ const AddFarmer = () => {
 
   return (
     <div>
-      <section>
+        <Segment>
+          <Menu stackable>
+            <Menu.Item
+              name="Personal"
+              active={stateToggle.personalInfoToggle === false}
+              onClick={() => toggleHandler('personalInfoToggle')}
+            >
+              Personal
+            </Menu.Item>
+            <Menu.Item
+              name="Family"
+              active={stateToggle.familyInfoToggle === false}
+              onClick={() => toggleHandler('familyInfoToggle')}
+            >
+              Family
+            </Menu.Item>
+            <Menu.Item
+              name="Guarantor"
+              active={stateToggle.guarantorToggle === false}
+              onClick={() => toggleHandler('guarantorToggle')}
+            >
+              Guarantor
+            </Menu.Item>
+            <Menu.Item
+              name="Farm"
+              active={stateToggle.farmInfoToggle === false}
+              onClick={() => toggleHandler('farmInfoToggle')}
+            >
+              Farm
+            </Menu.Item>
+          </Menu>
+        </Segment>
         <form onSubmit={formHandler} style={{ padding: '2rem' }}>
-          <fieldset>
-            <div onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
-              <h2>Personnel Information</h2>
-              <i className="fas fa-angle-double-down fa-2x" />
-            </div>
-            <div hidden={stateToggle.personalInfoToggle}>
-              {personalInfoInputs}
-            </div>
-          </fieldset>
+          <Form.Group>
+            <Segment textAlign='center' hidden={stateToggle.personalInfoToggle}>
+              <div>{personalInfoInputs}</div>
+            </Segment>
+          </Form.Group>
 
-          <fieldset>
-            <div onClick={toggleHandler.bind(this, 'familyInfoToggle')}>
-              <h2>Family</h2> <i className="fas fa-angle-double-down fa-2x" />
-            </div>
-            <div hidden={stateToggle.familyInfoToggle}>{familyInfoInputs}</div>
-          </fieldset>
+          <Form.Group>
+            <Segment hidden={stateToggle.familyInfoToggle}>
+              <div>{familyInfoInputs}</div>
+            </Segment>
+          </Form.Group>
 
-          <fieldset>
-            <div onClick={toggleHandler.bind(this, 'guarantorToggle')}>
-              <h2>Guarantor</h2>{' '}
-              <i className="fas fa-angle-double-down fa-2x" />
-            </div>
-            <div hidden={stateToggle.guarantorToggle}>{guarantorInputs}</div>
-          </fieldset>
+          <Form.Group>
+            <Segment hidden={stateToggle.guarantorToggle}>
+              <div>{guarantorInputs}</div>
+            </Segment>
+          </Form.Group>
 
-          <fieldset>
-            <div onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
-              <h2>Farm Information</h2>{' '}
-              <i className="fas fa-angle-double-down fa-2x" />
-            </div>
-            <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
-          </fieldset>
+          <Form.Group>
+            <Segment hidden={stateToggle.farmInfoToggle}>
+              <div>{farmInfoInputs}</div>
+            </Segment>
+          </Form.Group>
 
-          <button type="submit">
-            Add Farmer
-          </button>
+          <Button primary type="submit">Add Farmer</Button>
         </form>
-      </section>
     </div>
   );
 };
