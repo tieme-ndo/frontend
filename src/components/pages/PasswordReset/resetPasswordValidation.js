@@ -6,7 +6,9 @@ const resetPasswordSchema = yup.object().shape({
   newPassword: yup
     .string()
     .required('New Password is required')
-    .min(6),
+    .min(6)
+    .max(40)
+    .trim(),
   confirmNewPassword: yup
     .string()
     .oneOf([yup.ref('newPassword'), null], "Passwords don't match")
