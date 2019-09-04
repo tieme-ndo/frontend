@@ -97,6 +97,8 @@ const AddFarmer = () => {
       farmInfoToggle: true,
       [data]: false
     });
+    //scrolls to the height of the Menu whenever the tab is changed.
+    window.scrollTo(0, 75);
   };
   const formHandler = e => {
     e.preventDefault();
@@ -193,7 +195,7 @@ const AddFarmer = () => {
           </Menu.Item>
         </Menu>
       </Segment>
-      <Form onSubmit={formHandler}>
+      <Form onSubmit={formHandler} style={{marginBottom: '5rem'}}>
         <Segment
           style={{ width: '100%', padding: '2.5rem 0' }}
           hidden={stateToggle.personalInfoToggle}
@@ -203,6 +205,14 @@ const AddFarmer = () => {
           >
             {personalInfoInputs}
           </div>
+          <Button
+            primary
+            type='button'
+            onClick={() => toggleHandler('familyInfoToggle')}
+            style={{ maxWidth: '500px', margin: '0 auto'}}
+          >
+            Next
+          </Button>
         </Segment>
 
         <Segment
@@ -214,27 +224,52 @@ const AddFarmer = () => {
           >
             {familyInfoInputs}
           </div>
+          <Button
+            primary
+            type='button'
+            onClick={() => toggleHandler('guarantorToggle')}
+            style={{ maxWidth: '500px', margin: '0 auto'}}
+          >
+            Next
+          </Button>
         </Segment>
 
-        <Segment style={{ width: '100%', padding: '2.5rem 0' }} hidden={stateToggle.guarantorToggle}>
+        <Segment
+          style={{ width: '100%', padding: '2.5rem 0' }}
+          hidden={stateToggle.guarantorToggle}
+        >
           <div
             style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
           >
             {guarantorInputs}
           </div>
+          <Button
+            primary
+            type='button'
+            onClick={() => toggleHandler('farmInfoToggle')}
+            style={{ maxWidth: '500px', margin: '0 auto'}}
+          >
+            Next
+          </Button>
         </Segment>
 
-        <Segment style={{ width: '100%', padding: '2.5rem 0' }} hidden={stateToggle.farmInfoToggle}>
+        <Segment
+          style={{ width: '100%', padding: '2.5rem 0' }}
+          hidden={stateToggle.farmInfoToggle}
+        >
           <div
-            style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
+            style={{ maxWidth: '500px', margin: '0 auto'}}
           >
             {farmInfoInputs}
           </div>
+          <Button
+            primary
+            type="submit"
+            style={{ maxWidth: '500px', margin: '0 auto'}}
+          >
+            Add Farmer
+          </Button>
         </Segment>
-
-        <Button primary type="submit">
-          Add Farmer
-        </Button>
       </Form>
     </div>
   );
