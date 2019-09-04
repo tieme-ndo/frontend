@@ -9,20 +9,19 @@ You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/)
 
 ## Contributors
 
-
-|                                       [Pavol Karas](https://github.com/)                                        |                                       [Alex E.](https://github.com/)                                        |                                       [Anthony Campbell](https://github.com/)                                        |                                       [Benjamin Ajewole](https://github.com/)                                        |                                       [David Quiñones](https://github.com/)                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
+|                                                     [Pavol Karas](https://github.com/)                                                      |                                                        [Alex E.](https://github.com/)                                                         |                                                   [Anthony Campbell](https://github.com/)                                                   |                                                    [Benjamin Ajewole](https://github.com/)                                                    |                                                    [David Quiñones](https://github.com/)                                                    |
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
+|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
+|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
 
 <br>
 
-|                                       [Iñaki Breinbauer](https://github.com/)                                        |                                       [Oluwatimileyin Ojo](https://github.com/)                                        |                                       [Shola Ayeni](https://github.com/)                                        |                                       [Yemi](https://github.com/)                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | 
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                   |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [          |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | 
+|                                                   [Iñaki Breinbauer](https://github.com/)                                                   |                                                   [Oluwatimileyin Ojo](https://github.com/)                                                   |                                                     [Shola Ayeni](https://github.com/)                                                      |                                                          [Yemi](https://github.com/)                                                          |
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) |  |
+|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           | [ |
+|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |
 
 <br>
 <br>
@@ -43,20 +42,19 @@ You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/)
 
 [Product Canvas](https://www.notion.so/Tieme-Ndo-Co-op-3d5dd25f15ec4c15a6c3aaead4c48d97)
 
-[UX Design files](https://www.figma.com/file/4hAdkxUDAwWWJneMmbbNji/Mock-Ups?node-id=193%3A0) 
+[UX Design files](https://www.figma.com/file/4hAdkxUDAwWWJneMmbbNji/Mock-Ups?node-id=193%3A0)
 
-### Summary: 
+### Summary:
 
 In the bid to transform smallholder farmers into semi-commercial farmers and agripreneurs, Tieme Ndo empower farmers to take advantage of business opportunities along the agricultural value chain through SAD (Small Agribusiness Development). The aim of SAD is to train farmers on entrepreneurship and value addition.
 
-
 ### 4️⃣ Key Features
 
--    feature one
--    feature two
--    feature three
--    feature four
--    feature five
+- feature one
+- feature two
+- feature three
+- feature four
+- feature five
 
 ## Tech Stack
 
@@ -66,21 +64,18 @@ In the bid to transform smallholder farmers into semi-commercial farmers and agr
 
 🚫 Why did you choose this framework?
 
--    Zero-setup, plug-and-play functionality.
--    Rich ecosystem of applications that will help in multiple aspects of the development.
--    Team-wide familiarity & experience
+- Zero-setup, plug-and-play functionality.
+- Rich ecosystem of applications that will help in multiple aspects of the development.
+- Team-wide familiarity & experience
 
 #### Styled-Components
 
 🚫 Why did you choose this framework?
 
--    Component-specific styling & decentralization of styling
--    Team-wide familiarity & experience
-
+- Component-specific styling & decentralization of styling
+- Team-wide familiarity & experience
 
 #### Front end deployed to `Netlify`
-
-
 
 # APIs
 
@@ -92,11 +87,16 @@ Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do 
 
 # 3️⃣ Environment Variables
 
-In order for the app to function correctly, the user need not set up their own environment variables at this point in time. However, inspection of the `start` command will reveal that it injects `REACT_APP_API_URL=http://localhost:9000` when starting the app on a local machine (during development). This points to the port the back-end server will run on when ran on the local machine. This is done to pre-seed the environment.
+In order for the app to function correctly, the user need not set up their own environment variables at this point in time.
 
-The exact API_URL that's used is dependent on the environment it runs in, so is therefore outside of the scope of local deployment. As mentioned above, if the app is run on one's local machine, it will automatically resolve to the server running on `http://localhost:9000`. However, on Netlify, it'll target different API URLs, depending on if it's in the deploy-preview or production environment.
+Create an account on [Cloudinary](https://cloudinary.com/) to get preset value and cloudinary url.
 
-    *  REACT_APP_API_URL - As mentioned above, this variable is declared in configuration in the Netlify deployments and is passed through `yarn start` as `REACT_APP_API_URL=http://localhost:9000` on one's local machine. Therefore, it will not have to be declared in a `.env` file.
+Create a `.env` file on your root directory and the following lines
+
+`REACT_APP_CLOUDINARY_PRESET=<Preset value gotten from cloudinary>`
+`REACT_APP_CLOUDINARY_URL=<API Base URL gotten from cloudinary>`
+
+You can also check the `.env.example` to see how your `.env` should look like
 
 # 5️⃣ Content Licenses
 
@@ -118,6 +118,7 @@ The exact API_URL that's used is dependent on the environment it runs in, so is 
 To get a local version of the Tieme Ndo app up and running, make sure you have a copy of the local server running, in addition to running the front-end app.
 
 To get the server up and running, do the following:
+
 ```
     git clone https://github.com/tieme-ndo/backend.git
     cd backend
@@ -138,13 +139,14 @@ To get the front-end, you should be able to just run a few commands to get set u
     yarn install
 ```
 
-Once again, the installation will take anywhere between 30 seconds and a minute or two. To get the front-end running, run: 
+Once again, the installation will take anywhere between 30 seconds and a minute or two. To get the front-end running, run:
 
 ```
     yarn start
 ```
 
 ## Other Scripts
+
     * start - starts the production server after a build is created
     * build - creates a build of the application
     * test - runs tests in **tests** directory and `.test.js` and `.spec.js` files
@@ -157,12 +159,13 @@ When contributing to this repository, please first discuss the change you wish t
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
 ## Issue/Bug Request
-   
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 

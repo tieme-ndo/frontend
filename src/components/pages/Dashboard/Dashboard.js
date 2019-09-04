@@ -1,74 +1,64 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Header, Container, Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-
-import PageHeader from '../../common/PageHeader/PageHeader';
-import StyledTable from '../../common/Table/Table';
+import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
-import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
-import parseObjectContentToString from './parseObjectContentToString';
+import StyledTable from '../../common/Table/Table';
+import LoadingIndicator from './LoadingIndicator';
+import { Header, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import PropTypes from 'prop-types';
 
-const Dashboard = () => {
+const Dashboard = ({ farmers, rawFarmers, history }) => {
   const [data, setData] = React.useState([]);
+
+  const Title = <Header as="h1">All Farmers</Header>;
 
   const columns = React.useMemo(tableColumLabels, []);
 
   React.useEffect(() => {
-    let isSubscribed = true;
+    if (farmers) {
+      setData(farmers);
+    } else {
+      setData([]);
+    }
+  }, [farmers]);
 
-    getFarmersHandler().then(farmers => {
-      if (isSubscribed) {
-        setData(parseObjectContentToString(farmers));
-      }
-    });
-    return () => (isSubscribed = false);
-  }, []);
+  const getFarmer = id => {
+    const farmer = rawFarmers.find(farmer => farmer._id === id);
+    return farmer;
+  };
 
   return (
     <>
-      <PageHeader />
+      <DashboardHeader
+        leftElement={Title}
+        rightElement={
+          <Link style={{ color: 'white' }} to="/addfarmer">
+            <Button color="teal" fixed="right">
+              Add Farmer
+            </Button>
+          </Link>
+        }
+      />
 
-      <Menu secondary>
-        <Container>
-          <Menu.Item>
-            <Header as="h1">All Farmers</Header>
-          </Menu.Item>
-
-          <Menu.Menu position="right">
-            <AddFarmerLink to="/addfarmer">Add farmer</AddFarmerLink>
-          </Menu.Menu>
-        </Container>
-      </Menu>
-
-      <Container>
+      {data.length ? (
         <StyledTable
+          history={history}
           columns={columns}
-          data={React.useMemo(() => data, [data])}
+          getFarmer={getFarmer}
+          data={data}
         />
-      </Container>
+      ) : (
+        <LoadingIndicator />
+      )}
     </>
   );
 };
 
-export default Dashboard;
+Dashboard.propTypes = {
+  farmers: PropTypes.array,
+  rawFarmers: PropTypes.array,
+  history: PropTypes.object
+};
 
-const AddFarmerLink = styled(Link)`
-  color: #fff;
-  background-color: #00b5ad;
-  display: block;
-  border-radius: 5px;
-  transition: color 0.2s ease;
-  line-height: 40px;
-  height: 40px;
-  width: 120px;
-  text-align: center;
-  font-size: 1.2rem;
-  box-shadow: 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
-
-  &:hover {
-    background-color: #009c95;
-    color: #fff;
-    text-shadow: none;
-  }
-`;
+export default withRestrictedAccess(Dashboard, false);
