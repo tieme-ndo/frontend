@@ -50,11 +50,10 @@ function App() {
   const loadFarmers = () => {
     getFarmersHandler()
       .then(retrievedFarmers => {
-        const farmersToSave = {
+        setFarmers({
           data: retrievedFarmers,
           cleanedData: cleanFarmersData(retrievedFarmers)
-        };
-        setFarmers(farmersToSave);
+        });
       })
       .catch(error => {
         console.error(error);
