@@ -8,6 +8,7 @@ import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
+import ResetPassword from '../pages/PasswordReset/PasswordReset';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
 import {
@@ -99,6 +100,11 @@ function App() {
             render={props => (
               <DisplayFarmer {...props} needsUpdate={setNeedsUpdate} />
             )}
+          />
+          <Route
+            exact
+            path="/reset-password"
+            component={withRestrictedAccess(ResetPassword)}
           />
           <ToastContainer position="top-right" />
         </Container>

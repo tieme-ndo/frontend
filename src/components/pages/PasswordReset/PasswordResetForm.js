@@ -13,14 +13,12 @@ import {
   Message
 } from 'semantic-ui-react';
 import logo from '../../../assets/images/tiemendo_logo.jpg';
-import PageHeader from '../../common/PageHeader/PageHeader';
 
 const PasswordResetForm = props => {
   const { state, handleSubmit, handleInputChange } = props;
 
   return (
     <>
-      <PageHeader />
       <Container>
         <Grid
           textAlign="center"
