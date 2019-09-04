@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input as SemanticInput, Dropdown, Form, Container, Checkbox } from 'semantic-ui-react'
+import { Input as SemanticInput, Dropdown, Container, Checkbox } from 'semantic-ui-react'
 const Input = props => {
   const {
     type,

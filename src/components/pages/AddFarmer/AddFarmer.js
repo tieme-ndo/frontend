@@ -102,8 +102,10 @@ const AddFarmer = () => {
     e.preventDefault();
     let formData = {};
     const newState = JSON.parse(JSON.stringify(state));
+    // eslint-disable-next-line no-unused-vars
     for (let key in newState) {
       formData[key] = newState[key];
+      // eslint-disable-next-line no-unused-vars
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
           formData[key][key2] = newState[key][key2].selected;
@@ -131,6 +133,7 @@ const AddFarmer = () => {
   };
   const inputCreator = (data, tabName) => {
     const formElementsArray = [];
+    // eslint-disable-next-line no-unused-vars
     for (let key in data) {
       formElementsArray.push({
         id: key,
@@ -142,6 +145,7 @@ const AddFarmer = () => {
         key={idx}
         elementConfigObj={formElement.configObj}
         {...formElement.config}
+        // eslint-disable-next-line react/jsx-no-duplicate-props
         elementConfigObj={formElement.config}
         data={tabName}
         changeHandler={onChangeHandler}
@@ -157,65 +161,67 @@ const AddFarmer = () => {
 
   return (
     <div>
-        <Segment>
-          <Menu stackable>
-            <Menu.Item
-              name="Personal"
-              active={stateToggle.personalInfoToggle === false}
-              onClick={() => toggleHandler('personalInfoToggle')}
-            >
-              Personal
-            </Menu.Item>
-            <Menu.Item
-              name="Family"
-              active={stateToggle.familyInfoToggle === false}
-              onClick={() => toggleHandler('familyInfoToggle')}
-            >
-              Family
-            </Menu.Item>
-            <Menu.Item
-              name="Guarantor"
-              active={stateToggle.guarantorToggle === false}
-              onClick={() => toggleHandler('guarantorToggle')}
-            >
-              Guarantor
-            </Menu.Item>
-            <Menu.Item
-              name="Farm"
-              active={stateToggle.farmInfoToggle === false}
-              onClick={() => toggleHandler('farmInfoToggle')}
-            >
-              Farm
-            </Menu.Item>
-          </Menu>
-        </Segment>
-        <form onSubmit={formHandler} style={{ padding: '2rem' }}>
-          <Form.Group>
-            <Segment textAlign='center' hidden={stateToggle.personalInfoToggle}>
-              <div>{personalInfoInputs}</div>
-            </Segment>
-          </Form.Group>
+      <Segment>
+        <Menu stackable>
+          <Menu.Item
+            name="Personal"
+            active={stateToggle.personalInfoToggle === false}
+            onClick={() => toggleHandler('personalInfoToggle')}
+          >
+            Personal
+          </Menu.Item>
+          <Menu.Item
+            name="Family"
+            active={stateToggle.familyInfoToggle === false}
+            onClick={() => toggleHandler('familyInfoToggle')}
+          >
+            Family
+          </Menu.Item>
+          <Menu.Item
+            name="Guarantor"
+            active={stateToggle.guarantorToggle === false}
+            onClick={() => toggleHandler('guarantorToggle')}
+          >
+            Guarantor
+          </Menu.Item>
+          <Menu.Item
+            name="Farm"
+            active={stateToggle.farmInfoToggle === false}
+            onClick={() => toggleHandler('farmInfoToggle')}
+          >
+            Farm
+          </Menu.Item>
+        </Menu>
+      </Segment>
+      <form onSubmit={formHandler} style={{ padding: '2rem' }}>
+        <Form.Group>
+          <Segment textAlign="center" hidden={stateToggle.personalInfoToggle}>
+            <div>{personalInfoInputs}</div>
+          </Segment>
+        </Form.Group>
 
-          <Form.Group>
-            <Segment hidden={stateToggle.familyInfoToggle}>
-              <div>{familyInfoInputs}</div>
-            </Segment>
-          </Form.Group>
+        <Form.Group>
+          <Segment hidden={stateToggle.familyInfoToggle}>
+            <div>{familyInfoInputs}</div>
+          </Segment>
+        </Form.Group>
 
-          <Form.Group>
-            <Segment hidden={stateToggle.guarantorToggle}>
-              <div>{guarantorInputs}</div>
-            </Segment>
-          </Form.Group>
+        <Form.Group>
+          <Segment hidden={stateToggle.guarantorToggle}>
+            <div>{guarantorInputs}</div>
+          </Segment>
+        </Form.Group>
 
-          <Form.Group>
-            <Segment hidden={stateToggle.farmInfoToggle}>
-              <div>{farmInfoInputs}</div>
-            </Segment>
-          </Form.Group>
+        <Form.Group>
+          <Segment hidden={stateToggle.farmInfoToggle}>
+            <div>{farmInfoInputs}</div>
+          </Segment>
+        </Form.Group>
 
-          <Button primary type="submit">Add Farmer</Button>
-        </form>
+        <Button primary type="submit">
+          Add Farmer
+        </Button>
+      </form>
     </div>
   );
 };
