@@ -1,7 +1,7 @@
 /* eslint-disable no-sequences */
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
@@ -11,9 +11,17 @@ import FamilyTab from './FamilyTab.js';
 import FarmTab from './FarmTab';
 import GuarantorTab from './GuarantorTab.js';
 
-const DisplayFarmer = ({ history, location, needsUpdate }) => {
-  const farmer = location.state.farmer;
+const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
+  const [farmer, setFarmer] = useState();
   const [selected, setSelected] = useState('Personal');
+
+  useEffect(() => {
+    if (farmers) {
+      const farmerId = match.params.id;
+      const farmerToSave = getFarmer(farmerId);
+      farmerToSave ? setFarmer(farmerToSave) : history.push('/');
+    }
+  }, [farmers, getFarmer, match.params.id]);
 
   function handleSelected(e, { name }) {
     setSelected(name);
@@ -33,8 +41,7 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
         return;
     }
   }
-
-  return (
+  return farmer ? (
     <Container>
       <Grid stackable columns={2}>
         <Grid.Column width={5}>
@@ -81,13 +88,16 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
         </Grid.Column>
       </Grid>
     </Container>
-  );
+  ) : null;
 };
 
 DisplayFarmer.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
-  needsUpdate: PropTypes.func
+  needsUpdate: PropTypes.func,
+  match: PropTypes.object,
+  farmers: PropTypes.array,
+  getFarmer: PropTypes.func
 };
 
 export default withRestrictedAccess(DisplayFarmer);
