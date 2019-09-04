@@ -15,7 +15,9 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <>
       <Responsive as={Segment}>
-        <Image style={{ height: 150, width: 150 }} src={farmer.personalInfo.image_url} />
+        <Image style={{ height: 150, width: 150 }} 
+          src={farmer.personalInfo.image_url} 
+          alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`} />
         <Header size="medium">
           {farmer.personalInfo.first_name} {farmer.personalInfo.middle_name}{' '}
           {farmer.personalInfo.surname}
