@@ -203,7 +203,7 @@ const AddFarmer = () => {
         }}
       >
         <Segment
-          style={{ width: '100%', padding: '2.5rem 0' }}
+          style={{ width: '100%', padding: '2.5rem 1rem' }}
           hidden={stateToggle.personalInfoToggle}
         >
           <div
@@ -231,7 +231,7 @@ const AddFarmer = () => {
         </Segment>
 
         <Segment
-          style={{ width: '100%', padding: '2.5rem 0' }}
+          style={{ width: '100%', padding: '2.5rem 1rem' }}
           hidden={stateToggle.familyInfoToggle}
         >
           <div
@@ -259,7 +259,7 @@ const AddFarmer = () => {
         </Segment>
 
         <Segment
-          style={{ width: '100%', padding: '2.5rem 0' }}
+          style={{ width: '100%', padding: '2.5rem 1rem' }}
           hidden={stateToggle.guarantorToggle}
         >
           <div
@@ -287,7 +287,7 @@ const AddFarmer = () => {
         </Segment>
 
         <Segment
-          style={{ width: '100%', padding: '2.5rem 0' }}
+          style={{ width: '100%', padding: '2.5rem 1rem' }}
           hidden={stateToggle.farmInfoToggle}
         >
           <div style={{ maxWidth: '500px', margin: '0 auto' }}>
