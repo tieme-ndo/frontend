@@ -335,36 +335,36 @@ export const personalInfo = {
     value: '',
     valid: true,
   },
-  'major_source_of_income.name': {
+  'major_source_of_income_name': {
     elementType: 'input',
-    name: 'major_source_of_income.name',
+    name: 'major_source_of_income_name',
     type: 'text',
     labelName: 'Major Source Of Income',
     value: '',
     valid: false,
     touched: false,
   },
-  'major_source_of_income.amount': {
+  'major_source_of_income_amount': {
     elementType: 'input',
-    name: 'major_source_of_income.amount',
+    name: 'major_source_of_income_amount',
     type: 'number',
     labelName: 'Major Source Of Income Amount',
     value: '',
     valid: false,
     touched: false,
   },
-  'minor_source_of_income.name': {
+  'minor_source_of_income_name': {
     elementType: 'input',
-    name: 'minor_source_of_income.name',
+    name: 'minor_source_of_income_name',
     type: 'text',
     labelName: 'Minor Source Of Income',
     value: '',
     valid: false,
     touched: false,
   },
-  'minor_source_of_income.amount': {
+  'minor_source_of_income_amount': {
     elementType: 'input',
-    name: 'minor_source_of_income.amount',
+    name: 'minor_source_of_income_amount',
     type: 'number',
     labelName: 'Minor Source Of Income Amount',
     value: '',
