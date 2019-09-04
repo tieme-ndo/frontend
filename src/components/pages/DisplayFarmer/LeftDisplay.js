@@ -12,7 +12,6 @@ import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
 
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
-  console.log(farmer)
   return (
     <>
       <Responsive as={Segment}>
