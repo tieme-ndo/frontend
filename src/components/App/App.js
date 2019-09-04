@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Login from '../pages/Login/Login';
@@ -11,16 +11,18 @@ import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
+
 import {
   getFarmersHandler,
   cleanFarmersData
-} from '../../utils/handlers/farmerHandlers';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+} from "../../utils/handlers/farmerHandlers";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PageHeader from "../common/PageHeader/PageHeader";
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [farmers, setFarmers] = useState({ data: [], cleanedData: [] });
+  const [farmers, setFarmers] = useState({ data: undefined, cleanedData: undefined });
   const [needsUpdate, setNeedsUpdate] = useState(true);
 
   useEffect(() => {
@@ -34,6 +36,11 @@ function App() {
 
   useEffect(() => {
     if (user && needsUpdate) {
+      setFarmers({
+        // Setting this allows the dashboard to know that something is being loaded
+        data: undefined,
+        cleanedData: undefined
+      });
       updateFarmers();
       setNeedsUpdate(false);
     }
@@ -60,27 +67,8 @@ function App() {
   return (
     <Router>
       <div className="App" data-testid="App">
-        <nav>
-          <ul>
-            {user ? (
-              <>
-                <li>
-                  <Link to="/">Dashboard</Link>
-                </li>
-                {user.isAdmin ? (
-                  <li>
-                    <Link to="/accounts/new">Add Account</Link>
-                  </li>
-                ) : null}
-                <li>
-                  <Link to="/" onClick={logOut}>
-                    Log out
-                  </Link>
-                </li>
-              </>
-            ) : null}
-          </ul>
-        </nav>
+        {user ? <PageHeader logOut={logOut} user={user} /> : null}
+
         <Container>
           <Route
             path="/"

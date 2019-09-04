@@ -3,7 +3,6 @@ import { Grid, Header } from 'semantic-ui-react';
 
 export default function FamilyTab(props) {
   const data = props.farmer.familyInfo;
-  console.log(data);
 
   return (
     <Grid columns={2} stackable>

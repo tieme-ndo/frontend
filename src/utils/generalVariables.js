@@ -22,4 +22,4 @@ export const pathObj = {
   deleteFarmerPath: `${URL}/${API_VERSION}/farmers`
 };
 
-export const tokenKey = 'tokenTiemeNdo'
+export const tokenKey = 'tokenTiemeNdo';

@@ -6,10 +6,10 @@ import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
-import DisplayTabTemplate from './DisplayTabTemplate.js';
 import PersonalTab from './PersonalTab.js';
 import FamilyTab from './FamilyTab.js';
 import FarmTab from './FarmTab';
+import GuarantorTab from './GuarantorTab.js';
 
 const DisplayFarmer = ({ history, location, needsUpdate }) => {
   const farmer = location.state.farmer;
@@ -26,7 +26,7 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
       case 'Family':
         return <FamilyTab farmer={farmer} />;
       case 'Guarantor':
-        return <DisplayTabTemplate farmer={farmer} />;
+        return <GuarantorTab farmer={farmer} />;
       case 'Farm':
         return <FarmTab farmer={farmer} />;
       default:
@@ -46,7 +46,7 @@ const DisplayFarmer = ({ history, location, needsUpdate }) => {
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
-            <Menu>
+            <Menu stackable>
               <Menu.Item
                 name="Personal"
                 active={selected === 'Personal'}
