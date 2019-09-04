@@ -2,7 +2,6 @@ import * as yup from 'yup';
 
 // reset password schema
 const resetPasswordSchema = yup.object().shape({
-  oldPassword: yup.string().required('Old Password is required'),
   newPassword: yup
     .string()
     .required('New Password is required')

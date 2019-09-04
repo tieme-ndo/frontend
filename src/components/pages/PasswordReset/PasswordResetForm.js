@@ -51,17 +51,6 @@ const PasswordResetForm = props => {
                     fluid
                     icon="lock"
                     iconPosition="left"
-                    placeholder="old Password"
-                    type="password"
-                    name="oldPassword"
-                    value={state.oldPassword}
-                    onChange={handleInputChange}
-                  />
-
-                  <Form.Input
-                    fluid
-                    icon="lock"
-                    iconPosition="left"
                     placeholder="New Password"
                     type="password"
                     name="newPassword"

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import tokenKey from './generalVariables';
+import { tokenKey } from './generalVariables';
 
 const axiosWithHeader = () => {
   const token = localStorage.getItem(tokenKey);

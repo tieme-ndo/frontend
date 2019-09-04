@@ -11,7 +11,6 @@ const PasswordReset = props => {
   const [state, updateState] = useState({
     newPassword: '',
     confirmNewPassword: '',
-    oldPassword: '',
     errors: {},
     resetting: false
   });
@@ -28,10 +27,9 @@ const PasswordReset = props => {
       };
     });
 
-    const { oldPassword, newPassword, confirmNewPassword } = state;
+    const { newPassword, confirmNewPassword } = state;
 
     const { errors, isValid } = await validateResetPassword({
-      oldPassword,
       newPassword,
       confirmNewPassword
     });
@@ -51,9 +49,7 @@ const PasswordReset = props => {
     axiosWithHeader()
       .put(`${pathObj.changePasswordPath}`, { password: state.newPassword })
       .then(res => {
-        toast.success('Password reset successfully', {
-          position: toast.POSITION.TOP_CENTER
-        });
+        toast.success('Password reset successfully');
 
         updateState(prevState => ({
           ...prevState,
