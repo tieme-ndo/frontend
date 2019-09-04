@@ -9,6 +9,7 @@ import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
+import PasswordReset from '../pages/PasswordReset/PasswordReset';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
 
@@ -120,6 +121,11 @@ function App() {
                 needsUpdate={setNeedsUpdate}
               />
             )}
+          />
+          <Route
+            exact
+            path="/reset-password"
+            render={props => <PasswordReset {...props} logOut={logOut} />}
           />
           <ToastContainer position="top-right" />
         </Container>

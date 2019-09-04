@@ -1,6 +1,7 @@
 import React from 'react';
 import DashboardHeader from './DashboardHeader';
-import StyledTable from '../../common/Table/Table';
+import tableColumLabels from './tableColumLabels';
+import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -9,42 +10,10 @@ import PropTypes from 'prop-types';
 
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
+
   const Title = <Header as="h1">All Farmers</Header>;
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: ' ',
-        columns: [
-          {
-            Header: 'Name',
-            accessor: 'name'
-          },
-          {
-            Header: 'Community Name',
-            accessor: 'communityName'
-          },
-          {
-            Header: 'Farm Location',
-            accessor: 'farmLocation'
-          },
-          {
-            Header: 'Phone Number',
-            accessor: 'phoneNumber'
-          },
-          {
-            Header: 'Guarantor Name',
-            accessor: 'guarantorName'
-          },
-          {
-            Header: 'Guarantor Phone Number',
-            accessor: 'guarantorPhoneNumber'
-          }
-        ]
-      }
-    ],
-    []
-  );
+  const columns = React.useMemo(tableColumLabels, []);
 
   React.useEffect(() => {
     if (farmers) {
@@ -68,7 +37,7 @@ const Dashboard = ({ farmers, history }) => {
       />
 
       {data.length ? (
-        <StyledTable
+        <DashboardTable
           history={history}
           columns={columns}
           data={data}
