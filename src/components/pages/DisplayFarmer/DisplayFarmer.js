@@ -16,9 +16,11 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
   const [selected, setSelected] = useState('Personal');
 
   useEffect(() => {
-    const farmerId = match.params.id;
-    const farmerToSave = getFarmer(farmerId);
-    setFarmer(farmerToSave);
+    if (farmers) {
+      const farmerId = match.params.id;
+      const farmerToSave = getFarmer(farmerId);
+      farmerToSave ? setFarmer(farmerToSave) : history.push('/');
+    }
   }, [farmers, getFarmer, match.params.id]);
 
   function handleSelected(e, { name }) {
@@ -39,8 +41,7 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
         return;
     }
   }
-  return farmer ?
-   (
+  return farmer ? (
     <Container>
       <Grid stackable columns={2}>
         <Grid.Column width={5}>
