@@ -37,7 +37,7 @@ const AddFarmer = () => {
   });
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
-    let name, value, type;
+    let name, value, type, files;
 
     if (elementType === 'checkbox') {
       // This is for the checkboxes to work as Semantic UI uses the :before pseudoelement
@@ -56,7 +56,11 @@ const AddFarmer = () => {
       name = e.target.name;
       value = e.target.value;
       type = e.target.type;
-    }  
+
+      if (e.target.files) {
+        files = e.target.files;
+      }
+    }
 
     const newData = { ...state[data] };
     const newEntry = { ...newData[name] };
@@ -153,7 +157,6 @@ const AddFarmer = () => {
   return (
     <div>
       <section>
-        <hr />
         <form onSubmit={formHandler} style={{ padding: '2rem' }}>
           <fieldset>
             <div onClick={toggleHandler.bind(this, 'personalInfoToggle')}>

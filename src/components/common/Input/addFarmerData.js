@@ -1,4 +1,13 @@
 export const personalInfo = {
+  image_url: {
+    elementType: 'input',
+    name: 'image_url',
+    type: 'file',
+    labelName: 'Farmer Image',
+    imageUrl: '',
+    valid: false,
+    touched: false,
+  },
   title: {
     elementType: 'select',
     placeholder: 'Please Select',
@@ -31,15 +40,6 @@ export const personalInfo = {
     value: '',
     valid: true,
   },
-  surname: {
-    elementType: 'input',
-    name: 'surname',
-    type: 'text',
-    labelName: 'Surname',
-    value: '',
-    valid: false,
-    touched: false,
-  },
   first_name: {
     elementType: 'input',
     name: 'first_name',
@@ -58,12 +58,12 @@ export const personalInfo = {
     valid: false,
     touched: false,
   },
-  image_url: {
+  surname: {
     elementType: 'input',
-    name: 'image_url',
-    type: 'file',
-    labelName: 'Farmer Image',
-    imageUrl: '',
+    name: 'surname',
+    type: 'text',
+    labelName: 'Surname',
+    value: '',
     valid: false,
     touched: false,
   },
