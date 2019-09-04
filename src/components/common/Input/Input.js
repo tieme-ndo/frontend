@@ -1,5 +1,10 @@
-import React from 'react'
-import { Input as SemanticInput, Dropdown, Container, Checkbox } from 'semantic-ui-react'
+import React from 'react';
+import {
+  Input as SemanticInput,
+  Dropdown,
+  Checkbox,
+  Form
+} from 'semantic-ui-react';
 const Input = props => {
   const {
     type,
@@ -15,12 +20,13 @@ const Input = props => {
     placeholder,
     elementConfigObj
   } = props;
-  
-  let inputElement = null
+
+  let inputElement = null;
   switch (elementType) {
     case 'input':
       inputElement = (
         <SemanticInput
+          fluid
           type={type}
           name={name}
           value={value}
@@ -28,27 +34,29 @@ const Input = props => {
           checked={checked}
         />
       );
-      break
+      break;
     case 'checkbox':
       inputElement = (
         <>
           {elementConfig.options.map((option, index) => (
-              <Checkbox
-                key={index}
-                name={name}
-                type={type}
-                label={<label>{option}</label>}
-                value={option}
-                onChange={e => changeHandler(e, data, type)}
-                checked={selected.indexOf(option) > -1}
-              />
+            <Checkbox
+              fluid
+              key={index}
+              name={name}
+              type={type}
+              label={<label>{option}</label>}
+              value={option}
+              onChange={e => changeHandler(e, data, type)}
+              checked={selected.indexOf(option) > -1}
+            />
           ))}
         </>
       );
-      break
+      break;
     case 'select':
       inputElement = (
         <Dropdown
+          fluid
           selection
           placeholder={placeholder}
           onChange={e => changeHandler(e, data, elementType, elementConfigObj)}
@@ -57,19 +65,15 @@ const Input = props => {
           value={value}
         />
       );
-      break
+      break;
     default:
   }
   return (
-    <Container fluid>
-        <label>
-          {labelName}
-        </label>
-        <br/>
-         {inputElement}
-    </Container>
-  
-  )
-}
+    <Form.Field style={{marginBottom: '16px'}}>
+      <label>{labelName}</label>
+      {inputElement}
+    </Form.Field>
+  );
+};
 
-export default Input
+export default Input;

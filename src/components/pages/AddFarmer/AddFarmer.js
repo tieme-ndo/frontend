@@ -162,7 +162,7 @@ const AddFarmer = () => {
   return (
     <div>
       <Segment>
-        <Menu stackable>
+        <Menu stackable widths="4">
           <Menu.Item
             name="Personal"
             active={stateToggle.personalInfoToggle === false}
@@ -193,35 +193,49 @@ const AddFarmer = () => {
           </Menu.Item>
         </Menu>
       </Segment>
-      <form onSubmit={formHandler} style={{ padding: '2rem' }}>
-        <Form.Group>
-          <Segment textAlign="center" hidden={stateToggle.personalInfoToggle}>
-            <div>{personalInfoInputs}</div>
-          </Segment>
-        </Form.Group>
+      <Form onSubmit={formHandler}>
+        <Segment
+          style={{ width: '100%', padding: '2.5rem 0' }}
+          hidden={stateToggle.personalInfoToggle}
+        >
+          <div
+            style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
+          >
+            {personalInfoInputs}
+          </div>
+        </Segment>
 
-        <Form.Group>
-          <Segment hidden={stateToggle.familyInfoToggle}>
-            <div>{familyInfoInputs}</div>
-          </Segment>
-        </Form.Group>
+        <Segment
+          style={{ width: '100%', padding: '2.5rem 0' }}
+          hidden={stateToggle.familyInfoToggle}
+        >
+          <div
+            style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
+          >
+            {familyInfoInputs}
+          </div>
+        </Segment>
 
-        <Form.Group>
-          <Segment hidden={stateToggle.guarantorToggle}>
-            <div>{guarantorInputs}</div>
-          </Segment>
-        </Form.Group>
+        <Segment style={{ width: '100%', padding: '2.5rem 0' }} hidden={stateToggle.guarantorToggle}>
+          <div
+            style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
+          >
+            {guarantorInputs}
+          </div>
+        </Segment>
 
-        <Form.Group>
-          <Segment hidden={stateToggle.farmInfoToggle}>
-            <div>{farmInfoInputs}</div>
-          </Segment>
-        </Form.Group>
+        <Segment style={{ width: '100%', padding: '2.5rem 0' }} hidden={stateToggle.farmInfoToggle}>
+          <div
+            style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}
+          >
+            {farmInfoInputs}
+          </div>
+        </Segment>
 
         <Button primary type="submit">
           Add Farmer
         </Button>
-      </form>
+      </Form>
     </div>
   );
 };
