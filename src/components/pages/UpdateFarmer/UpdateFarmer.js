@@ -265,7 +265,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         }}
       >
         <Button
-          primary
+          color="teal"
           type="submit"
           size="large"
           content="Submit Changes"
