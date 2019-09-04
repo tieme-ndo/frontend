@@ -8,7 +8,6 @@ import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
 const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
-
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
 
@@ -22,62 +21,68 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
       const inputSectionData = formInputData[inputSection];
 
       for (const input in inputSectionData) {
-        inputSectionData[input].value = farmerData[inputSection][input];
-        if ('selected' in inputSectionData[input]) {
-          inputSectionData[input].selected = farmerData[inputSection][input];
+        // do not hydrate the image_url
+        // it will cause the component to break
+        if (input !== 'image_url') {
+          inputSectionData[input].value = farmerData[inputSection][input];
+          if ('selected' in inputSectionData[input]) {
+            inputSectionData[input].selected = farmerData[inputSection][input];
+          }
+          hydratedFormInputs = {
+            ...formInputData
+          };
         }
-        hydratedFormInputs = {
-          ...formInputData
-        };
       }
     }
 
     return hydratedFormInputs;
-  }
+  };
 
-  const [formElementsState, setFormElementsState] = useState(hydrateFormInputValues());
+  const [formElementsState, setFormElementsState] = useState(
+    hydrateFormInputValues()
+  );
 
   const [stateToggle, setStateToggle] = useState({
     personalInfoToggle: false,
     familyInfoToggle: true,
     guarantorToggle: true,
-    farmInfoToggle: true,
+    farmInfoToggle: true
   });
 
   const onChangeHandler = (e, data) => {
-    const { name, value, type } = e.target
-    const newData = { ...formElementsState[data] }
-    const newEntry = { ...newData[name] }
+    const { name, value, type } = e.target;
+    const newData = { ...formElementsState[data] };
+    const newEntry = { ...newData[name] };
     if (type === 'checkbox') {
       if (newEntry.selected.indexOf(value) > -1) {
-        newEntry.selected = newEntry.selected.filter(s => s !== value)
+        newEntry.selected = newEntry.selected.filter(s => s !== value);
       } else {
-        newEntry.selected = [...newEntry.selected, value]
+        newEntry.selected = [...newEntry.selected, value];
       }
     } else {
-      newEntry.value = value
+      newEntry.value = value;
     }
-    newData[name] = newEntry
-    setFormElementsState({ ...formElementsState, [data]: newData })
-  }
+    newData[name] = newEntry;
+    setFormElementsState({ ...formElementsState, [data]: newData });
+  };
   const toggleHandler = data => {
     setStateToggle(prevState => ({
       ...prevState,
-      [data]: !prevState[data],
-    }))
-  }
+      [data]: !prevState[data]
+    }));
+  };
   const formHandler = e => {
-    e.preventDefault()
-    let formData = {}
+    e.preventDefault();
+    let formData = {};
 
     const newState = JSON.parse(JSON.stringify(formElementsState));
     for (let key in newState) {
-      formData[key] = newState[key]
+      formData[key] = newState[key];
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
-          formData[key][key2] = newState[key][key2].selected
+          formData[key][key2] = newState[key][key2].selected;
         } else {
-          formData[key][key2] = newState[key][key2].value
+          formData[key][key2] = newState[key][key2].value;
         }
       }
     }
@@ -92,14 +97,14 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         farmer: { ...formData, _id: farmerData._id }
       });
     });
-  }
+  };
   const inputCreator = (data, index) => {
-    const formElementsArray = []
+    const formElementsArray = [];
     for (let key in data) {
       formElementsArray.push({
         id: key,
-        config: data[key],
-      })
+        config: data[key]
+      });
     }
     let form = formElementsArray.map(formElement => (
       <Input
@@ -108,14 +113,20 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         data={index}
         changeHandler={onChangeHandler}
       />
-    ))
-    return form
-  }
+    ));
+    return form;
+  };
 
-  let personalInfoInputs = inputCreator(formElementsState.personalInfo, 'personalInfo')
-  let familyInfoInputs = inputCreator(formElementsState.familyInfo, 'familyInfo')
-  let guarantorInputs = inputCreator(formElementsState.guarantor, 'guarantor')
-  let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo')
+  let personalInfoInputs = inputCreator(
+    formElementsState.personalInfo,
+    'personalInfo'
+  );
+  let familyInfoInputs = inputCreator(
+    formElementsState.familyInfo,
+    'familyInfo'
+  );
+  let guarantorInputs = inputCreator(formElementsState.guarantor, 'guarantor');
+  let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo');
 
   const DivToggle = styled.div`
     display: flex;
@@ -123,7 +134,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     &:hover {
       cursor: pointer;
     }
-  `
+  `;
   return (
     <div>
       <header>
@@ -136,15 +147,21 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         <Button displayName="Back" styles={{ backgroundColor: 'green' }} />
         <hr />
 
-        <form action="" onSubmit={(e) => {
-          e.preventDefault();
-        }} style={{ padding: '2rem' }}>
+        <form
+          action=""
+          onSubmit={e => {
+            e.preventDefault();
+          }}
+          style={{ padding: '2rem' }}
+        >
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'personalInfoToggle')}>
               <h2>Personal Information</h2>
               <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
-            <div hidden={stateToggle.personalInfoToggle}>{personalInfoInputs}</div>
+            <div hidden={stateToggle.personalInfoToggle}>
+              {personalInfoInputs}
+            </div>
           </fieldset>
 
           <hr />
@@ -158,7 +175,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           <hr />
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'guarantorToggle')}>
-              <h2>Guarantor</h2> <i className="fas fa-angle-double-down fa-2x" />
+              <h2>Guarantor</h2>{' '}
+              <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
             <div hidden={stateToggle.guarantorToggle}>{guarantorInputs}</div>
           </fieldset>
@@ -166,19 +184,20 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
 
           <fieldset>
             <DivToggle onClick={toggleHandler.bind(this, 'farmInfoToggle')}>
-              <h2>Farm Information</h2> <i className="fas fa-angle-double-down fa-2x" />
+              <h2>Farm Information</h2>{' '}
+              <i className="fas fa-angle-double-down fa-2x" />
             </DivToggle>
             <div hidden={stateToggle.farmInfoToggle}>{farmInfoInputs}</div>
           </fieldset>
         </form>
-          
+
         {/* Button is wrapped in a div to get onClick to work */}
-        <div onClick={(e) => formHandler(e)}>
+        <div onClick={e => formHandler(e)}>
           <Button displayName="Save" />
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
 export default withRestrictedAccess(UpdateFarmer);
