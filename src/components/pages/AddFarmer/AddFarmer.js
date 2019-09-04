@@ -171,28 +171,28 @@ const AddFarmer = () => {
             active={stateToggle.personalInfoToggle === false}
             onClick={() => toggleHandler('personalInfoToggle')}
           >
-            Personal
+            <b>1. Personal</b>
           </Menu.Item>
           <Menu.Item
             name="Family"
             active={stateToggle.familyInfoToggle === false}
             onClick={() => toggleHandler('familyInfoToggle')}
           >
-            Family
+            <b>2. Family</b>
           </Menu.Item>
           <Menu.Item
             name="Guarantor"
             active={stateToggle.guarantorToggle === false}
             onClick={() => toggleHandler('guarantorToggle')}
           >
-            Guarantor
+            <b>3. Guarantor</b>
           </Menu.Item>
           <Menu.Item
             name="Farm"
             active={stateToggle.farmInfoToggle === false}
             onClick={() => toggleHandler('farmInfoToggle')}
           >
-            Farm
+            <b>4. Farm</b>
           </Menu.Item>
         </Menu>
       </Segment>
