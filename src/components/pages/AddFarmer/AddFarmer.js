@@ -211,15 +211,23 @@ const AddFarmer = () => {
           >
             {personalInfoInputs}
           </div>
-          <Button
-            type="button"
-            onClick={() => toggleHandler('familyInfoToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto' }}
-            size="large"
-            content="Next"
-            icon="right arrow"
-            labelPosition="right"
-          />
+          <div
+            style={{
+              maxWidth: '500px',
+              margin: '0 auto',
+              textAlign: 'center',
+              marginTop: '2rem'
+            }}
+          >
+            <Button
+              type="button"
+              onClick={() => toggleHandler('familyInfoToggle')}
+              size="large"
+              content="Next"
+              icon="right arrow"
+              labelPosition="right"
+            />
+          </div>
         </Segment>
 
         <Segment
@@ -231,15 +239,23 @@ const AddFarmer = () => {
           >
             {familyInfoInputs}
           </div>
-          <Button
-            type="button"
-            onClick={() => toggleHandler('guarantorToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto' }}
-            size="large"
-            content="Next"
-            icon="right arrow"
-            labelPosition="right"
-          />
+          <div
+            style={{
+              maxWidth: '500px',
+              margin: '0 auto',
+              textAlign: 'center',
+              marginTop: '2rem'
+            }}
+          >
+            <Button
+              type="button"
+              onClick={() => toggleHandler('guarantorToggle')}
+              size="large"
+              content="Next"
+              icon="right arrow"
+              labelPosition="right"
+            />
+          </div>
         </Segment>
 
         <Segment
@@ -251,15 +267,23 @@ const AddFarmer = () => {
           >
             {guarantorInputs}
           </div>
-          <Button
-            type="button"
-            onClick={() => toggleHandler('farmInfoToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto' }}
-            size="large"
-            content="Next"
-            icon="right arrow"
-            labelPosition="right"
-          />
+          <div
+            style={{
+              maxWidth: '500px',
+              margin: '0 auto',
+              textAlign: 'center',
+              marginTop: '2rem'
+            }}
+          >
+            <Button
+              type="button"
+              onClick={() => toggleHandler('farmInfoToggle')}
+              size="large"
+              content="Next"
+              icon="right arrow"
+              labelPosition="right"
+            />
+          </div>
         </Segment>
 
         <Segment
@@ -269,15 +293,23 @@ const AddFarmer = () => {
           <div style={{ maxWidth: '500px', margin: '0 auto' }}>
             {farmInfoInputs}
           </div>
-          <Button
-            primary
-            type="submit"
-            style={{ maxWidth: '500px', margin: '0 auto' }}
-            size="large"
-            content="Add Farmer"
-            icon="check"
-            labelPosition="right"
-          />
+          <div
+            style={{
+              maxWidth: '500px',
+              margin: '0 auto',
+              textAlign: 'center',
+              marginTop: '2rem'
+            }}
+          >
+            <Button
+              primary
+              type="submit"
+              size="large"
+              content="Add Farmer"
+              icon="check"
+              labelPosition="right"
+            />
+          </div>
         </Segment>
       </Form>
     </div>
