@@ -104,7 +104,7 @@ function App() {
           <Route
             exact
             path="/reset-password"
-            component={withRestrictedAccess(ResetPassword)}
+            render={props => <ResetPassword {...props} logOut={logOut} />}
           />
           <ToastContainer position="top-right" />
         </Container>

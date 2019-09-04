@@ -6,8 +6,9 @@ import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
 import axiosWithHeader from '../../../utils/axiosWithHeaders';
 import { pathObj } from '../../../utils/generalVariables';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
-const PasswordReset = props => {
+const PasswordReset = ({ logOut }) => {
   const [state, updateState] = useState({
     newPassword: '',
     confirmNewPassword: '',
@@ -57,9 +58,7 @@ const PasswordReset = props => {
           resetting: false
         }));
 
-        localStorage.removeItem('tokenTiemeNdo');
-
-        props.history.push('/');
+        logOut();
       })
       .catch(error => {
         updateState(prevState => ({
@@ -79,4 +78,4 @@ const PasswordReset = props => {
   );
 };
 
-export default PasswordReset;
+export default withRestrictedAccess(PasswordReset);
