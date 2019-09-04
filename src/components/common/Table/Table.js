@@ -39,10 +39,7 @@ function DashboardTable({ className, history, columns, data, getFarmer }) {
               prepareRow(row) || (
                 <Table.Row
                   onClick={() => {
-                    history.push({
-                      pathname: `/farmers/${row.original.id}`,
-                      state: { farmer: getFarmer(row.original.id)}
-                    });
+                    history.push(`/farmers/${row.original.id}`);
                   }}
                   {...row.getRowProps()}
                 >
