@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
 
-const Dashboard = ({ farmers, getFarmer, history }) => {
+const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -71,7 +71,6 @@ const Dashboard = ({ farmers, getFarmer, history }) => {
         <StyledTable
           history={history}
           columns={columns}
-          getFarmer={getFarmer}
           data={data}
         />
       ) : (
@@ -83,7 +82,6 @@ const Dashboard = ({ farmers, getFarmer, history }) => {
 
 Dashboard.propTypes = {
   farmers: PropTypes.array,
-  rawFarmers: PropTypes.array,
   history: PropTypes.object
 };
 
