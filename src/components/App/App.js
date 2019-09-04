@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
@@ -8,7 +6,7 @@ import Login from '../pages/Login/Login';
 import AddStaff from '../pages/AddStaff/AddStaff';
 import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
-import ResetPassword from '../pages/PasswordReset/PasswordReset';
+import PasswordReset from '../pages/PasswordReset/PasswordReset';
 import withRestrictedAccess from '../hoc/withRestrictedAccess';
 import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
 import {
@@ -104,7 +102,7 @@ function App() {
           <Route
             exact
             path="/reset-password"
-            render={props => <ResetPassword {...props} logOut={logOut} />}
+            render={props => <PasswordReset {...props} logOut={logOut} />}
           />
           <ToastContainer position="top-right" />
         </Container>

@@ -50,6 +50,7 @@ const PasswordResetForm = props => {
                   <Form.Input
                     fluid
                     icon="lock"
+                    data-testid="new-password"
                     iconPosition="left"
                     placeholder="New Password"
                     type="password"
@@ -61,6 +62,7 @@ const PasswordResetForm = props => {
                   <Form.Input
                     fluid
                     icon="lock"
+                    data-testid="new-password-confirm"
                     iconPosition="left"
                     placeholder="Confirm New Password"
                     type="password"
@@ -80,9 +82,18 @@ const PasswordResetForm = props => {
                     />
                   ) : (
                     <Form.Group widths="equal">
-                      <Button color="teal" content="Reset" fluid />
+                      <Button
+                        color="teal"
+                        content="Reset"
+                        fluid
+                        data-testid="reset-pw-btn"
+                      />
                       <Link to="/" style={{ width: '100%' }}>
-                        <Button content="Cancel" fluid />
+                        <Button
+                          content="Cancel"
+                          fluid
+                          data-testid="cancel-reset-pw-btn"
+                        />
                       </Link>
                     </Form.Group>
                   )}
