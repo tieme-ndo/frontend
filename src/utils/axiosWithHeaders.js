@@ -1,13 +1,13 @@
 import axios from 'axios';
+import tokenKey from './generalVariables';
 
 const axiosWithHeader = () => {
-  const tokenFromBrowser = localStorage.getItem('tokenTiemeNdo');
-
-  const token = tokenFromBrowser ? tokenFromBrowser : false;
+  const token = localStorage.getItem(tokenKey);
 
   const axiosInstance = axios.create({
     headers: {
-      Authorization: token
+      Authorization: token,
+      'Content-Type': 'application/json'
     }
   });
 
