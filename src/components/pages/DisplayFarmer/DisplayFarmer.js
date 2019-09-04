@@ -93,7 +93,10 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
 DisplayFarmer.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
-  needsUpdate: PropTypes.func
+  needsUpdate: PropTypes.func,
+  match: PropTypes.object,
+  farmers: PropTypes.array,
+  getFarmer: PropTypes.func
 };
 
 export default withRestrictedAccess(DisplayFarmer);
