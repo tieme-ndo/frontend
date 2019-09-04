@@ -3,7 +3,7 @@ import {
   Responsive,
   Segment,
   Button,
-  Placeholder,
+  Image,
   Header
 } from 'semantic-ui-react';
 import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
@@ -11,12 +11,11 @@ import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
 
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
+  console.log(farmer)
   return (
     <>
       <Responsive as={Segment}>
-        <Placeholder style={{ height: 150, width: 150 }}>
-          <Placeholder.Image />
-        </Placeholder>
+        <Image style={{ height: 150, width: 150 }} src={farmer.personalInfo.image_url} />
         <Header size="medium">
           {farmer.personalInfo.first_name} {farmer.personalInfo.middle_name}{' '}
           {farmer.personalInfo.surname}
