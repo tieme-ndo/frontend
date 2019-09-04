@@ -40,7 +40,6 @@ const Input = props => {
         <>
           {elementConfig.options.map((option, index) => (
             <Checkbox
-              fluid
               key={index}
               name={name}
               type={type}
