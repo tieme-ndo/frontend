@@ -36,9 +36,7 @@ const PasswordReset = ({ logOut }) => {
     });
 
     if (!isValid) {
-      toast.error('All fields are required', {
-        position: toast.POSITION.TOP_CENTER
-      });
+      toast.error('All fields are required');
 
       return updateState(prevState => ({
         ...prevState,

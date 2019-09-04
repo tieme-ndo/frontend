@@ -52,9 +52,7 @@ function Login({ setUser, ...props }) {
 
     // if the response has token => successful login
     if (receivedUser.hasOwnProperty('token')) {
-      toast.success('Logged in successfully', {
-        position: toast.POSITION.TOP_CENTER
-      });
+      toast.success('Logged in successfully');
 
       setUser(getUser());
 
