@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import {
   loginHandler,
@@ -52,8 +51,6 @@ function Login({ setUser, ...props }) {
 
     // if the response has token => successful login
     if (receivedUser.hasOwnProperty('token')) {
-      toast.success('Logged in successfully');
-
       setUser(getUser());
 
       props.history.push('/');
