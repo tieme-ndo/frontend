@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
@@ -41,12 +43,12 @@ function App() {
         data: undefined,
         cleanedData: undefined
       });
-      updateFarmers();
+      loadFarmers();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
 
-  const updateFarmers = () => {
+  const loadFarmers = () => {
     getFarmersHandler()
       .then(retrievedFarmers => {
         setFarmers({
@@ -57,6 +59,13 @@ function App() {
       .catch(error => {
         console.error(error);
       });
+  };
+
+  const getFarmer = id => {
+    if (farmers.data) {
+      const farmer = farmers.data.find(farmer => farmer._id === id);
+      return farmer;
+    }
   };
 
   const logOut = () => {
@@ -77,7 +86,7 @@ function App() {
               <Dashboard
                 {...props}
                 farmers={farmers.cleanedData}
-                rawFarmers={farmers.data}
+                getFarmer={getFarmer}
               />
             )}
           />
@@ -96,7 +105,12 @@ function App() {
           <Route
             path="/farmers/:id"
             render={props => (
-              <DisplayFarmer {...props} needsUpdate={setNeedsUpdate} />
+              <DisplayFarmer
+                {...props}
+                farmers={farmers.data}
+                getFarmer={getFarmer}
+                needsUpdate={setNeedsUpdate}
+              />
             )}
           />
           <Route

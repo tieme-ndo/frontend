@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
 
-const Dashboard = ({ farmers, rawFarmers, history }) => {
+const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
 
   const Title = <Header as="h1">All Farmers</Header>;
@@ -22,11 +22,6 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
       setData([]);
     }
   }, [farmers]);
-
-  const getFarmer = id => {
-    const farmer = rawFarmers.find(farmer => farmer._id === id);
-    return farmer;
-  };
 
   return (
     <>
@@ -45,7 +40,6 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
         <DashboardTable
           history={history}
           columns={columns}
-          getFarmer={getFarmer}
           data={data}
         />
       ) : (
@@ -57,7 +51,6 @@ const Dashboard = ({ farmers, rawFarmers, history }) => {
 
 Dashboard.propTypes = {
   farmers: PropTypes.array,
-  rawFarmers: PropTypes.array,
   history: PropTypes.object
 };
 
