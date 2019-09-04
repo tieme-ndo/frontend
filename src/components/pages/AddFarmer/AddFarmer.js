@@ -97,6 +97,7 @@ const AddFarmer = () => {
       farmInfoToggle: true,
       [data]: false
     });
+
     //scrolls to the height of the Menu whenever the tab is changed.
     window.scrollTo(0, 75);
   };
@@ -195,7 +196,12 @@ const AddFarmer = () => {
           </Menu.Item>
         </Menu>
       </Segment>
-      <Form onSubmit={formHandler} style={{marginBottom: '5rem'}}>
+      <Form
+        onSubmit={formHandler}
+        style={{
+          marginBottom: `${window.innerHeight / 2}px`
+        }}
+      >
         <Segment
           style={{ width: '100%', padding: '2.5rem 0' }}
           hidden={stateToggle.personalInfoToggle}
@@ -207,9 +213,9 @@ const AddFarmer = () => {
           </div>
           <Button
             primary
-            type='button'
+            type="button"
             onClick={() => toggleHandler('familyInfoToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto'}}
+            style={{ maxWidth: '500px', margin: '0 auto' }}
           >
             Next
           </Button>
@@ -226,9 +232,9 @@ const AddFarmer = () => {
           </div>
           <Button
             primary
-            type='button'
+            type="button"
             onClick={() => toggleHandler('guarantorToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto'}}
+            style={{ maxWidth: '500px', margin: '0 auto' }}
           >
             Next
           </Button>
@@ -245,9 +251,9 @@ const AddFarmer = () => {
           </div>
           <Button
             primary
-            type='button'
+            type="button"
             onClick={() => toggleHandler('farmInfoToggle')}
-            style={{ maxWidth: '500px', margin: '0 auto'}}
+            style={{ maxWidth: '500px', margin: '0 auto' }}
           >
             Next
           </Button>
@@ -257,15 +263,13 @@ const AddFarmer = () => {
           style={{ width: '100%', padding: '2.5rem 0' }}
           hidden={stateToggle.farmInfoToggle}
         >
-          <div
-            style={{ maxWidth: '500px', margin: '0 auto'}}
-          >
+          <div style={{ maxWidth: '500px', margin: '0 auto' }}>
             {farmInfoInputs}
           </div>
           <Button
             primary
             type="submit"
-            style={{ maxWidth: '500px', margin: '0 auto'}}
+            style={{ maxWidth: '500px', margin: '0 auto' }}
           >
             Add Farmer
           </Button>
