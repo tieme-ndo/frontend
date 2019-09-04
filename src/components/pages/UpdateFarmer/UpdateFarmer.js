@@ -257,8 +257,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
             {farmInfoInputs}
           </div>
         </Segment>
-      </Form>
-      <div
+        <div
         style={{
           position: 'fixed',
           bottom: '0',
@@ -271,14 +270,14 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
       >
         <Button
           color="teal"
-          type="button"
-          onClick={formHandler}
+          type="submit"
           size="large"
           content="Submit Changes"
           icon="check"
           labelPosition="right"
         />
       </div>
+      </Form>   
     </div>
   );
 };
