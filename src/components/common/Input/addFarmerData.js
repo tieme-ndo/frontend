@@ -58,6 +58,15 @@ export const personalInfo = {
     valid: false,
     touched: false,
   },
+  image_url: {
+    elementType: 'input',
+    name: 'image_url',
+    type: 'file',
+    labelName: 'Farmer Image',
+    imageUrl: '',
+    valid: false,
+    touched: false,
+  },
   marital_status: {
     elementType: 'select',
     placeholder: 'Please Select',

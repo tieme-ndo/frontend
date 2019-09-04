@@ -1,11 +1,13 @@
 import React from 'react';
-import PageHeader from '../../common/PageHeader/PageHeader';
+import DashboardHeader from './DashboardHeader';
 import StyledTable from '../../common/Table/Table';
+import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { getFarmersHandler } from '../../../utils/handlers/farmerHandlers';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import PropTypes from 'prop-types';
 
-const Dashboard = () => {
+const Dashboard = ({ farmers, rawFarmers, history }) => {
   const [data, setData] = React.useState([]);
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -44,44 +46,50 @@ const Dashboard = () => {
     []
   );
 
-  const prepareData = farmers => {
-    let cleanedData = farmers.map(farmer => {
-      const farmerData = {
-        name: `${farmer.personalInfo.first_name} ${farmer.personalInfo.surname}`,
-        communityName: farmer.personalInfo.community_name,
-        farmLocation: farmer.farmInfo.location_of_farm,
-        phoneNumber: farmer.personalInfo.Phone_1,
-        guarantorName: `${farmer.guarantor.grt_first_name} ${farmer.guarantor.grt_surname}`,
-        guarantorPhoneNumber: farmer.guarantor.grt_phone
-      };
-      return farmerData;
-    });
-    return cleanedData;
-  };
-
   React.useEffect(() => {
-    let isSubscribed = true;
-    getFarmersHandler().then(farmers => {
-      if (isSubscribed) {
-        setData(prepareData(farmers));
-      }
-    });
-    return () => (isSubscribed = false);
-  }, []);
+    if (farmers) {
+      setData(farmers);
+    } else {
+      setData([]);
+    }
+  }, [farmers]);
+
+  const getFarmer = id => {
+    const farmer = rawFarmers.find(farmer => farmer._id === id);
+    return farmer;
+  };
 
   return (
     <>
-      <PageHeader
+      <DashboardHeader
         leftElement={Title}
         rightElement={
-          <Button color="teal" fixed="right">
-            <Link style={{color: 'white'}} to="/addfarmer">Add Farmer</Link>
-          </Button>
+          <Link style={{ color: 'white' }} to="/addfarmer">
+            <Button color="teal" fixed="right">
+              Add Farmer
+            </Button>
+          </Link>
         }
       />
-      <StyledTable columns={columns} data={React.useMemo(() => data, [data])} />
+
+      {data.length ? (
+        <StyledTable
+          history={history}
+          columns={columns}
+          getFarmer={getFarmer}
+          data={data}
+        />
+      ) : (
+        <LoadingIndicator />
+      )}
     </>
   );
 };
 
-export default Dashboard;
+Dashboard.propTypes = {
+  farmers: PropTypes.array,
+  rawFarmers: PropTypes.array,
+  history: PropTypes.object
+};
+
+export default withRestrictedAccess(Dashboard, false);
