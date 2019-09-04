@@ -576,7 +576,7 @@ export const guarantor = {
   grt_phone: {
     elementType: 'input',
     name: 'grt_phone',
-    type: 'text',
+    type: 'number',
     labelName: 'Phone',
     value: '',
     valid: false,
