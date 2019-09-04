@@ -27,7 +27,7 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
             <Placeholder style={{ height: 150, width: 150, margin: '0 auto' }}>
               <Placeholder.Image />
             </Placeholder>
-            <Header.Subheader style={{ textAlign: 'center' }}>No image available for this farmer!</Header.Subheader>
+            <Header.Subheader style={{ textAlign: 'center', color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
           </>
         }
         
