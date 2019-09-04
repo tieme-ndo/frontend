@@ -335,7 +335,7 @@ export const personalInfo = {
     value: '',
     valid: true,
   },
-  'major_source_of_income_name': {
+  major_source_of_income_name: {
     elementType: 'input',
     name: 'major_source_of_income_name',
     type: 'text',
@@ -344,7 +344,7 @@ export const personalInfo = {
     valid: false,
     touched: false,
   },
-  'major_source_of_income_amount': {
+  major_source_of_income_amount: {
     elementType: 'input',
     name: 'major_source_of_income_amount',
     type: 'number',
@@ -353,7 +353,7 @@ export const personalInfo = {
     valid: false,
     touched: false,
   },
-  'minor_source_of_income_name': {
+  minor_source_of_income_name: {
     elementType: 'input',
     name: 'minor_source_of_income_name',
     type: 'text',
@@ -362,7 +362,7 @@ export const personalInfo = {
     valid: false,
     touched: false,
   },
-  'minor_source_of_income_amount': {
+  minor_source_of_income_amount: {
     elementType: 'input',
     name: 'minor_source_of_income_amount',
     type: 'number',
