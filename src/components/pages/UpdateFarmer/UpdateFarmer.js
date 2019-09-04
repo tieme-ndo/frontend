@@ -22,6 +22,9 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
 
       // eslint-disable-next-line no-unused-vars
       for (const input in inputSectionData) {
+        // do not hydrate the image_url
+        // it will cause the component to break
+        if (input !== 'image_url') {
         inputSectionData[input].value = farmerData[inputSection][input];
         if ('selected' in inputSectionData[input]) {
           inputSectionData[input].selected = farmerData[inputSection][input];
@@ -31,6 +34,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         };
       }
     }
+  }
 
     return hydratedFormInputs;
   };
