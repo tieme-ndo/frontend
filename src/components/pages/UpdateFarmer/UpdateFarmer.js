@@ -263,14 +263,16 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           position: 'fixed',
           bottom: '0',
           left: '0',
+          right: '0',
           padding: '1.5rem 0',
-          width: '100%',
+          margin: ' 0 auto',
           textAlign: 'center'
         }}
       >
         <Button
           color="teal"
-          type="submit"
+          type="button"
+          onClick={formHandler}
           size="large"
           content="Submit Changes"
           icon="check"
