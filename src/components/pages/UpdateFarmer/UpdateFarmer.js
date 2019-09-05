@@ -25,16 +25,16 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         // do not hydrate the image_url
         // it will cause the component to break
         if (input !== 'image_url') {
-        inputSectionData[input].value = farmerData[inputSection][input];
-        if ('selected' in inputSectionData[input]) {
-          inputSectionData[input].selected = farmerData[inputSection][input];
+          inputSectionData[input].value = farmerData[inputSection][input];
+          if ('selected' in inputSectionData[input]) {
+            inputSectionData[input].selected = farmerData[inputSection][input];
+          }
+          hydratedFormInputs = {
+            ...formInputData
+          };
         }
-        hydratedFormInputs = {
-          ...formInputData
-        };
       }
     }
-  }
 
     return hydratedFormInputs;
   };

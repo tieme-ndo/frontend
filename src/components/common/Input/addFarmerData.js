@@ -38,7 +38,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   first_name: {
     elementType: 'input',
@@ -47,7 +47,7 @@ export const personalInfo = {
     labelName: 'First Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   middle_name: {
     elementType: 'input',
@@ -56,7 +56,7 @@ export const personalInfo = {
     labelName: 'Middle Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   surname: {
     elementType: 'input',
@@ -65,7 +65,7 @@ export const personalInfo = {
     labelName: 'Surname',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   marital_status: {
     elementType: 'select',
@@ -97,7 +97,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   gender: {
     elementType: 'select',
@@ -129,7 +129,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   place_of_birth: {
     elementType: 'input',
@@ -138,7 +138,7 @@ export const personalInfo = {
     labelName: 'Place Of Birth',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   date_of_birth: {
     elementType: 'input',
@@ -147,7 +147,7 @@ export const personalInfo = {
     labelName: 'Date Of Birth',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   id_type: {
     elementType: 'select',
@@ -179,7 +179,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   id_number: {
     elementType: 'input',
@@ -188,7 +188,7 @@ export const personalInfo = {
     labelName: 'Id Number',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   district: {
     elementType: 'input',
@@ -197,7 +197,7 @@ export const personalInfo = {
     labelName: 'District',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   region: {
     elementType: 'input',
@@ -206,7 +206,7 @@ export const personalInfo = {
     labelName: 'Region',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   community_name: {
     elementType: 'input',
@@ -215,7 +215,7 @@ export const personalInfo = {
     labelName: 'Community Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   house_name: {
     elementType: 'input',
@@ -224,7 +224,7 @@ export const personalInfo = {
     labelName: 'House Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   house_number: {
     elementType: 'input',
@@ -233,7 +233,7 @@ export const personalInfo = {
     labelName: 'House Number',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   nearest_landmark: {
     elementType: 'input',
@@ -242,7 +242,7 @@ export const personalInfo = {
     labelName: 'Nearest Landmark',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   Phone_1: {
     elementType: 'input',
@@ -251,7 +251,7 @@ export const personalInfo = {
     labelName: ' Phone 1',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   Phone_2: {
     elementType: 'input',
@@ -260,7 +260,7 @@ export const personalInfo = {
     labelName: 'Phone 2',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   education_level: {
     elementType: 'select',
@@ -297,7 +297,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   occupation: {
     elementType: 'input',
@@ -306,7 +306,7 @@ export const personalInfo = {
     labelName: 'Occupation',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   expected_income_per_month: {
     elementType: 'select',
@@ -333,7 +333,7 @@ export const personalInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   major_source_of_income_name: {
     elementType: 'input',
@@ -342,7 +342,7 @@ export const personalInfo = {
     labelName: 'Major Source Of Income',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   major_source_of_income_amount: {
     elementType: 'input',
@@ -351,7 +351,7 @@ export const personalInfo = {
     labelName: 'Major Source Of Income Amount',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   minor_source_of_income_name: {
     elementType: 'input',
@@ -360,7 +360,7 @@ export const personalInfo = {
     labelName: 'Minor Source Of Income',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   minor_source_of_income_amount: {
     elementType: 'input',
@@ -369,9 +369,9 @@ export const personalInfo = {
     labelName: 'Minor Source Of Income Amount',
     value: '',
     valid: false,
-    touched: false,
-  },
-}
+    touched: false
+  }
+};
 
 export const familyInfo = {
   family_size: {
@@ -381,7 +381,7 @@ export const familyInfo = {
     labelName: 'Family Size',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   number_of_dependant: {
     elementType: 'input',
@@ -390,7 +390,7 @@ export const familyInfo = {
     labelName: 'Number Of Dependant',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   highest_level_of_dependent: {
     elementType: 'select',
@@ -427,7 +427,7 @@ export const familyInfo = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   family_income_per_month: {
     elementType: 'select',
@@ -454,9 +454,9 @@ export const familyInfo = {
       ],
     },
     value: '',
-    valid: true,
-  },
-}
+    valid: true
+  }
+};
 
 export const guarantor = {
   grt_title: {
@@ -494,7 +494,7 @@ export const guarantor = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   grt_surname: {
     elementType: 'input',
@@ -503,7 +503,7 @@ export const guarantor = {
     labelName: 'Surname',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_first_name: {
     elementType: 'input',
@@ -512,7 +512,7 @@ export const guarantor = {
     labelName: 'First Name',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_gender: {
     elementType: 'select',
@@ -544,7 +544,7 @@ export const guarantor = {
       ],
     },
     value: '',
-    valid: true,
+    valid: true
   },
   grt_relations: {
     elementType: 'input',
@@ -553,7 +553,7 @@ export const guarantor = {
     labelName: 'Relations',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_residential_address: {
     elementType: 'input',
@@ -562,7 +562,7 @@ export const guarantor = {
     labelName: 'Residential Address',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_occupation: {
     elementType: 'input',
@@ -571,7 +571,7 @@ export const guarantor = {
     labelName: 'Occupation',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_phone: {
     elementType: 'input',
@@ -580,7 +580,7 @@ export const guarantor = {
     labelName: 'Phone',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_district: {
     elementType: 'input',
@@ -589,7 +589,7 @@ export const guarantor = {
     labelName: 'District',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   grt_region: {
     elementType: 'input',
@@ -598,9 +598,9 @@ export const guarantor = {
     labelName: 'Region',
     value: '',
     valid: false,
-    touched: false,
-  },
-}
+    touched: false
+  }
+};
 
 export const farmInfo = {
   number_of_acres: {
@@ -610,7 +610,7 @@ export const farmInfo = {
     labelName: 'Number Of Acres',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   location_of_farm: {
     elementType: 'input',
@@ -619,7 +619,7 @@ export const farmInfo = {
     labelName: 'Location Of Farm',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   farm_nearest_landmark: {
     elementType: 'input',
@@ -628,7 +628,7 @@ export const farmInfo = {
     labelName: 'Farm Nearest landmark',
     value: '',
     valid: false,
-    touched: false,
+    touched: false
   },
   crops_cultivated: {
     elementType: 'checkbox',
@@ -636,13 +636,23 @@ export const farmInfo = {
     type: 'checkbox',
     labelName: 'Crops Cultivated',
     elementConfig: {
-      options: ['Maize','Rice','Sorghum', 'Millet','Groundnuts','Beans','SoyaBeans','Yam','Guinea Corn']
+      options: [
+        'Maize',
+        'Rice',
+        'Sorghum',
+        'Millet',
+        'Groundnuts',
+        'Beans',
+        'SoyaBeans',
+        'Yam',
+        'Guinea Corn'
+      ]
     },
-    selected:[],
+    selected: [],
     value: '',
     checked: false,
     valid: false,
-    touched: false,
+    touched: false
   },
   // crops_cultivated_optional: {
   //   elementType: 'input',
@@ -659,14 +669,23 @@ export const farmInfo = {
     type: 'checkbox',
     labelName: 'Animals/Birds Own',
     elementConfig: {
-      options: ['Goat','Cow','Sheep', 'Pig','Donkey','Fowl','Guinea Pig','Turkey']
+      options: [
+        'Goat',
+        'Cow',
+        'Sheep',
+        'Pig',
+        'Donkey',
+        'Fowl',
+        'Guinea Pig',
+        'Turkey'
+      ]
     },
-    selected:[],
+    selected: [],
     value: '',
     checked: false,
     valid: false,
-    touched: false,
-  },
+    touched: false
+  }
   // animal_birds_other: {
   //   elementType: 'input',
   //   name: 'animal_birds_optional',
@@ -676,4 +695,4 @@ export const farmInfo = {
   //   valid: false,
   //   touched: false,
   // },
-}
+};
