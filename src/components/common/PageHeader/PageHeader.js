@@ -22,7 +22,11 @@ const PageHeader = ({ logOut, user }) => {
               </Link>
               {user && user.isAdmin ? (
                 <Link to="/accounts/new">
-                  <Dropdown.Item>Create new account</Dropdown.Item>
+                  <Dropdown.Item>
+                    <span data-testid="create-new-account-test">
+                      Create new account
+                    </span>
+                  </Dropdown.Item>
                 </Link>
               ) : null}
 
