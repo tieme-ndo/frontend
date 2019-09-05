@@ -42,7 +42,7 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
     }
   }
   return farmer ? (
-    <Container>
+    <Container data-testid="farmer-display-test">
       <Grid stackable columns={2}>
         <Grid.Column width={5}>
           <LeftDisplay
