@@ -15,7 +15,7 @@ const DashboardHeader = props => {
   return (
     <StyledHeader>
       <div className="left-element">{leftElement}</div>
-      <div className="right-element">{rightElement}</div>
+      <div data-testid="add-farmer-button-test" className="right-element">{rightElement}</div>
     </StyledHeader>
   );
 };
