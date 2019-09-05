@@ -26,7 +26,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         // it will cause the component to break
         if (input === 'image_url') {
           // but we still need the 'image_url' property on state object
-          inputSectionData[input].value = undefined;
+          inputSectionData[input].imageUrl = '';
         } else {
           inputSectionData[input].value = farmerData[inputSection][input];
           if ('selected' in inputSectionData[input]) {
@@ -130,6 +130,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
       for (let key2 in newState[key]) {
         if (newState[key][key2].selected) {
           formData[key][key2] = newState[key][key2].selected;
+        } else if (newState[key][key2].imageUrl) {
+          formData[key][key2] = newState[key][key2].imageUrl;
         } else {
           formData[key][key2] = newState[key][key2].value;
         }
