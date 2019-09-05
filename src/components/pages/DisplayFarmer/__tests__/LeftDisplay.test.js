@@ -4,6 +4,24 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import LeftDisplay from '../LeftDisplay';
 
+const testFarmerWithoutImg = {
+  personalInfo: {
+    first_name: "John",
+    middle_name: "Smith",
+    surname: "Thing",
+    image_url: "",
+  }
+}
+
+const testFarmerWithImg = {
+  personalInfo: {
+    first_name: "John",
+    middle_name: "Smith",
+    surname: "Thing",
+    image_url: "https://res.cloudinary.com/tiemendo/image/upload/v1567674036/farmers_images/p72mzdynr491ah3bfohl.jpg",
+  }
+}
+
 beforeAll(() => {
   // Mocking localStorage
   const localStorageMock = {
@@ -19,12 +37,7 @@ it('renders without crashing', () => {
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
   const { getByTestId } = render(
     <Router>
-      <LeftDisplay farmer={{personalInfo: {
-        first_name: "John",
-        middle_name: "Smith",
-        surname: "Thing",
-        image_url: "",
-      }}}/>
+      <LeftDisplay farmer={testFarmerWithoutImg}/>
     </Router>
   )
   const LeftDisplayComponent = getByTestId("left-display-render-test")
@@ -35,12 +48,7 @@ it('renders an image when a source is passed through props ', () => {
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
   const { getByTestId } = render(
     <Router>
-      <LeftDisplay farmer={{personalInfo: {
-        first_name: "John",
-        middle_name: "Smith",
-        surname: "Thing",
-        image_url: "https://res.cloudinary.com/tiemendo/image/upload/v1567674036/farmers_images/p72mzdynr491ah3bfohl.jpg",
-      }}}/>
+      <LeftDisplay farmer={testFarmerWithImg}/>
     </Router>
   )
   const LeftDisplayComponent = getByTestId("left-display-image-test")
@@ -51,12 +59,7 @@ it('renders an error message when no image source is passed through props', () =
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
   const { getByTestId } = render(
     <Router>
-      <LeftDisplay farmer={{personalInfo: {
-        first_name: "John",
-        middle_name: "Smith",
-        surname: "Thing",
-        image_url: "",
-      }}}/>
+      <LeftDisplay farmer={testFarmerWithoutImg}/>
     </Router>
   )
   const LeftDisplayComponent = getByTestId("left-display-placeholder-test")
