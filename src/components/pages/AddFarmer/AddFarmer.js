@@ -300,7 +300,7 @@ const AddFarmer = () => {
             }}
           >
             <Button
-              primary
+              color="teal"
               type="submit"
               size="large"
               content="Add Farmer"

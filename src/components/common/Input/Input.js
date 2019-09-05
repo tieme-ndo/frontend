@@ -47,7 +47,7 @@ const Input = props => {
               value={option}
               onChange={e => changeHandler(e, data, type)}
               checked={selected.indexOf(option) > -1}
-              style={{width: '33.3%', padding: '14px 0' }}
+              style={{ width: '33.3%', padding: '14px 0' }}
             />
           ))}
         </>
@@ -69,7 +69,7 @@ const Input = props => {
     default:
   }
   return (
-    <Form.Field style={{marginBottom: '16px'}}>
+    <Form.Field style={{ marginBottom: '16px' }}>
       <label>{labelName}</label>
       {inputElement}
     </Form.Field>
