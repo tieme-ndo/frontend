@@ -24,15 +24,18 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
       for (const input in inputSectionData) {
         // do not hydrate the image_url
         // it will cause the component to break
-        if (input !== 'image_url') {
+        if (input === 'image_url') {
+          // but we still need the 'image_url' property on state object
+          inputSectionData[input].value = undefined;
+        } else {
           inputSectionData[input].value = farmerData[inputSection][input];
           if ('selected' in inputSectionData[input]) {
             inputSectionData[input].selected = farmerData[inputSection][input];
           }
-          hydratedFormInputs = {
-            ...formInputData
-          };
         }
+        hydratedFormInputs = {
+          ...formInputData
+        };
       }
     }
 
@@ -258,26 +261,26 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           </div>
         </Segment>
         <div
-        style={{
-          position: 'fixed',
-          bottom: '0',
-          left: '0',
-          right: '0',
-          padding: '1.5rem 0',
-          margin: ' 0 auto',
-          textAlign: 'center'
-        }}
-      >
-        <Button
-          color="teal"
-          type="submit"
-          size="large"
-          content="Submit Changes"
-          icon="check"
-          labelPosition="right"
-        />
-      </div>
-      </Form>   
+          style={{
+            position: 'fixed',
+            bottom: '0',
+            left: '0',
+            right: '0',
+            padding: '1.5rem 0',
+            margin: ' 0 auto',
+            textAlign: 'center'
+          }}
+        >
+          <Button
+            color="teal"
+            type="submit"
+            size="large"
+            content="Submit Changes"
+            icon="check"
+            labelPosition="right"
+          />
+        </div>
+      </Form>
     </div>
   );
 };
