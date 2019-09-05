@@ -3,6 +3,7 @@ import {
   Responsive,
   Segment,
   Button,
+  Image,
   Placeholder,
   Header
 } from 'semantic-ui-react';
@@ -14,9 +15,21 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <>
       <Responsive as={Segment}>
-        <Placeholder style={{ height: 150, width: 150 }}>
-          <Placeholder.Image />
-        </Placeholder>
+        {
+          farmer.personalInfo.image_url 
+            ? 
+          <Image style={{ height: 150, width: 150}} 
+            src={farmer.personalInfo.image_url} 
+            alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`} />
+            :
+          <>
+            <Placeholder style={{ height: 150, width: 150 }}>
+              <Placeholder.Image />
+            </Placeholder>
+            <Header.Subheader style={{ color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
+          </>
+        }
+        
         <Header size="medium">
           {farmer.personalInfo.first_name} {farmer.personalInfo.middle_name}{' '}
           {farmer.personalInfo.surname}
