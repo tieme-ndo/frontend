@@ -38,7 +38,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         };
       }
     }
-
+    
     return hydratedFormInputs;
   };
 
