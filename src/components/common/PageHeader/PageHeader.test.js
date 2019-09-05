@@ -18,6 +18,26 @@ const userTest = {
   username: 'Test'
 };
 
+it('renders the navbar if user is admin', () => {
+  const { getByTestId } = render(
+    <Router>
+      <PageHeader user={userTestAdmin} />
+    </Router>
+  );
+  const HeaderComponent = getByTestId('nav-test');
+  expect(HeaderComponent).toBeInTheDocument();
+});
+
+it('renders the navbar if user is not admin', () => {
+  const { getByTestId } = render(
+    <Router>
+      <PageHeader user={userTest} />
+    </Router>
+  );
+  const HeaderComponent = getByTestId('nav-test');
+  expect(HeaderComponent).toBeInTheDocument();
+});
+
 it('renders add account if user is admin', () => {
   const { getByTestId } = render(
     <Router>
