@@ -29,10 +29,9 @@ Start by cloning the repository to your local machine
 ```bash
 git clone https://github.com/tieme-ndo/frontend.git
 
-cd frontend
-
-Rename .env.example and insert the right parameters
 ```
+
+Create a `.env` file on your root directory and populate it based on examples in `.env.example`.
 
 Next install the package dependencies by running
 
