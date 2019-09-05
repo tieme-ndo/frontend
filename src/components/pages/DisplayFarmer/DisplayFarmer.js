@@ -53,8 +53,9 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
         </Grid.Column>
         <Grid.Column width={11}>
           <Segment>
-            <Menu stackable>
+            <Menu stackable widths={4}>
               <Menu.Item
+                data-testid="personal-tab-render-test"
                 name="Personal"
                 active={selected === 'Personal'}
                 onClick={handleSelected}
@@ -62,6 +63,7 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
                 Personal
               </Menu.Item>
               <Menu.Item
+                data-testid="family-tab-click-test"
                 name="Family"
                 active={selected === 'Family'}
                 onClick={handleSelected}
