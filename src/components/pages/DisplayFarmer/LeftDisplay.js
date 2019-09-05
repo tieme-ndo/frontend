@@ -13,17 +13,17 @@ import PropTypes from 'prop-types';
 
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
-    <>
+    <div data-testid="left-display-render-test">
       <Responsive as={Segment}>
         {
           farmer.personalInfo.image_url 
             ? 
-          <Image style={{ height: 150, width: 150}} 
+          <Image data-testid="left-display-image-test" style={{ height: 150, width: 150}} 
             src={farmer.personalInfo.image_url} 
             alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`} />
             :
           <>
-            <Placeholder style={{ height: 150, width: 150 }}>
+            <Placeholder data-testid="left-display-placeholder-test" style={{ height: 150, width: 150 }}>
               <Placeholder.Image />
             </Placeholder>
             <Header.Subheader style={{ color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
@@ -73,7 +73,7 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
         message={"This can't be undone"}
         title={'Do you want to delete that farmer?'}
       />
-    </>
+    </div>
   );
 };
 
