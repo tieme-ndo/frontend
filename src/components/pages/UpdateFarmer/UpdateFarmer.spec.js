@@ -18,14 +18,32 @@ beforeAll(() => {
 
 it('renders without crashing', () => {
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
-  const { getByDisplayValue } = render(
+  const { getByDisplayValue, getAllByDisplayValue } = render(
     <Router>
       <UpdateFarmer />
     </Router>
   );
-  const farmerTitle = getByDisplayValue('Mrs');
-  expect(farmerTitle).toBeInTheDocument()
+  const allFields = getAllByDisplayValue;
+  expect(allFields).length().toBe(33)
 
 });
+
+// it('renders menu and form', () => {
+//   const {
+//     getAllByText,
+//     getAllByPlaceholderText,
+//     getAllByDisplayValue,
+//     getByText
+//   } = render(<AddFarmer />);
+
+//   expect(getAllByText('Next').length).toBe(3);
+//   expect(getByText('Add Farmer')).toBeInTheDocument();
+//   expect(getAllByDisplayValue('').length).toBe(33);
+//   expect(getAllByText('Please Select').length).toBe(10);
+//   expect(getByText('1. Personal')).toBeInTheDocument();
+//   expect(getByText('2. Family')).toBeInTheDocument();
+//   expect(getByText('3. Guarantor')).toBeInTheDocument();
+//   expect(getByText('4. Farm')).toBeInTheDocument();
+// });
 
 
