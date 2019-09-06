@@ -184,7 +184,7 @@ export const personalInfo = {
   id_number: {
     elementType: 'input',
     name: 'id_number',
-    type: 'number',
+    type: 'string',
     labelName: 'Id Number',
     value: '',
     valid: false,
@@ -229,7 +229,7 @@ export const personalInfo = {
   house_number: {
     elementType: 'input',
     name: 'house_number',
-    type: 'number',
+    type: 'string',
     labelName: 'House Number',
     value: '',
     valid: false,
@@ -247,7 +247,7 @@ export const personalInfo = {
   Phone_1: {
     elementType: 'input',
     name: 'Phone_1',
-    type: 'number',
+    type: 'string',
     labelName: ' Phone 1',
     value: '',
     valid: false,
@@ -256,7 +256,7 @@ export const personalInfo = {
   Phone_2: {
     elementType: 'input',
     name: 'Phone_2',
-    type: 'number',
+    type: 'string',
     labelName: 'Phone 2',
     value: '',
     valid: false,
@@ -576,7 +576,7 @@ export const guarantor = {
   grt_phone: {
     elementType: 'input',
     name: 'grt_phone',
-    type: 'number',
+    type: 'string',
     labelName: 'Phone',
     value: '',
     valid: false,
