@@ -184,7 +184,7 @@ export const personalInfo = {
   id_number: {
     elementType: 'input',
     name: 'id_number',
-    type: 'number',
+    type: 'string',
     labelName: 'Id Number',
     value: '',
     valid: false,
