@@ -19,8 +19,7 @@ const Dashboard = ({ farmers, history }) => {
 
   const [data, setData] = React.useState([]);
 
-  const [search, setSearch] = React.useState('shola');
-
+  const [search, setSearch] = React.useState('Shola');
 
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -33,6 +32,13 @@ const Dashboard = ({ farmers, history }) => {
       setData([]);
     }
   }, [farmers]);
+
+  console.log(search)
+  console.log(typeof farmers)
+
+  // if(search !== '' && farmersArray.name.indexOf( search ) === -1){
+  //   return null
+  // }
   return (
     <div data-testid="dashboard-render-test">
       <DashboardHeader
