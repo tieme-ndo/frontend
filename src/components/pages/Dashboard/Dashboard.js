@@ -19,7 +19,10 @@ const Dashboard = ({ farmers, history }) => {
 
   const [data, setData] = React.useState([]);
 
-  const [search, setSearch] = React.useState('Shola');
+  const [search, setSearch] = React.useState({
+    filteredFarmers: farmers && farmers.name ? farmers.name: [],
+    valChanged: false
+  });
 
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -31,14 +34,9 @@ const Dashboard = ({ farmers, history }) => {
     } else {
       setData([]);
     }
-  }, [farmers]);
+  }, [search, farmers]);
 
-  console.log(search)
-  console.log(typeof farmers)
 
-  // if(search !== '' && farmersArray.name.indexOf( search ) === -1){
-  //   return null
-  // }
   return (
     <div data-testid="dashboard-render-test">
       <DashboardHeader
@@ -55,7 +53,7 @@ const Dashboard = ({ farmers, history }) => {
 
       <Grid style={{ marginBottom: '10px' }}>
         <Grid.Column width={6}>
-          <Search 
+          <Search
             value={search}
             onSearchChange={event => setSearch(event.target.value)}
           />
