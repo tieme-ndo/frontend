@@ -182,7 +182,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
   let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo');
 
   return (
-    <div>
+    <div data-testid="edit-farmer-component">
       <Segment>
         <Menu stackable widths="4">
           <Menu.Item
