@@ -32,9 +32,3 @@ it('renders without crashing', () => {
   const editFarmerComponent = getByTestId('edit-farmer-component');
   expect(editFarmerComponent).toBeInTheDocument();
 });
-
-
-
-// 1. Test if each component renders
-
-
