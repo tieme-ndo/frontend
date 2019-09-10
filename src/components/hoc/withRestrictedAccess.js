@@ -24,3 +24,7 @@ const withRestrictedAccess = (
 };
 
 export default withRestrictedAccess;
+
+/**
+ * Check the status of the user
+ */

@@ -43,8 +43,8 @@ const Dashboard = ({ farmers, history }) => {
           data={data}
         />
       ) : (
-        <LoadingIndicator />
-      )}
+          <LoadingIndicator />
+        )}
     </div>
   );
 };
