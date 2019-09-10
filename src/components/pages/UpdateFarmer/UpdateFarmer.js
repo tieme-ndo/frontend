@@ -121,7 +121,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     window.scrollTo(0, 75);
   };
 
-  const formHandler = async e => {
+  const formHandler = e => {
     e.preventDefault();
     let formData = {};
     const newState = JSON.parse(JSON.stringify(formElementsState));
@@ -134,7 +134,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
           formData[key][key2] = newState[key][key2].selected;
         } else if (newState[key][key2].imageUrl) {
           formData[key][key2] = newState[key][key2].imageUrl;
-        } else {
+        } else { 
           formData[key][key2] = newState[key][key2].value;
         }
       }
@@ -192,7 +192,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
   let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo');
 
   return (
-    <div>
+    <div data-testid='test-update-farmer-component'>
       <Segment>
         <Menu stackable widths="4">
           <Menu.Item
