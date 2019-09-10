@@ -83,13 +83,12 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     setHeaders(token),
   )
     .then(res => {
-      if (res.data.successMessage) {
+      if (res.data.success) {
         return res.data;
       }
     })
-
     .catch(error => {
-      return new Error(error);
+      throw error;
     });
 };
 
