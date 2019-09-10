@@ -14,6 +14,7 @@ import { getUser } from '../../../utils/handlers/authenticationHandlers';
 
 const { isAdmin } = getUser();
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
+  const { isAdmin } = getUser();
   return (
     <div data-testid="left-display-render-test">
       <Responsive as={Segment}>
