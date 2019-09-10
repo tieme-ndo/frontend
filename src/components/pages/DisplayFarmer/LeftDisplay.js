@@ -10,34 +10,26 @@ import {
 import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
 import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
-import { getUser } from '../../../utils/handlers/authenticationHandlers';
 
-const { isAdmin } = getUser();
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <div data-testid="left-display-render-test">
       <Responsive as={Segment}>
-        {farmer.personalInfo.image_url ? (
-          <Image
-            data-testid="left-display-image-test"
-            style={{ height: 150, width: 150 }}
-            src={farmer.personalInfo.image_url}
-            alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`}
-          />
-        ) : (
+        {
+          farmer.personalInfo.image_url 
+            ? 
+          <Image data-testid="left-display-image-test" style={{ height: 150, width: 150}} 
+            src={farmer.personalInfo.image_url} 
+            alt={`${farmer.personalInfo.first_name} ${farmer.personalInfo.middle_name} ${farmer.personalInfo.surname}`} />
+            :
           <>
-            <Placeholder
-              data-testid="left-display-placeholder-test"
-              style={{ height: 150, width: 150 }}
-            >
+            <Placeholder data-testid="left-display-placeholder-test" style={{ height: 150, width: 150 }}>
               <Placeholder.Image />
             </Placeholder>
-            <Header.Subheader style={{ color: '#db2828' }}>
-              No image available for this farmer!
-            </Header.Subheader>
+            <Header.Subheader style={{ color: '#db2828' }}>No image available for this farmer!</Header.Subheader>
           </>
-        )}
-
+        }
+        
         <Header size="medium">
           {farmer.personalInfo.first_name} {farmer.personalInfo.middle_name}{' '}
           {farmer.personalInfo.surname}
@@ -67,23 +59,20 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
       >
         Edit Farmer
       </Button>
-
-      {isAdmin ? (
-        <ConfirmationModal
-          TriggerElement={Button}
-          triggerText={'Remove Farmer'}
-          triggerStyle={{ width: '100%' }}
-          triggerColor={'red'}
-          action={() => {
-            deleteFarmerHandler(farmer._id).then(() => {
-              needsUpdate(true);
-              history.push('/');
-            });
-          }}
-          message={"This can't be undone"}
-          title={'Do you want to delete that farmer?'}
-        />
-      ) : null}
+      <ConfirmationModal
+        TriggerElement={Button}
+        triggerText={'Remove Farmer'}
+        triggerStyle={{ width: '100%' }}
+        triggerColor={'red'}
+        action={() => {
+          deleteFarmerHandler(farmer._id).then(() => {
+            needsUpdate(true);
+            history.push('/');
+          });
+        }}
+        message={"This can't be undone"}
+        title={'Do you want to delete that farmer?'}
+      />
     </div>
   );
 };
