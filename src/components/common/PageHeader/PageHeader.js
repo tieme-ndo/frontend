@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
+import Notification from '../Notification/notification';
 
 const PageHeader = ({ logOut, user }) => {
   return (
@@ -16,11 +17,9 @@ const PageHeader = ({ logOut, user }) => {
           </Link>
 
           <Menu.Menu position="right">
-            {
-              user && user.isAdmin ? (
-                <i className="fa fa-bell fa-2x" style={{ padding: '12px' }}></i>
-              ) : null
-            }
+           <Notification 
+            user={user}
+           />
             <Dropdown text="Menu" pointing className="link item">
               <Dropdown.Menu>
                 <Link to="/">
