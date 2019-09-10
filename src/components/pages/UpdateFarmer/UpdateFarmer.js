@@ -4,8 +4,10 @@ import * as form from '../../common/Input/addFarmerData';
 import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
+
 const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
@@ -119,7 +121,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     window.scrollTo(0, 75);
   };
 
-  const formHandler = e => {
+  const formHandler = async e => {
     e.preventDefault();
     let formData = {};
     const newState = JSON.parse(JSON.stringify(formElementsState));
@@ -139,16 +141,24 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     }
 
     const token = getToken();
-    updateFarmerHandler(formData, farmerData._id, token).then(() => {
-      appStateShouldUpdate(true);
-      // removes "/edit" dynamically from the route pathname
-      history.replace(`${location.pathname.split('/edit')[0]}`, {
-        // Passes back the updated farmer data to the location state of the DisplayFarmers component
-        // Added "_id" because formData doesn't have/need an _id property
-        farmer: { ...formData, _id: farmerData._id }
-      });
-    });
+    updateFarmerHandler(formData, farmerData._id, token)
+      .then(() => {
+        appStateShouldUpdate(true);
+        // removes "/edit" dynamically from the route pathname
+        history.replace(`${location.pathname.split('/edit')[0]}`, {
+          // Passes back the updated farmer data to the location state of the DisplayFarmers component
+          // Added "_id" because formData doesn't have/need an _id property
+          farmer: { ...formData, _id: farmerData._id }
+        });
+      })
+      .catch(err => {
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message);
+        });
+        return;
+      })
   };
+
   const inputCreator = (data, tabName) => {
     const formElementsArray = [];
     // eslint-disable-next-line no-unused-vars
