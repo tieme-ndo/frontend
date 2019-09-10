@@ -40,7 +40,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         };
       }
     }
-
+    
     return hydratedFormInputs;
   };
 
@@ -192,7 +192,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
   let farmInfoInputs = inputCreator(formElementsState.farmInfo, 'farmInfo');
 
   return (
-    <div data-testid='test-update-farmer-component'>
+    <div data-testid='edit-farmer-component'>
       <Segment>
         <Menu stackable widths="4">
           <Menu.Item
