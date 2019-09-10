@@ -16,6 +16,11 @@ const PageHeader = ({ logOut, user }) => {
           </Link>
 
           <Menu.Menu position="right">
+            {
+              user && user.isAdmin ? (
+                <i className="fa fa-bell fa-2x" style={{ padding: '12px' }}></i>
+              ) : null
+            }
             <Dropdown text="Menu" pointing className="link item">
               <Dropdown.Menu>
                 <Link to="/">
