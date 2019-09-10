@@ -161,8 +161,8 @@ const AddFarmer = () => {
   let farmInfoInputs = inputCreator(state.farmInfo, 'farmInfo');
 
   return (
-    <div>
-      <Segment>
+    <>
+      <Segment data-testid="test-addfarmer-component">
         <Menu stackable widths="4">
           <Menu.Item
             name="Personal"
@@ -310,7 +310,7 @@ const AddFarmer = () => {
           </div>
         </Segment>
       </Form>
-    </div>
+    </>
   );
 };
 

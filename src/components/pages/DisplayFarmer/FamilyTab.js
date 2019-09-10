@@ -5,7 +5,7 @@ export default function FamilyTab(props) {
   const data = props.farmer.familyInfo;
 
   return (
-    <Grid columns={2} stackable>
+    <Grid data-testid="family-tab-render-test" columns={2} stackable>
       <Grid.Column>
         <Header.Subheader>Family Size</Header.Subheader>
         <Header size="tiny" style={{ marginTop: '0.1rem' }}>

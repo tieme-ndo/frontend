@@ -24,7 +24,7 @@ const Dashboard = ({ farmers, history }) => {
   }, [farmers]);
 
   return (
-    <>
+    <div data-testid="dashboard-render-test">
       <DashboardHeader
         leftElement={Title}
         rightElement={
@@ -45,7 +45,7 @@ const Dashboard = ({ farmers, history }) => {
       ) : (
         <LoadingIndicator />
       )}
-    </>
+    </div>
   );
 };
 
