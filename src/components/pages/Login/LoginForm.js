@@ -80,13 +80,6 @@ const LoginForm = props => {
                 )}
               </Segment>
             </Form>
-            <Button
-              onClick={() => {
-                throw new Error('Oh noes! I think I broke the app');
-              }}
-            >
-              Break everything
-            </Button>
           </Segment>
         </Grid.Column>
       </Grid>
