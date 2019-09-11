@@ -28,7 +28,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         // it will cause the component to break
         if (input === 'image_url') {
           // but we still need the 'image_url' property on state object
-          inputSectionData[input].imageUrl = '';
+          inputSectionData[input].imageUrl = farmerData[inputSection][input];
         } else {
           inputSectionData[input].value = farmerData[inputSection][input];
           if ('selected' in inputSectionData[input]) {
@@ -90,6 +90,13 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         newEntry.selected = [...newEntry.selected, value];
       }
     } else if (type === 'file') {
+      // Remove the selected image file from the form's <img /> element if no file is selected
+      e.target.nextSibling.src = '';
+      
+      if (files.length) {
+        // Render the image in the form's <img /> element
+        e.target.nextSibling.src = URL.createObjectURL(e.target.files[0]);
+
       const imageFile = new FormData();
       imageFile.append('file', files[0]);
       imageFile.append(
@@ -101,6 +108,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         .then(data => data.data.secure_url)
         .catch(err => err);
       newEntry.imageUrl = imageUrl;
+      }
     } else {
       newEntry.value = value;
     }

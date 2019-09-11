@@ -26,11 +26,10 @@ const Input = props => {
     case 'input':
       
       if (type === 'file' && name === 'image_url') {
-        console.log(name);
         inputElement = (
-          <div className="field">
+          <div>
             <input type="file" onChange={e => changeHandler(e, data, type)} />
-            <img src="" alt="" />
+            <img src={ props.imageUrl || '' } alt="" />
           </div>
         );
       } else {
