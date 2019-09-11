@@ -1,10 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
-const PageHeader = ({ logOut, user }) => {
+const Span = styled.span`
+  .red {
+    color: red;
+  }
+  .grey {
+    color: grey;
+  }
+`;
+
+const PageHeader = ({ logOut, user, edits }) => {
+  const changeColor = event => (event.target.style.color = 'grey');
+
   return (
     <div data-testid="nav-test">
       <Menu style={{ borderRadius: '0', margin: '0 0 2rem' }}>
@@ -16,6 +28,19 @@ const PageHeader = ({ logOut, user }) => {
           </Link>
 
           <Menu.Menu position="right">
+            {user && user.isAdmin ? (
+              <Menu.Item>
+                <Link to="/">
+                  <Span>
+                    {' '}
+                    <i
+                      className={edits ? 'fas fa-bell red' : 'fas fa-bell grey'}
+                      onClick={changeColor}
+                    ></i>
+                  </Span>
+                </Link>
+              </Menu.Item>
+            ) : null}
             <Dropdown text="Menu" pointing className="link item">
               <Dropdown.Menu>
                 <Link to="/">
