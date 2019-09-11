@@ -41,7 +41,7 @@ const getFarmer = farmerId => {
 const match = { params: { id: 'aksgjkasjgkasga' } };
 
 it('renders without crashing', () => {
-  localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
+  localStorage.setItem('tokenTiemeNdo', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBhdm9sIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTY4MTk3NjU3LCJleHAiOjE1Njg4MDI0NTd9.vfuvsBUI4c7YRarmbRJ5LD98dWcVF2CLE-w5SptOZGs');
 
   const { getByTestId } = render(
     <Router>
@@ -58,7 +58,7 @@ it('renders without crashing', () => {
 });
 
 it('renders the respective tab when clicking tab link', () => {
-  localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
+  localStorage.setItem('tokenTiemeNdo', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBhdm9sIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTY4MTk3NjU3LCJleHAiOjE1Njg4MDI0NTd9.vfuvsBUI4c7YRarmbRJ5LD98dWcVF2CLE-w5SptOZGs');
 
   const { getByTestId } = render(
     <Router>

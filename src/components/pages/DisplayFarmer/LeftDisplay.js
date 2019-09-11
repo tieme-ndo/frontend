@@ -12,7 +12,7 @@ import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
 import { getUser } from '../../../utils/handlers/authenticationHandlers';
 
-const { isAdmin } = getUser();
+
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <div data-testid="left-display-render-test">
@@ -68,7 +68,7 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
         Edit Farmer
       </Button>
 
-      {isAdmin ? (
+      {getUser().isAdmin ? (
         <ConfirmationModal
           TriggerElement={Button}
           triggerText={'Remove Farmer'}
