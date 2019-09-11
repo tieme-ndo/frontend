@@ -24,16 +24,27 @@ const Input = props => {
   let inputElement = null;
   switch (elementType) {
     case 'input':
-      inputElement = (
-        <SemanticInput
-          fluid
-          type={type}
-          name={name}
-          value={value}
-          onChange={e => changeHandler(e, data, type)}
-          checked={checked}
-        />
-      );
+      
+      if (type === 'file' && name === 'image_url') {
+        console.log(name);
+        inputElement = (
+          <div className="field">
+            <input type="file" onChange={e => changeHandler(e, data, type)} />
+            <img src="" alt="" />
+          </div>
+        );
+      } else {
+        inputElement = (
+          <SemanticInput
+            fluid
+            type={type}
+            name={name}
+            value={value}
+            onChange={e => changeHandler(e, data, type)}
+            checked={checked}
+          />
+        );
+      }
       break;
     case 'checkbox':
       inputElement = (
