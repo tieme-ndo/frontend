@@ -72,6 +72,14 @@ const AddFarmer = () => {
         newEntry.selected = [...newEntry.selected, value];
       }
     } else if (type === 'file') {
+      // Remove the selected image file from the form's <img /> element if no file is selected
+      e.target.nextSibling.src = '';
+      
+      
+      if (files.length) {
+        // Render the image in the form's <img /> element
+        e.target.nextSibling.src = URL.createObjectURL(e.target.files[0]);
+
       const imageFile = new FormData();
       imageFile.append('file', files[0]);
       imageFile.append(
@@ -83,6 +91,7 @@ const AddFarmer = () => {
         .then(data => data.data.secure_url)
         .catch(err => err);
       newEntry.imageUrl = imageUrl;
+      }
     } else {
       newEntry.value = value;
     }
