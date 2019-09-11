@@ -82,7 +82,7 @@ const LoginForm = props => {
             </Form>
             <Button
               onClick={() => {
-                throw new Error('damn');
+                throw new Error('Oh noes! I think I broke the app');
               }}
             >
               Break everything
