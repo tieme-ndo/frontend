@@ -80,17 +80,18 @@ const AddFarmer = () => {
         // Render the image in the form's <img /> element
         e.target.nextSibling.src = URL.createObjectURL(e.target.files[0]);
 
-      const imageFile = new FormData();
-      imageFile.append('file', files[0]);
-      imageFile.append(
-        'upload_preset',
-        process.env.REACT_APP_CLOUDINARY_PRESET
-      );
-      const imageUrl = await axios
-        .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
-        .then(data => data.data.secure_url)
-        .catch(err => err);
-      newEntry.imageUrl = imageUrl;
+        const imageFile = new FormData();
+        imageFile.append('file', files[0]);
+        imageFile.append(
+          'upload_preset',
+          process.env.REACT_APP_CLOUDINARY_PRESET
+        );
+        const imageUrl = await axios
+          .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
+          .then(data => data.data.secure_url)
+          .catch(err => err);
+        
+        newEntry.imageUrl = imageUrl;
       }
     } else {
       newEntry.value = value;
