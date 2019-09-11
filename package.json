@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "coveralls": "npm run coverage && cat coverage/lcov.info | coveralls",
-    "update-branch": "git checkout master && git pull && git checkout developer-staging && git merge master && git push origin developer-staging"
+    "update-branch": "git checkout master && git pull && git checkout developer-staging && yarn && git merge master && git push origin developer-staging"
   },
   "eslintConfig": {
     "extends": "react-app"
