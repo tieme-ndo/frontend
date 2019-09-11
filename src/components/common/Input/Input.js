@@ -27,10 +27,13 @@ const Input = props => {
       
       if (type === 'file' && name === 'image_url') {
         inputElement = (
-          <div>
-            <input type="file" onChange={e => changeHandler(e, data, type)} />
-            <img src={ props.imageUrl || '' } alt="" />
-          </div>
+          <>
+            <div>
+              <input type="file" onChange={e => changeHandler(e, data, type)} />
+              <img src={props.imageUrl || ''} alt="" />
+            </div>
+            <label style={{textAlign: 'center'}}>{labelName}</label>
+          </>
         );
       } else {
         inputElement = (
@@ -80,7 +83,7 @@ const Input = props => {
   }
   return (
     <Form.Field style={{ marginBottom: '16px' }}>
-      <label>{labelName}</label>
+      { name !== 'image_url' && <label>{labelName}</label> }
       {inputElement}
     </Form.Field>
   );
