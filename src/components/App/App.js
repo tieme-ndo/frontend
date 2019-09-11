@@ -141,6 +141,7 @@ function App() {
             path="/reset-password"
             render={props => <PasswordReset {...props} logOut={logOut} />}
           />
+
           <ToastContainer position="top-right" />
         </Container>
       </div>

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
+import EditModal from '../EditModal/EditModal';
 
 const Span = styled.span`
+  cursor: pointer;
   .red {
     color: red;
   }
@@ -15,7 +17,12 @@ const Span = styled.span`
 `;
 
 const PageHeader = ({ logOut, user, edits }) => {
-  const changeColor = event => (event.target.style.color = 'grey');
+  const [visible, setVisible] = useState(false);
+
+  const changeColor = event => {
+    event.target.style.color = 'grey';
+    setVisible(!visible);
+  };
 
   return (
     <div data-testid="nav-test">
@@ -30,15 +37,13 @@ const PageHeader = ({ logOut, user, edits }) => {
           <Menu.Menu position="right">
             {user && user.isAdmin ? (
               <Menu.Item>
-                <Link to="/">
-                  <Span>
-                    {' '}
-                    <i
-                      className={edits ? 'fas fa-bell red' : 'fas fa-bell grey'}
-                      onClick={changeColor}
-                    ></i>
-                  </Span>
-                </Link>
+                <Span>
+                  <i
+                    className={edits ? 'fas fa-bell red' : 'fas fa-bell grey'}
+                    onClick={changeColor}
+                  ></i>
+                </Span>
+                <EditModal visible={visible} />
               </Menu.Item>
             ) : null}
             <Dropdown text="Menu" pointing className="link item">
