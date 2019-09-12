@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
+  // state that keeps track of changed input fields
   const [changes, setChanges] = useState({});
 
   const hydrateFormInputValues = () => {
@@ -65,8 +66,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   /**
    * @param {*} e - an event which takes place in the DOM
    * @param {String} data - tabName
-   * @param {*} elementType - input field type ['checkbox', 'select', 'text', 'number']
-   * @param {*} elementConfigObj - Inputs component config with type, name, label, value ...
+   * @param {String} elementType - input field type 'checkbox', 'select', 'text', 'number'
+   * @param {Object | undefined} elementConfigObj - Inputs component config with type, name, label, value ...
    */
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
     let name, value, type, files;
@@ -120,13 +121,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     newData[name] = newEntry;
     setFormElementsState({ ...formElementsState, [data]: newData });
 
-    /**
-     * data = personalInfo
-     * name = first_name
-     *
-     * changedData = { personalInfo: {} }
-     * changedEntry = { first_name: "" }
-     */
+    // keep track of changed input fields that are sent to the Edits endpoint
     const changedData = { ...changes[data] }; // personalInfo object
     const originalData = { ...formElementsState[data] };
     if (type === 'checkbox') {
@@ -141,6 +136,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         changedData[name] = [...originalData[name].selected, value];
       }
     } else if (type === 'file') {
+      // upload the image file in FormData and send it to Cloudinary
       const imageFile = new FormData();
       imageFile.append('file', files[0]);
       imageFile.append(
@@ -151,6 +147,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
         .then(data => data.data.secure_url)
         .catch(err => err);
+      // save the img URL in DB
       changedData.imageUrl = imageUrl;
     } else {
       changedData[name] = value;
@@ -192,20 +189,26 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     }
 
     const token = getToken();
-    updateFarmerHandler(formData, farmerData._id, token).then(() => {
-      appStateShouldUpdate(true);
-      if (user && user.isAdmin) {
-        toast.success('Farmer record updated successfully');
-      } else {
-        toast.success("Waiting for Admin's review");
-      }
-      // removes "/edit" dynamically from the route pathname
-      history.replace(`${location.pathname.split('/edit')[0]}`, {
-        // Passes back the updated farmer data to the location state of the DisplayFarmers component
-        // Added "_id" because formData doesn't have/need an _id property
-        farmer: { ...formData, _id: farmerData._id }
-      });
-    });
+    updateFarmerHandler(changes, farmerData._id, token)
+      .then(() => {
+        appStateShouldUpdate(true);
+        if (user && user.isAdmin) {
+          toast.success('Farmer record updated successfully');
+        } else {
+          toast.success("Waiting for Admin's review");
+        }
+        // removes "/edit" dynamically from the route pathname
+        history.replace(`${location.pathname.split('/edit')[0]}`, {
+          // Passes back the updated farmer data to the location state of the DisplayFarmers component
+          // Added "_id" because formData doesn't have/need an _id property
+          farmer: { ...formData, _id: farmerData._id }
+        });
+      })
+      .catch(err =>
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message);
+        })
+      );
   };
 
   const inputCreator = (data, tabName) => {
