@@ -7,6 +7,7 @@ import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
+import FarmersStatistic from '../../partials/FarmersStatistic';
 
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
@@ -36,15 +37,13 @@ const Dashboard = ({ farmers, history }) => {
         }
       />
 
+      <FarmersStatistic />
+
       {data.length ? (
-        <DashboardTable
-          history={history}
-          columns={columns}
-          data={data}
-        />
+        <DashboardTable history={history} columns={columns} data={data} />
       ) : (
-          <LoadingIndicator />
-        )}
+        <LoadingIndicator />
+      )}
     </div>
   );
 };
