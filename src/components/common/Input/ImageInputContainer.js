@@ -5,8 +5,8 @@ export const ImageInputContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 12vh;
-  height: 15vh;
+  width: 14vh;
+  height: 18vh;
   overflow: hidden;
   background-color: rgba(34, 36, 38, 0.1);
   text-align: center;
@@ -14,8 +14,9 @@ export const ImageInputContainer = styled.div`
   margin: 0 auto 3px auto;
 
   &:after {
-    content: 'Tap To Upload Photo';
+    content: 'Upload Photo';
     color: rgba(0, 0, 0, 0.6);
+    padding: 0 8px;
   }
 
   input[type='file'] {
