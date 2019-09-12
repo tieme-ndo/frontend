@@ -75,7 +75,7 @@ const AddFarmer = () => {
     } else if (type === 'file') {
       // Remove the selected image file from the form's <img /> element if no file is selected
       e.target.nextSibling.src = '';
-      
+      newEntry.imageUrl = '';
       
       if (files.length) {
         

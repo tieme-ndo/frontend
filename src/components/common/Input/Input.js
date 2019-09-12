@@ -31,9 +31,14 @@ const Input = props => {
           <>
             <ImageInputContainer>
               <input name={name} type="file" onChange={e => changeHandler(e, data, type)} />
-              <img src={props.imageUrl || ''} alt="" />
+              <img
+                // Prevent empty image from being visible when no image is uploaded
+                style={{ opacity: !props.imageUrl ? 0 : 1 }}
+                src={props.imageUrl}
+                alt={props.imgAltText}
+              />
             </ImageInputContainer>
-            <label style={{textAlign: 'center'}}>{labelName}</label>
+            <label style={{ textAlign: 'center' }}>{labelName}</label>
           </>
         );
       } else {
