@@ -10,7 +10,7 @@ import {
 import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
 import { deleteFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import PropTypes from 'prop-types';
-
+import {getUser} from '../../../utils/handlers/authenticationHandlers'
 const LeftDisplay = ({ farmer, history, needsUpdate }) => {
   return (
     <div data-testid="left-display-render-test">
@@ -59,20 +59,23 @@ const LeftDisplay = ({ farmer, history, needsUpdate }) => {
       >
         Edit Farmer
       </Button>
-      <ConfirmationModal
-        TriggerElement={Button}
-        triggerText={'Remove Farmer'}
-        triggerStyle={{ width: '100%' }}
-        triggerColor={'red'}
-        action={() => {
-          deleteFarmerHandler(farmer._id).then(() => {
-            needsUpdate(true);
-            history.push('/');
-          });
-        }}
-        message={"This can't be undone"}
-        title={'Do you want to delete that farmer?'}
-      />
+
+      {getUser().isAdmin ? (
+        <ConfirmationModal
+          TriggerElement={Button}
+          triggerText={'Remove Farmer'}
+          triggerStyle={{ width: '100%' }}
+          triggerColor={'red'}
+          action={() => {
+            deleteFarmerHandler(farmer._id).then(() => {
+              needsUpdate(true);
+              history.push('/');
+            });
+          }}
+          message={"This can't be undone"}
+          title={'Do you want to delete that farmer?'}
+        />
+      ) : null}
     </div>
   );
 };

@@ -29,6 +29,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         if (input === 'image_url') {
           // but we still need the 'image_url' property on state object
           inputSectionData[input].imageUrl = '';
+        } else if (input === 'date_of_birth') {
+          inputSectionData[input].value = new Date(
+            farmerData[inputSection][input]
+          )
+            .toISOString()
+            .substr(0, 10);
         } else {
           inputSectionData[input].value = farmerData[inputSection][input];
           if ('selected' in inputSectionData[input]) {
@@ -54,6 +60,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     guarantorToggle: true,
     farmInfoToggle: true
   });
+  const [stateLoading, setStateLoading] = useState(false);
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
     let name, value, type, files;
@@ -122,6 +129,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   };
 
   const formHandler = e => {
+    setStateLoading(true);
     e.preventDefault();
     let formData = {};
     const newState = JSON.parse(JSON.stringify(formElementsState));
@@ -148,6 +156,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       } else {
         toast.success("Waiting for Admin's review");
       }
+      setStateLoading(false);
       // removes "/edit" dynamically from the route pathname
       history.replace(`${location.pathname.split('/edit')[0]}`, {
         // Passes back the updated farmer data to the location state of the DisplayFarmers component
@@ -156,6 +165,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       });
     });
   };
+
   const inputCreator = (data, tabName) => {
     const formElementsArray = [];
     // eslint-disable-next-line no-unused-vars
@@ -280,7 +290,16 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             textAlign: 'center'
           }}
         >
-          <Button
+          {stateLoading ? (
+            <Button
+            loading
+            disabled
+            color="teal"
+            size="large"
+            content="Submit Changes"
+          />
+          ) : (
+            <Button
             color="teal"
             type="submit"
             size="large"
@@ -288,6 +307,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             icon="check"
             labelPosition="right"
           />
+          )}
         </div>
       </Form>
     </div>
