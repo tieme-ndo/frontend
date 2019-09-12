@@ -66,7 +66,7 @@ const LoginForm = props => {
                   onChange={handleChange}
                 />
 
-                {state.loginIn ? (
+                {state.loading ? (
                   <Button
                     loading
                     disabled
