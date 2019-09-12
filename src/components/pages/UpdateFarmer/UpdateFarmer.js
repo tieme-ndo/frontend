@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
+  const [changes, setChanges] = useState({});
 
   const hydrateFormInputValues = () => {
     let hydratedFormInputs = {};
@@ -61,6 +62,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     farmInfoToggle: true
   });
 
+  /**
+   * @param {*} e - an event which takes place in the DOM
+   * @param {String} data - tabName
+   * @param {*} elementType - input field type ['checkbox', 'select', 'text', 'number']
+   * @param {*} elementConfigObj - Inputs component config with type, name, label, value ...
+   */
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
     let name, value, type, files;
 
@@ -112,6 +119,44 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     }
     newData[name] = newEntry;
     setFormElementsState({ ...formElementsState, [data]: newData });
+
+    /**
+     * data = personalInfo
+     * name = first_name
+     *
+     * changedData = { personalInfo: {} }
+     * changedEntry = { first_name: "" }
+     */
+    const changedData = { ...changes[data] }; // personalInfo object
+    const originalData = { ...formElementsState[data] };
+    if (type === 'checkbox') {
+      // need to check if it's already selected
+      if (e.target.parentNode.className.includes('checked')) {
+        // if it is selected, remove it from the array
+        changedData[name] = originalData[name].selected.filter(
+          s => s !== value
+        );
+      } else {
+        // if not append it to changedData[name] = [results, results, ...]
+        changedData[name] = [...originalData[name].selected, value];
+      }
+    } else if (type === 'file') {
+      const imageFile = new FormData();
+      imageFile.append('file', files[0]);
+      imageFile.append(
+        'upload_preset',
+        process.env.REACT_APP_CLOUDINARY_PRESET
+      );
+      const imageUrl = await axios
+        .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
+        .then(data => data.data.secure_url)
+        .catch(err => err);
+      changedData.imageUrl = imageUrl;
+    } else {
+      changedData[name] = value;
+    }
+
+    setChanges({ ...changes, [data]: changedData });
   };
 
   const toggleHandler = data => {

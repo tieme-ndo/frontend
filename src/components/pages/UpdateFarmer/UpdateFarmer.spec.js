@@ -37,7 +37,7 @@ const farmerMock = {
     number_of_acres: 3,
     location_of_farm: '7, Basi, Accra',
     farm_nearest_landmark: 'CBN',
-    crops_cultivated: ['Yam', 'Cassava'],
+    crops_cultivated: ['Yam'],
     animals_or_birds: ['Goat']
   },
   archived: true,
