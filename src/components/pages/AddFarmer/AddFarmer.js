@@ -38,6 +38,7 @@ const AddFarmer = () => {
   });
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
+    e.persist();
     let name, value, type, files;
 
     if (elementType === 'checkbox') {
@@ -77,21 +78,34 @@ const AddFarmer = () => {
       
       
       if (files.length) {
-        // Render the image in the form's <img /> element
-        e.target.nextSibling.src = URL.createObjectURL(e.target.files[0]);
-
+        
         const imageFile = new FormData();
         imageFile.append('file', files[0]);
         imageFile.append(
           'upload_preset',
           process.env.REACT_APP_CLOUDINARY_PRESET
-        );
-        const imageUrl = await axios
-          .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
-          .then(data => data.data.secure_url)
-          .catch(err => err);
+          );
+          try {
+            if (process.env.REACT_APP_CLOUDINARY_URL) {
+              const imageUrl = await axios
+              .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
+              .then(data => data.data.secure_url)
+              
+              // Render the image in the form's <img /> element
+              e.target.nextSibling.src = imageUrl;
+              
+              newEntry.imageUrl = imageUrl;
+          } else {
+            throw new Error('CLOUDINARY_URL environment variable not provided.');
+          }
+        }
+        catch (error) {
+          toast.error('Failed to upload image. Please check your connection.');
+          
+          // Display error message in the console for context
+          console.error(error.message);
+        }
         
-        newEntry.imageUrl = imageUrl;
       }
     } else {
       newEntry.value = value;
