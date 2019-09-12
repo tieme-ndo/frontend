@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import logo from '../../../assets/images/tiemendo_logo.jpg';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
-import EditModal from '../EditModal/EditModal';
+import Sidebar from '../Sidebar/Sidebar';
 
 const Span = styled.span`
   cursor: pointer;
@@ -19,7 +19,7 @@ const Span = styled.span`
 const PageHeader = ({ logOut, user, edits }) => {
   const [visible, setVisible] = useState(false);
 
-  const changeColor = event => {
+  const clickHandler = event => {
     event.target.style.color = 'grey';
     setVisible(!visible);
   };
@@ -40,10 +40,10 @@ const PageHeader = ({ logOut, user, edits }) => {
                 <Span>
                   <i
                     className={edits ? 'fas fa-bell red' : 'fas fa-bell grey'}
-                    onClick={changeColor}
+                    onClick={clickHandler}
                   ></i>
                 </Span>
-                <EditModal visible={visible} />
+                <Sidebar visible={visible} />
               </Menu.Item>
             ) : null}
             <Dropdown text="Menu" pointing className="link item">
