@@ -5,6 +5,7 @@ import {
   Checkbox,
   Form
 } from 'semantic-ui-react';
+import { ImageInputContainer } from './ImageInputContainer';
 const Input = props => {
   const {
     type,
@@ -28,10 +29,10 @@ const Input = props => {
       if (type === 'file' && name === 'image_url') {
         inputElement = (
           <>
-            <div>
+            <ImageInputContainer>
               <input name={name} type="file" onChange={e => changeHandler(e, data, type)} />
               <img src={props.imageUrl || ''} alt="" />
-            </div>
+            </ImageInputContainer>
             <label style={{textAlign: 'center'}}>{labelName}</label>
           </>
         );
