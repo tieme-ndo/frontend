@@ -20,6 +20,7 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
+import EditCollection from '../pages/EditCollection/EditCollection';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -50,6 +51,7 @@ function App() {
         cleanedData: undefined
       });
       loadFarmers();
+      loadeEditFarmer();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
@@ -77,6 +79,13 @@ function App() {
   const logOut = () => {
     setUser(false);
     logout();
+  };
+
+  const loadeEditFarmer = () => {
+    setEditFarmers({
+      data: undefined,
+      cleanedData: { id: '84hjrrr', name: 'Hey' }
+    });
   };
 
   return (
@@ -140,6 +149,11 @@ function App() {
             exact
             path="/reset-password"
             render={props => <PasswordReset {...props} logOut={logOut} />}
+          />
+          <Route
+            exact
+            path="/edit-collection/:id"
+            render={props => <EditCollection {...props} />}
           />
 
           <ToastContainer position="top-right" />
