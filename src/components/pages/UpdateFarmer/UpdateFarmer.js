@@ -97,11 +97,15 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
     const newData = { ...formElementsState[data] };
     const newEntry = { ...newData[name] };
+    // keep track of changed input fields that are sent to the Edits endpoint
+    const changedData = { ...changes[data] }; // personalInfo object
     if (type === 'checkbox') {
       if (newEntry.selected.indexOf(value) > -1) {
         newEntry.selected = newEntry.selected.filter(s => s !== value);
+        changedData[name] = newData[name].selected.filter(s => s !== value);
       } else {
         newEntry.selected = [...newEntry.selected, value];
+        changedData[name] = [...newData[name].selected, value];
       }
     } else if (type === 'file') {
       const imageFile = new FormData();
@@ -115,44 +119,13 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         .then(data => data.data.secure_url)
         .catch(err => err);
       newEntry.imageUrl = imageUrl;
+      changedData.imageUrl = imageUrl;
     } else {
       newEntry.value = value;
+      changedData[name] = value;
     }
     newData[name] = newEntry;
     setFormElementsState({ ...formElementsState, [data]: newData });
-
-    // keep track of changed input fields that are sent to the Edits endpoint
-    const changedData = { ...changes[data] }; // personalInfo object
-    const originalData = { ...formElementsState[data] };
-    if (type === 'checkbox') {
-      // need to check if it's already selected
-      if (e.target.parentNode.className.includes('checked')) {
-        // if it is selected, remove it from the array
-        changedData[name] = originalData[name].selected.filter(
-          s => s !== value
-        );
-      } else {
-        // if not append it to changedData[name] = [results, results, ...]
-        changedData[name] = [...originalData[name].selected, value];
-      }
-    } else if (type === 'file') {
-      // upload the image file in FormData and send it to Cloudinary
-      const imageFile = new FormData();
-      imageFile.append('file', files[0]);
-      imageFile.append(
-        'upload_preset',
-        process.env.REACT_APP_CLOUDINARY_PRESET
-      );
-      const imageUrl = await axios
-        .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
-        .then(data => data.data.secure_url)
-        .catch(err => err);
-      // save the img URL in DB
-      changedData.imageUrl = imageUrl;
-    } else {
-      changedData[name] = value;
-    }
-
     setChanges({ ...changes, [data]: changedData });
   };
 
