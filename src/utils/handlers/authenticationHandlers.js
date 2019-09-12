@@ -1,7 +1,7 @@
 import axios from "axios";
 import { pathObj, tokenKey } from "../generalVariables";
 import { setHeaders } from "../requestHeaders";
-import * as jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
@@ -78,7 +78,7 @@ export const logout = () => {
 export const getUser = () => {
   const token = localStorage.getItem(tokenKey);
   if (token) {
-    const decodedToken = jwt_decode(token);
+    const decodedToken = jwtDecode(token);
     if (decodedToken.exp * 1000 < Date.now()) {
       localStorage.removeItem(tokenKey);
       return false;
