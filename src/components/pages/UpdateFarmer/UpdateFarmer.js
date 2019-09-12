@@ -52,7 +52,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     personalInfoToggle: false,
     familyInfoToggle: true,
     guarantorToggle: true,
-    farmInfoToggle: true
+    farmInfoToggle: true,
+    submitLoading: false
   });
   const [stateLoading, setStateLoading] = useState(false);
 
