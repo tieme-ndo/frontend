@@ -29,6 +29,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         if (input === 'image_url') {
           // but we still need the 'image_url' property on state object
           inputSectionData[input].imageUrl = '';
+        } else if (input === 'date_of_birth') {
+          inputSectionData[input].value = new Date(
+            farmerData[inputSection][input]
+          )
+            .toISOString()
+            .substr(0, 10);
         } else {
           inputSectionData[input].value = farmerData[inputSection][input];
           if ('selected' in inputSectionData[input]) {
@@ -156,6 +162,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       });
     });
   };
+
   const inputCreator = (data, tabName) => {
     const formElementsArray = [];
     // eslint-disable-next-line no-unused-vars
