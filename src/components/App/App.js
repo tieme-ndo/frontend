@@ -28,6 +28,10 @@ function App() {
     cleanedData: undefined
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
+  const [editFarmers, setEditFarmers] = useState({
+    data: undefined,
+    cleanedData: undefined
+  });
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -78,7 +82,13 @@ function App() {
   return (
     <Router>
       <div className="App" data-testid="App">
-        {user ? <PageHeader logOut={logOut} user={user} /> : null}
+        {user ? (
+          <PageHeader
+            logOut={logOut}
+            user={user}
+            edits={editFarmers.cleanedData}
+          />
+        ) : null}
 
         <Container>
           <Route
@@ -103,7 +113,11 @@ function App() {
           <Route
             path="/farmers/:id/edit"
             render={props => (
-              <UpdateFarmer {...props} appStateShouldUpdate={setNeedsUpdate} />
+              <UpdateFarmer
+                {...props}
+                appStateShouldUpdate={setNeedsUpdate}
+                user={user}
+              />
             )}
           />
           <Route

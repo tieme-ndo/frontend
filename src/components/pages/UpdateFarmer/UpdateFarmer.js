@@ -6,7 +6,9 @@ import { getToken } from '../../../utils/handlers/authenticationHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
-const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
+import { toast } from 'react-toastify';
+
+const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
 
@@ -38,7 +40,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
         };
       }
     }
-    
+
     return hydratedFormInputs;
   };
 
@@ -141,6 +143,11 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate }) => {
     const token = getToken();
     updateFarmerHandler(formData, farmerData._id, token).then(() => {
       appStateShouldUpdate(true);
+      if (user && user.isAdmin) {
+        toast.success('Farmer record updated successfully');
+      } else {
+        toast.success("Waiting for Admin's review");
+      }
       // removes "/edit" dynamically from the route pathname
       history.replace(`${location.pathname.split('/edit')[0]}`, {
         // Passes back the updated farmer data to the location state of the DisplayFarmers component
