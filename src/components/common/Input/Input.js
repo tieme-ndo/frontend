@@ -29,7 +29,7 @@ const Input = props => {
         inputElement = (
           <>
             <div>
-              <input type="file" onChange={e => changeHandler(e, data, type)} />
+              <input name={name} type="file" onChange={e => changeHandler(e, data, type)} />
               <img src={props.imageUrl || ''} alt="" />
             </div>
             <label style={{textAlign: 'center'}}>{labelName}</label>
