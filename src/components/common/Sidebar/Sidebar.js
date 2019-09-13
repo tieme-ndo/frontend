@@ -43,17 +43,15 @@ const Div = styled.div`
 
 const SidebarComponent = ({ visible }) => {
 
-  const [hidden, setHidden] = useState(false)
 
-  //Not wokking
-  const clickHandler = (e) => {
-    setHidden(true);
-    console.log(e.currentTarget);
-  };
-
+  const hideSideBar = () => {
+    if (visible) {
+      return (!visible)
+    }
+  }
 
   return (
-    <Span hidden={hidden}>
+    <Span >
       {' '}
       <Sidebar
         as={Menu}
@@ -68,7 +66,7 @@ const SidebarComponent = ({ visible }) => {
       >
         <Div>
           <Link to="/edit-collection/95995/">
-            <div className="cards" onClick={clickHandler}>
+            <div className="cards" onClick={hideSideBar}>
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
               </p>

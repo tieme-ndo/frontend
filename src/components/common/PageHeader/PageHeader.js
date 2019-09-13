@@ -24,9 +24,15 @@ const PageHeader = ({ logOut, user, edits }) => {
     setVisible(!visible);
   };
 
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible)
+    }
+  }
+
   return (
     <div data-testid="nav-test">
-      <Menu style={{ borderRadius: '0', margin: '0 0 2rem' }}>
+      <Menu style={{ borderRadius: '0', margin: '0 0 2rem' }} onClick={closeSideBar}>
         <Container>
           <Link to="/">
             <Menu.Item>
