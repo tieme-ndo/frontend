@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Button, Menu, Sidebar } from 'semantic-ui-react';
+import { Menu, Sidebar } from 'semantic-ui-react';
 
 const Span = styled.span`
   cursor: pointer;
@@ -42,7 +42,6 @@ const Div = styled.div`
 `;
 
 const SidebarComponent = ({ visible }) => {
-
 
   const hideSideBar = () => {
     if (visible) {
