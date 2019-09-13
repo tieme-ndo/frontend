@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Button, Menu, Sidebar } from 'semantic-ui-react';
+import { Menu, Sidebar } from 'semantic-ui-react';
 
 const Span = styled.span`
   cursor: pointer;
@@ -13,6 +13,9 @@ const Span = styled.span`
   }
   .grey {
     color: grey;
+  }
+  .hidden {
+    display: display
   }
 `;
 
@@ -38,18 +41,22 @@ const Div = styled.div`
       color: white;
     }
   }
+  
 `;
 
 const SidebarComponent = ({ visible }) => {
 
-  //Not woeking
-  const clickHandler = () => {
-    return visible = !visible
+  const [hidden, setHidden] = useState(false)
+
+  //Not wokking
+  const clickHandler = (e) => {
+    setHidden(true);
+    console.log(e.currentTarget);
   };
-  
+
 
   return (
-    <Span>
+    <Span hidden={hidden}>
       {' '}
       <Sidebar
         as={Menu}
@@ -63,7 +70,7 @@ const SidebarComponent = ({ visible }) => {
         style={{ top: '57px', paddingBottom: '50px' }}
       >
         <Div>
-          <Link to="/edit-collection/95995/">
+          <Link to="/edit-collection/95995/" >
             <div className="cards" onClick={clickHandler}>
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
