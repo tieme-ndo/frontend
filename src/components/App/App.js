@@ -51,7 +51,7 @@ function App() {
         cleanedData: undefined
       });
       loadFarmers();
-      loadeEditFarmer();
+      loadEditFarmer();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
@@ -81,7 +81,7 @@ function App() {
     logout();
   };
 
-  const loadeEditFarmer = () => {
+  const loadEditFarmer = () => {
     setEditFarmers({
       data: undefined,
       cleanedData: { id: '84hjrrr', name: 'Hey' }

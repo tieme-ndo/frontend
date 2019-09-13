@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Button, Menu, Sidebar } from 'semantic-ui-react';
+import { Menu, Sidebar } from 'semantic-ui-react';
 
 const Span = styled.span`
   cursor: pointer;
@@ -41,16 +41,15 @@ const Div = styled.div`
 `;
 
 const SidebarComponent = ({ visible }) => {
-  const [show, setShow] = useState(visible);
-  //Not woeking
-  const clickHandler = () => {
-    setShow(false);
+  const [hidden, setHidden] = useState(false);
+
+  //Not wokking
+  const clickHandler = e => {
+    setHidden(true);
   };
 
-  console.log(show)
-
   return (
-    <Span>
+    <Span hidden={hidden}>
       {' '}
       <Sidebar
         as={Menu}
@@ -59,7 +58,7 @@ const SidebarComponent = ({ visible }) => {
         icon="labeled"
         dimmed={'dimmed'}
         vertical
-        visible={visible }
+        visible={visible}
         width="wide"
         style={{ top: '57px', paddingBottom: '50px' }}
       >
