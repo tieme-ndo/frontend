@@ -38,7 +38,6 @@ const AddFarmer = () => {
   });
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
-    e.persist();
     let name, value, type, files;
 
     if (elementType === 'checkbox') {
@@ -74,6 +73,7 @@ const AddFarmer = () => {
       }
     } else if (type === 'file') {
       // Remove the selected image file from the form's <img /> element if no file is selected
+      e.persist();
       e.target.nextSibling.src = '';
       newEntry.imageUrl = '';
       

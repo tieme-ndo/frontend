@@ -60,7 +60,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   const [stateLoading, setStateLoading] = useState(false);
 
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
-    e.persist();
     let name, value, type, files;
 
     if (elementType === 'checkbox') {
@@ -112,6 +111,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             const imageUrl = uploadResponseData.data.secure_url;
 
             // Render the image in the form's <img /> element
+            e.persist();
             e.target.nextSibling.src = imageUrl;
 
             newEntry.imageUrl = imageUrl;
