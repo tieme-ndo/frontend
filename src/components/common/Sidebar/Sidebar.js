@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Menu, Sidebar } from 'semantic-ui-react';
+import { Button, Menu, Sidebar } from 'semantic-ui-react';
 
 const Span = styled.span`
   cursor: pointer;
@@ -13,9 +13,6 @@ const Span = styled.span`
   }
   .grey {
     color: grey;
-  }
-  .hidden {
-    display: display
   }
 `;
 
@@ -70,14 +67,14 @@ const SidebarComponent = ({ visible }) => {
         style={{ top: '57px', paddingBottom: '50px' }}
       >
         <Div>
-          <Link to="/edit-collection/95995/" >
+          <Link to="/edit-collection/95995/">
             <div className="cards" onClick={clickHandler}>
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
               </p>
             </div>
           </Link>
-          <Link to="/edit-collection/95995">
+          <Link to="/edit-collection/95995ss">
             <div className="cards">
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
@@ -91,7 +88,7 @@ const SidebarComponent = ({ visible }) => {
               </p>
             </div>
           </Link>
-          <Link to="/edit-collection/95995">
+          <Link to="/edit-collection/959951q">
             <div className="cards">
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
