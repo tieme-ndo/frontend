@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -41,13 +41,8 @@ const Div = styled.div`
   
 `;
 
-const SidebarComponent = ({ visible }) => {
+const SidebarComponent = ({ visible, closeSideBar }) => {
 
-  const hideSideBar = () => {
-    if (visible) {
-      return (!visible)
-    }
-  }
 
   return (
     <Span >
@@ -65,7 +60,7 @@ const SidebarComponent = ({ visible }) => {
       >
         <Div>
           <Link to="/edit-collection/95995/">
-            <div className="cards" onClick={hideSideBar}>
+            <div className="cards" onClick={closeSideBar}>
               <p>
                 <b>Staff name</b> updated <b>farmer record</b> on Sept 13
               </p>

@@ -88,6 +88,18 @@ function App() {
     });
   };
 
+  const [visible, setVisible] = useState(false);
+
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible)
+    } 
+  }
+
+  const toggleSideBar = () => {
+    setVisible(!visible)
+  }
+
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -96,10 +108,15 @@ function App() {
             logOut={logOut}
             user={user}
             edits={editFarmers.cleanedData}
+            visible={visible}
+            closeSideBar={closeSideBar}
+            toggleSideBar={toggleSideBar}
           />
         ) : null}
 
-        <Container>
+        <Container
+          onClick={closeSideBar}
+        >
           <Route
             path="/"
             exact
