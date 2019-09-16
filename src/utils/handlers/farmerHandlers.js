@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
-import { getToken } from './authenticationHandlers';
 
 export const getFarmersHandler = () => {
   return axios

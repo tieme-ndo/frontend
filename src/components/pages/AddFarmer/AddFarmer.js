@@ -9,9 +9,7 @@ import {
   farmInfo
 } from '../../common/Input/addFarmerData';
 import axios from 'axios';
-import { pathObj } from '../../../utils/generalVariables';
-import { getToken } from '../../../utils/handlers/authenticationHandlers';
-import { setHeaders } from '../../../utils/requestHeaders';
+import { addFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
@@ -120,8 +118,7 @@ const AddFarmer = () => {
       }
     }
 
-    axios
-      .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
+    addFarmerHandler(formData)
       .then(res => {
         toast.success('Farmer Added Successfully');
         defaultState();
