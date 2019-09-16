@@ -77,6 +77,7 @@ const AddFarmer = () => {
         process.env.REACT_APP_CLOUDINARY_PRESET
       );
       const imageUrl = await axios
+      // This should be made into a separate request handler.
         .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
         .then(data => data.data.secure_url)
         .catch(err => err);
