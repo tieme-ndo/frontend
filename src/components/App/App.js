@@ -21,6 +21,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
+import {
+  getAllChangeRequests,
+  getChangeRequestsById
+} from '../../utils/handlers/changeRequestHandler';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -29,10 +33,7 @@ function App() {
     cleanedData: undefined
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
-  const [editFarmers, setEditFarmers] = useState({
-    data: undefined,
-    cleanedData: undefined
-  });
+  const [changeRequest, setChangeRequest] = useState([]);
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -51,7 +52,7 @@ function App() {
         cleanedData: undefined
       });
       loadFarmers();
-      loadEditFarmer();
+      loadChangeRequest();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
@@ -81,22 +82,29 @@ function App() {
     logout();
   };
 
-  const loadEditFarmer = () => {
-    setEditFarmers({
-      data: undefined,
-      cleanedData: { id: '84hjrrr', name: 'Hey' }
-    });
+  const loadChangeRequest = () => {
+    getAllChangeRequests()
+      .then(changeRequests => {
+        setChangeRequest(changeRequests);
+      })
+      .catch(error => {
+        return new Error(error);
+      });
+  };
+
+  const loadChangeRequestById = id => {
+    return getChangeRequestsById(id)
+      .then(res => res)
+      .catch(error => {
+        return new Error(error);
+      });
   };
 
   return (
     <Router>
       <div className="App" data-testid="App">
         {user ? (
-          <PageHeader
-            logOut={logOut}
-            user={user}
-            edits={editFarmers.cleanedData}
-          />
+          <PageHeader logOut={logOut} user={user} edits={changeRequest} />
         ) : null}
 
         <Container>
@@ -153,7 +161,12 @@ function App() {
           <Route
             exact
             path="/edit-collection/:id"
-            render={props => <EditCollection {...props} />}
+            render={props => (
+              <EditCollection
+                {...props}
+                changeRequest={loadChangeRequestById}
+              />
+            )}
           />
 
           <ToastContainer position="top-right" />

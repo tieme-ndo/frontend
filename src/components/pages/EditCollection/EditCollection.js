@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { Grid, Segment, Table, TableHeader, Button } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Table, TableHeader, Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import uuid from 'uuid';
+import PropTypes from 'prop-types';
 
-import TestImage from '../../../assets/images/tiemendo_logo.jpg';
+import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import {
+  getChangeRequestsById,
+  approveChangeRequest,
+  rejectChangeRequest
+} from '../../../utils/handlers/changeRequestHandler';
+import moment from 'moment';
 
 const Div = styled.div`
   strike {
@@ -26,60 +33,46 @@ const Div = styled.div`
   }
 `;
 
-const mockData = {
-  requested_changes: {
-    personalInfo: {
-      firstName: 'Joe',
-      middleName: '',
-      image_url: TestImage
-    },
-    farmInfo: {
-      crops_cultivated: ['bar', 'lorem', 'ipsum'],
-      animals_or_birds: ['goat', 'cow', 'pig']
-    }
-  },
-  original_data: {
-    personalInfo: {
-      firstName: 'Mark',
-      middleName: 'Frank',
-      image_url: TestImage
-    },
-    farmInfo: {
-      crops_cultivated: ['dolar'],
-      animals_or_birds: ['goat', 'cow', 'pig', 'sheep', 'bird']
-    }
-  },
-  id: 'jgatgosbsdpb',
-  edited_by: 'AccountName',
-  datetime: '424284204'
-};
+const EditCollection = ({ match }) => {
+  const [state, setState] = useState({
+    data: undefined,
+    cleanedData: []
+  });
+  useEffect(() => {
+    getChangeRequestsById(match.params.id)
+      .then(data => {
+        const oldData = data.original_data;
+        const newData = data.requested_changes;
+        const cleanedData = [];
+        for (let key in oldData) {
+          for (let key2 in oldData[key]) {
+            cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
+          }
+        }
+        setState(prevState => {
+          return {
+            ...prevState,
+            data,
+            cleanedData
+          };
+        });
+      })
+      .catch(err => err);
+  }, []);
 
-const wholeObject = [];
+  const { data, cleanedData } = state;
 
-const display = () => {
-  const oldData = mockData.original_data;
-  const newData = mockData.requested_changes;
-
-  for (let key in oldData) {
-    for (let key2 in oldData[key]) {
-      wholeObject.push([key2, oldData[key][key2], newData[key][key2]]);
-    }
-  }
-};
-console.log(wholeObject);
-
-display();
-
-const EditCollection = props => {
-  console.log(props.location.pathname);
   return (
     <Div data-testid="edit-collection-component">
       <h1>Edit Collection</h1>
-      <div>
-        <p> {`Edited by: ${mockData.edited_by}`}</p>
-        <p> Farmer Record: John Doe</p>
-        <p>When: 20th Sept</p>
-      </div>
+      {data ? (
+        <div>
+          <p> {`Edited by: ${data.change_requested_by}`}</p>
+          <p> Farmer Record: {data.farmer_name}</p>
+          <p>When: {moment(data.datetime).format('LLLL')}</p>{' '}
+        </div>
+      ) : null}
+
       <Table celled>
         <TableHeader>
           <Table.Row>
@@ -89,17 +82,17 @@ const EditCollection = props => {
           </Table.Row>
         </TableHeader>
         <Table.Body>
-          {wholeObject.map(value =>
+          {cleanedData.map(value =>
             value[0] === 'image_url' ? (
               <Table.Row key={uuid()}>
                 <Table.Cell>
                   <b>Image</b>
                 </Table.Cell>
                 <Table.Cell>
-                  <img src={value[1]} alt="farmer" />
+                  {value[1] ? <img src={value[1]} alt="farmer" /> : null}
                 </Table.Cell>
                 <Table.Cell>
-                  <img src={value[2]} alt="farmer" />
+                  {value[2] ? <img src={value[2]} alt="farmer" /> : null}
                 </Table.Cell>
               </Table.Row>
             ) : value[0] === 'animals_or_birds' ||
@@ -111,7 +104,7 @@ const EditCollection = props => {
                 <Table.Cell>
                   <strike>
                     {value[1].map(val => (
-                      <b>
+                      <b key={uuid()}>
                         {val} <br />
                       </b>
                     ))}
@@ -120,7 +113,7 @@ const EditCollection = props => {
                 <Table.Cell className="update">
                   {' '}
                   {value[2].map(val => (
-                    <b>
+                    <b key={uuid()}>
                       {val} <br />
                     </b>
                   ))}
@@ -140,14 +133,26 @@ const EditCollection = props => {
           )}
         </Table.Body>
       </Table>
-      <Button floated="right" className="red">
+      <Button
+        floated="right"
+        className="red"
+        onClick={() => rejectChangeRequest(match.params.id)}
+      >
         Reject
       </Button>
-      <Button floated="right" className="green">
+      <Button
+        floated="right"
+        className="green"
+        onClick={() => approveChangeRequest(match.params.id)}
+      >
         Accept
       </Button>
     </Div>
   );
 };
 
-export default EditCollection;
+EditCollection.propTypes = {
+  match: PropTypes.object
+};
+
+export default withRestrictedAccess(EditCollection);

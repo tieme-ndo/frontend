@@ -43,7 +43,7 @@ const PageHeader = ({ logOut, user, edits }) => {
                     onClick={clickHandler}
                   ></i>
                 </Span>
-                <Sidebar visible={visible} />
+                <Sidebar visible={visible} edits={edits} />
               </Menu.Item>
             ) : null}
             <Dropdown text="Menu" pointing className="link item">

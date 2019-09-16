@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { Menu, Sidebar } from 'semantic-ui-react';
 
@@ -40,7 +41,7 @@ const Div = styled.div`
   }
 `;
 
-const SidebarComponent = ({ visible }) => {
+const SidebarComponent = ({ visible, edits }) => {
   const [hidden, setHidden] = useState(false);
 
   //Not wokking
@@ -63,36 +64,23 @@ const SidebarComponent = ({ visible }) => {
         style={{ top: '57px', paddingBottom: '50px' }}
       >
         <Div>
-          <Link to="/edit-collection/95995/">
-            <div className="cards" onClick={clickHandler}>
-              <p>
-                <b>Staff name</b> updated <b>farmer record</b> on Sept 13
-              </p>
-            </div>
-          </Link>
-          <Link to="/edit-collection/95995ss">
-            <div className="cards">
-              <p>
-                <b>Staff name</b> updated <b>farmer record</b> on Sept 13
-              </p>
-            </div>
-          </Link>
-          <Link to="/edit-collection/95995">
-            <div className="cards">
-              <p>
-                <b>Staff name</b> updated <b>farmer record</b> on Sept 13
-              </p>
-            </div>
-          </Link>
-          <Link to="/edit-collection/959951q">
-            <div className="cards">
-              <p>
-                <b>Staff name</b> updated <b>farmer record</b> on Sept 13
-              </p>
-            </div>
-          </Link>
+          {edits && edits.length ? (
+            edits.map(edit => (
+              <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
+                <div className="cards" onClick={clickHandler}>
+                  <p>
+                    <b>{edit.change_requested_by}</b> updated{' '}
+                    <b>{edit.farmer_name}'s record</b> on{' '}
+                    {moment(edit.date).format('LLLL')}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>No change requests has been made</p>
+          )}
         </Div>
-      </Sidebar>{' '}
+      </Sidebar>
     </Span>
   );
 };
