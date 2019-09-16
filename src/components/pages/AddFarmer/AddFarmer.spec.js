@@ -16,19 +16,15 @@ beforeAll(() => {
 
 it('renders without crashing', () => {
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
-  const {
-    getByTestId,
-  } = render(<AddFarmer />);
+  const { getByTestId } = render(<AddFarmer />);
 
   expect(getByTestId('test-addfarmer-component')).toBeInTheDocument();
 });
 
 it('renders menu and form', () => {
-  const {
-    getAllByText,
-    getAllByDisplayValue,
-    getByText
-  } = render(<AddFarmer />);
+  const { getAllByText, getAllByDisplayValue, getByText } = render(
+    <AddFarmer />
+  );
 
   expect(getAllByText('Next').length).toBe(3);
   expect(getByText('Add Farmer')).toBeInTheDocument();
@@ -39,4 +35,3 @@ it('renders menu and form', () => {
   expect(getByText('3. Guarantor')).toBeInTheDocument();
   expect(getByText('4. Farm')).toBeInTheDocument();
 });
-

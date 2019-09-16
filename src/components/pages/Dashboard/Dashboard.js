@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
 import FarmersStatistic from '../../partials/FarmersStatistic';
+import axiosWithHeader from '../../../utils/axiosWithHeaders';
 
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
@@ -23,6 +24,13 @@ const Dashboard = ({ farmers, history }) => {
       setData([]);
     }
   }, [farmers]);
+
+  React.useEffect(() => {
+    axiosWithHeader()
+      .get('http://localhost:9000/api/v1/farmers/statistic')
+      .then(res => console.log(res))
+      .catch(error => console.log(error.response));
+  }, []);
 
   return (
     <div data-testid="dashboard-render-test">
