@@ -1,14 +1,14 @@
 /* eslint-disable react/display-name */
 import React from 'react';
 import { Redirect } from 'react-router';
-import { isLoggedIn } from '../../utils/handlers/authenticationHandlers';
+import { isLoggedIn, getToken } from '../../utils/handlers/authenticationHandlers';
 
 const withRestrictedAccess = (
   BaseComponent,
   onlyForAdmin = false,
   user
 ) => props => {
-  if (!isLoggedIn()) {
+  if (!isLoggedIn(getToken())) {
     return <Redirect to="/login" />;
   }
 

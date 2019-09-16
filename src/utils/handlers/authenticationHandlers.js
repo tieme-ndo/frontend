@@ -89,10 +89,14 @@ export const getUser = () => {
   }
 };
 
-export const isLoggedIn = () => {
-  // This needs to be improved checking the token with decryption, checking payload for expiration
+export const isLoggedIn = (token) => {
+  // TODO: This needs to be improved checking the token with decryption, checking payload for expiration
   // Returns a boolean if a valid token is found in the localStorage
-  return tokenKey in window.localStorage;
+  if (token) {
+    const tokenIsCorrectlyFormatted = token.match(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
+    return !!token && !!tokenIsCorrectlyFormatted;
+  }
+  return false;
 };
 
 export const getToken = () => {
