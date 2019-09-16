@@ -1,6 +1,5 @@
-/** @format */
-
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import Input from '../../common/Input/Input';
 import {
   personalInfo,
@@ -119,13 +118,12 @@ const AddFarmer = () => {
         }
       }
     }
-
     axios
       .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
       .then(res => {
         toast.success('Farmer Added Successfully');
         defaultState();
-        return;
+        return <Redirect to="/" />;
       })
       .catch(err => {
         err.response.data.errors.forEach(element => {
