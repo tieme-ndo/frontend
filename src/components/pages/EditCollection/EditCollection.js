@@ -33,11 +33,12 @@ const Div = styled.div`
   }
 `;
 
-const EditCollection = ({ match }) => {
+const EditCollection = ({ match, history }) => {
   const [state, setState] = useState({
     data: undefined,
     cleanedData: []
   });
+  console.log(history.push('/'));
   useEffect(() => {
     getChangeRequestsById(match.params.id)
       .then(data => {
@@ -136,14 +137,14 @@ const EditCollection = ({ match }) => {
       <Button
         floated="right"
         className="red"
-        onClick={() => rejectChangeRequest(match.params.id)}
+        onClick={() => rejectChangeRequest(match.params.id, history)}
       >
         Reject
       </Button>
       <Button
         floated="right"
         className="green"
-        onClick={() => approveChangeRequest(match.params.id)}
+        onClick={() => approveChangeRequest(match.params.id, history)}
       >
         Accept
       </Button>

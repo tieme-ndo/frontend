@@ -92,15 +92,6 @@ function App() {
       });
   };
 
-  const loadChangeRequestById = id => {
-    return getChangeRequestsById(id)
-      .then(res => res)
-      .catch(error => {
-        return new Error(error);
-      });
-  };
-
-  console.log(changeRequest)
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -165,7 +156,6 @@ function App() {
             render={props => (
               <EditCollection
                 {...props}
-                changeRequest={loadChangeRequestById}
               />
             )}
           />

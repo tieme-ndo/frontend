@@ -35,13 +35,15 @@ export const getChangeRequestsById = requestId => {
     });
 };
 
-export const approveChangeRequest = requestId => {
+export const approveChangeRequest = (requestId, history) => {
   const token = getToken();
   console.log(token);
   return axios
     .post(`${pathObj.getEdits}/${requestId}/approve`, setHeaders(token))
     .then(res => {
-      if (res.data) {
+      if (res.data)
+      {
+        history.push('/')
         return res.data;
       }
     })
@@ -50,13 +52,15 @@ export const approveChangeRequest = requestId => {
     });
 };
 
-export const rejectChangeRequest = requestId => {
+export const rejectChangeRequest = (requestId, history) => {
   console.log('Here2');
   const token = getToken();
   return axios
     .post(`${pathObj.getEdits}/${requestId}/approve`, setHeaders(token))
     .then(res => {
-      if (res.data) {
+      if (res.data)
+      {
+        history.push('/')
         return res.data;
       }
     })
