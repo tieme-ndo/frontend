@@ -1,9 +1,11 @@
+/** @format */
+
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { Menu, Sidebar } from 'semantic-ui-react';
+import { Menu, Sidebar, Segment } from 'semantic-ui-react';
 
 const Span = styled.span`
   cursor: pointer;
@@ -27,23 +29,22 @@ const Div = styled.div`
   }
   .cards {
     background-color: #e8e8e8ab;
+    color: black;
     &:hover {
-      background-color: teal;
-      color: white;
+      color: teal;
     }
   }
   .cards:nth-child(even) {
     background-color: white;
     &:hover {
-      background-color: teal;
-      color: white;
+      color: teal;
     }
   }
 `;
 
 const SidebarComponent = ({ visible, edits, closeSideBar }) => {
   return (
-    <Span>
+    <Span data-testid="sidebar-component">
       {' '}
       <Sidebar
         as={Menu}
@@ -54,19 +55,22 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
         vertical
         visible={visible}
         width="wide"
-        style={{ top: '57px', paddingBottom: '50px' }}
+        style={{
+          top: '57px',
+          maxHeight: '400px'
+        }}
       >
         <Div>
           {edits && edits.length ? (
             edits.map(edit => (
               <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
-                <div className="cards" onClick={closeSideBar}>
+                <Segment vertical className="cards" onClick={closeSideBar}>
                   <p>
                     <b>{edit.change_requested_by}</b> updated{' '}
                     <b>{edit.farmer_name}'s record</b> on{' '}
                     {moment(edit.date).format('LLLL')}
                   </p>
-                </div>
+                </Segment>
               </Link>
             ))
           ) : (

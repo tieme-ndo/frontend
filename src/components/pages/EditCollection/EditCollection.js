@@ -1,8 +1,11 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import { Table, TableHeader, Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import {
@@ -10,7 +13,6 @@ import {
   approveChangeRequest,
   rejectChangeRequest
 } from '../../../utils/handlers/changeRequestHandler';
-import moment from 'moment';
 
 const Div = styled.div`
   strike {
@@ -66,21 +68,19 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
   return (
     <Div data-testid="edit-collection-component">
       <h1>Edit Collection</h1>
-      {data ? (
+      {data && (
         <div>
           <p>
-            {' '}
             <strong>Edited by:</strong> {data.change_requested_by}
           </p>
           <p>
-            {' '}
             <strong>Farmer Record:</strong> {data.farmer_name}
           </p>
           <p>
             <strong>When: </strong> {moment(data.datetime).format('LLLL')}
-          </p>{' '}
+          </p>
         </div>
-      ) : null}
+      )}
 
       <Table celled>
         <TableHeader>
