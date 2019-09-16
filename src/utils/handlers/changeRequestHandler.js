@@ -37,9 +37,11 @@ export const getChangeRequestsById = requestId => {
 
 export const approveChangeRequest = requestId => {
   const token = getToken();
+  const headers = setHeaders(token);
   console.log(token);
+  console.log(headers);
   return axios
-    .post(`${pathObj.getEdits}/${requestId}/approve`, setHeaders(token))
+    .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders(token))
     .then(res => {
       if (res.data) {
         return res.data;
