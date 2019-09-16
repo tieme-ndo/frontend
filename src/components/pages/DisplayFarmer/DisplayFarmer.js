@@ -2,7 +2,6 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Container, Grid, Segment, Menu } from 'semantic-ui-react';
 import LeftDisplay from './LeftDisplay';
 import PropTypes from 'prop-types';
@@ -102,4 +101,4 @@ DisplayFarmer.propTypes = {
   getFarmer: PropTypes.func
 };
 
-export default withRestrictedAccess(DisplayFarmer);
+export default DisplayFarmer;

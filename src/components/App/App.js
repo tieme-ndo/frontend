@@ -10,8 +10,8 @@ import AddFarmer from '../pages/AddFarmer/AddFarmer';
 import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import PasswordReset from '../pages/PasswordReset/PasswordReset';
-import withRestrictedAccess from '../hoc/withRestrictedAccess';
-import { getUser, logout } from '../../utils/handlers/authenticationHandlers';
+import RestrictedRoute from '../hoc/RestrictedRoute';
+import { getUser, logout, isLoggedIn, getToken } from '../../utils/handlers/authenticationHandlers';
 
 import {
   getFarmersHandler,
@@ -91,9 +91,11 @@ function App() {
         ) : null}
 
         <Container>
-          <Route
+          <RestrictedRoute
             path="/"
             exact
+            isAllowed={isLoggedIn(getToken())}
+            redirectTo='/login'
             render={props => (
               <Dashboard
                 {...props}
@@ -102,16 +104,20 @@ function App() {
               />
             )}
           />
-          <Route
+          <RestrictedRoute
             path="/accounts/new"
-            component={withRestrictedAccess(AddStaff, true, user)}
+            isAllowed={isLoggedIn(getToken()) && getUser().isAdmin}
+            redirectTo='/'
+            component={AddStaff}
           />
           <Route
             path="/login/"
             render={props => <Login {...props} setUser={setUser} />}
           />
-          <Route
+          <RestrictedRoute
             path="/farmers/:id/edit"
+            isAllowed={isLoggedIn(getToken())}
+            redirectTo='/login'
             render={props => (
               <UpdateFarmer
                 {...props}
@@ -120,13 +126,17 @@ function App() {
               />
             )}
           />
-          <Route
+          <RestrictedRoute
             path="/addfarmer"
-            component={withRestrictedAccess(AddFarmer)}
+            isAllowed={isLoggedIn(getToken())}
+            redirectTo='/login'
+            component={AddFarmer}
           />
-          <Route
+          <RestrictedRoute
             exact
             path="/farmers/:id"
+            isAllowed={isLoggedIn(getToken())}
+            redirectTo='/login'
             render={props => (
               <DisplayFarmer
                 {...props}
@@ -136,9 +146,11 @@ function App() {
               />
             )}
           />
-          <Route
+          <RestrictedRoute
             exact
             path="/reset-password"
+            isAllowed={isLoggedIn(getToken())}
+            redirectTo='/login'
             render={props => <PasswordReset {...props} logOut={logOut} />}
           />
           <ToastContainer position="top-right" />

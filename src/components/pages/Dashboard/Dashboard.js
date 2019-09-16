@@ -5,7 +5,6 @@ import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
 import { Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import PropTypes from 'prop-types';
 
 const Dashboard = ({ farmers, history }) => {
@@ -54,4 +53,4 @@ Dashboard.propTypes = {
   history: PropTypes.object
 };
 
-export default withRestrictedAccess(Dashboard, false);
+export default Dashboard;
