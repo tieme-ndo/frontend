@@ -61,8 +61,8 @@ export const addFarmerHandler = (newFarmer) => {
 
   return axios
     .post(`${pathObj.addFarmerPath}`, 
+      newFarmer,
       setHeaders(), 
-      newFarmer
     )
     .then(res => {
       if (res.data.successMessage) {
@@ -70,7 +70,9 @@ export const addFarmerHandler = (newFarmer) => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      // Note that this *should* not throw a new Error, but rather return the error array. 
+      // This gets used to generate the toasts on the form itself.
+      throw error;
     });
 };
 

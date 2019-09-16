@@ -17,7 +17,7 @@ export const pathObj = {
   deleteUserPath: `${URL}/${API_VERSION}/user`,
 
   getFarmersPath: `${URL}/${API_VERSION}/farmers`,
-  addFarmerPath: `${URL}/${API_VERSION}/farmers`,
+  addFarmerPath: `${URL}/${API_VERSION}/farmers/create`,
   updateFarmerPath: `${URL}/${API_VERSION}/farmers`,
   deleteFarmerPath: `${URL}/${API_VERSION}/farmers`
 };
