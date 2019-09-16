@@ -147,7 +147,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       }
     }
 
-    updateFarmerHandler(formData, farmerData._id).then(() => {
+    updateFarmerHandler(formData, farmerData._id)
+    .then(() => {
       appStateShouldUpdate(true);
       if (user && user.isAdmin) {
         toast.success('Farmer record updated successfully');
@@ -161,6 +162,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         // Added "_id" because formData doesn't have/need an _id property
         farmer: { ...formData, _id: farmerData._id }
       });
+    })
+    .catch(err => {
+      err.response.data.errors.forEach(element => {
+        toast.error(element.message);
+      });
+      return;
     });
   };
 

@@ -118,16 +118,13 @@ const AddFarmer = () => {
       }
     }
 
-    console.log('here')
     addFarmerHandler(formData)
-      .then(res => {
-        console.log('there')
+      .then(() => {
         toast.success('Farmer Added Successfully');
-        // defaultState();
+        defaultState();
         return;
       })
       .catch(err => {
-        console.log('oops')
         err.response.data.errors.forEach(element => {
           toast.error(element.message);
         });

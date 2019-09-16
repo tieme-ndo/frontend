@@ -92,6 +92,8 @@ export const updateFarmerHandler = (changes, farmerId) => {
       }
     })
     .catch(error => {
+      // Note that this *should* not throw a new Error, but rather return the error array. 
+      // This gets used to generate the toasts on the form itself.
       throw error;
     });
 };
