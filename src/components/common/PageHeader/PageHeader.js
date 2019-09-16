@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -16,17 +16,20 @@ const Span = styled.span`
   }
 `;
 
-const PageHeader = ({ logOut, user, edits }) => {
-  const [visible, setVisible] = useState(false);
-
-  const clickHandler = event => {
-    event.target.style.color = 'grey';
-    setVisible(!visible);
-  };
-
+const PageHeader = ({
+  logOut,
+  user,
+  edits,
+  visible,
+  closeSideBar,
+  toggleSideBar
+}) => {
   return (
     <div data-testid="nav-test">
-      <Menu style={{ borderRadius: '0', margin: '0 0 2rem' }}>
+      <Menu
+        style={{ borderRadius: '0', margin: '0 0 2rem' }}
+        onClick={closeSideBar}
+      >
         <Container>
           <Link to="/">
             <Menu.Item>
@@ -39,11 +42,17 @@ const PageHeader = ({ logOut, user, edits }) => {
               <Menu.Item>
                 <Span>
                   <i
-                    className={edits ? 'fas fa-bell red' : 'fas fa-bell grey'}
-                    onClick={clickHandler}
+                    className={
+                      edits.length ? 'fas fa-bell red' : 'fas fa-bell grey'
+                    }
+                    onClick={toggleSideBar}
                   ></i>
                 </Span>
-                <Sidebar visible={visible} edits={edits}/>
+                <Sidebar
+                  visible={visible}
+                  edits={edits}
+                  closeSideBar={closeSideBar}
+                />
               </Menu.Item>
             ) : null}
             <Dropdown text="Menu" pointing className="link item">

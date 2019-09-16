@@ -21,10 +21,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
-import {
-  getAllChangeRequests,
-  getChangeRequestsById
-} from '../../utils/handlers/changeRequestHandler';
+import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -34,6 +31,7 @@ function App() {
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -92,14 +90,31 @@ function App() {
       });
   };
 
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible);
+    }
+  };
+
+  const toggleSideBar = () => {
+    setVisible(!visible);
+  };
+
   return (
     <Router>
       <div className="App" data-testid="App">
         {user ? (
-          <PageHeader logOut={logOut} user={user} edits={changeRequest} />
+          <PageHeader
+            logOut={logOut}
+            user={user}
+            edits={changeRequest}
+            visible={visible}
+            closeSideBar={closeSideBar}
+            toggleSideBar={toggleSideBar}
+          />
         ) : null}
 
-        <Container>
+        <Container onClick={closeSideBar}>
           <Route
             path="/"
             exact
@@ -156,6 +171,7 @@ function App() {
             render={props => (
               <EditCollection
                 {...props}
+                appStateShouldUpdate={setNeedsUpdate}
               />
             )}
           />

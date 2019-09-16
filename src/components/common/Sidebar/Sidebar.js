@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -41,17 +41,9 @@ const Div = styled.div`
   }
 `;
 
-const SidebarComponent = ({ visible, edits }) => {
-  const [hidden, setHidden] = useState(false);
-
-  //Not wokking
-  const clickHandler = e => {
-    setHidden(true);
-  };
-
-
+const SidebarComponent = ({ visible, edits, closeSideBar }) => {
   return (
-    <Span hidden={hidden}>
+    <Span>
       {' '}
       <Sidebar
         as={Menu}
@@ -68,7 +60,7 @@ const SidebarComponent = ({ visible, edits }) => {
           {edits && edits.length ? (
             edits.map(edit => (
               <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
-                <div className="cards" onClick={clickHandler}>
+                <div className="cards" onClick={closeSideBar}>
                   <p>
                     <b>{edit.change_requested_by}</b> updated{' '}
                     <b>{edit.farmer_name}'s record</b> on{' '}

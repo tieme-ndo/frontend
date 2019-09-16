@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
 import { getToken } from './authenticationHandlers';
@@ -35,17 +36,19 @@ export const getChangeRequestsById = requestId => {
     });
 };
 
-export const approveChangeRequest = (requestId, history) => {
+export const approveChangeRequest = (
+  requestId,
+  history,
+  appStateShouldUpdate
+) => {
   const token = getToken();
-  const headers = setHeaders(token);
-  console.log(token);
-  console.log(headers);
   return axios
     .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders(token))
     .then(res => {
-      if (res.data)
-      {
-        history.push('/')
+      if (res.data) {
+        toast.success('Farmer record approved');
+        appStateShouldUpdate(true);
+        history.push('/');
         return res.data;
       }
     })
@@ -54,15 +57,19 @@ export const approveChangeRequest = (requestId, history) => {
     });
 };
 
-export const rejectChangeRequest = (requestId, history) => {
-  console.log('Here2');
+export const rejectChangeRequest = (
+  requestId,
+  history,
+  appStateShouldUpdate
+) => {
   const token = getToken();
   return axios
-    .post(`${pathObj.getEdits}/${requestId}/approve`, setHeaders(token))
+    .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders(token))
     .then(res => {
-      if (res.data)
-      {
-        history.push('/')
+      if (res.data) {
+        toast.success('Farmer record rejected');
+        appStateShouldUpdate(true);
+        history.push('/');
         return res.data;
       }
     })

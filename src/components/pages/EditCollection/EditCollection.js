@@ -33,20 +33,20 @@ const Div = styled.div`
   }
 `;
 
-const EditCollection = ({ match, history }) => {
+const EditCollection = ({ match, history, appStateShouldUpdate }) => {
   const [state, setState] = useState({
     data: undefined,
     cleanedData: []
   });
-  console.log(history.push('/'));
   useEffect(() => {
     getChangeRequestsById(match.params.id)
       .then(data => {
         const oldData = data.original_data;
         const newData = data.requested_changes;
         const cleanedData = [];
-        for (let key in oldData) {
-          for (let key2 in oldData[key]) {
+        let key, key2;
+        for (key in oldData) {
+          for (key2 in oldData[key]) {
             cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
           }
         }
@@ -59,7 +59,7 @@ const EditCollection = ({ match, history }) => {
         });
       })
       .catch(err => err);
-  }, []);
+  }, [match.params.id]);
 
   const { data, cleanedData } = state;
 
@@ -68,9 +68,17 @@ const EditCollection = ({ match, history }) => {
       <h1>Edit Collection</h1>
       {data ? (
         <div>
-          <p> {`Edited by: ${data.change_requested_by}`}</p>
-          <p> Farmer Record: {data.farmer_name}</p>
-          <p>When: {moment(data.datetime).format('LLLL')}</p>{' '}
+          <p>
+            {' '}
+            <strong>Edited by:</strong> {data.change_requested_by}
+          </p>
+          <p>
+            {' '}
+            <strong>Farmer Record:</strong> {data.farmer_name}
+          </p>
+          <p>
+            <strong>When: </strong> {moment(data.datetime).format('LLLL')}
+          </p>{' '}
         </div>
       ) : null}
 
@@ -87,7 +95,7 @@ const EditCollection = ({ match, history }) => {
             value[0] === 'image_url' ? (
               <Table.Row key={uuid()}>
                 <Table.Cell>
-                  <b>Image</b>
+                  <strong>Image</strong>
                 </Table.Cell>
                 <Table.Cell>
                   {value[1] ? <img src={value[1]} alt="farmer" /> : null}
@@ -100,30 +108,30 @@ const EditCollection = ({ match, history }) => {
               value[0] === 'crops_cultivated' ? (
               <Table.Row key={uuid()}>
                 <Table.Cell>
-                  <b> {value[0]}</b>
+                  <strong> {value[0]}</strong>
                 </Table.Cell>
                 <Table.Cell>
                   <strike>
                     {value[1].map(val => (
-                      <b key={uuid()}>
+                      <strong key={uuid()}>
                         {val} <br />
-                      </b>
+                      </strong>
                     ))}
                   </strike>
                 </Table.Cell>
                 <Table.Cell className="update">
                   {' '}
                   {value[2].map(val => (
-                    <b key={uuid()}>
+                    <strong key={uuid()}>
                       {val} <br />
-                    </b>
+                    </strong>
                   ))}
                 </Table.Cell>
               </Table.Row>
             ) : (
               <Table.Row key={uuid()}>
                 <Table.Cell>
-                  <b> {value[0]}</b>
+                  <strong> {value[0]}</strong>
                 </Table.Cell>
                 <Table.Cell>
                   <strike>{value[1]}</strike>
@@ -137,14 +145,18 @@ const EditCollection = ({ match, history }) => {
       <Button
         floated="right"
         className="red"
-        onClick={() => rejectChangeRequest(match.params.id, history)}
+        onClick={() =>
+          rejectChangeRequest(match.params.id, history, appStateShouldUpdate)
+        }
       >
         Reject
       </Button>
       <Button
         floated="right"
         className="green"
-        onClick={() => approveChangeRequest(match.params.id, history)}
+        onClick={() =>
+          approveChangeRequest(match.params.id, history, appStateShouldUpdate)
+        }
       >
         Accept
       </Button>
@@ -153,7 +165,9 @@ const EditCollection = ({ match, history }) => {
 };
 
 EditCollection.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  history: PropTypes.object,
+  appStateShouldUpdate: PropTypes.func
 };
 
 export default withRestrictedAccess(EditCollection);
