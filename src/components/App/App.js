@@ -63,7 +63,7 @@ function App() {
         });
       })
       .catch(error => {
-        return new Error(error);
+        throw new Error(error);
       });
   };
 
