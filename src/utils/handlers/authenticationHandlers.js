@@ -1,7 +1,7 @@
 import axios from "axios";
 import { pathObj, tokenKey } from "../generalVariables";
 import { setHeaders } from "../requestHeaders";
-import * as jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 export const loginHandler = ({ username, password }) => {
   // With the finalization of the database schema, more checks can be implemented (with separate error-messages)
@@ -27,7 +27,7 @@ export const loginHandler = ({ username, password }) => {
         checkAndStoreToken(res.data.token);
         return res.data;
       } else {
-        return new Error("Oh no, there was no token returned by the database!");
+        throw new Error("Oh no, there was no token returned by the database!");
       }
     })
     .catch(error => {
@@ -63,7 +63,7 @@ export const registrationHandler = ({ username, password, isAdmin, token }) => {
 export const checkAndStoreToken = token => {
   // More token validation and checking can be added later
   if (typeof token !== "string") {
-    return new Error("The token is supposed to be a string!");
+    throw new Error("The token is supposed to be a string!");
   } else {
     localStorage.setItem(tokenKey, token);
   }
@@ -78,7 +78,7 @@ export const logout = () => {
 export const getUser = () => {
   const token = localStorage.getItem(tokenKey);
   if (token) {
-    const decodedToken = jwt_decode(token);
+    const decodedToken = jwtDecode(token);
     if (decodedToken.exp * 1000 < Date.now()) {
       localStorage.removeItem(tokenKey);
       return false;

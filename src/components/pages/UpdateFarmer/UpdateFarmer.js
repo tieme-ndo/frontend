@@ -62,6 +62,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     guarantorToggle: true,
     farmInfoToggle: true
   });
+  const [stateLoading, setStateLoading] = useState(false);
 
   /**
    * @param {*} e - an event which takes place in the DOM
@@ -143,6 +144,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   };
 
   const formHandler = e => {
+    setStateLoading(true);
     e.preventDefault();
     let formData = {};
     const newState = JSON.parse(JSON.stringify(formElementsState));
@@ -170,6 +172,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         } else {
           toast.success("Waiting for Admin's review");
         }
+        setStateLoading(false);
         // removes "/edit" dynamically from the route pathname
         history.replace(`${location.pathname.split('/edit')[0]}`, {
           // Passes back the updated farmer data to the location state of the DisplayFarmers component
@@ -308,14 +311,24 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             textAlign: 'center'
           }}
         >
-          <Button
-            color="teal"
-            type="submit"
-            size="large"
-            content="Submit Changes"
-            icon="check"
-            labelPosition="right"
-          />
+          {stateLoading ? (
+            <Button
+              loading
+              disabled
+              color="teal"
+              size="large"
+              content="Submit Changes"
+            />
+          ) : (
+            <Button
+              color="teal"
+              type="submit"
+              size="large"
+              content="Submit Changes"
+              icon="check"
+              labelPosition="right"
+            />
+          )}
         </div>
       </Form>
     </div>
