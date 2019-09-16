@@ -5,7 +5,8 @@
 // When hosted on Netlify, it'll retrieve the requisite environmental URL and target the appropriate API
 // eslint-disable-next-line no-undef
 export const URL =
-  process.env.REACT_APP_API_URL || 'https://tndo-temp-staging.herokuapp.com';
+  process.env.REACT_APP_API_URL ||
+  'https://tieme-ndo-backend-staging1.herokuapp.com';
 const API_VERSION = 'api/v1';
 
 // Path contains the 'base' of the URL but does not includes params
