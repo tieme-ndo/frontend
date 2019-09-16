@@ -15,7 +15,7 @@ export const getUserHandler = (token, userId) => {
       }
     })
     .catch(error => {
-      throw error;
+      throw new Error(error);
     });
 };
 
@@ -35,7 +35,7 @@ export const changePasswordHandler = (token, userId, newPassword) => {
     })
 
     .catch(error => {
-      throw error;
+      throw new Error(error);
     });
 };
 
