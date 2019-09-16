@@ -94,6 +94,9 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         newEntry.selected = [...newEntry.selected, value];
       }
     } else if (type === 'file') {
+      // Render the image in the form's <img /> element
+      e.persist();
+      
       if (files.length) {
         const imageFile = new FormData();
         imageFile.append('file', files[0]);
@@ -109,9 +112,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
               imageFile
             );
             const imageUrl = uploadResponseData.data.secure_url;
-
-            // Render the image in the form's <img /> element
-            e.persist();
             e.target.nextSibling.src = imageUrl;
 
             newEntry.imageUrl = imageUrl;
