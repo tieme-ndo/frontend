@@ -13,7 +13,7 @@ export const getFarmersHandler = () => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -36,7 +36,7 @@ export const cleanFarmersData = farmers => {
 export const getIndividualFarmerHandler = farmerId => {
   const token = getToken();
   if (!farmerId || typeof farmerId !== 'string') {
-    return new Error("Make sure you're passing a farmer id!");
+    throw new Error("Make sure you're passing a farmer id!");
   }
 
   return axios
@@ -47,7 +47,7 @@ export const getIndividualFarmerHandler = farmerId => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -55,7 +55,7 @@ export const addFarmerHandler = (newFarmer, token) => {
   // Add separate function to exhaustively check all incoming inputs from the farmers form.
   // I.e. check for every single piece of data that's required in the form.
   if (!newFarmer) {
-    return new Error(
+    throw new Error(
       "Make sure you're passing an object that contains the relevant information for the new farmer!"
     );
   }
@@ -68,14 +68,14 @@ export const addFarmerHandler = (newFarmer, token) => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
 export const updateFarmerHandler = (changes, farmerId, token) => {
   // Once again, add a separate function to exhaustively check all incoming inputs
   if (!changes) {
-    return new Error("Make sure you're passing valid changes!");
+    throw new Error("Make sure you're passing valid changes!");
   }
 
   return axios.patch(`${pathObj.updateFarmerPath}/${farmerId}/update`,
@@ -103,6 +103,6 @@ export const deleteFarmerHandler = (farmerId) => {
     })
 
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
