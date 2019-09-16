@@ -49,6 +49,7 @@ const SidebarComponent = ({ visible, edits }) => {
     setHidden(true);
   };
 
+
   return (
     <Span hidden={hidden}>
       {' '}

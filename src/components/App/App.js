@@ -100,6 +100,7 @@ function App() {
       });
   };
 
+  console.log(changeRequest)
   return (
     <Router>
       <div className="App" data-testid="App">
