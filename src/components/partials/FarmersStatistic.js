@@ -3,7 +3,7 @@ import { Statistic, Container, Segment } from 'semantic-ui-react';
 
 const FarmersStatistic = props => {
   return (
-    <Container style={{ marginBottom: '50px' }}>
+    <Container style={{ marginBottom: '40px' }}>
       <Segment.Group horizontal style={{ fontWeight: 'normal' }}>
         <Segment textAlign="center">
           <Statistic

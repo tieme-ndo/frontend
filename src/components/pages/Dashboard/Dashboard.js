@@ -1,16 +1,20 @@
 import React from 'react';
+import { Dimmer, Loader, Segment, Header, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
 import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
-import { Header, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
-import PropTypes from 'prop-types';
 import FarmersStatistic from '../../partials/FarmersStatistic';
+import axiosWithHeader from '../../../utils/axiosWithHeaders';
+import { pathObj } from '../../../utils/generalVariables';
 
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
+  const [farmersStatistic, setFarmersStatistic] = React.useState({});
 
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -23,6 +27,29 @@ const Dashboard = ({ farmers, history }) => {
       setData([]);
     }
   }, [farmers]);
+
+  React.useEffect(() => {
+    axiosWithHeader()
+      .get(pathObj.getFarmersStatistic)
+      .then(res => setFarmersStatistic(() => res.data))
+      .catch(error => error.response);
+  }, []);
+
+  const renderFarmersStatistic = () => {
+    if (Object.keys(farmersStatistic).length === 0) {
+      return (
+        <Segment
+          style={{ marginBottom: '50px', boxShadow: 'none', border: '0' }}
+        >
+          <Dimmer active inverted>
+            <Loader inverted>Loading farmers statistic</Loader>
+          </Dimmer>
+        </Segment>
+      );
+    }
+
+    return <FarmersStatistic {...farmersStatistic} />;
+  };
 
   return (
     <div data-testid="dashboard-render-test">
@@ -37,7 +64,7 @@ const Dashboard = ({ farmers, history }) => {
         }
       />
 
-      <FarmersStatistic />
+      {renderFarmersStatistic()}
 
       {data.length ? (
         <DashboardTable history={history} columns={columns} data={data} />
