@@ -17,7 +17,7 @@ import {
   getFarmersHandler,
   cleanFarmersData
 } from '../../utils/handlers/farmerHandlers';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 
@@ -63,7 +63,7 @@ function App() {
         });
       })
       .catch(error => {
-        throw new Error(error);
+        toast.error(error.message)
       });
   };
 
