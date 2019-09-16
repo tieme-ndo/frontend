@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router';
 
 export default function RestrictedRoute({
-  isAllowed,
+  isAllowed = false,
   component: Component,
   render: RenderedComponent,
   redirectTo,
@@ -15,7 +15,7 @@ export default function RestrictedRoute({
         if (isAllowed) {
           // Compatibility with both Route render or Route component
           if (!!RenderedComponent) {
-            return RenderedComponent();
+            return RenderedComponent(props);
           }
           return <Component {...props} />
         }
