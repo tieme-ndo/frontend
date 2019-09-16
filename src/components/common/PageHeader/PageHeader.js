@@ -24,6 +24,7 @@ const PageHeader = ({
   closeSideBar,
   toggleSideBar
 }) => {
+  console.log(edits)
   return (
     <div data-testid="nav-test">
       <Menu
@@ -43,7 +44,7 @@ const PageHeader = ({
                 <Span>
                   <i
                     className={
-                      edits.length ? 'fas fa-bell red' : 'fas fa-bell grey'
+                      edits && edits.length ? 'fas fa-bell red' : 'fas fa-bell grey'
                     }
                     onClick={toggleSideBar}
                   ></i>
