@@ -20,4 +20,4 @@
 # Deploy Preview context: All deploys generated from a pull/merge request
 # will inherit these settings.
 [context.deploy-preview.environment]
-  REACT_APP_API_URL = "https://tieme-ndo-backend-staging1.herokuapp.com/"
+  REACT_APP_API_URL = "https://tieme-ndo-backend-staging1.herokuapp.com"
