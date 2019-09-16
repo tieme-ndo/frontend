@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import {
   registrationHandler,
-  getToken
 } from '../../../utils/handlers/authenticationHandlers';
 import AddStaffForm from './AddStaffForm';
 import validateAddStaffForm from './AddStaffValidation';
@@ -56,7 +55,6 @@ function AddStaff() {
       username: state.username,
       password: state.password,
       isAdmin: state.isAdmin,
-      token: getToken()
     });
 
     if (Array.isArray(response)) {

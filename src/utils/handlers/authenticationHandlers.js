@@ -37,7 +37,7 @@ export const loginHandler = ({ username, password }) => {
 
 // There is no `addUserHandler` since the only avenue for adding new users should be when an admin registers a new user
 // Therefore, whenever a new user is added, this method should be used. In essence, it replicates the CRUD functionality.
-export const registrationHandler = ({ username, password, isAdmin, token }) => {
+export const registrationHandler = ({ username, password, isAdmin }) => {
   // Once database schema is finalized, this conditional check could be refactored into a separate utility function.
   return axios
     .post(
@@ -47,7 +47,7 @@ export const registrationHandler = ({ username, password, isAdmin, token }) => {
         password,
         isAdmin
       },
-      setHeaders(token)
+      setHeaders()
     )
     .then(res => {
       if (res.data.success) {
@@ -70,13 +70,13 @@ export const checkAndStoreToken = token => {
 };
 
 export const logout = () => {
-  if (localStorage.getItem(tokenKey)) {
+  if (getToken()) {
     localStorage.removeItem(tokenKey);
   }
 };
 
 export const getUser = () => {
-  const token = localStorage.getItem(tokenKey);
+  const token = getToken();
   if (token) {
     const decodedToken = jwtDecode(token);
     if (decodedToken.exp * 1000 < Date.now()) {

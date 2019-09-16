@@ -4,9 +4,9 @@ import { setHeaders } from '../requestHeaders';
 import { getToken } from './authenticationHandlers';
 
 export const getFarmersHandler = () => {
-  const token = getToken();
   return axios
-    .get(`${pathObj.getFarmersPath}`, setHeaders(token))
+    .get(`${pathObj.getFarmersPath}`, 
+      setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmers;
@@ -34,13 +34,13 @@ export const cleanFarmersData = farmers => {
 };
 
 export const getIndividualFarmerHandler = farmerId => {
-  const token = getToken();
   if (!farmerId || typeof farmerId !== 'string') {
     return new Error("Make sure you're passing a farmer id!");
   }
 
   return axios
-    .get(`${pathObj.getFarmersPath}/${farmerId}`, setHeaders(token))
+    .get(`${pathObj.getFarmersPath}/${farmerId}`, 
+      setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmer;
@@ -51,7 +51,7 @@ export const getIndividualFarmerHandler = farmerId => {
     });
 };
 
-export const addFarmerHandler = (newFarmer, token) => {
+export const addFarmerHandler = (newFarmer) => {
   // Add separate function to exhaustively check all incoming inputs from the farmers form.
   // I.e. check for every single piece of data that's required in the form.
   if (!newFarmer) {
@@ -61,7 +61,10 @@ export const addFarmerHandler = (newFarmer, token) => {
   }
 
   return axios
-    .post(`${pathObj.addFarmerPath}`, setHeaders(token), newFarmer)
+    .post(`${pathObj.addFarmerPath}`, 
+      setHeaders(), 
+      newFarmer
+    )
     .then(res => {
       if (res.data.successMessage) {
         return res.data;
@@ -72,7 +75,7 @@ export const addFarmerHandler = (newFarmer, token) => {
     });
 };
 
-export const updateFarmerHandler = (changes, farmerId, token) => {
+export const updateFarmerHandler = (changes, farmerId) => {
   // Once again, add a separate function to exhaustively check all incoming inputs
   if (!changes) {
     return new Error("Make sure you're passing valid changes!");
@@ -80,7 +83,7 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
 
   return axios.put(`${pathObj.updateFarmerPath}/${farmerId}/update`,
     changes,
-    setHeaders(token),
+    setHeaders(),
   )
     .then(res => {
       if (res.data.success) {
@@ -93,9 +96,10 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
 };
 
 export const deleteFarmerHandler = (farmerId) => {
-  const token = getToken();
   return axios
-    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders(token))
+    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, 
+      setHeaders()
+    )
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage;

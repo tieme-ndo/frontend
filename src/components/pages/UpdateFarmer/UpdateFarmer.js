@@ -148,8 +148,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       }
     }
 
-    const token = getToken();
-    updateFarmerHandler(formData, farmerData._id, token).then(() => {
+    updateFarmerHandler(formData, farmerData._id).then(() => {
       appStateShouldUpdate(true);
       if (user && user.isAdmin) {
         toast.success('Farmer record updated successfully');
