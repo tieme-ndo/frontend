@@ -21,15 +21,11 @@ export const getUserHandler = (userId) => {
     });
 };
 
-export const changePasswordHandler = (userId, newPassword) => {
-  if (!userId || typeof userId !== 'string') {
-    return new Error("Make sure you're passing a valid user ID!");
-  }
-
+export const changePasswordHandler = (newPassword) => {
   return axios
-    .put(`${pathObj.changePasswordPath}/${userId}`, 
+    .put(`${pathObj.changePasswordPath}`, 
+      newPassword,
       setHeaders(), 
-      {newPassword}
     )
     .then(res => {
       if (res.data) {

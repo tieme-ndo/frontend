@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
-import axiosWithHeader from '../../../utils/axiosWithHeaders';
-import { pathObj } from '../../../utils/generalVariables';
+import { changePasswordHandler } from '../../../utils/handlers/userHandlers'; 
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
 const PasswordReset = ({ logOut }) => {
@@ -45,8 +44,7 @@ const PasswordReset = ({ logOut }) => {
       }));
     }
 
-    axiosWithHeader()
-      .put(`${pathObj.changePasswordPath}`, { password: state.newPassword })
+    changePasswordHandler({ password: state.newPassword })
       .then(res => {
         toast.success('Password reset successfully');
 
