@@ -21,13 +21,13 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
         visible={visible}
         width="wide"
         style={{
-          top: '57px',
-          maxHeight: '400px'
+          top: '57px'
+          //   maxHeight: '400px'
         }}
       >
         <Div>
           {edits && edits.length ? (
-            edits.map(edit => (
+            edits.map((edit, idx) => (
               <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
                 <Segment vertical className="cards" onClick={closeSideBar}>
                   <p>
@@ -66,16 +66,8 @@ const Div = styled.div`
 
   .cards {
     padding: 5px;
-  }
-  .cards {
-    background-color: #e8e8e8ab;
-    color: black;
-    &:hover {
-      color: teal;
-    }
-  }
-  .cards:nth-child(even) {
     background-color: white;
+    color: black;
     &:hover {
       color: teal;
     }
