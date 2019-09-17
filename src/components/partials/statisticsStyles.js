@@ -2,6 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import { Statistic, Segment } from 'semantic-ui-react';
 
+export const StatisticsContainer = styled(Segment.Group)`
+  &.ui.horizontal.segments {
+    padding: 25px 0;
+    margin-bottom: 40px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
+    & > .segment {
+      @media (max-width: 600px) {
+        padding: 14px;
+        align-items: center;
+        border: unset;
+        border-bottom: 1px solid rgba(34,36,38,.15);
+
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+`;
+
 export const MinorStatContainer = styled(Segment)`
   &.ui.segment {
     padding: 14px 0 14px 23px;
@@ -49,12 +73,12 @@ export function MinorStatistic({ size = 'mini', color = 'teal', ...props }) {
 
 export function MajorStatistic({ size = 'small', color = 'teal', ...props }) {
   const MajorStatistic = styled(Statistic)`
-  &.ui.statistic {
-    margin: 0 auto;
-  }
-
     &.ui.statistic {
-      margin-bottom: 6px;
+      margin: 0 auto;
+    }
+
+    &.ui.statistic > .value {
+      margin-bottom: 4px;
     }
 
     &.ui.statistic > .label {
