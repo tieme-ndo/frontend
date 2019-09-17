@@ -115,12 +115,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         'upload_preset',
         process.env.REACT_APP_CLOUDINARY_PRESET
       );
-      const imageUrl = await axios
+      const cloudinaryImg = await axios
         .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
         .then(data => data.data.secure_url)
         .catch(err => err);
-      newEntry.imageUrl = imageUrl;
-      changedData.imageUrl = imageUrl;
+      newEntry.imageUrl = cloudinaryImg;
+      changedData.image_url = cloudinaryImg;
     } else {
       newEntry.value = value;
       changedData[name] = value;
