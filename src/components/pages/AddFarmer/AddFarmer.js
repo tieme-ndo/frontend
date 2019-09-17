@@ -78,11 +78,11 @@ const AddFarmer = () => {
         'upload_preset',
         process.env.REACT_APP_CLOUDINARY_PRESET
       );
-      const imageUrl = await axios
+      const cloudinaryImg = await axios
         .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
         .then(data => data.data.secure_url)
         .catch(err => err);
-      newEntry.imageUrl = imageUrl;
+      newEntry.imageUrl = cloudinaryImg;
     } else {
       newEntry.value = value;
     }
