@@ -119,6 +119,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
+            setStateLoading(true);
             const uploadResponseData = await axios.post(
               process.env.REACT_APP_CLOUDINARY_URL,
               imageFile
@@ -128,6 +129,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             e.target.nextSibling.src = imageUrl;
 
             newEntry.imageUrl = imageUrl;
+            setStateLoading(false);
           } else {
             throw new Error(
               'CLOUDINARY_URL environment variable not provided.'
