@@ -113,3 +113,10 @@ export const deleteFarmerHandler = (farmerId) => {
       throw new Error(error);
     });
 };
+
+export const uploadImageHandler = (imageFile) => {
+  return axios.post(
+    process.env.REACT_APP_CLOUDINARY_URL,
+    imageFile
+  );
+}

@@ -8,8 +8,7 @@ import {
   guarantor,
   farmInfo
 } from '../../common/Input/addFarmerData';
-import axios from 'axios';
-import { addFarmerHandler } from '../../../utils/handlers/farmerHandlers';
+import { addFarmerHandler, uploadImageHandler } from '../../../utils/handlers/farmerHandlers';
 import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
@@ -85,10 +84,7 @@ const AddFarmer = () => {
         );
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
-            const uploadResponseData = await axios.post(
-              process.env.REACT_APP_CLOUDINARY_URL,
-              imageFile
-            );
+            const uploadResponseData = await uploadImageHandler(imageFile)
             const imageUrl = uploadResponseData.data.secure_url;
 
             // Render the image in the form's <img /> element
