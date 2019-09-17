@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Dimmer, Loader, Segment, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
@@ -9,8 +10,7 @@ import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import FarmersStatistic from '../../partials/FarmersStatistic';
-import axiosWithHeader from '../../../utils/axiosWithHeaders';
-import { pathObj } from '../../../utils/generalVariables';
+import { getfarmerStatisticsHandler } from '../../../utils/handlers/farmerHandlers';
 
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = React.useState([]);
@@ -29,10 +29,11 @@ const Dashboard = ({ farmers, history }) => {
   }, [farmers]);
 
   useEffect(() => {
-    axiosWithHeader()
-      .get(pathObj.getFarmersStatistic)
-      .then(res => setFarmersStatistic(() => res.data))
-      .catch(error => error.response);
+    getfarmerStatisticsHandler()
+      .then(res => setFarmersStatistic(res))
+      .catch(error => {
+        toast.error(error.message);
+      });
   }, []);
 
   const renderFarmersStatistic = () => {
