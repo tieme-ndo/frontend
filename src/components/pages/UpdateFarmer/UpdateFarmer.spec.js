@@ -28,10 +28,11 @@ const farmerMock = {
     education_level: 'Tertiary',
     occupation: 'Farmer',
     expected_income_per_month: '501 to GHC 1,000',
-    'major_source_of_income.name': 'Crops',
-    'major_source_of_income.amount': 500,
-    'minor_source_of_income.name': 'Crops',
-    'minor_source_of_income.amount': 50
+    major_source_of_income_name: 'Crops',
+    major_source_of_income_amount: 500,
+    minor_source_of_income_name: 'Crops',
+    minor_source_of_income_amount: 50,
+    image_url: 'https://www.farmafrica.org/us/images/stories-fro-our-work/rs11268farm-africa---beatrice-smiling-portrait-scr-700x468.jpg'
   },
   farmInfo: {
     number_of_acres: 3,
@@ -129,4 +130,18 @@ describe('Update Farmer component', () => {
     // middle name stays the same
     expect(middleNameInput.value).toBe(farmerMock.personalInfo.middle_name);
   });
+});
+
+it('should render image in form if image is present in data', () => {
+  localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
+
+  const FarmerForm = render(
+    <Router>
+      <UpdateFarmer location={{ state: { farmer: farmerMock } }} />
+    </Router>
+  );
+
+  const farmerFormImage = FarmerForm.getByAltText('Farmer Form Image');
+  
+  expect(farmerFormImage.src).toEqual(farmerMock.personalInfo.image_url);
 });
