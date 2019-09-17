@@ -179,7 +179,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       }
     }
 
-    updateFarmerHandler(formData, farmerData._id)
+    updateFarmerHandler(changes, farmerData._id)
     .then(() => {
       appStateShouldUpdate(true);
       if (user && user.isAdmin) {
