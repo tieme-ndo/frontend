@@ -4,7 +4,7 @@ import { setHeaders } from "../requestHeaders";
 
 export const getUserHandler = (userId) => {
   if (!userId || typeof userId !== 'string') {
-    return new Error("Make sure you're passing a valid user ID!");
+    throw new Error("Make sure you're passing a valid user ID!");
   }
 
   return axios
@@ -17,7 +17,7 @@ export const getUserHandler = (userId) => {
       }
     })
     .catch(error => {
-      throw error;
+      throw new Error(error);
     });
 };
 
@@ -34,7 +34,7 @@ export const changePasswordHandler = (newPassword) => {
     })
 
     .catch(error => {
-      throw error;
+      throw new Error(error);
     });
 };
 
@@ -50,6 +50,6 @@ export const deleteUserHandler = (userId) => {
     })
 
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
