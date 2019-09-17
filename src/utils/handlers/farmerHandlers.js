@@ -78,10 +78,12 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     throw new Error("Make sure you're passing valid changes!");
   }
 
-  return axios.put(`${pathObj.updateFarmerPath}/${farmerId}/update`,
-    changes,
-    setHeaders(token),
-  )
+  return axios
+    .patch(
+      `${pathObj.updateFarmerPath}/${farmerId}/update`,
+      changes,
+      setHeaders(token)
+    )
     .then(res => {
       if (res.data.success) {
         return res.data;
@@ -92,7 +94,7 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     });
 };
 
-export const deleteFarmerHandler = (farmerId) => {
+export const deleteFarmerHandler = farmerId => {
   const token = getToken();
   return axios
     .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders(token))
