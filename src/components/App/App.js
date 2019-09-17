@@ -49,8 +49,12 @@ function App() {
         data: undefined,
         cleanedData: undefined
       });
+
+      // fetch changeRequests only for admin users
+      if (user.isAdmin) {
+        loadChangeRequest();
+      }
       loadFarmers();
-      loadChangeRequest();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
@@ -64,7 +68,7 @@ function App() {
         });
       })
       .catch(error => {
-        toast.error(error.message)
+        toast.error(error.message);
       });
   };
 
