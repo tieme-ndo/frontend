@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StatisticsContainer,
   MajorStatistic,
@@ -13,22 +13,23 @@ const FarmersStatistic = props => {
       <MajorStatContainer>
         <MajorStatistic
           label="Total Farmers"
-          value={`${props.totalNumOfFarmers}`}
+          value={`${props.totalNumOfFarmers || 0}`}
         />
       </MajorStatContainer>
 
       <MinorStatContainer>
         <MinorStatistic
           label="Female"
-          value={props.totalNumOfFemaleFarmers}
+          value={props.totalNumOfFemaleFarmers || 0}
         />
         <MinorStatistic
           label="Male"
-          value={props.totalNumOfMaleFarmers}
+          value={props.totalNumOfMaleFarmers || 0}
         />
         <MinorStatistic
           label="Other"
-          value={props.totalNumOfMaleFarmers}
+          // TODO: implement "other" gender on the backend and pass value as props
+          value={props.totalNumOfOtherFarmers || 0}
         />
       </MinorStatContainer>
 
@@ -39,7 +40,7 @@ const FarmersStatistic = props => {
         />
         <MinorStatistic
           label="Below 35 Years Old"
-          value={props.totalNumOfMaleFarmers}
+          value={props.farmersAgeLesserThanThirtyFive}
         />
         </MinorStatContainer>
     </StatisticsContainer>
