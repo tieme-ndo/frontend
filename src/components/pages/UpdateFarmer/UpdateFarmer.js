@@ -11,6 +11,8 @@ import { toast } from 'react-toastify';
 const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   // Prevents errors when location state is empty
   const { farmer: farmerData } = location.state || {};
+  // state that keeps track of changed input fields
+  const [changes, setChanges] = useState({});
 
   const hydrateFormInputValues = () => {
     let hydratedFormInputs = {};
@@ -24,11 +26,8 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
       // eslint-disable-next-line no-unused-vars
       for (const input in inputSectionData) {
-        // do not hydrate the image_url
-        // it will cause the component to break
         if (input === 'image_url') {
-          // but we still need the 'image_url' property on state object
-          inputSectionData[input].imageUrl = '';
+          inputSectionData[input].imageUrl = farmerData[inputSection][input];
         } else if (input === 'date_of_birth') {
           inputSectionData[input].value = new Date(
             farmerData[inputSection][input]
@@ -62,6 +61,12 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   });
   const [stateLoading, setStateLoading] = useState(false);
 
+  /**
+   * @param {*} e - an event which takes place in the DOM
+   * @param {String} data - tabName
+   * @param {String} elementType - input field type 'checkbox', 'select', 'text', 'number'
+   * @param {Object | undefined} elementConfigObj - Inputs component config with type, name, label, value ...
+   */
   const onChangeHandler = async (e, data, elementType, elementConfigObj) => {
     let name, value, type, files;
 
@@ -90,29 +95,60 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
     const newData = { ...formElementsState[data] };
     const newEntry = { ...newData[name] };
+    // keep track of changed input fields that are sent to the Edits endpoint
+    const changedData = { ...changes[data] }; // personalInfo object
     if (type === 'checkbox') {
       if (newEntry.selected.indexOf(value) > -1) {
         newEntry.selected = newEntry.selected.filter(s => s !== value);
+        changedData[name] = newData[name].selected.filter(s => s !== value);
       } else {
         newEntry.selected = [...newEntry.selected, value];
+        changedData[name] = [...newData[name].selected, value];
       }
     } else if (type === 'file') {
-      const imageFile = new FormData();
-      imageFile.append('file', files[0]);
-      imageFile.append(
-        'upload_preset',
-        process.env.REACT_APP_CLOUDINARY_PRESET
-      );
-      const imageUrl = await axios
-        .post(process.env.REACT_APP_CLOUDINARY_URL, imageFile)
-        .then(data => data.data.secure_url)
-        .catch(err => err);
-      newEntry.imageUrl = imageUrl;
+      // Render the image in the form's <img /> element
+      e.persist();
+
+      if (files.length) {
+        const imageFile = new FormData();
+        imageFile.append('file', files[0]);
+        imageFile.append(
+          'upload_preset',
+          process.env.REACT_APP_CLOUDINARY_PRESET
+        );
+
+        try {
+          if (process.env.REACT_APP_CLOUDINARY_URL) {
+            setStateLoading(true);
+            const uploadResponseData = await axios.post(
+              process.env.REACT_APP_CLOUDINARY_URL,
+              imageFile
+            );
+            const imageUrl = uploadResponseData.data.secure_url;
+            changedData.image_url = uploadResponseData.data.secure_url;
+            e.target.nextSibling.src = imageUrl;
+
+            newEntry.imageUrl = imageUrl;
+            setStateLoading(false);
+          } else {
+            throw new Error(
+              'CLOUDINARY_URL environment variable not provided.'
+            );
+          }
+        } catch (error) {
+          toast.error('Failed to upload image. Please check your connection.');
+
+          // Display error message in the console for context
+          console.error(error.message);
+        }
+      }
     } else {
       newEntry.value = value;
+      changedData[name] = value;
     }
     newData[name] = newEntry;
     setFormElementsState({ ...formElementsState, [data]: newData });
+    setChanges({ ...changes, [data]: changedData });
   };
 
   const toggleHandler = data => {
@@ -149,21 +185,34 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     }
 
     const token = getToken();
-    updateFarmerHandler(formData, farmerData._id, token).then(() => {
-      appStateShouldUpdate(true);
-      if (user && user.isAdmin) {
-        toast.success('Farmer record updated successfully');
-      } else {
-        toast.success("Waiting for Admin's review");
-      }
-      setStateLoading(false);
-      // removes "/edit" dynamically from the route pathname
-      history.replace(`${location.pathname.split('/edit')[0]}`, {
-        // Passes back the updated farmer data to the location state of the DisplayFarmers component
-        // Added "_id" because formData doesn't have/need an _id property
-        farmer: { ...formData, _id: farmerData._id }
+    updateFarmerHandler(changes, farmerData._id, token)
+      .then(() => {
+        appStateShouldUpdate(true);
+        if (user && user.isAdmin) {
+          toast.success('Farmer record updated successfully');
+        } else {
+          toast.success("Waiting for Admin's review");
+        }
+        setStateLoading(false);
+        // removes "/edit" dynamically from the route pathname
+        history.replace(`${location.pathname.split('/edit')[0]}`, {
+          // Passes back the updated farmer data to the location state of the DisplayFarmers component
+          // Added "_id" because formData doesn't have/need an _id property
+          farmer: { ...formData, _id: farmerData._id }
+        });
+      })
+      .catch(err => {
+        setStateLoading(false);
+        if (!err.response) {
+          toast.error(err.message);
+          toast.error(
+            'Looks like there is a problem with your connection. Please try again later'
+          );
+        }
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message);
+        });
       });
-    });
   };
 
   const inputCreator = (data, tabName) => {
@@ -292,21 +341,21 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         >
           {stateLoading ? (
             <Button
-            loading
-            disabled
-            color="teal"
-            size="large"
-            content="Submit Changes"
-          />
+              loading
+              disabled
+              color="teal"
+              size="large"
+              content="Submit Changes"
+            />
           ) : (
             <Button
-            color="teal"
-            type="submit"
-            size="large"
-            content="Submit Changes"
-            icon="check"
-            labelPosition="right"
-          />
+              color="teal"
+              type="submit"
+              size="large"
+              content="Submit Changes"
+              icon="check"
+              labelPosition="right"
+            />
           )}
         </div>
       </Form>
