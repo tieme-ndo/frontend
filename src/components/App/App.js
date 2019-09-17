@@ -20,6 +20,8 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
+import EditCollection from '../pages/EditCollection/EditCollection';
+import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -28,10 +30,8 @@ function App() {
     cleanedData: undefined
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
-  const [editFarmers, setEditFarmers] = useState({
-    data: undefined,
-    cleanedData: undefined
-  });
+  const [changeRequest, setChangeRequest] = useState([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -49,6 +49,11 @@ function App() {
         data: undefined,
         cleanedData: undefined
       });
+
+      // fetch changeRequests only for admin users
+      if (user.isAdmin) {
+        loadChangeRequest();
+      }
       loadFarmers();
       setNeedsUpdate(false);
     }
@@ -63,7 +68,7 @@ function App() {
         });
       })
       .catch(error => {
-        toast.error(error.message)
+        toast.error(error.message);
       });
   };
 
@@ -79,6 +84,26 @@ function App() {
     logout();
   };
 
+  const loadChangeRequest = () => {
+    getAllChangeRequests()
+      .then(changeRequests => {
+        setChangeRequest(changeRequests);
+      })
+      .catch(error => {
+        return new Error(error);
+      });
+  };
+
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible);
+    }
+  };
+
+  const toggleSideBar = () => {
+    setVisible(!visible);
+  };
+
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -86,11 +111,14 @@ function App() {
           <PageHeader
             logOut={logOut}
             user={user}
-            edits={editFarmers.cleanedData}
+            edits={changeRequest}
+            visible={visible}
+            closeSideBar={closeSideBar}
+            toggleSideBar={toggleSideBar}
           />
         ) : null}
 
-        <Container>
+        <Container onClick={closeSideBar}>
           <Route
             path="/"
             exact
@@ -141,6 +169,17 @@ function App() {
             path="/reset-password"
             render={props => <PasswordReset {...props} logOut={logOut} />}
           />
+          <Route
+            exact
+            path="/edit-collection/:id"
+            render={props => (
+              <EditCollection
+                {...props}
+                appStateShouldUpdate={setNeedsUpdate}
+              />
+            )}
+          />
+
           <ToastContainer position="top-right" />
         </Container>
       </div>
