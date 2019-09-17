@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UpdateFarmer from './UpdateFarmer.js';
 
@@ -38,7 +38,7 @@ const farmerMock = {
     number_of_acres: 3,
     location_of_farm: '7, Basi, Accra',
     farm_nearest_landmark: 'CBN',
-    crops_cultivated: ['Yam', 'Cassava'],
+    crops_cultivated: ['Yam'],
     animals_or_birds: ['Goat']
   },
   archived: true,
@@ -107,6 +107,28 @@ describe('Update Farmer component', () => {
 
     expect(birthInputElement).toBeInTheDocument();
     expect(birthInputElement.value).toBe(renderedDate);
+  });
+
+  it('updates state with changed fields only', () => {
+    const { container } = render(
+      <Router>
+        <UpdateFarmer location={{ state: { farmer: farmerMock } }} />
+      </Router>
+    );
+    const newFirstName = 'Frank';
+
+    const firstNameInput = container.querySelector('input[name=first_name]');
+    const middleNameInput = container.querySelector('input[name=middle_name]');
+    expect(firstNameInput).toBeInTheDocument();
+    expect(firstNameInput.value).toBe(farmerMock.personalInfo.first_name);
+
+    expect(middleNameInput).toBeInTheDocument();
+    expect(middleNameInput.value).toBe(farmerMock.personalInfo.middle_name);
+    // change the input value
+    fireEvent.change(firstNameInput, { target: { value: newFirstName } });
+    expect(firstNameInput.value).toBe(newFirstName);
+    // middle name stays the same
+    expect(middleNameInput.value).toBe(farmerMock.personalInfo.middle_name);
   });
 });
 
