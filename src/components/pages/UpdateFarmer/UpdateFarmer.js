@@ -180,11 +180,18 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
           farmer: { ...formData, _id: farmerData._id }
         });
       })
-      .catch(err =>
+      .catch(err => {
+        setStateLoading(false);
+        if (!err.response) {
+          toast.error(err.message);
+          toast.error(
+            'Looks like there is a problem with your connection. Please try again later'
+          );
+        }
         err.response.data.errors.forEach(element => {
           toast.error(element.message);
-        })
-      );
+        });
+      });
   };
 
   const inputCreator = (data, tabName) => {
