@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimmer, Loader, Segment, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Dashboard = ({ farmers, history }) => {
 
   const columns = React.useMemo(tableColumLabels, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (farmers) {
       setData(farmers);
     } else {
@@ -28,7 +28,7 @@ const Dashboard = ({ farmers, history }) => {
     }
   }, [farmers]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     axiosWithHeader()
       .get(pathObj.getFarmersStatistic)
       .then(res => setFarmersStatistic(() => res.data))
