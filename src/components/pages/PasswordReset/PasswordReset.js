@@ -6,7 +6,6 @@ import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
 import axiosWithHeader from '../../../utils/axiosWithHeaders';
 import { pathObj } from '../../../utils/generalVariables';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 
 const PasswordReset = ({ logOut }) => {
   const [state, updateState] = useState({
@@ -76,4 +75,4 @@ const PasswordReset = ({ logOut }) => {
   );
 };
 
-export default withRestrictedAccess(PasswordReset);
+export default PasswordReset;

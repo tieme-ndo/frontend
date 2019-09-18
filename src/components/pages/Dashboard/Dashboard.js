@@ -8,7 +8,6 @@ import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
 import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import FarmersStatistic from '../../partials/FarmersStatistic';
 import { getfarmerStatisticsHandler } from '../../../utils/handlers/farmerHandlers';
 
@@ -98,4 +97,4 @@ Dashboard.propTypes = {
   history: PropTypes.object
 };
 
-export default withRestrictedAccess(Dashboard, false);
+export default Dashboard;
