@@ -52,7 +52,7 @@ function App() {
 
       // fetch changeRequests only for admin users
       if (user.isAdmin) {
-        loadChangeRequest();
+        loadChangeRequest()
       }
       loadFarmers();
       setNeedsUpdate(false);
@@ -90,7 +90,7 @@ function App() {
         setChangeRequest(changeRequests);
       })
       .catch(error => {
-        throw new Error(error);
+        toast.error(error.message)
       });
   };
 

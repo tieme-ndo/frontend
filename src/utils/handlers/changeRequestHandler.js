@@ -12,7 +12,7 @@ export const getAllChangeRequests = () => {
       }
     })
     .catch(error => {
-      throw new Error(error);
+      toast.error(error.message);
     });
 };
 
@@ -29,7 +29,7 @@ export const getChangeRequestsById = requestId => {
       }
     })
     .catch(error => {
-      throw new Error(error);
+      toast.error(error.message)
     });
 };
 
@@ -49,7 +49,7 @@ export const approveChangeRequest = (
       }
     })
     .catch(error => {
-      throw new Error(error);
+      toast.error(error.message)
     });
 };
 
@@ -69,6 +69,6 @@ export const rejectChangeRequest = (
       }
     })
     .catch(error => {
-      throw new Error(error);
+      toast.error(error.message);
     });
 };
