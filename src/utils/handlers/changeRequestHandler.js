@@ -64,7 +64,7 @@ export const rejectChangeRequest = (
 ) => {
   const token = getToken();
   return axios
-    .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders(token))
+    .post(`${pathObj.getEdits}/${requestId}/decline`, {}, setHeaders(token))
     .then(res => {
       if (res.data) {
         toast.success('Farmer record rejected');
