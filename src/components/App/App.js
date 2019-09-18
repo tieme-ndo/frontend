@@ -11,7 +11,7 @@ import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import PasswordReset from '../pages/PasswordReset/PasswordReset';
 import RestrictedRoute from '../hoc/RestrictedRoute';
-import { getUser, logout, isLoggedIn, getToken } from '../../utils/handlers/authenticationHandlers';
+import { getUser, logout, isLoggedIn } from '../../utils/handlers/authenticationHandlers';
 
 import {
   getFarmersHandler,
