@@ -21,7 +21,7 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
       farmerToSave ? setFarmer(farmerToSave) : history.push('/');
     }
   }, [farmers, getFarmer, match.params.id, history]);
-
+ 
   function handleSelected(e, { name }) {
     setSelected(name);
   }

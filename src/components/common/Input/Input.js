@@ -5,6 +5,7 @@ import {
   Checkbox,
   Form
 } from 'semantic-ui-react';
+import { ImageInputContainer } from './ImageInputContainer';
 const Input = props => {
   const {
     type,
@@ -24,16 +25,34 @@ const Input = props => {
   let inputElement = null;
   switch (elementType) {
     case 'input':
-      inputElement = (
-        <SemanticInput
-          fluid
-          type={type}
-          name={name}
-          value={value}
-          onChange={e => changeHandler(e, data, type)}
-          checked={checked}
-        />
-      );
+      
+      if (type === 'file' && name === 'image_url') {
+        inputElement = (
+          <>
+            <ImageInputContainer>
+              <input name={name} type="file" onChange={e => changeHandler(e, data, type)} />
+              <img
+                // Prevent empty image from being visible when no image is uploaded
+                style={{ opacity: !props.imageUrl ? 0 : 1 }}
+                src={props.imageUrl}
+                alt={props.imgAltText}
+              />
+            </ImageInputContainer>
+            <label style={{ textAlign: 'center' }}>{labelName}</label>
+          </>
+        );
+      } else {
+        inputElement = (
+          <SemanticInput
+            fluid
+            type={type}
+            name={name}
+            value={value}
+            onChange={e => changeHandler(e, data, type)}
+            checked={checked}
+          />
+        );
+      }
       break;
     case 'checkbox':
       inputElement = (
@@ -70,7 +89,7 @@ const Input = props => {
   }
   return (
     <Form.Field style={{ marginBottom: '16px' }}>
-      <label>{labelName}</label>
+      { name !== 'image_url' && <label>{labelName}</label> }
       {inputElement}
     </Form.Field>
   );

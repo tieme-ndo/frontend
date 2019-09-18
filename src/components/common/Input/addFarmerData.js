@@ -7,6 +7,7 @@ export const personalInfo = {
     imageUrl: '',
     valid: false,
     touched: false,
+    imgAltText: 'Farmer Form Image'
   },
   title: {
     elementType: 'select',

@@ -18,10 +18,11 @@ const userTest = {
   username: 'Test'
 };
 
+
 it('renders the navbar if user is admin', () => {
   const { getByTestId } = render(
     <Router>
-      <PageHeader user={userTestAdmin} />
+      <PageHeader user={userTestAdmin}/>
     </Router>
   );
   const HeaderComponent = getByTestId('nav-test');
@@ -56,3 +57,4 @@ it('does not render add account if user is not admin', () => {
   );
   expect(queryByTestId('create-new-account-test')).toBeNull();
 });
+
