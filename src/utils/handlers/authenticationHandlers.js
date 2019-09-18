@@ -31,7 +31,7 @@ export const loginHandler = ({ username, password }) => {
       }
     })
     .catch(error => {
-      return error.response.data;
+      throw new Error(error.response.data)
     });
 };
 
@@ -56,7 +56,7 @@ export const registrationHandler = ({ username, password, isAdmin }) => {
     })
     .catch(error => {
       delete error.response.data.errors.status;
-      return error.response.data.errors;
+      throw new Error(error.response.data.errors)
     });
 };
 
