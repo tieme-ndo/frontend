@@ -123,7 +123,7 @@ function App() {
             path="/"
             exact
             isAllowed={isLoggedIn()}
-            redirectTo='/login'
+            redirectTo="/login"
             render={props => (
               <Dashboard
                 {...props}
@@ -135,7 +135,7 @@ function App() {
           <RestrictedRoute
             path="/accounts/new"
             isAllowed={isLoggedIn() && getUser().isAdmin}
-            redirectTo='/'
+            redirectTo="/"
             component={AddStaff}
           />
           <Route
@@ -145,7 +145,7 @@ function App() {
           <RestrictedRoute
             path="/farmers/:id/edit"
             isAllowed={isLoggedIn()}
-            redirectTo='/login'
+            redirectTo="/login"
             render={props => (
               <UpdateFarmer
                 {...props}
@@ -157,14 +157,19 @@ function App() {
           <RestrictedRoute
             path="/addfarmer"
             isAllowed={isLoggedIn()}
-            redirectTo='/login'
-            component={AddFarmer}
+            redirectTo="/login"
+            render={props => (
+              <AddFarmer
+                {...props}
+                appStateShouldUpdate={setNeedsUpdate}
+              />
+            )}
           />
           <RestrictedRoute
             exact
             path="/farmers/:id"
             isAllowed={isLoggedIn()}
-            redirectTo='/login'
+            redirectTo="/login"
             render={props => (
               <DisplayFarmer
                 {...props}
@@ -178,14 +183,14 @@ function App() {
             exact
             path="/reset-password"
             isAllowed={isLoggedIn()}
-            redirectTo='/login'
+            redirectTo="/login"
             render={props => <PasswordReset {...props} logOut={logOut} />}
           />
           <RestrictedRoute
             exact
             path="/edit-collection/:id"
             isAllowed={isLoggedIn() && getUser().isAdmin}
-            redirectTo='/login'
+            redirectTo="/login"
             render={props => (
               <EditCollection
                 {...props}
