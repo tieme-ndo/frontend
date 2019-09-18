@@ -144,7 +144,6 @@ const AddFarmer = () => {
       .then(() => {
         toast.success('Farmer Added Successfully');
         defaultState();
-        return;
       })
       .catch(err => {
         err.response.data.errors.forEach(element => {
