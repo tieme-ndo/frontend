@@ -126,3 +126,14 @@ export const uploadImageHandler = (imageFile) => {
       throw new Error(error);
     });
 }
+
+export const getfarmerStatisticsHandler = () => {
+  return axios
+    .get(pathObj.getFarmersStatistic, 
+      setHeaders()
+    )
+    .then(res => res.data)
+    .catch(error => {
+      throw new Error(error);
+    });
+};
