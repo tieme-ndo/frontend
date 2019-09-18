@@ -199,7 +199,6 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       err.response.data.errors.forEach(element => {
         toast.error(element.message);
       });
-      return;
     });
   };
 
