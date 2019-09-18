@@ -15,7 +15,9 @@ import { getfarmerStatisticsHandler } from '../../../utils/handlers/farmerHandle
 const Dashboard = ({ farmers, history }) => {
   const [data, setData] = useState([]);
   const [farmersStatistic, setFarmersStatistic] = useState({});
-  const [farmersStatisticsLoading, setFarmersStatisticsLoading] = useState(true);
+  const [farmersStatisticsLoading, setFarmersStatisticsLoading] = useState(
+    true
+  );
 
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -33,12 +35,14 @@ const Dashboard = ({ farmers, history }) => {
     setFarmersStatisticsLoading(true);
     getfarmerStatisticsHandler()
       .then(res => {
-        setFarmersStatistic(res)
+        setFarmersStatistic(res);
+        setFarmersStatisticsLoading(false);
       })
       .catch(error => {
         toast.error(error.message);
-      })
-      .finally(() => setFarmersStatisticsLoading(false));
+        setFarmersStatisticsLoading(false);
+      });
+    //   .finally(() => setFarmersStatisticsLoading(false));
   }, []);
 
   const renderFarmersStatistic = () => {
@@ -56,10 +60,7 @@ const Dashboard = ({ farmers, history }) => {
 
     if (Object.keys(farmersStatistic).length === 0) {
       return (
-        <Segment
-          secondary
-          style={{ textAlign: 'center' }}
-        >
+        <Segment secondary style={{ textAlign: 'center' }}>
           Failed to retreive farmer statistics
         </Segment>
       );
