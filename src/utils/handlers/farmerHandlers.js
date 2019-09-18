@@ -108,3 +108,13 @@ export const deleteFarmerHandler = farmerId => {
       throw new Error(error);
     });
 };
+
+export const getfarmerStatisticsHandler = () => {
+  const token = getToken();
+  return axios
+    .get(pathObj.getFarmersStatistic, setHeaders(token))
+    .then(res => res.data)
+    .catch(error => {
+      throw new Error(error);
+    });
+};
