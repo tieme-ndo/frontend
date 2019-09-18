@@ -42,7 +42,7 @@ export const approveChangeRequest = (
     .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders())
     .then(res => {
       if (res.data) {
-        toast.success('Farmer record approved');
+        toast.success('Change request approved');
         appStateShouldUpdate(true);
         history.push('/');
         return res.data;
@@ -62,7 +62,7 @@ export const rejectChangeRequest = (
     .post(`${pathObj.getEdits}/${requestId}/decline`, {}, setHeaders())
     .then(res => {
       if (res.data) {
-        toast.success('Farmer record rejected');
+        toast.success('Change request rejected');
         appStateShouldUpdate(true);
         history.push('/');
         return res.data;
