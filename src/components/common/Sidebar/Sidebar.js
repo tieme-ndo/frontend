@@ -29,12 +29,17 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
           {edits && edits.length ? (
             edits.map((edit, idx) => (
               <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
-                <Segment vertical className="cards" onClick={closeSideBar}>
-                  <p>
+                <Segment
+                  basic
+                  //   vertical
+                  //   className="cards"
+                  onClick={closeSideBar}
+                >
+                  <Segment>
                     <b>{edit.change_requested_by}</b> updated{' '}
                     <b>{edit.farmer_name}'s record</b> on{' '}
                     {moment(edit.date).format('LLLL')}
-                  </p>
+                  </Segment>
                 </Segment>
               </Link>
             ))
