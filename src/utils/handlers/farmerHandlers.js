@@ -116,7 +116,13 @@ export const deleteFarmerHandler = (farmerId) => {
 
 export const uploadImageHandler = (imageFile) => {
   return axios.post(
-    process.env.REACT_APP_CLOUDINARY_URL,
-    imageFile
-  );
+      process.env.REACT_APP_CLOUDINARY_URL,
+      imageFile
+    )
+    .then(res => {
+      return res
+    })
+    .catch(error => {
+      throw new Error(error);
+    });
 }
