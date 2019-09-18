@@ -20,7 +20,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
     // eslint-disable-next-line no-unused-vars
     for (const inputSection in formInputData) {
-      const inputSectionData = formInputData[inputSection];
+      const inputSectionData = formInputData[inputSection]; 
 
       // eslint-disable-next-line no-unused-vars
       for (const input in inputSectionData) {
