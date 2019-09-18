@@ -14,7 +14,7 @@ export const getAllChangeRequests = () => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -32,7 +32,7 @@ export const getChangeRequestsById = requestId => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -52,7 +52,7 @@ export const approveChangeRequest = (
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
 
@@ -72,6 +72,6 @@ export const rejectChangeRequest = (
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error);
     });
 };
