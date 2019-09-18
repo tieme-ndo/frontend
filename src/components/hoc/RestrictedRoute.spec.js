@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import withRestrictedAccess from './withRestrictedAccess';
+import RestrictedRoute from './RestrictedRoute';
 
 beforeAll(() => {
   // Mocking localStorage
@@ -19,14 +19,16 @@ const TestComponent = () => {
   return <div data-testid="restricted-test">This is a test</div>;
 };
 
-const RestrictedTestComponent = withRestrictedAccess(TestComponent);
-
 it('renders without crashing', () => {
   localStorage.setItem('tokenTiemeNdo', 'akgjsakgjaslgjslgkjaslgjalkgja');
 
   const { getByTestId } = render(
     <Router>
-      <RestrictedTestComponent />
+      <RestrictedRoute
+        path='/'
+        isAllowed={true}
+        component={TestComponent}
+      />
     </Router>
   );
   const AppComponent = getByTestId('restricted-test');

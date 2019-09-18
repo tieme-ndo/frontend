@@ -3,7 +3,6 @@ import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
 import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
 import { getToken } from '../../../utils/handlers/authenticationHandlers';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -363,4 +362,4 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   );
 };
 
-export default withRestrictedAccess(UpdateFarmer);
+export default UpdateFarmer;

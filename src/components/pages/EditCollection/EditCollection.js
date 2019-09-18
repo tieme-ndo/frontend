@@ -7,7 +7,6 @@ import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import {
   getChangeRequestsById,
   approveChangeRequest,
@@ -170,4 +169,4 @@ EditCollection.propTypes = {
   appStateShouldUpdate: PropTypes.func
 };
 
-export default withRestrictedAccess(EditCollection);
+export default EditCollection;
