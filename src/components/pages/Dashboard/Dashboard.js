@@ -8,8 +8,6 @@ import DashboardHeader from './DashboardHeader';
 import tableColumLabels from './tableColumLabels';
 import DashboardTable from '../../common/Table/Table';
 import LoadingIndicator from './LoadingIndicator';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import FarmersStatistic from '../../partials/FarmersStatistic';
 import { getfarmerStatisticsHandler } from '../../../utils/handlers/farmerHandlers';
 
