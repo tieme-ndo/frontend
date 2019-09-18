@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimmer, Loader, Segment, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -13,8 +13,9 @@ import FarmersStatistic from '../../partials/FarmersStatistic';
 import { getfarmerStatisticsHandler } from '../../../utils/handlers/farmerHandlers';
 
 const Dashboard = ({ farmers, history }) => {
-  const [data, setData] = React.useState([]);
-  const [farmersStatistic, setFarmersStatistic] = React.useState({});
+  const [data, setData] = useState([]);
+  const [farmersStatistic, setFarmersStatistic] = useState({});
+  const [farmersStatisticsLoading, setFarmersStatisticsLoading] = useState(true);
 
   const Title = <Header as="h1">All Farmers</Header>;
 
@@ -29,15 +30,19 @@ const Dashboard = ({ farmers, history }) => {
   }, [farmers]);
 
   useEffect(() => {
+    setFarmersStatisticsLoading(true);
     getfarmerStatisticsHandler()
-      .then(res => setFarmersStatistic(res))
+      .then(res => {
+        setFarmersStatistic(res)
+      })
       .catch(error => {
         toast.error(error.message);
-      });
+      })
+      .finally(() => setFarmersStatisticsLoading(false));
   }, []);
 
   const renderFarmersStatistic = () => {
-    if (Object.keys(farmersStatistic).length === 0) {
+    if (farmersStatisticsLoading) {
       return (
         <Segment
           style={{ marginBottom: '50px', boxShadow: 'none', border: '0' }}
@@ -45,6 +50,17 @@ const Dashboard = ({ farmers, history }) => {
           <Dimmer active inverted>
             <Loader inverted>Loading farmers statistic</Loader>
           </Dimmer>
+        </Segment>
+      );
+    }
+
+    if (Object.keys(farmersStatistic).length === 0) {
+      return (
+        <Segment
+          secondary
+          style={{ textAlign: 'center' }}
+        >
+          Failed to retreive farmer statistics
         </Segment>
       );
     }
