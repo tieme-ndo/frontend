@@ -150,7 +150,6 @@ const AddFarmer = () => {
         err.response.data.errors.forEach(element => {
           toast.error(element.message);
         });
-        return;
       });
   };
   const inputCreator = (data, tabName) => {
