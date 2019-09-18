@@ -122,7 +122,7 @@ function App() {
           <RestrictedRoute
             path="/"
             exact
-            isAllowed={isLoggedIn(getToken())}
+            isAllowed={isLoggedIn()}
             redirectTo='/login'
             render={props => (
               <Dashboard
@@ -134,7 +134,7 @@ function App() {
           />
           <RestrictedRoute
             path="/accounts/new"
-            isAllowed={isLoggedIn(getToken()) && getUser().isAdmin}
+            isAllowed={isLoggedIn() && getUser().isAdmin}
             redirectTo='/'
             component={AddStaff}
           />
@@ -144,7 +144,7 @@ function App() {
           />
           <RestrictedRoute
             path="/farmers/:id/edit"
-            isAllowed={isLoggedIn(getToken())}
+            isAllowed={isLoggedIn()}
             redirectTo='/login'
             render={props => (
               <UpdateFarmer
@@ -156,14 +156,14 @@ function App() {
           />
           <RestrictedRoute
             path="/addfarmer"
-            isAllowed={isLoggedIn(getToken())}
+            isAllowed={isLoggedIn()}
             redirectTo='/login'
             component={AddFarmer}
           />
           <RestrictedRoute
             exact
             path="/farmers/:id"
-            isAllowed={isLoggedIn(getToken())}
+            isAllowed={isLoggedIn()}
             redirectTo='/login'
             render={props => (
               <DisplayFarmer
@@ -177,14 +177,14 @@ function App() {
           <RestrictedRoute
             exact
             path="/reset-password"
-            isAllowed={isLoggedIn(getToken())}
+            isAllowed={isLoggedIn()}
             redirectTo='/login'
             render={props => <PasswordReset {...props} logOut={logOut} />}
           />
           <RestrictedRoute
             exact
             path="/edit-collection/:id"
-            isAllowed={isLoggedIn(getToken()) && getUser().isAdmin}
+            isAllowed={isLoggedIn() && getUser().isAdmin}
             redirectTo='/login'
             render={props => (
               <EditCollection

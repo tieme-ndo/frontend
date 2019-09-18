@@ -89,7 +89,11 @@ export const getUser = () => {
   }
 };
 
-export const isLoggedIn = (token) => {
+export const getToken = () => {
+  return window.localStorage.getItem(tokenKey);
+};
+
+export const isLoggedIn = (token = getToken()) => {
   // TODO: This needs to be improved checking the token with decryption, checking payload for expiration
   // Returns a boolean if a valid token is found in the localStorage
   if (token) {
@@ -98,10 +102,5 @@ export const isLoggedIn = (token) => {
   }
   return false;
 };
-
-export const getToken = () => {
-  return window.localStorage.getItem(tokenKey);
-};
-
 // DEBATE: adding a separate logoutHandler to account for clearing localStorage, as well as the user objects.
 // However, since we do not use Redux, the use-case for this is limited. Will discuss during stand-up.
