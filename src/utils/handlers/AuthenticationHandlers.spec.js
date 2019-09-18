@@ -1,5 +1,3 @@
-const farmerHandlers = require('./farmerHandlers')
+const farmerHandlers = require('./farmerHandlers');
 
-it('renders without crashing', () => {
-  
-});
+it('renders without crashing', () => {});

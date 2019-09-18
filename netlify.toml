@@ -1,5 +1,5 @@
-# Global settings applied to the whole site.  
-# 
+# Global settings applied to the whole site.
+#
 # “base” is the directory to change to before starting build. If you set base:
 #        that is where we will look for package.json/.nvmrc/etc, not repo root!
 # “command” is your build command.
@@ -18,6 +18,6 @@
     REACT_APP_API_URL = "https://t-ndo.herokuapp.com"
 
 # Deploy Preview context: All deploys generated from a pull/merge request
-# will inherit these settings. 
+# will inherit these settings.
 [context.deploy-preview.environment]
   REACT_APP_API_URL = "https://tndo-temp-staging.herokuapp.com"
