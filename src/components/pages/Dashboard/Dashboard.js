@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -10,19 +10,8 @@ import LoadingIndicator from './LoadingIndicator';
 import FarmersStatistic from '../../partials/FarmersStatistic';
 
 const Dashboard = ({ farmers, statistics, history }) => {
-  const [data, setData] = useState([]);
-
   const Title = <Header as="h1">All Farmers</Header>;
-
   const columns = React.useMemo(tableColumLabels, []);
-
-  useEffect(() => {
-    if (farmers) {
-      setData(farmers);
-    } else {
-      setData([]);
-    }
-  }, [farmers]);
 
   return (
     <div data-testid="dashboard-render-test">
@@ -39,8 +28,8 @@ const Dashboard = ({ farmers, statistics, history }) => {
 
       <FarmersStatistic farmersStatistic={statistics} />
 
-      {data.length ? (
-        <DashboardTable history={history} columns={columns} data={data} />
+      {farmers && farmers.length ? (
+        <DashboardTable history={history} columns={columns} data={farmers} />
       ) : (
         <LoadingIndicator />
       )}
