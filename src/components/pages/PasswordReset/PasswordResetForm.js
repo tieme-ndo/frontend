@@ -47,10 +47,20 @@ const PasswordResetForm = props => {
 
               <Form size="large" onSubmit={handleSubmit}>
                 <Segment width={5}>
+                <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Previous Password"
+                    type="password"
+                    name="prevPassword"
+                    value={state.prevPassword}
+                    onChange={handleInputChange}
+                  />
+
                   <Form.Input
                     fluid
                     icon="lock"
-                    data-testid="new-password"
                     iconPosition="left"
                     placeholder="New Password"
                     type="password"
