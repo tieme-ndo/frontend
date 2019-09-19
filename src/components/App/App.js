@@ -25,9 +25,9 @@ import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler'
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [farmers, setFarmers] = useState({
-    data: undefined,
-    cleanedData: undefined
+  const [data, setData] = useState({
+    farmers: undefined,
+    farmersDashboard: undefined
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
@@ -44,10 +44,10 @@ function App() {
 
   useEffect(() => {
     if (user && needsUpdate) {
-      setFarmers({
+      setData({
         // Setting this allows the dashboard to know that something is being loaded
-        data: undefined,
-        cleanedData: undefined
+        farmers: undefined,
+        farmersDashboard: undefined
       });
 
       // fetch changeRequests only for admin users
@@ -62,9 +62,9 @@ function App() {
   const loadFarmers = () => {
     getFarmersHandler()
       .then(retrievedFarmers => {
-        setFarmers({
-          data: retrievedFarmers,
-          cleanedData: cleanFarmersData(retrievedFarmers)
+        setData({
+          farmers: retrievedFarmers,
+          farmersDashboard: cleanFarmersData(retrievedFarmers)
         });
       })
       .catch(error => {
@@ -73,8 +73,8 @@ function App() {
   };
 
   const getFarmer = id => {
-    if (farmers.data) {
-      const farmer = farmers.data.find(farmer => farmer._id === id);
+    if (data.farmers) {
+      const farmer = data.farmers.find(farmer => farmer._id === id);
       return farmer;
     }
   };
@@ -127,7 +127,7 @@ function App() {
             render={props => (
               <Dashboard
                 {...props}
-                farmers={farmers.cleanedData}
+                farmers={data.farmersDashboard}
                 getFarmer={getFarmer}
               />
             )}
@@ -173,7 +173,7 @@ function App() {
             render={props => (
               <DisplayFarmer
                 {...props}
-                farmers={farmers.data}
+                farmers={data.farmers}
                 getFarmer={getFarmer}
                 needsUpdate={setNeedsUpdate}
               />
