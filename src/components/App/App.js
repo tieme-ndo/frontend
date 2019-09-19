@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
@@ -32,12 +32,30 @@ function App() {
   const [user, setUser] = useState(undefined);
   const [data, setData] = useState({
     farmers: undefined,
-    farmersDashboard: undefined
+    farmersDashboard: undefined,
+    statistics: undefined
   });
-  const [farmersStatistic, setFarmersStatistic] = useState(undefined);
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
   const [visible, setVisible] = useState(false);
+
+  const loadFarmers = useCallback(() => {
+    getFarmersHandler()
+      .then(async retrievedFarmers => {
+        setData({
+          farmers: retrievedFarmers,
+          farmersDashboard: cleanFarmersData(retrievedFarmers),
+          statistics: await loadStatistics()
+        });
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
+  }, []);
+
+  const loadStatistics = async () => {
+    return await getfarmerStatisticsHandler();
+  };
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -53,7 +71,8 @@ function App() {
       setData({
         // Setting this allows the dashboard to know that something is being loaded
         farmers: undefined,
-        farmersDashboard: undefined
+        farmersDashboard: undefined,
+        statistics: undefined
       });
 
       // fetch changeRequests only for admin users
@@ -61,34 +80,9 @@ function App() {
         loadChangeRequest();
       }
       loadFarmers();
-      loadStatistics();
       setNeedsUpdate(false);
     }
-  }, [user, needsUpdate]);
-
-  const loadFarmers = () => {
-    getFarmersHandler()
-      .then(retrievedFarmers => {
-        setData({
-          farmers: retrievedFarmers,
-          farmersDashboard: cleanFarmersData(retrievedFarmers)
-        });
-      })
-      .catch(error => {
-        toast.error(error.message);
-      });
-  };
-
-  const loadStatistics = () => {
-    getfarmerStatisticsHandler()
-      .then(statistics => {
-        setFarmersStatistic(statistics);
-      })
-      .catch(error => {
-        setFarmersStatistic({});
-        toast.error(error.message);
-      });
-  };
+  }, [user, needsUpdate, loadFarmers]);
 
   const getFarmer = id => {
     if (data.farmers) {
@@ -147,7 +141,7 @@ function App() {
                 {...props}
                 farmers={data.farmersDashboard}
                 getFarmer={getFarmer}
-                statistics={farmersStatistic}
+                statistics={data.statistics}
               />
             )}
           />
