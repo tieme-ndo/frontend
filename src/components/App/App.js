@@ -209,7 +209,11 @@ function App() {
             )}
           />
 
-          <ToastContainer position="top-right" />
+          <ToastContainer
+            position="top-right"
+            hideProgressBar
+            style={{ top: '64px' }}
+          />
         </Container>
       </div>
     </Router>
