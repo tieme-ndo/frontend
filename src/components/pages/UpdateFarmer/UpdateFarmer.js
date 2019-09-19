@@ -133,6 +133,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             );
           }
         } catch (error) {
+          setStateLoading(false);
           toast.error('Failed to upload image. Please check your connection.');
 
           // Display error message in the console for context
