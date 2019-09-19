@@ -23,6 +23,10 @@ it('renders without crashing', () => {
       <PasswordReset />
     </Router>
   );
+
+  const prevPasswordField = getByPlaceholderText('Previous Password');
+  expect(prevPasswordField).toBeInTheDocument();
+
   const newPasswordField = getByPlaceholderText('New Password');
   expect(newPasswordField).toBeInTheDocument();
 
