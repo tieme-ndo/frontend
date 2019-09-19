@@ -55,12 +55,11 @@ function App() {
   }, []);
 
   const loadStatistics = async () => {
-    const statistics = await getfarmerStatisticsHandler()
-      if(statistics instanceof Error){
-        toast.error(statistics);
-        return null;
-      }
-      return statistics;
+    try {
+      return await getfarmerStatisticsHandler();
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   useEffect(() => {
