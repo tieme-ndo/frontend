@@ -11,6 +11,12 @@ const addStaffSchema = yup.object().shape({
     .string()
     .min(6)
     .max(40)
+    .required(),
+
+  confirmPassword: yup
+    .string()
+    .min(6)
+    .max(40)
     .required()
 });
 
