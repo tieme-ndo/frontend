@@ -39,7 +39,7 @@ const PageHeader = ({
 
           <Menu.Menu position="right">
             {user && user.isAdmin ? (
-              <Menu.Item>
+              <Menu.Item onClick={toggleSideBar}>
                 <Span>
                   <i
                     className={
@@ -47,7 +47,6 @@ const PageHeader = ({
                         ? 'fas fa-bell red'
                         : 'fas fa-bell grey'
                     }
-                    onClick={toggleSideBar}
                   ></i>
                 </Span>
                 <Sidebar
