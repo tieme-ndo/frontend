@@ -37,7 +37,6 @@ function App() {
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
-  const [visible, setVisible] = useState(false);
 
   const loadFarmers = useCallback(() => {
     getFarmersHandler()
@@ -106,16 +105,6 @@ function App() {
       });
   };
 
-  const closeSideBar = () => {
-    if (visible) {
-      setVisible(!visible);
-    }
-  };
-
-  const toggleSideBar = () => {
-    setVisible(!visible);
-  };
-
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -124,13 +113,14 @@ function App() {
             logOut={logOut}
             user={user}
             edits={changeRequest}
-            visible={visible}
-            closeSideBar={closeSideBar}
-            toggleSideBar={toggleSideBar}
           />
         ) : null}
 
-        <Container onClick={closeSideBar}>
+        <Container
+          onClick={() => {
+            console.log("Close panel");
+          }}
+        >
           <RestrictedRoute
             path="/"
             exact

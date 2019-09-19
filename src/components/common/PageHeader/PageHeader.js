@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -16,14 +16,18 @@ const Span = styled.span`
   }
 `;
 
-const PageHeader = ({
-  logOut,
-  user,
-  edits,
-  visible,
-  closeSideBar,
-  toggleSideBar
-}) => {
+const PageHeader = ({ logOut, user, edits }) => {
+  const [visible, setVisible] = useState(false);
+
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible);
+    }
+  };
+
+  const toggleSideBar = () => {
+    setVisible(!visible);
+  };
   return (
     <div data-testid="nav-test">
       <Menu
