@@ -21,10 +21,10 @@ export const getUserHandler = (userId) => {
     });
 };
 
-export const changePasswordHandler = (newPassword) => {
+export const changePasswordHandler = (prevPassword, newPassword) => {
   return axios
     .put(`${pathObj.changePasswordPath}`, 
-      newPassword,
+      {prevPassword, newPassword},
       setHeaders(), 
     )
     .then(res => {
