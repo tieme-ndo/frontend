@@ -130,7 +130,7 @@ function App() {
           />
         ) : null}
 
-        <Container onClick={closeSideBar}>
+        <Container onClick={closeSideBar} style={{ marginTop: '57px', paddingTop: '40px' }}>
           <RestrictedRoute
             path="/"
             exact

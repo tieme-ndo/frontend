@@ -20,7 +20,8 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
       width="very wide"
       style={{
         top: '57px',
-        maxWidth: '100%'
+        maxWidth: '100%',
+        boxShadow: '-2px 0px 2px 0 rgba(34,36,38,.1)'
       }}
     >
       <NotificationsList divided>
