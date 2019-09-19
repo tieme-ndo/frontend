@@ -2,12 +2,11 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
-import { getToken } from './authenticationHandlers';
+
 
 export const getAllChangeRequests = () => {
-  const token = getToken();
   return axios
-    .get(`${pathObj.getEdits}`, setHeaders(token))
+    .get(`${pathObj.getEdits}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.changeRequests;
@@ -19,13 +18,12 @@ export const getAllChangeRequests = () => {
 };
 
 export const getChangeRequestsById = requestId => {
-  const token = getToken();
   if (!requestId || typeof requestId !== 'string') {
     return new Error("Make sure you're passing an edit id!");
   }
 
   return axios
-    .get(`${pathObj.getEdits}/${requestId}`, setHeaders(token))
+    .get(`${pathObj.getEdits}/${requestId}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data;
