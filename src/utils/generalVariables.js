@@ -15,7 +15,7 @@ export const pathObj = {
   changePasswordPath: `${URL}/${API_VERSION}/user/reset-password`,
   registrationPath: `${URL}/${API_VERSION}/user/signup`,
   deleteUserPath: `${URL}/${API_VERSION}/user`,
-
+  getFarmersStatistic: `${URL}/${API_VERSION}/farmers/statistic`,
   getFarmersPath: `${URL}/${API_VERSION}/farmers`,
   addFarmerPath: `${URL}/${API_VERSION}/farmers/create`,
   updateFarmerPath: `${URL}/${API_VERSION}/farmers`,

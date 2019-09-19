@@ -4,8 +4,7 @@ import { setHeaders } from '../requestHeaders';
 
 export const getFarmersHandler = () => {
   return axios
-    .get(`${pathObj.getFarmersPath}`, 
-      setHeaders())
+    .get(`${pathObj.getFarmersPath}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmers;
@@ -38,8 +37,7 @@ export const getIndividualFarmerHandler = farmerId => {
   }
 
   return axios
-    .get(`${pathObj.getFarmersPath}/${farmerId}`, 
-      setHeaders())
+    .get(`${pathObj.getFarmersPath}/${farmerId}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmer;
@@ -50,7 +48,7 @@ export const getIndividualFarmerHandler = farmerId => {
     });
 };
 
-export const addFarmerHandler = (newFarmer) => {
+export const addFarmerHandler = newFarmer => {
   // Add separate function to exhaustively check all incoming inputs from the farmers form.
   // I.e. check for every single piece of data that's required in the form.
   if (!newFarmer) {
@@ -60,17 +58,14 @@ export const addFarmerHandler = (newFarmer) => {
   }
 
   return axios
-    .post(`${pathObj.addFarmerPath}`, 
-      newFarmer,
-      setHeaders(), 
-    )
+    .post(`${pathObj.addFarmerPath}`, newFarmer, setHeaders())
     .then(res => {
       if (res.data.successMessage) {
         return res.data;
       }
     })
     .catch(error => {
-      // Note that this *should* not throw a new Error, but rather return the error array. 
+      // Note that this *should* not throw a new Error, but rather return the error array.
       // This gets used to generate the toasts on the form itself.
       throw error;
     });
@@ -82,27 +77,27 @@ export const updateFarmerHandler = (changes, farmerId) => {
     throw new Error("Make sure you're passing valid changes!");
   }
 
-  return axios.patch(`${pathObj.updateFarmerPath}/${farmerId}/update`,
-    changes,
-    setHeaders(),
-  )
+  return axios
+    .patch(
+      `${pathObj.updateFarmerPath}/${farmerId}/update`,
+      changes,
+      setHeaders()
+    )
     .then(res => {
       if (res.data.success) {
         return res.data;
       }
     })
     .catch(error => {
-      // Note that this *should* not throw a new Error, but rather return the error array. 
+      // Note that this *should* not throw a new Error, but rather return the error array.
       // This gets used to generate the toasts on the form itself.
       throw error;
     });
 };
 
-export const deleteFarmerHandler = (farmerId) => {
+export const deleteFarmerHandler = farmerId => {
   return axios
-    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, 
-      setHeaders()
-    )
+    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders())
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage;
@@ -114,9 +109,15 @@ export const deleteFarmerHandler = (farmerId) => {
     });
 };
 
-export const uploadImageHandler = (imageFile) => {
-  return axios.post(
-    process.env.REACT_APP_CLOUDINARY_URL,
-    imageFile
-  );
-}
+export const uploadImageHandler = imageFile => {
+  return axios.post(process.env.REACT_APP_CLOUDINARY_URL, imageFile);
+};
+
+export const getfarmerStatisticsHandler = () => {
+  return axios
+    .get(pathObj.getFarmersStatistic, setHeaders())
+    .then(res => res.data)
+    .catch(error => {
+      throw new Error(error);
+    });
+};

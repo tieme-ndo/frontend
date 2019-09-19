@@ -12,7 +12,7 @@ import { addFarmerHandler, uploadImageHandler } from '../../../utils/handlers/fa
 import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
-const AddFarmer = () => {
+const AddFarmer = ({ history, appStateShouldUpdate }) => {
   const [state, setState] = useState({});
 
   const defaultState = () => {
@@ -143,8 +143,9 @@ const AddFarmer = () => {
     addFarmerHandler(formData)
       .then(() => {
         toast.success('Farmer Added Successfully');
+        appStateShouldUpdate(true);
         defaultState();
-        return;
+        history.push('/');
       })
       .catch(err => {
         err.response.data.errors.forEach(element => {

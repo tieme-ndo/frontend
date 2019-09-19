@@ -5,7 +5,6 @@ import {
   updateFarmerHandler,
   uploadImageHandler
 } from '../../../utils/handlers/farmerHandlers';
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 
@@ -360,4 +359,4 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
   );
 };
 
-export default withRestrictedAccess(UpdateFarmer);
+export default UpdateFarmer;

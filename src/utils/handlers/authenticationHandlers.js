@@ -89,15 +89,18 @@ export const getUser = () => {
   }
 };
 
-export const isLoggedIn = () => {
-  // This needs to be improved checking the token with decryption, checking payload for expiration
-  // Returns a boolean if a valid token is found in the localStorage
-  return tokenKey in window.localStorage;
-};
-
 export const getToken = () => {
   return window.localStorage.getItem(tokenKey);
 };
 
+export const isLoggedIn = (token = getToken()) => {
+  // TODO: This needs to be improved checking the token with decryption, checking payload for expiration
+  // Returns a boolean if a valid token is found in the localStorage
+  if (token) {
+    const tokenIsCorrectlyFormatted = token.match(/^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/);
+    return !!token && !!tokenIsCorrectlyFormatted;
+  }
+  return false;
+};
 // DEBATE: adding a separate logoutHandler to account for clearing localStorage, as well as the user objects.
 // However, since we do not use Redux, the use-case for this is limited. Will discuss during stand-up.

@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
-import { changePasswordHandler } from '../../../utils/handlers/userHandlers'; 
-import withRestrictedAccess from '../../hoc/withRestrictedAccess';
+import { changePasswordHandler } from '../../../utils/handlers/userHandlers';
 
 const PasswordReset = ({ logOut }) => {
   const [state, updateState] = useState({
@@ -74,4 +73,4 @@ const PasswordReset = ({ logOut }) => {
   );
 };
 
-export default withRestrictedAccess(PasswordReset);
+export default PasswordReset;
