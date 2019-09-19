@@ -8,10 +8,7 @@ import {
   guarantor,
   farmInfo
 } from '../../common/Input/addFarmerData';
-import axios from 'axios';
-import { pathObj } from '../../../utils/generalVariables';
-import { getToken } from '../../../utils/handlers/authenticationHandlers';
-import { setHeaders } from '../../../utils/requestHeaders';
+import { addFarmerHandler, uploadImageHandler } from '../../../utils/handlers/farmerHandlers';
 import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
@@ -72,6 +69,7 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         newEntry.selected = [...newEntry.selected, value];
       }
     } else if (type === 'file') {
+      
       // Remove the selected image file from the form's <img /> element if no file is selected
       e.persist();
       e.target.nextSibling.src = '';
@@ -86,10 +84,7 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         );
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
-            const uploadResponseData = await axios.post(
-              process.env.REACT_APP_CLOUDINARY_URL,
-              imageFile
-            );
+            const uploadResponseData = await uploadImageHandler(imageFile)
             const imageUrl = uploadResponseData.data.secure_url;
 
             // Render the image in the form's <img /> element
@@ -145,9 +140,8 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
       }
     }
 
-    axios
-      .post(`${pathObj.addFarmerPath}/create`, formData, setHeaders(getToken()))
-      .then(res => {
+    addFarmerHandler(formData)
+      .then(() => {
         toast.success('Farmer Added Successfully');
         appStateShouldUpdate(true);
         defaultState();

@@ -41,9 +41,8 @@ export const approveChangeRequest = (
   history,
   appStateShouldUpdate
 ) => {
-  const token = getToken();
   return axios
-    .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders(token))
+    .post(`${pathObj.getEdits}/${requestId}/approve`, {}, setHeaders())
     .then(res => {
       if (res.data) {
         toast.success('Farmer record approved');
@@ -62,9 +61,8 @@ export const rejectChangeRequest = (
   history,
   appStateShouldUpdate
 ) => {
-  const token = getToken();
   return axios
-    .post(`${pathObj.getEdits}/${requestId}/decline`, {}, setHeaders(token))
+    .post(`${pathObj.getEdits}/${requestId}/decline`, {}, setHeaders())
     .then(res => {
       if (res.data) {
         toast.success('Farmer record rejected');
