@@ -5,81 +5,86 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import { Menu, Sidebar, Segment } from 'semantic-ui-react';
+import { Menu, Sidebar, List } from 'semantic-ui-react';
 
 const SidebarComponent = ({ visible, edits, closeSideBar }) => {
   return (
-    <Span data-testid="sidebar-component">
-      {' '}
-      <Sidebar
-        as={Menu}
-        animation="overlay"
-        direction="right"
-        icon="labeled"
-        dimmed={'dimmed'}
-        vertical
-        visible={visible}
-        width="wide"
-        style={{
-          top: '57px',
-          maxHeight: '400px'
-        }}
-      >
-        <Div>
-          {edits && edits.length ? (
-            edits.map(edit => (
-              <Link to={`/edit-collection/${edit._id}`} key={edit._id}>
-                <Segment vertical className="cards" onClick={closeSideBar}>
-                  <p>
+    <Sidebar
+      data-testid="sidebar-component"
+      as={Menu}
+      animation="overlay"
+      direction="right"
+      icon="labeled"
+      dimmed="dimmed"
+      visible={visible}
+      width="very wide"
+      style={{
+        top: '57px',
+        maxWidth: '100%',
+        // Statistics loader is set at z-index of 1000 by default! X(
+        zIndex: '1001'
+      }}
+    >
+      <NotificationsList divided>
+        {edits && edits.length ? (
+          edits.map(edit => (
+            <List.Item
+              onClick={closeSideBar}
+              key={edit._id}
+              // Overwrite padding coming from parent Menu component
+              // Not working using specificity within styled component styles
+              style={{ padding: '23px 14px 23px 23px' }}
+            >
+              <Link to={`/edit-collection/${edit._id}`}>
+                <List.Content>
+                  <List.Header>
                     <b>{edit.change_requested_by}</b> updated{' '}
-                    <b>{edit.farmer_name}'s record</b> on{' '}
-                    {moment(edit.date).format('LLLL')}
-                  </p>
-                </Segment>
+                    <b>{edit.farmer_name}</b>'s record
+                  </List.Header>
+                  <List.Description>
+                    on {moment(edit.date).format('LLLL')}
+                  </List.Description>
+                </List.Content>
               </Link>
-            ))
-          ) : (
-            <p>No change requests have been made</p>
-          )}
-        </Div>
-      </Sidebar>
-    </Span>
+            </List.Item>
+          ))
+        ) : (
+          <NoChangeRequestsP>
+            No change requests have been made
+          </NoChangeRequestsP>
+        )}
+      </NotificationsList>
+    </Sidebar>
   );
 };
 
-const Span = styled.span`
-  cursor: pointer;
-  padding-top: 10px;
-  font-size: 12px;
-  .red {
-    color: red;
-  }
-  .grey {
-    color: grey;
+const NotificationsList = styled(List)`
+  width: 100%;
+
+  &.ui.divided.list > .item {
+    width: 100%;
+    text-align: left;
+    min-height: 130px;
+
+    &:hover {
+      background-color: #eeee;
+      transition: background-color 300ms ease-in-out;
+    }
+
+    .header {
+      font-weight: 400;
+      font-size: 20px;
+    }
+
+    .description {
+      margin-top: 10px;
+    }
   }
 `;
 
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .cards {
-    padding: 5px;
-  }
-  .cards {
-    background-color: #e8e8e8ab;
-    color: black;
-    &:hover {
-      color: teal;
-    }
-  }
-  .cards:nth-child(even) {
-    background-color: white;
-    &:hover {
-      color: teal;
-    }
-  }
+const NoChangeRequestsP = styled.p`
+  line-height: 60px;
+  opacity: 0.7;
 `;
 
 export default SidebarComponent;
