@@ -218,9 +218,6 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
       </Segment>
       <Form
         onSubmit={formHandler}
-        style={{
-          marginBottom: `${window.innerHeight / 2}px`
-        }}
       >
         <Segment
           style={{ width: '100%', padding: '2.5rem 1rem' }}
