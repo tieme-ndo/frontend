@@ -116,11 +116,7 @@ function App() {
           />
         ) : null}
 
-        <Container
-          onClick={() => {
-            console.log("Close panel");
-          }}
-        >
+        <Container id="container">
           <RestrictedRoute
             path="/"
             exact

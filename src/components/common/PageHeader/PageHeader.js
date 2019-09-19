@@ -28,6 +28,15 @@ const PageHeader = ({ logOut, user, edits }) => {
   const toggleSideBar = () => {
     setVisible(!visible);
   };
+
+  React.useEffect(function setupListener() {
+    window.addEventListener('click', closeSideBar)
+
+    return function cleanupListener() {
+      window.removeEventListener('click', closeSideBar)
+    }
+
+  })
   return (
     <div data-testid="nav-test">
       <Menu
