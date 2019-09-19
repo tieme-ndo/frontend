@@ -1,10 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import {
-  registrationHandler,
-  getToken
-} from '../../../utils/handlers/authenticationHandlers';
+import { registrationHandler } from '../../../utils/handlers/authenticationHandlers';
 import AddStaffForm from './AddStaffForm';
 import validateAddStaffForm from './AddStaffValidation';
 import { toast } from 'react-toastify';
@@ -55,8 +52,7 @@ function AddStaff() {
     const response = await registrationHandler({
       username: state.username,
       password: state.password,
-      isAdmin: state.isAdmin,
-      token: getToken()
+      isAdmin: state.isAdmin
     });
 
     if (Array.isArray(response)) {
