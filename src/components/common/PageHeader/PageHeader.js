@@ -56,7 +56,12 @@ const PageHeader = ({
                 />
               </Menu.Item>
             ) : null}
-            <Dropdown text="Menu" pointing className="link item">
+            <Dropdown
+              text="Menu"
+              pointing
+              className="link item"
+              onClick={closeSideBar}
+            >
               <Dropdown.Menu>
                 <Link to="/">
                   <Dropdown.Item>Dashboard</Dropdown.Item>
