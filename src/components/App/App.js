@@ -177,7 +177,6 @@ function App() {
                 <DisplayFarmer
                   {...props}
                   farmer={selectedFarmer}
-                  getFarmer={getFarmer}
                   needsUpdate={setNeedsUpdate}
                 />
               );
