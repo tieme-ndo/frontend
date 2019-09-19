@@ -140,7 +140,6 @@ function App() {
               <Dashboard
                 {...props}
                 farmers={data.farmersDashboard}
-                getFarmer={getFarmer}
                 statistics={data.statistics}
               />
             )}
@@ -180,14 +179,23 @@ function App() {
             path="/farmers/:id"
             isAllowed={isLoggedIn()}
             redirectTo="/login"
-            render={props => (
-              <DisplayFarmer
-                {...props}
-                farmers={data.farmers}
-                getFarmer={getFarmer}
-                needsUpdate={setNeedsUpdate}
-              />
-            )}
+            render={props => {
+              const id = props.match.params.id;
+              let selectedFarmer;
+              if (data.farmers) {
+                selectedFarmer = getFarmer(id);
+                if (!selectedFarmer) selectedFarmer = null;
+              }
+
+              return (
+                <DisplayFarmer
+                  {...props}
+                  farmer={selectedFarmer}
+                  getFarmer={getFarmer}
+                  needsUpdate={setNeedsUpdate}
+                />
+              );
+            }}
           />
           <RestrictedRoute
             exact
