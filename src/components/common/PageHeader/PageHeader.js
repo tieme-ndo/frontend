@@ -52,7 +52,6 @@ const PageHeader = ({
                 <Sidebar
                   visible={visible}
                   edits={edits}
-                  closeSideBar={closeSideBar}
                 />
               </Menu.Item>
             ) : null}

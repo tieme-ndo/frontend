@@ -2,12 +2,11 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-
 import { Menu, Sidebar, List } from 'semantic-ui-react';
 
-const SidebarComponent = ({ visible, edits, closeSideBar }) => {
+const SidebarComponent = ({ visible, edits, history }) => {
   return (
     <Sidebar
       data-testid="sidebar-component"
@@ -29,13 +28,15 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
         {edits && edits.length ? (
           edits.map(edit => (
             <List.Item
-              onClick={closeSideBar}
+              onClick={() => {
+                history.push(`/edit-collection/${edit._id}`)
+              }}
               key={edit._id}
               // Overwrite padding coming from parent Menu component
               // Not working using specificity within styled component styles
               style={{ padding: '23px 14px 23px 23px' }}
             >
-              <Link to={`/edit-collection/${edit._id}`}>
+              {/* <Link to={`/edit-collection/${edit._id}`}> */}
                 <List.Content>
                   <List.Header>
                     <b>{edit.change_requested_by}</b> updated{' '}
@@ -45,7 +46,7 @@ const SidebarComponent = ({ visible, edits, closeSideBar }) => {
                     on {moment(edit.date).format('LLLL')}
                   </List.Description>
                 </List.Content>
-              </Link>
+              {/* </Link> */}
             </List.Item>
           ))
         ) : (
@@ -87,4 +88,4 @@ const NoChangeRequestsP = styled.p`
   opacity: 0.7;
 `;
 
-export default SidebarComponent;
+export default withRouter(SidebarComponent);
