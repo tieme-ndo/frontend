@@ -73,7 +73,7 @@ const AddStaff = props => {
                     fluid
                     id="confirmPassword"
                     name="confirmPassword"
-                    type="confirmPassword"
+                    type="password"
                     value={state.confirmPassword}
                     onChange={handleChange}
                     data-testid="password-field"
