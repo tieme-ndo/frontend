@@ -16,7 +16,7 @@ const resetPasswordSchema = yup.object().shape({
     .trim(),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], "Passwords don't match")
+    .oneOf([yup.ref('newPassword'), null], "New passwords don't match")
     .required('Confirm Password is required')
 });
 

@@ -27,7 +27,7 @@ const PasswordReset = ({ logOut }) => {
       };
     });
 
-    const { newPassword, confirmNewPassword } = state;
+    const { prevPassword, newPassword, confirmNewPassword } = state;
 
     const { errors, isValid } = await validateResetPassword({
       prevPassword,
@@ -36,8 +36,6 @@ const PasswordReset = ({ logOut }) => {
     });
 
     if (!isValid) {
-      toast.error('All fields are required');
-
       return updateState(prevState => ({
         ...prevState,
         errors,
@@ -45,7 +43,7 @@ const PasswordReset = ({ logOut }) => {
       }));
     }
 
-    changePasswordHandler({ password: state.newPassword })
+    changePasswordHandler({ prevPassword: prevPassword, password: newPassword })
       .then(res => {
         toast.success('Password changed successfully');
 
