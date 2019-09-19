@@ -42,30 +42,26 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
   });
 
   useEffect(() => {
-    const fetchChangeRequest = changeRequestID => {
-      getChangeRequestsById(changeRequestID)
-        .then(data => {
-          const oldData = data.original_data;
-          const newData = data.requested_changes;
-          const cleanedData = [];
-          let key, key2;
-          for (key in oldData) {
-            for (key2 in oldData[key]) {
-              cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
-            }
+    getChangeRequestsById(match.params.id)
+      .then(data => {
+        const oldData = data.original_data;
+        const newData = data.requested_changes;
+        const cleanedData = [];
+        let key, key2;
+        for (key in oldData) {
+          for (key2 in oldData[key]) {
+            cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
           }
-          setState(prevState => {
-            return {
-              ...prevState,
-              data,
-              cleanedData
-            };
-          });
-        })
-        .catch(err => toast.error(err));
-    };
-    
-    fetchChangeRequest(match.params.id);
+        }
+        setState(prevState => {
+          return {
+            ...prevState,
+            data,
+            cleanedData
+          };
+        });
+      })
+      .catch(err => toast.error(err));
   }, [match]);
 
   const { data, cleanedData } = state;
