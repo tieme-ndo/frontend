@@ -55,7 +55,12 @@ function App() {
   }, []);
 
   const loadStatistics = async () => {
-    return await getfarmerStatisticsHandler();
+    const statistics = await getfarmerStatisticsHandler()
+      if(statistics instanceof Error){
+        toast.error(statistics);
+        return null;
+      }
+      return statistics;
   };
 
   useEffect(() => {
@@ -210,10 +215,7 @@ function App() {
             )}
           />
 
-          <StyledToastContainer
-            position="top-right"
-            hideProgressBar
-          />
+          <StyledToastContainer position="top-right" hideProgressBar />
         </Container>
       </div>
     </Router>
