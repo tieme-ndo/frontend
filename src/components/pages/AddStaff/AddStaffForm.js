@@ -68,6 +68,18 @@ const AddStaff = props => {
                   />
                 </Form.Field>
                 <Form.Field>
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <Form.Input
+                    fluid
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="confirmPassword"
+                    value={state.confirmPassword}
+                    onChange={handleChange}
+                    data-testid="password-field"
+                  />
+                </Form.Field>
+                <Form.Field>
                   <Checkbox
                     label="Check this box to make this user Admin"
                     name="isAdmin"
@@ -88,8 +100,8 @@ const AddStaff = props => {
                     content="Loading..."
                   />
                 ) : (
-                  <Button color="teal" fluid content="Add Staff" />
-                )}
+                    <Button color="teal" fluid content="Add Staff" />
+                  )}
               </Segment>
             </Form>
           </Grid.Column>
