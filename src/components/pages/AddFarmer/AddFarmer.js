@@ -148,10 +148,12 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         history.push('/');
       })
       .catch(err => {
-        err.response.data.errors.forEach(element => {
-          toast.error(element.message);
-        });
-        return;
+        if (Array.isArray(err.response.data.errors)) {
+          err.response.data.errors.forEach(element => {
+            toast.error(element.message);
+          });
+        }
+        toast.error(err.response.data.errors.message)
       });
   };
   const inputCreator = (data, tabName) => {
