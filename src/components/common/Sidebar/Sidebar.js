@@ -29,24 +29,22 @@ const SidebarComponent = ({ visible, edits, history }) => {
           edits.map(edit => (
             <List.Item
               onClick={() => {
-                history.push(`/edit-collection/${edit._id}`)
+                history.push(`/edit-collection/${edit._id}`);
               }}
               key={edit._id}
               // Overwrite padding coming from parent Menu component
               // Not working using specificity within styled component styles
               style={{ padding: '23px 14px 23px 23px' }}
             >
-              {/* <Link to={`/edit-collection/${edit._id}`}> */}
-                <List.Content>
-                  <List.Header>
-                    <b>{edit.change_requested_by}</b> updated{' '}
-                    <b>{edit.farmer_name}</b>'s record
-                  </List.Header>
-                  <List.Description>
-                    on {moment(edit.date).format('LLLL')}
-                  </List.Description>
-                </List.Content>
-              {/* </Link> */}
+              <List.Content>
+                <List.Header>
+                  <b>{edit.change_requested_by}</b> updated{' '}
+                  <b>{edit.farmer_name}</b>'s record
+                </List.Header>
+                <List.Description>
+                  on {moment(edit.date).format('LLLL')}
+                </List.Description>
+              </List.Content>
             </List.Item>
           ))
         ) : (
