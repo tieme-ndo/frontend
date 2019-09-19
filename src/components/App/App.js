@@ -21,7 +21,8 @@ import {
   getFarmersHandler,
   cleanFarmersData
 } from '../../utils/handlers/farmerHandlers';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { StyledToastContainer } from '../common/Toast/StyledToastContainer';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
@@ -209,10 +210,9 @@ function App() {
             )}
           />
 
-          <ToastContainer
+          <StyledToastContainer
             position="top-right"
             hideProgressBar
-            style={{ top: '64px' }}
           />
         </Container>
       </div>
