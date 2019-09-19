@@ -10,13 +10,14 @@ const resetPasswordSchema = yup.object().shape({
     .trim(),
   newPassword: yup
     .string()
+    .notOneOf([yup.ref('prevPassword')], "Password is the same as previous password")
     .required('New Password is required')
     .min(6)
     .max(40)
     .trim(),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword'), null], "New passwords don't match")
+    .oneOf([yup.ref('newPassword')], "New passwords don't match")
     .required('Confirm Password is required')
 });
 
