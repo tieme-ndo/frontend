@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Table, TableHeader, Button } from 'semantic-ui-react';
+/* import { Link } from 'react-router-dom'; */
 import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
+import { toast } from 'react-toastify';
 import {
   getChangeRequestsById,
   approveChangeRequest,
@@ -39,28 +40,33 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
     data: undefined,
     cleanedData: []
   });
+
   useEffect(() => {
-    getChangeRequestsById(match.params.id)
-      .then(data => {
-        const oldData = data.original_data;
-        const newData = data.requested_changes;
-        const cleanedData = [];
-        let key, key2;
-        for (key in oldData) {
-          for (key2 in oldData[key]) {
-            cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
+    const fetchChangeRequest = changeRequestID => {
+      getChangeRequestsById(changeRequestID)
+        .then(data => {
+          const oldData = data.original_data;
+          const newData = data.requested_changes;
+          const cleanedData = [];
+          let key, key2;
+          for (key in oldData) {
+            for (key2 in oldData[key]) {
+              cleanedData.push([key2, oldData[key][key2], newData[key][key2]]);
+            }
           }
-        }
-        setState(prevState => {
-          return {
-            ...prevState,
-            data,
-            cleanedData
-          };
-        });
-      })
-      .catch(err => err);
-  }, [match.params.id]);
+          setState(prevState => {
+            return {
+              ...prevState,
+              data,
+              cleanedData
+            };
+          });
+        })
+        .catch(err => toast.error(err));
+    };
+    
+    fetchChangeRequest(match.params.id);
+  }, [match]);
 
   const { data, cleanedData } = state;
 
@@ -144,18 +150,20 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
       <Button
         floated="right"
         className="red"
-        onClick={() =>
-          rejectChangeRequest(match.params.id, history, appStateShouldUpdate)
-        }
+        onClick={event => {
+          event.preventDefault();
+          rejectChangeRequest(match.params.id, history, appStateShouldUpdate);
+        }}
       >
         Reject
       </Button>
       <Button
         floated="right"
         className="green"
-        onClick={() =>
-          approveChangeRequest(match.params.id, history, appStateShouldUpdate)
-        }
+        onClick={event => {
+          event.preventDefault();
+          approveChangeRequest(match.params.id, history, appStateShouldUpdate);
+        }}
       >
         Accept
       </Button>

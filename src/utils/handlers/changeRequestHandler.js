@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
 
-
 export const getAllChangeRequests = () => {
   return axios
     .get(`${pathObj.getEdits}`, setHeaders())
@@ -44,8 +43,8 @@ export const approveChangeRequest = (
     .then(res => {
       if (res.data) {
         toast.success('Farmer record approved');
-        appStateShouldUpdate(true);
         history.push('/');
+        appStateShouldUpdate(true);
         return res.data;
       }
     })
@@ -64,8 +63,8 @@ export const rejectChangeRequest = (
     .then(res => {
       if (res.data) {
         toast.success('Farmer record rejected');
-        appStateShouldUpdate(true);
         history.push('/');
+        appStateShouldUpdate(true);
         return res.data;
       }
     })
