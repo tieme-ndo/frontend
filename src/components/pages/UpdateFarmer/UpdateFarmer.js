@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
-import { updateFarmerHandler, uploadImageHandler } from '../../../utils/handlers/farmerHandlers';
+import {
+  updateFarmerHandler,
+  uploadImageHandler
+} from '../../../utils/handlers/farmerHandlers';
 import withRestrictedAccess from '../../hoc/withRestrictedAccess';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
@@ -20,7 +23,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
 
     // eslint-disable-next-line no-unused-vars
     for (const inputSection in formInputData) {
-      const inputSectionData = formInputData[inputSection]; 
+      const inputSectionData = formInputData[inputSection];
 
       // eslint-disable-next-line no-unused-vars
       for (const input in inputSectionData) {
@@ -118,7 +121,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
             setStateLoading(true);
-            const uploadResponseData = await uploadImageHandler(imageFile)
+            const uploadResponseData = await uploadImageHandler(imageFile);
             const imageUrl = uploadResponseData.data.secure_url;
             changedData.image_url = uploadResponseData.data.secure_url;
             e.target.nextSibling.src = imageUrl;
@@ -180,27 +183,33 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     }
 
     updateFarmerHandler(changes, farmerData._id)
-    .then(() => {
-      appStateShouldUpdate(true);
-      if (user && user.isAdmin) {
-        toast.success('Farmer record updated successfully');
-      } else {
-        toast.success("Waiting for Admin's review");
-      }
-      setStateLoading(false);
-      // removes "/edit" dynamically from the route pathname
-      history.replace(`${location.pathname.split('/edit')[0]}`, {
-        // Passes back the updated farmer data to the location state of the DisplayFarmers component
-        // Added "_id" because formData doesn't have/need an _id property
-        farmer: { ...formData, _id: farmerData._id }
+      .then(() => {
+        appStateShouldUpdate(true);
+        if (user && user.isAdmin) {
+          toast.success('Farmer record updated successfully');
+        } else {
+          toast.success("Waiting for Admin's review");
+        }
+        setStateLoading(false);
+        // removes "/edit" dynamically from the route pathname
+        history.replace(`${location.pathname.split('/edit')[0]}`, {
+          // Passes back the updated farmer data to the location state of the DisplayFarmers component
+          // Added "_id" because formData doesn't have/need an _id property
+          farmer: { ...formData, _id: farmerData._id }
+        });
+      })
+      .catch(err => {
+        setStateLoading(false);
+        if (!err.response) {
+          toast.error(err.message);
+          toast.error(
+            'Looks like there is a problem with your connection. Please try again later'
+          );
+        }
+        err.response.data.errors.forEach(element => {
+          toast.error(element.message);
+        });
       });
-    })
-    .catch(err => {
-      err.response.data.errors.forEach(element => {
-        toast.error(element.message);
-      });
-      return;
-    });
   };
 
   const inputCreator = (data, tabName) => {
