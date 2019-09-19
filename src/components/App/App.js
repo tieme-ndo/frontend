@@ -11,7 +11,11 @@ import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import PasswordReset from '../pages/PasswordReset/PasswordReset';
 import RestrictedRoute from '../hoc/RestrictedRoute';
-import { getUser, logout, isLoggedIn } from '../../utils/handlers/authenticationHandlers';
+import {
+  getUser,
+  logout,
+  isLoggedIn
+} from '../../utils/handlers/authenticationHandlers';
 
 import {
   getFarmersHandler,
@@ -22,6 +26,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
+import { getfarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -29,6 +34,7 @@ function App() {
     farmers: undefined,
     farmersDashboard: undefined
   });
+  const [farmersStatistic, setFarmersStatistic] = useState(undefined);
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -55,6 +61,7 @@ function App() {
         loadChangeRequest();
       }
       loadFarmers();
+      loadStatistics();
       setNeedsUpdate(false);
     }
   }, [user, needsUpdate]);
@@ -68,6 +75,17 @@ function App() {
         });
       })
       .catch(error => {
+        toast.error(error.message);
+      });
+  };
+
+  const loadStatistics = () => {
+    getfarmerStatisticsHandler()
+      .then(statistics => {
+        setFarmersStatistic(statistics);
+      })
+      .catch(error => {
+        setFarmersStatistic({});
         toast.error(error.message);
       });
   };
@@ -129,6 +147,7 @@ function App() {
                 {...props}
                 farmers={data.farmersDashboard}
                 getFarmer={getFarmer}
+                statistics={farmersStatistic}
               />
             )}
           />
@@ -159,10 +178,7 @@ function App() {
             isAllowed={isLoggedIn()}
             redirectTo="/login"
             render={props => (
-              <AddFarmer
-                {...props}
-                appStateShouldUpdate={setNeedsUpdate}
-              />
+              <AddFarmer {...props} appStateShouldUpdate={setNeedsUpdate} />
             )}
           />
           <RestrictedRoute
