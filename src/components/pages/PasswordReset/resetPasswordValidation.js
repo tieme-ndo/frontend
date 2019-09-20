@@ -4,21 +4,21 @@ import * as yup from 'yup';
 const resetPasswordSchema = yup.object().shape({
   currentPassword: yup
     .string()
-    .required('Current Password is required')
-    .min(6)
-    .max(40)
+    .required('Current password is required')
+    .min(6, "Current password must be at least 6 characers long")
+    .max(40, "Current password must be less than 40 characters long")
     .trim(),
   newPassword: yup
     .string()
     .notOneOf([yup.ref('currentPassword')], "Password is the same as current password")
-    .required('New Password is required')
-    .min(6)
-    .max(40)
+    .required('New password is required')
+    .min(6, "New password must be at least 6 characers long")
+    .max(40, "New password must be less than 40 characters long")
     .trim(),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref('newPassword')], "New passwords don't match")
-    .required('Confirm Password is required')
+    .oneOf([yup.ref('newPassword')], "New passwords must match")
+    .required('Confirm new password is required')
 });
 
 const errorFormatter = err => {
