@@ -63,7 +63,7 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
         // If no request is found with that ID
         history.push('/');
       });
-  }, [match]);
+  }, [match, history]);
 
   const { data, cleanedData } = state;
 
