@@ -10,18 +10,15 @@ import FamilyTab from './FamilyTab.js';
 import FarmTab from './FarmTab';
 import GuarantorTab from './GuarantorTab.js';
 
-const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
-  const [farmer, setFarmer] = useState();
+const DisplayFarmer = ({ history, farmer, needsUpdate }) => {
   const [selected, setSelected] = useState('Personal');
 
   useEffect(() => {
-    if (farmers) {
-      const farmerId = match.params.id;
-      const farmerToSave = getFarmer(farmerId);
-      farmerToSave ? setFarmer(farmerToSave) : history.push('/');
+    if (farmer === null) {
+      history.push('/');
     }
-  }, [farmers, getFarmer, match.params.id, history]);
- 
+  }, [farmer, history]);
+
   function handleSelected(e, { name }) {
     setSelected(name);
   }
@@ -94,11 +91,8 @@ const DisplayFarmer = ({ history, match, farmers, getFarmer, needsUpdate }) => {
 
 DisplayFarmer.propTypes = {
   history: PropTypes.object,
-  location: PropTypes.object,
   needsUpdate: PropTypes.func,
-  match: PropTypes.object,
-  farmers: PropTypes.array,
-  getFarmer: PropTypes.func
+  farmer: PropTypes.object,
 };
 
 export default DisplayFarmer;
