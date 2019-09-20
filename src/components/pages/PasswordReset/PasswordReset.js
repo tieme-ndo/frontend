@@ -42,7 +42,7 @@ const PasswordReset = ({ logOut }) => {
         resetting: false
       }));
     }
-    console.log(currentPassword);
+
     changePasswordHandler({ currentPassword, newPassword })
       .then(res => {
         toast.success('Password changed successfully');

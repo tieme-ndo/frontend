@@ -21,7 +21,7 @@ export const getUserHandler = (userId) => {
     });
 };
 
-export const changePasswordHandler = ({currentPassword, newPassword} ) => {
+export const changePasswordHandler = (currentPassword, newPassword) => {
   return axios
     .put(`${pathObj.changePasswordPath}`, 
       {currentPassword, password: newPassword},
