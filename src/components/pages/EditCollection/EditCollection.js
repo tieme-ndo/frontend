@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { toast } from 'react-toastify';
 import {
   getChangeRequestById,
   approveChangeRequest,
@@ -60,7 +59,10 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
           };
         });
       })
-      .catch(err => toast.error(err.message));
+      .catch(() => {
+        // If no request is found with that ID
+        history.push('/');
+      });
   }, [match]);
 
   const { data, cleanedData } = state;

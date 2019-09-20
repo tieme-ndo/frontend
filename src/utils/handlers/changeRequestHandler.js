@@ -29,7 +29,7 @@ export const getChangeRequestById = requestId => {
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error.response.data.message);
     });
 };
 
