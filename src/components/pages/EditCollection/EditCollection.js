@@ -11,6 +11,7 @@ import {
   approveChangeRequest,
   rejectChangeRequest
 } from '../../../utils/handlers/changeRequestHandler';
+import { toast } from 'react-toastify';
 
 const Div = styled.div`
   strike {
@@ -60,6 +61,9 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
         });
       })
       .catch(() => {
+        toast.error(
+          'Network Error when retrieving change request. Redirecting to Dashboard'
+        );
         // If no request is found with that ID
         history.push('/');
       });
