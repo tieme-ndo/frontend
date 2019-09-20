@@ -24,8 +24,8 @@ it('renders without crashing', () => {
     </Router>
   );
 
-  const prevPasswordField = getByPlaceholderText('Previous Password');
-  expect(prevPasswordField).toBeInTheDocument();
+  const currentPasswordField = getByPlaceholderText('Current Password');
+  expect(currentPasswordField).toBeInTheDocument();
 
   const newPasswordField = getByPlaceholderText('New Password');
   expect(newPasswordField).toBeInTheDocument();

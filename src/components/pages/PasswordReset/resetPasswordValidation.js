@@ -2,15 +2,15 @@ import * as yup from 'yup';
 
 // reset password schema
 const resetPasswordSchema = yup.object().shape({
-  prevPassword: yup
+  currentPassword: yup
     .string()
-    .required('Previous Password is required')
+    .required('Current Password is required')
     .min(6)
     .max(40)
     .trim(),
   newPassword: yup
     .string()
-    .notOneOf([yup.ref('prevPassword')], "Password is the same as previous password")
+    .notOneOf([yup.ref('currentPassword')], "Password is the same as current password")
     .required('New Password is required')
     .min(6)
     .max(40)

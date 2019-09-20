@@ -51,10 +51,10 @@ const PasswordResetForm = props => {
                     fluid
                     icon="lock"
                     iconPosition="left"
-                    placeholder="Previous Password"
+                    placeholder="Current Password"
                     type="password"
-                    name="prevPassword"
-                    value={state.prevPassword}
+                    name="currentPassword"
+                    value={state.currentPassword}
                     onChange={handleInputChange}
                   />
 
