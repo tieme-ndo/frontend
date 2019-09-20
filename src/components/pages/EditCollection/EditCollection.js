@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Table, TableHeader, Button } from 'semantic-ui-react';
-/* import { Link } from 'react-router-dom'; */
 import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
