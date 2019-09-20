@@ -9,6 +9,8 @@ it('renders without crashing', () => {
   expect(usernameField).toBeInTheDocument();
   const passwordField = getByTestId('password-field');
   expect(passwordField).toBeInTheDocument();
+  const confirmPasswordField = getByTestId('confirm-password-field');
+  expect(confirmPasswordField).toBeInTheDocument();
   const adminCheckbox = getByTestId('admin-checkbox');
   expect(adminCheckbox).toBeInTheDocument();
 });
