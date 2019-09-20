@@ -27,7 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
-import { getfarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
+import { getFarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -54,7 +54,11 @@ function App() {
   }, []);
 
   const loadStatistics = async () => {
-    return await getfarmerStatisticsHandler();
+    try {
+      return await getFarmerStatisticsHandler();
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   useEffect(() => {
@@ -203,10 +207,7 @@ function App() {
             )}
           />
 
-          <StyledToastContainer
-            position="top-right"
-            hideProgressBar
-          />
+          <StyledToastContainer position="top-right" hideProgressBar />
         </Container>
       </div>
     </Router>

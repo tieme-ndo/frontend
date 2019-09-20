@@ -113,7 +113,7 @@ export const uploadImageHandler = imageFile => {
   return axios.post(process.env.REACT_APP_CLOUDINARY_URL, imageFile);
 };
 
-export const getfarmerStatisticsHandler = () => {
+export const getFarmerStatisticsHandler = () => {
   return axios
     .get(pathObj.getFarmersStatistic, setHeaders())
     .then(res => res.data)
