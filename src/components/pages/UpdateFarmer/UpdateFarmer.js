@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Input from '../../common/Input/Input';
 import * as form from '../../common/Input/addFarmerData';
-import { updateFarmerHandler } from '../../../utils/handlers/farmerHandlers';
-import { getToken } from '../../../utils/handlers/authenticationHandlers';
+import {
+  updateFarmerHandler,
+  uploadImageHandler
+} from '../../../utils/handlers/farmerHandlers';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
@@ -119,10 +120,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
             setStateLoading(true);
-            const uploadResponseData = await axios.post(
-              process.env.REACT_APP_CLOUDINARY_URL,
-              imageFile
-            );
+            const uploadResponseData = await uploadImageHandler(imageFile);
             const imageUrl = uploadResponseData.data.secure_url;
             changedData.image_url = uploadResponseData.data.secure_url;
             e.target.nextSibling.src = imageUrl;
@@ -135,6 +133,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             );
           }
         } catch (error) {
+          setStateLoading(false);
           toast.error('Failed to upload image. Please check your connection.');
 
           // Display error message in the console for context
@@ -183,8 +182,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       }
     }
 
-    const token = getToken();
-    updateFarmerHandler(changes, farmerData._id, token)
+    updateFarmerHandler(changes, farmerData._id)
       .then(() => {
         appStateShouldUpdate(true);
         if (user && user.isAdmin) {

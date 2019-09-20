@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
-import { getToken } from './authenticationHandlers';
 
 export const getFarmersHandler = () => {
-  const token = getToken();
   return axios
-    .get(`${pathObj.getFarmersPath}`, setHeaders(token))
+    .get(`${pathObj.getFarmersPath}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmers;
@@ -34,13 +32,12 @@ export const cleanFarmersData = farmers => {
 };
 
 export const getIndividualFarmerHandler = farmerId => {
-  const token = getToken();
   if (!farmerId || typeof farmerId !== 'string') {
     throw new Error("Make sure you're passing a farmer id!");
   }
 
   return axios
-    .get(`${pathObj.getFarmersPath}/${farmerId}`, setHeaders(token))
+    .get(`${pathObj.getFarmersPath}/${farmerId}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.farmer;
@@ -51,7 +48,7 @@ export const getIndividualFarmerHandler = farmerId => {
     });
 };
 
-export const addFarmerHandler = (newFarmer, token) => {
+export const addFarmerHandler = newFarmer => {
   // Add separate function to exhaustively check all incoming inputs from the farmers form.
   // I.e. check for every single piece of data that's required in the form.
   if (!newFarmer) {
@@ -61,18 +58,20 @@ export const addFarmerHandler = (newFarmer, token) => {
   }
 
   return axios
-    .post(`${pathObj.addFarmerPath}`, setHeaders(token), newFarmer)
+    .post(`${pathObj.addFarmerPath}`, newFarmer, setHeaders())
     .then(res => {
       if (res.data.successMessage) {
         return res.data;
       }
     })
     .catch(error => {
-      throw new Error(error);
+      // Note that this *should* not throw a new Error, but rather return the error array.
+      // This gets used to generate the toasts on the form itself.
+      throw error;
     });
 };
 
-export const updateFarmerHandler = (changes, farmerId, token) => {
+export const updateFarmerHandler = (changes, farmerId) => {
   // Once again, add a separate function to exhaustively check all incoming inputs
   if (!changes) {
     throw new Error("Make sure you're passing valid changes!");
@@ -82,7 +81,7 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
     .patch(
       `${pathObj.updateFarmerPath}/${farmerId}/update`,
       changes,
-      setHeaders(token)
+      setHeaders()
     )
     .then(res => {
       if (res.data.success) {
@@ -90,14 +89,15 @@ export const updateFarmerHandler = (changes, farmerId, token) => {
       }
     })
     .catch(error => {
+      // Note that this *should* not throw a new Error, but rather return the error array.
+      // This gets used to generate the toasts on the form itself.
       throw error;
     });
 };
 
 export const deleteFarmerHandler = farmerId => {
-  const token = getToken();
   return axios
-    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders(token))
+    .delete(`${pathObj.deleteFarmerPath}/${farmerId}/delete`, setHeaders())
     .then(res => {
       if (res.data.successMessage) {
         return res.data.successMessage;
@@ -109,10 +109,13 @@ export const deleteFarmerHandler = farmerId => {
     });
 };
 
-export const getfarmerStatisticsHandler = () => {
-  const token = getToken();
+export const uploadImageHandler = imageFile => {
+  return axios.post(process.env.REACT_APP_CLOUDINARY_URL, imageFile);
+};
+
+export const getFarmerStatisticsHandler = () => {
   return axios
-    .get(pathObj.getFarmersStatistic, setHeaders(token))
+    .get(pathObj.getFarmersStatistic, setHeaders())
     .then(res => res.data)
     .catch(error => {
       throw new Error(error);

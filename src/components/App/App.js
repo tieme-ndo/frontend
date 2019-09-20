@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import Dashboard from '../pages/Dashboard/Dashboard';
@@ -11,27 +11,55 @@ import UpdateFarmer from '../pages/UpdateFarmer/UpdateFarmer';
 import DisplayFarmer from '../pages/DisplayFarmer/DisplayFarmer';
 import PasswordReset from '../pages/PasswordReset/PasswordReset';
 import RestrictedRoute from '../hoc/RestrictedRoute';
-import { getUser, logout, isLoggedIn } from '../../utils/handlers/authenticationHandlers';
+import {
+  getUser,
+  logout,
+  isLoggedIn
+} from '../../utils/handlers/authenticationHandlers';
 
 import {
   getFarmersHandler,
   cleanFarmersData
 } from '../../utils/handlers/farmerHandlers';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { StyledToastContainer } from '../common/Toast/StyledToastContainer';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
+import { getFarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
 
 function App() {
   const [user, setUser] = useState(undefined);
-  const [farmers, setFarmers] = useState({
-    data: undefined,
-    cleanedData: undefined
+  const [data, setData] = useState({
+    farmers: undefined,
+    farmersDashboard: undefined,
+    statistics: undefined
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
-  const [visible, setVisible] = useState(false);
+
+  const loadFarmers = useCallback(() => {
+    getFarmersHandler()
+      .then(async retrievedFarmers => {
+        setData({
+          farmers: retrievedFarmers,
+          farmersDashboard: cleanFarmersData(retrievedFarmers),
+          statistics: await loadStatistics()
+        });
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
+  }, []);
+
+  const loadStatistics = async () => {
+    try {
+      return await getFarmerStatisticsHandler();
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   useEffect(() => {
     // Hook to retrieve the current logged in user from token
@@ -44,10 +72,11 @@ function App() {
 
   useEffect(() => {
     if (user && needsUpdate) {
-      setFarmers({
+      setData({
         // Setting this allows the dashboard to know that something is being loaded
-        data: undefined,
-        cleanedData: undefined
+        farmers: undefined,
+        farmersDashboard: undefined,
+        statistics: undefined
       });
 
       // fetch changeRequests only for admin users
@@ -57,24 +86,11 @@ function App() {
       loadFarmers();
       setNeedsUpdate(false);
     }
-  }, [user, needsUpdate]);
-
-  const loadFarmers = () => {
-    getFarmersHandler()
-      .then(retrievedFarmers => {
-        setFarmers({
-          data: retrievedFarmers,
-          cleanedData: cleanFarmersData(retrievedFarmers)
-        });
-      })
-      .catch(error => {
-        toast.error(error.message);
-      });
-  };
+  }, [user, needsUpdate, loadFarmers]);
 
   const getFarmer = id => {
-    if (farmers.data) {
-      const farmer = farmers.data.find(farmer => farmer._id === id);
+    if (data.farmers) {
+      const farmer = data.farmers.find(farmer => farmer._id === id);
       return farmer;
     }
   };
@@ -94,16 +110,6 @@ function App() {
       });
   };
 
-  const closeSideBar = () => {
-    if (visible) {
-      setVisible(!visible);
-    }
-  };
-
-  const toggleSideBar = () => {
-    setVisible(!visible);
-  };
-
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -112,13 +118,10 @@ function App() {
             logOut={logOut}
             user={user}
             edits={changeRequest}
-            visible={visible}
-            closeSideBar={closeSideBar}
-            toggleSideBar={toggleSideBar}
           />
         ) : null}
 
-        <Container onClick={closeSideBar}>
+        <Container id="container">
           <RestrictedRoute
             path="/"
             exact
@@ -127,8 +130,8 @@ function App() {
             render={props => (
               <Dashboard
                 {...props}
-                farmers={farmers.cleanedData}
-                getFarmer={getFarmer}
+                farmers={data.farmersDashboard}
+                statistics={data.statistics}
               />
             )}
           />
@@ -159,10 +162,7 @@ function App() {
             isAllowed={isLoggedIn()}
             redirectTo="/login"
             render={props => (
-              <AddFarmer
-                {...props}
-                appStateShouldUpdate={setNeedsUpdate}
-              />
+              <AddFarmer {...props} appStateShouldUpdate={setNeedsUpdate} />
             )}
           />
           <RestrictedRoute
@@ -170,14 +170,22 @@ function App() {
             path="/farmers/:id"
             isAllowed={isLoggedIn()}
             redirectTo="/login"
-            render={props => (
-              <DisplayFarmer
-                {...props}
-                farmers={farmers.data}
-                getFarmer={getFarmer}
-                needsUpdate={setNeedsUpdate}
-              />
-            )}
+            render={props => {
+              const id = props.match.params.id;
+              let selectedFarmer;
+              if (data.farmers) {
+                selectedFarmer = getFarmer(id);
+                if (!selectedFarmer) selectedFarmer = null;
+              }
+
+              return (
+                <DisplayFarmer
+                  {...props}
+                  farmer={selectedFarmer}
+                  needsUpdate={setNeedsUpdate}
+                />
+              );
+            }}
           />
           <RestrictedRoute
             exact
@@ -199,7 +207,7 @@ function App() {
             )}
           />
 
-          <ToastContainer position="top-right" />
+          <StyledToastContainer position="top-right" hideProgressBar />
         </Container>
       </div>
     </Router>
