@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import {
-  getChangeRequestsById,
+  getChangeRequestById,
   approveChangeRequest,
   rejectChangeRequest
 } from '../../../utils/handlers/changeRequestHandler';
@@ -41,7 +41,7 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
   });
 
   useEffect(() => {
-    getChangeRequestsById(match.params.id)
+    getChangeRequestById(match.params.id)
       .then(data => {
         const oldData = data.original_data;
         const newData = data.requested_changes;

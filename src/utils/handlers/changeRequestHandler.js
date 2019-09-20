@@ -16,7 +16,7 @@ export const getAllChangeRequests = () => {
     });
 };
 
-export const getChangeRequestsById = requestId => {
+export const getChangeRequestById = requestId => {
   if (!requestId || typeof requestId !== 'string') {
     return new Error("Make sure you're passing an edit id!");
   }
