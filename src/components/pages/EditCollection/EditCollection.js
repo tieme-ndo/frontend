@@ -60,7 +60,7 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
           };
         });
       })
-      .catch(err => toast.error(err));
+      .catch(err => toast.error(err.message));
   }, [match]);
 
   const { data, cleanedData } = state;
