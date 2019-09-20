@@ -76,7 +76,7 @@ const AddStaff = props => {
                     type="password"
                     value={state.confirmPassword}
                     onChange={handleChange}
-                    data-testid="password-field"
+                    data-testid="confirm-password-field"
                   />
                 </Form.Field>
                 <Form.Field>
