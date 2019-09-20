@@ -57,7 +57,7 @@ function AddStaff() {
         createAccount: false,
         password: '',
         confirmPassword: '',
-        errors: [{ password: 'passwords do not match' }]
+        errors: [{ password: 'Passwords do not match' }]
       }));
     }
 
