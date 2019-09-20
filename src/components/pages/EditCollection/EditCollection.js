@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { toast } from 'react-toastify';
 import {
   getChangeRequestById,
   approveChangeRequest,
   rejectChangeRequest
 } from '../../../utils/handlers/changeRequestHandler';
+import { toast } from 'react-toastify';
 
 const Div = styled.div`
   strike {
@@ -60,8 +60,14 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
           };
         });
       })
-      .catch(err => toast.error(err.message));
-  }, [match]);
+      .catch(() => {
+        toast.error(
+          'Network Error when retrieving change request. Redirecting to Dashboard'
+        );
+        // If no request is found with that ID
+        history.push('/');
+      });
+  }, [match, history]);
 
   const { data, cleanedData } = state;
 
