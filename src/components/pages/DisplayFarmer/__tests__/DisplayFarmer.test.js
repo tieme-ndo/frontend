@@ -45,7 +45,7 @@ it('renders without crashing', () => {
 
   const { getByTestId } = render(
     <Router>
-      <DisplayFarmer getFarmer={getFarmer} farmers={farmers} match={match} />
+      <DisplayFarmer farmer={farmers[0]} match={match} />
     </Router>
   );
 
@@ -62,7 +62,7 @@ it('renders the respective tab when clicking tab link', () => {
 
   const { getByTestId } = render(
     <Router>
-      <DisplayFarmer getFarmer={getFarmer} farmers={farmers} match={match} />
+      <DisplayFarmer farmer={farmers[0]} match={match} />
     </Router>
   );
 
