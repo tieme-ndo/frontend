@@ -69,6 +69,12 @@ const StyledDashboardTable = styled(DashboardTable)`
   tr {
     cursor: pointer;
   }
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
+  tr:hover {
+    background-color: #dcdcdc;
+  }
 `;
 
 export default StyledDashboardTable;
