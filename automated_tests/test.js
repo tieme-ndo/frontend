@@ -1,12 +1,18 @@
+const URL =
+  process.env.REACT_APP_URL || 'http://localhost:3000';
+const ADMIN_USER_TEST = process.env.ADMIN_USER_TEST || 'adminusertest';
+const ADMIN_PASSWORD_TEST = process.env.ADMIN_PASSWORD_TEST || '123456';
+
 module.exports = {
   'step one: login': function(browser) {
     browser
-      .url('http://localhost:3000/')
+      .url(URL)
       .waitForElementVisible('body', 1000)
-      .setValue('input[name=username]', 'david')
-      .setValue('input[name=password]', '1234567')
+      .setValue('input[name=username]', ADMIN_USER_TEST)
+      .setValue('input[name=password]', ADMIN_PASSWORD_TEST)
       .click('button');
   },
+
   'step two: click add farmer': function(browser) {
     browser
       .pause(3500)
@@ -15,6 +21,7 @@ module.exports = {
       .click("//*[contains(text(),'Add Farmer')]")
       .pause(1000);
   },
+
   'step three: add farmer info': function(browser) {
     browser
       .useCss()
@@ -80,9 +87,7 @@ module.exports = {
       .execute(
         'document.querySelectorAll("[data-name=\'family_income_per_month\']")[0].children[2].children[1].click()'
       )
-      .execute(
-        'document.getElementsByTagName("button")[1].click()'
-      )
+      .execute('document.getElementsByTagName("button")[1].click()')
       .useCss();
   },
 
@@ -110,7 +115,48 @@ module.exports = {
       .setValue('input[name=grt_region]', 'Region')
       .useXpath()
       .execute('document.getElementsByTagName("button")[2].click()')
-      .pause(3000)
+      .useCss();
+  },
+
+  'step six: add farm info': function(browser) {
+    browser
+      .setValue('input[name=number_of_acres]', '30')
+      .setValue('input[name=location_of_farm]', 'Farm Location')
+      .setValue('input[name=farm_nearest_landmark]', 'Landmark')
+      .useXpath()
+      .click("//*[contains(text(),'Maize')]")
+      .click("//*[contains(text(),'Rice')]")
+      .click("//*[contains(text(),'Turkey')]")
+      .click("//*[contains(text(),'Pig')]");
+  },
+
+  'step seven: add farmer': function(browser) {
+    browser
+      .execute('document.getElementsByTagName("button")[3].click()')
+      .pause(1000)
+      .assert.containsText('html', 'Farmer Added Successfully')
+      .assert.containsText('html', 'Automated Test');
+  },
+
+  'step eight: edit farmer info': function(browser) {
+    browser
+      .useXpath()
+      .click("//td[contains(text(),'Automated Test')]")
+      .click("//*[contains(text(),'Edit Farmer')]")
+      .useCss()
+      .setValue('input[name=surname]', 'Edited')
+      .useXpath()
+      .click("//*[contains(text(),'Submit Changes')]")
+      .pause(1000);
+  },
+
+  'step nine: delete farmer': function(browser) {
+    browser
+      .useXpath()
+      .assert.containsText('html', 'Automated TestEdited')
+      .click("//*[contains(text(),'Remove Farmer')]")
+      .click("//*[contains(text(),'Yes')]")
+      .pause(1000)
       .end();
   }
 };
