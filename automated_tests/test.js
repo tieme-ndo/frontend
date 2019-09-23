@@ -9,7 +9,7 @@ module.exports = {
   },
   'step two: click add farmer': function(browser) {
     browser
-      .pause(3000)
+      .pause(3500)
       .assert.containsText('body', 'All Farmers')
       .useXpath()
       .click("//*[contains(text(),'Add Farmer')]")
@@ -20,7 +20,7 @@ module.exports = {
       .useCss()
       .click('div[data-name=title]')
       .useXpath()
-      .click("//span[text()='Miss']")
+      .click("//span[text()='Mr']")
       .useCss()
       .setValue('input[name=first_name]', 'Automated')
       .setValue('input[name=surname]', 'Test')
@@ -67,7 +67,50 @@ module.exports = {
 
   'step four: add family info': function(browser) {
     browser
-      .pause(2000)
+      .setValue('input[name=family_size]', '4')
+      .setValue('input[name=number_of_dependant]', '2')
+      .click('div[data-name=highest_level_of_dependent]')
+      .useXpath()
+      .execute(
+        'document.querySelectorAll("[data-name=\'highest_level_of_dependent\']")[0].children[2].children[1].click()'
+      )
+      .useCss()
+      .click('div[data-name=family_income_per_month]')
+      .useXpath()
+      .execute(
+        'document.querySelectorAll("[data-name=\'family_income_per_month\']")[0].children[2].children[1].click()'
+      )
+      .execute(
+        'document.getElementsByTagName("button")[1].click()'
+      )
+      .useCss();
+  },
+
+  'step five: add guarantor info': function(browser) {
+    browser
+      .click('div[data-name=grt_title]')
+      .useXpath()
+      .execute(
+        'document.querySelectorAll("[data-name=\'grt_title\']")[0].children[2].children[1].click()'
+      )
+      .useCss()
+      .setValue('input[name=grt_surname]', 'Test')
+      .setValue('input[name=grt_first_name]', 'Guarantor')
+      .click('div[data-name=grt_gender]')
+      .useXpath()
+      .execute(
+        'document.querySelectorAll("[data-name=\'grt_gender\']")[0].children[2].children[1].click()'
+      )
+      .useCss()
+      .setValue('input[name=grt_relations]', 'Friend')
+      .setValue('input[name=grt_residential_address]', 'Fake Street 123')
+      .setValue('input[name=grt_occupation]', 'Guarantor')
+      .setValue('input[name=grt_phone]', '0184848282')
+      .setValue('input[name=grt_district]', 'District')
+      .setValue('input[name=grt_region]', 'Region')
+      .useXpath()
+      .execute('document.getElementsByTagName("button")[2].click()')
+      .pause(3000)
       .end();
   }
 };
