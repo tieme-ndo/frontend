@@ -2,12 +2,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { pathObj } from '../generalVariables';
 import { setHeaders } from '../requestHeaders';
-import { getToken } from './authenticationHandlers';
 
 export const getAllChangeRequests = () => {
-  const token = getToken();
   return axios
-    .get(`${pathObj.getEdits}`, setHeaders(token))
+    .get(`${pathObj.getEdits}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data.changeRequests;
@@ -18,21 +16,20 @@ export const getAllChangeRequests = () => {
     });
 };
 
-export const getChangeRequestsById = requestId => {
-  const token = getToken();
+export const getChangeRequestById = requestId => {
   if (!requestId || typeof requestId !== 'string') {
     return new Error("Make sure you're passing an edit id!");
   }
 
   return axios
-    .get(`${pathObj.getEdits}/${requestId}`, setHeaders(token))
+    .get(`${pathObj.getEdits}/${requestId}`, setHeaders())
     .then(res => {
       if (res.data) {
         return res.data;
       }
     })
     .catch(error => {
-      return new Error(error);
+      throw new Error(error.response.data.message);
     });
 };
 
@@ -46,8 +43,8 @@ export const approveChangeRequest = (
     .then(res => {
       if (res.data) {
         toast.success('Farmer record approved');
-        appStateShouldUpdate(true);
         history.push('/');
+        appStateShouldUpdate(true);
         return res.data;
       }
     })
@@ -66,8 +63,8 @@ export const rejectChangeRequest = (
     .then(res => {
       if (res.data) {
         toast.success('Farmer record rejected');
-        appStateShouldUpdate(true);
         history.push('/');
+        appStateShouldUpdate(true);
         return res.data;
       }
     })

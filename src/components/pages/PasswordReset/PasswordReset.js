@@ -8,6 +8,7 @@ import { changePasswordHandler } from '../../../utils/handlers/userHandlers';
 
 const PasswordReset = ({ logOut }) => {
   const [state, updateState] = useState({
+    currentPassword: '',
     newPassword: '',
     confirmNewPassword: '',
     errors: {},
@@ -26,16 +27,15 @@ const PasswordReset = ({ logOut }) => {
       };
     });
 
-    const { newPassword, confirmNewPassword } = state;
+    const { currentPassword, newPassword, confirmNewPassword } = state;
 
     const { errors, isValid } = await validateResetPassword({
+      currentPassword,
       newPassword,
       confirmNewPassword
     });
 
     if (!isValid) {
-      toast.error('All fields are required');
-
       return updateState(prevState => ({
         ...prevState,
         errors,
@@ -43,9 +43,9 @@ const PasswordReset = ({ logOut }) => {
       }));
     }
 
-    changePasswordHandler({ password: state.newPassword })
+    changePasswordHandler(currentPassword, newPassword)
       .then(res => {
-        toast.success('Password reset successfully');
+        toast.success('Password changed successfully');
 
         updateState(prevState => ({
           ...prevState,
@@ -61,6 +61,7 @@ const PasswordReset = ({ logOut }) => {
           errors: error,
           resetting: false
         }));
+        toast.error(error.message);
       });
   };
 

@@ -206,6 +206,9 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
             'Looks like there is a problem with your connection. Please try again later'
           );
         }
+        if(err.response.status === 403){
+        toast.warn(err.response.data.message)
+        }
         err.response.data.errors.forEach(element => {
           toast.error(element.message);
         });

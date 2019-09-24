@@ -21,12 +21,13 @@ import {
   getFarmersHandler,
   cleanFarmersData
 } from '../../utils/handlers/farmerHandlers';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { StyledToastContainer } from '../common/Toast/StyledToastContainer';
 import 'react-toastify/dist/ReactToastify.css';
 import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
-import { getfarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
+import { getFarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -37,7 +38,6 @@ function App() {
   });
   const [needsUpdate, setNeedsUpdate] = useState(true);
   const [changeRequest, setChangeRequest] = useState([]);
-  const [visible, setVisible] = useState(false);
 
   const loadFarmers = useCallback(() => {
     getFarmersHandler()
@@ -54,7 +54,11 @@ function App() {
   }, []);
 
   const loadStatistics = async () => {
-    return await getfarmerStatisticsHandler();
+    try {
+      return await getFarmerStatisticsHandler();
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   useEffect(() => {
@@ -106,16 +110,6 @@ function App() {
       });
   };
 
-  const closeSideBar = () => {
-    if (visible) {
-      setVisible(!visible);
-    }
-  };
-
-  const toggleSideBar = () => {
-    setVisible(!visible);
-  };
-
   return (
     <Router>
       <div className="App" data-testid="App">
@@ -124,15 +118,12 @@ function App() {
             logOut={logOut}
             user={user}
             edits={changeRequest}
-            visible={visible}
-            closeSideBar={closeSideBar}
-            toggleSideBar={toggleSideBar}
           />
         ) : null}
 
         <Container
-          onClick={closeSideBar}
           style={{ paddingTop: '97px' }}
+          id="container"
         >
           <RestrictedRoute
             path="/"
@@ -143,7 +134,6 @@ function App() {
               <Dashboard
                 {...props}
                 farmers={data.farmersDashboard}
-                getFarmer={getFarmer}
                 statistics={data.statistics}
               />
             )}
@@ -183,14 +173,22 @@ function App() {
             path="/farmers/:id"
             isAllowed={isLoggedIn()}
             redirectTo="/login"
-            render={props => (
-              <DisplayFarmer
-                {...props}
-                farmers={data.farmers}
-                getFarmer={getFarmer}
-                needsUpdate={setNeedsUpdate}
-              />
-            )}
+            render={props => {
+              const id = props.match.params.id;
+              let selectedFarmer;
+              if (data.farmers) {
+                selectedFarmer = getFarmer(id);
+                if (!selectedFarmer) selectedFarmer = null;
+              }
+
+              return (
+                <DisplayFarmer
+                  {...props}
+                  farmer={selectedFarmer}
+                  needsUpdate={setNeedsUpdate}
+                />
+              );
+            }}
           />
           <RestrictedRoute
             exact
@@ -212,7 +210,7 @@ function App() {
             )}
           />
 
-          <ToastContainer position="top-right" />
+          <StyledToastContainer position="top-right" hideProgressBar />
         </Container>
       </div>
     </Router>

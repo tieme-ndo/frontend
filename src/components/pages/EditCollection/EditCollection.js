@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
 import {
-  getChangeRequestsById,
+  getChangeRequestById,
   approveChangeRequest,
   rejectChangeRequest
 } from '../../../utils/handlers/changeRequestHandler';
+import { toast } from 'react-toastify';
 
 const Div = styled.div`
   strike {
@@ -39,8 +39,9 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
     data: undefined,
     cleanedData: []
   });
+
   useEffect(() => {
-    getChangeRequestsById(match.params.id)
+    getChangeRequestById(match.params.id)
       .then(data => {
         const oldData = data.original_data;
         const newData = data.requested_changes;
@@ -59,8 +60,14 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
           };
         });
       })
-      .catch(err => err);
-  }, [match.params.id]);
+      .catch(() => {
+        toast.error(
+          'Network Error when retrieving change request. Redirecting to Dashboard'
+        );
+        // If no request is found with that ID
+        history.push('/');
+      });
+  }, [match, history]);
 
   const { data, cleanedData } = state;
 
@@ -144,18 +151,20 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
       <Button
         floated="right"
         className="red"
-        onClick={() =>
-          rejectChangeRequest(match.params.id, history, appStateShouldUpdate)
-        }
+        onClick={event => {
+          event.preventDefault();
+          rejectChangeRequest(match.params.id, history, appStateShouldUpdate);
+        }}
       >
         Reject
       </Button>
       <Button
         floated="right"
         className="green"
-        onClick={() =>
-          approveChangeRequest(match.params.id, history, appStateShouldUpdate)
-        }
+        onClick={event => {
+          event.preventDefault();
+          approveChangeRequest(match.params.id, history, appStateShouldUpdate);
+        }}
       >
         Accept
       </Button>

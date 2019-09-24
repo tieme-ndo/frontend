@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -32,10 +32,27 @@ const PageHeader = ({
   logOut,
   user,
   edits,
-  visible,
-  closeSideBar,
-  toggleSideBar
 }) => {
+  const [visible, setVisible] = useState(false);
+
+  const closeSideBar = () => {
+    if (visible) {
+      setVisible(!visible);
+    }
+  };
+
+  const toggleSideBar = () => {
+    setVisible(!visible);
+  };
+
+  React.useEffect(function setupListener() {
+    window.addEventListener('click', closeSideBar);
+
+    return function cleanupListener() {
+      window.removeEventListener('click', closeSideBar);
+    };
+  });
+
   return (
     <div data-testid="nav-test">
       <Header
@@ -50,7 +67,7 @@ const PageHeader = ({
 
           <Menu.Menu position="right">
             {user && user.isAdmin ? (
-              <Menu.Item>
+              <Menu.Item onClick={toggleSideBar}>
                 <Span>
                   <i
                     className={
@@ -58,17 +75,20 @@ const PageHeader = ({
                         ? 'fas fa-bell red'
                         : 'fas fa-bell grey'
                     }
-                    onClick={toggleSideBar}
                   ></i>
                 </Span>
                 <Sidebar
                   visible={visible}
                   edits={edits}
-                  closeSideBar={closeSideBar}
                 />
               </Menu.Item>
             ) : null}
-            <Dropdown text="Menu" pointing className="link item">
+            <Dropdown
+              text="Menu"
+              pointing
+              className="link item"
+              onClick={closeSideBar}
+            >
               <Dropdown.Menu>
                 <Link to="/">
                   <Dropdown.Item>Dashboard</Dropdown.Item>

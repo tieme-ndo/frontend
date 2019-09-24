@@ -10,6 +10,7 @@ function AddStaff() {
   const [state, updateState] = useState({
     username: '',
     password: '',
+    confirmPassword: '',
     isAdmin: false,
     createAccount: false,
     errors: {}
@@ -36,7 +37,8 @@ function AddStaff() {
 
     const credential = {
       username: state.username,
-      password: state.password
+      password: state.password,
+      confirmPassword: state.confirmPassword
     };
 
     const { errors, isValid } = await validateAddStaffForm(credential);
@@ -46,6 +48,16 @@ function AddStaff() {
         ...prevState,
         createAccount: false,
         errors
+      }));
+    }
+
+    if (state.password !== state.confirmPassword) {
+      return updateState(prevState => ({
+        ...prevState,
+        createAccount: false,
+        password: '',
+        confirmPassword: '',
+        errors: [{ password: 'Passwords do not match' }]
       }));
     }
 
@@ -69,7 +81,8 @@ function AddStaff() {
 
       return updateState(prevState => ({
         ...prevState,
-        createAccount: false
+        createAccount: false,
+        errors: {}
       }));
     } else if (response === 'New user created') {
       toast.success('New user created');
@@ -78,6 +91,7 @@ function AddStaff() {
         ...prevState,
         username: '',
         password: '',
+        confirmPassword: '',
         isAdmin: false,
         createAccount: false
       }));
