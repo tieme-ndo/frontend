@@ -10,7 +10,7 @@ import LoadingIndicator from './LoadingIndicator';
 import FarmersStatistic from '../../partials/FarmersStatistic';
 
 const Dashboard = ({ farmers, statistics, history }) => {
-  const Title = <Header as="h1">All Farmers</Header>;
+  const Title = <Header as="h1">Dashboard</Header>;
   const columns = React.useMemo(tableColumLabels, []);
 
   return (
