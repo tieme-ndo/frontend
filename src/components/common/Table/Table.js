@@ -14,7 +14,6 @@ function DashboardTable({ className, history, columns, data }) {
 
   const ScrollDiv = styled.div`
     height: 50vh;
-    border: 1px solid red;
     overflow-y: scroll;
     ::-webkit-scrollbar { 
       display: none;
