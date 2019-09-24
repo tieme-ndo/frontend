@@ -159,7 +159,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
     });
 
     //scrolls to the height of the Menu whenever the tab is changed.
-    window.scrollTo(0, 75);
+    window.scrollTo(0, 0);
   };
 
   const formHandler = e => {

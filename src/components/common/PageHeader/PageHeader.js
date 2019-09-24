@@ -16,7 +16,23 @@ const Span = styled.span`
   }
 `;
 
-const PageHeader = ({ logOut, user, edits }) => {
+const Header = styled(Menu)`
+  &.ui.menu {
+    border-radius: 0;
+    margin: 0 0 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 103;
+    box-shadow: 0 2px 4px 0 rgba(34, 36, 38, 0.15);
+  }
+`;
+
+const PageHeader = ({
+  logOut,
+  user,
+  edits,
+}) => {
   const [visible, setVisible] = useState(false);
 
   const closeSideBar = () => {
@@ -39,8 +55,7 @@ const PageHeader = ({ logOut, user, edits }) => {
 
   return (
     <div data-testid="nav-test">
-      <Menu
-        style={{ borderRadius: '0', margin: '0 0 2rem' }}
+      <Header
         onClick={closeSideBar}
       >
         <Container>
@@ -99,7 +114,7 @@ const PageHeader = ({ logOut, user, edits }) => {
             </Dropdown>
           </Menu.Menu>
         </Container>
-      </Menu>
+      </Header>
     </div>
   );
 };
