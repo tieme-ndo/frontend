@@ -11,9 +11,18 @@ function DashboardTable({ className, history, columns, data }) {
     columns,
     data
   });
+
+  const ScrollDiv = styled.div`
+    height: 50vh;
+    border: 1px solid red;
+    overflow-y: scroll;
+    ::-webkit-scrollbar { 
+      display: none;
+    } 
+  `;
   // Render the UI for your table
   return (
-    <div className={className}>
+    <ScrollDiv className={className} >
       <Table celled {...getTableProps()} data-testid="Table-test">
         <Table.Header data-testid="Table-test-header">
           {headerGroups.map((headerGroup, index) => {
@@ -55,7 +64,7 @@ function DashboardTable({ className, history, columns, data }) {
           )}
         </Table.Body>
       </Table>
-    </div>
+    </ScrollDiv>
   );
 }
 
