@@ -132,6 +132,8 @@ module.exports = {
   'step seven: add farmer': function(browser) {
     browser
       .useXpath()
+      .waitForElementVisible("//*[contains(text(),'Add Farmer')]", 1000)
+      .pause(1000)
       .click("//*[contains(text(),'Add Farmer')]")
       .pause(2000)
       .useCss()
