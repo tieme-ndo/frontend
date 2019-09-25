@@ -19,7 +19,6 @@ module.exports = {
       .assert.containsText('body', 'All Farmers')
       .useXpath()
       .click("//*[contains(text(),'Add Farmer')]")
-      .pause(1000);
   },
 
   'step three: add farmer info': function(browser) {
@@ -133,7 +132,7 @@ module.exports = {
   'step seven: add farmer': function(browser) {
     browser
       .execute('document.getElementsByTagName("button")[3].click()')
-      .pause(1000)
+      .pause(2000)
       .assert.containsText('html', 'Farmer Added Successfully')
       .assert.containsText('html', 'Automated Test');
   },
@@ -147,7 +146,7 @@ module.exports = {
       .setValue('input[name=surname]', 'Edited')
       .useXpath()
       .click("//*[contains(text(),'Submit Changes')]")
-      .pause(1000);
+      .pause(2000);
   },
 
   'step nine: delete farmer': function(browser) {
@@ -156,7 +155,7 @@ module.exports = {
       .assert.containsText('html', 'Automated TestEdited')
       .click("//*[contains(text(),'Remove Farmer')]")
       .click("//*[contains(text(),'Yes')]")
-      .pause(1000)
+      .pause(2000)
       .end();
   }
 };
