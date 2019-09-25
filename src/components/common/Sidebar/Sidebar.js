@@ -20,8 +20,7 @@ const SidebarComponent = ({ visible, edits, history }) => {
       style={{
         top: '57px',
         maxWidth: '100%',
-        // Statistics loader is set at z-index of 1000 by default! X(
-        zIndex: '1001'
+        boxShadow: '-2px 0px 2px 0 rgba(34,36,38,.1)'
       }}
     >
       <NotificationsList divided>

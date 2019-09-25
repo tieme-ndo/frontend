@@ -121,7 +121,10 @@ function App() {
           />
         ) : null}
 
-        <Container id="container">
+        <Container
+          style={{ paddingTop: '97px' }}
+          id="container"
+        >
           <RestrictedRoute
             path="/"
             exact

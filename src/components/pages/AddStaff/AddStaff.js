@@ -51,6 +51,14 @@ function AddStaff() {
       }));
     }
 
+    if(!/^[a-z0-9]+$/.test(state.username)){
+      return updateState(prevState => ({
+        ...prevState,
+        createAccount: false,
+        errors: [{username: 'Non-alphanumeric characters are not allowed. Capital letters not allowed'}]
+      }));
+    }
+
     if (state.password !== state.confirmPassword) {
       return updateState(prevState => ({
         ...prevState,
