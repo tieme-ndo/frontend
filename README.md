@@ -51,6 +51,7 @@ yarn start # For a local development
 yarn test
 
 ```
+You can also learn about Nightwatch tests [here](./automated_tests/README.md).
 
 # Contributing
 
