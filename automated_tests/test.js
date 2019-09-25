@@ -131,8 +131,10 @@ module.exports = {
 
   'step seven: add farmer': function(browser) {
     browser
-      .execute('document.getElementsByTagName("button")[3].click()')
+      .useXpath()
+      .click("//*[contains(text(),'Add Farmer')]")
       .pause(2000)
+      .useCss()
       .assert.containsText('html', 'Farmer Added Successfully')
       .assert.containsText('html', 'Automated Test');
   },
