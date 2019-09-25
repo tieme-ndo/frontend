@@ -55,7 +55,7 @@ function AddStaff() {
       return updateState(prevState => ({
         ...prevState,
         createAccount: false,
-        errors: [{username: 'Non-alphanumeric characters are not allowed'}]
+        errors: [{username: 'Non-alphanumeric characters are not allowed. Capital letters not allowed'}]
       }));
     }
 
