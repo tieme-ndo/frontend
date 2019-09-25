@@ -8,7 +8,7 @@ This test should not run in a shared database. You should always run it in a tes
 ## Requirements to run
 - Chrome installed locally in your device
 - ENV variables: `REACT_APP_URL`, `ADMIN_USER_TEST`, `ADMIN_PASSWORD_TEST`
-- `REACT_APP_URL`: It's the url against the test is going to be executed. By default, if none, will use localhost.
+- `REACT_APP_URL`: It's the url against the test is going to be executed. By default, if none, will use localhost. If you use localhost, make sure your machine is running it with `yarn start` before executing the tests.
 - `ADMIN_USER_TEST`: Admin username used to log in and perform the different interactions. By default uses `adminusertest`.
 - `ADMIN_PASSWORD_TEST`: Password for the Admin username. By default uses `123456`.
 
