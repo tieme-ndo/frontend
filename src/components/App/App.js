@@ -26,7 +26,6 @@ import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
 import { getFarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
-import AxiosErrorInterceptor from '../hoc/axoisErrorHandler/AxiosErrorInterceptor'
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -213,4 +212,4 @@ function App() {
   );
 }
 
-export default AxiosErrorInterceptor(App);
+export default App;
