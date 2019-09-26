@@ -61,38 +61,44 @@ function AddStaff() {
       }));
     }
 
-    const response = await registrationHandler({
-      username: state.username,
-      password: state.password,
-      isAdmin: state.isAdmin
-    });
+    try {
+      const response = await registrationHandler({
+        username: state.username,
+        password: state.password,
+        isAdmin: state.isAdmin
+      });
+      if (Array.isArray(response)) {
+        const [errors] = response;
 
-    if (Array.isArray(response)) {
-      const [errors] = response;
+        toast.error(errors.message);
 
-      toast.error(errors.message);
+        return updateState(prevState => ({
+          ...prevState,
+          createAccount: false
+        }));
+      } else if (response && response.message === 'username already exists') {
+        toast.error('username already exists');
 
-      return updateState(prevState => ({
+        return updateState(prevState => ({
+          ...prevState,
+          createAccount: false,
+          errors: {}
+        }));
+      } else if (response === 'New user created') {
+        toast.success('New user created');
+
+        return updateState(prevState => ({
+          ...prevState,
+          username: '',
+          password: '',
+          confirmPassword: '',
+          isAdmin: false,
+          createAccount: false
+        }));
+      }
+    } catch (error) {
+      updateState(prevState => ({
         ...prevState,
-        createAccount: false
-      }));
-    } else if (response && response.message === 'username already exists') {
-      toast.error('username already exists');
-
-      return updateState(prevState => ({
-        ...prevState,
-        createAccount: false,
-        errors: {}
-      }));
-    } else if (response === 'New user created') {
-      toast.success('New user created');
-
-      return updateState(prevState => ({
-        ...prevState,
-        username: '',
-        password: '',
-        confirmPassword: '',
-        isAdmin: false,
         createAccount: false
       }));
     }
