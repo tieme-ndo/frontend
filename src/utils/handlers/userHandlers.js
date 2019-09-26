@@ -19,7 +19,7 @@ export const getUserHandler = userId => {
     });
 };
 
-export const changePasswordHandler = ( currentPassword, newPassword ) => {
+export const changePasswordHandler = (currentPassword, newPassword) => {
   return axios
     .put(
       `${pathObj.changePasswordPath}`,
@@ -28,12 +28,14 @@ export const changePasswordHandler = ( currentPassword, newPassword ) => {
     )
     .then(res => {
       if (res.data) {
-        return res.data.successMessage;
+        return res.data.message;
       }
     })
-
     .catch(error => {
-      throw new Error(error.response.data.message);
+      if (error.response) {
+        throw new Error(error.response.data.message);
+      }
+      // "else" is already handled by HOC intercepting network errors, all other erros have response.
     });
 };
 

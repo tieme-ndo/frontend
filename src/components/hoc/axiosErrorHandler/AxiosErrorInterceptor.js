@@ -12,7 +12,7 @@ const AxiosErrorInterceptor = WrappedComponent => {
         },
         function(error) {
           if (error.message === 'Network Error') {
-            toast.error(error.message);
+            toast.error('Network error, please check your internet connection');
           }
           return Promise.reject(error);
         }

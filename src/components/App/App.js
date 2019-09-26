@@ -191,7 +191,7 @@ function App() {
             path="/reset-password"
             isAllowed={isLoggedIn()}
             redirectTo="/login"
-            render={props => <PasswordReset {...props} logOut={logOut} />}
+            render={props => <PasswordReset {...props}/>}
           />
           <RestrictedRoute
             exact
