@@ -62,7 +62,7 @@ const EditCollection = ({ match, history, appStateShouldUpdate }) => {
       })
       .catch(() => {
         toast.error(
-          'Network Error when retrieving change request. Redirecting to Dashboard'
+          'Redirecting to Dashboard'
         );
         // If no request is found with that ID
         history.push('/');

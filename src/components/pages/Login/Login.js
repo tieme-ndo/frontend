@@ -43,22 +43,29 @@ function Login({ setUser, ...props }) {
         loading: false
       }));
     }
-    // send request to server
-    const receivedUser = await loginHandler({
-      username: state.username,
-      password: state.password
-    });
+    try {
+      // send request to server
+      const receivedUser = await loginHandler({
+        username: state.username,
+        password: state.password
+      });
+      // if the response has token => successful login
+      if (receivedUser.hasOwnProperty('token')) {
+        setUser(getUser());
 
-    // if the response has token => successful login
-    if (receivedUser.hasOwnProperty('token')) {
-      setUser(getUser());
-
-      props.history.push('/');
-    } else {
-      // on unsuccessful login, render server error message
+        props.history.push('/');
+      } else {
+        // on unsuccessful login, render server error message
+        updateState(prevState => ({
+          ...prevState,
+          errors: [{ error: receivedUser.message }],
+          loading: false
+        }));
+      }
+    } catch (error) {
       updateState(prevState => ({
         ...prevState,
-        errors: [{ error: receivedUser.message }],
+        errors: {},
         loading: false
       }));
     }

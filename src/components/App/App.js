@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
@@ -28,6 +26,7 @@ import PageHeader from '../common/PageHeader/PageHeader';
 import EditCollection from '../pages/EditCollection/EditCollection';
 import { getAllChangeRequests } from '../../utils/handlers/changeRequestHandler';
 import { getFarmerStatisticsHandler } from '../../utils/handlers/farmerHandlers';
+import AxiosErrorInterceptor from '../hoc/axiosErrorHandler/AxiosErrorInterceptor'
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -195,7 +194,7 @@ function App() {
             path="/reset-password"
             isAllowed={isLoggedIn()}
             redirectTo="/login"
-            render={props => <PasswordReset {...props} logOut={logOut} />}
+            render={props => <PasswordReset {...props}/>}
           />
           <RestrictedRoute
             exact
@@ -217,4 +216,4 @@ function App() {
   );
 }
 
-export default App;
+export default AxiosErrorInterceptor(App);

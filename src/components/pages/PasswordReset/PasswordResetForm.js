@@ -42,7 +42,7 @@ const PasswordResetForm = props => {
               <Image src={logo} centered alt="tiemendo logo" size="small" />
 
               <Header as="h3" style={{ marginBottom: '30px' }}>
-                Reset password
+                Change password
               </Header>
 
               <Form size="large" onSubmit={handleSubmit}>

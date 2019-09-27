@@ -6,7 +6,7 @@ import validateResetPassword from './resetPasswordValidation';
 import PasswordResetForm from './PasswordResetForm';
 import { changePasswordHandler } from '../../../utils/handlers/userHandlers';
 
-const PasswordReset = ({ logOut }) => {
+const PasswordReset = ({ history }) => {
   const [state, updateState] = useState({
     currentPassword: '',
     newPassword: '',
@@ -43,26 +43,35 @@ const PasswordReset = ({ logOut }) => {
       }));
     }
 
-    changePasswordHandler(currentPassword, newPassword)
-      .then(res => {
-        toast.success('Password changed successfully');
+    try {
+      const responseMessage = await changePasswordHandler(
+        currentPassword,
+        newPassword
+      );
+
+      if (responseMessage) {
+        toast.success(responseMessage);
 
         updateState(prevState => ({
           ...prevState,
           errors: {},
           resetting: false
         }));
-
-        logOut();
-      })
-      .catch(error => {
+        history.push('/');
+      } else {
         updateState(prevState => ({
           ...prevState,
-          errors: error,
           resetting: false
         }));
-        toast.error(error.message);
-      });
+      }
+    } catch (error) {
+      updateState(prevState => ({
+        ...prevState,
+        errors: error,
+        resetting: false
+      }));
+      toast.error(error.message);
+    }
   };
 
   return (
