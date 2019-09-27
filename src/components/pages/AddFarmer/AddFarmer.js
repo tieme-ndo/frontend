@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState, useEffect } from 'react';
 import Input from '../../common/Input/Input';
 import {
@@ -8,7 +6,10 @@ import {
   guarantor,
   farmInfo
 } from '../../common/Input/addFarmerData';
-import { addFarmerHandler, uploadImageHandler } from '../../../utils/handlers/farmerHandlers';
+import {
+  addFarmerHandler,
+  uploadImageHandler
+} from '../../../utils/handlers/farmerHandlers';
 import { toast } from 'react-toastify';
 import { Menu, Segment, Form, Button } from 'semantic-ui-react';
 
@@ -69,7 +70,6 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         newEntry.selected = [...newEntry.selected, value];
       }
     } else if (type === 'file') {
-      
       // Remove the selected image file from the form's <img /> element if no file is selected
       e.persist();
       e.target.nextSibling.src = '';
@@ -84,7 +84,7 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         );
         try {
           if (process.env.REACT_APP_CLOUDINARY_URL) {
-            const uploadResponseData = await uploadImageHandler(imageFile)
+            const uploadResponseData = await uploadImageHandler(imageFile);
             const imageUrl = uploadResponseData.data.secure_url;
 
             // Render the image in the form's <img /> element
@@ -148,12 +148,17 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
         history.push('/');
       })
       .catch(err => {
-        if (Array.isArray(err.response.data.errors)) {
-          err.response.data.errors.forEach(element => {
-            toast.error(element.message);
-          });
+        if (err.response) {
+          if (Array.isArray(err.response.data.errors)) {
+            err.response.data.errors.forEach(element => {
+              toast.error(element.message);
+            });
+          } else if (err.response.data.errors.message) {
+            toast.error(err.response.data.errors.message);
+          } else {
+            toast.error("There was a problem in your request");
+          }
         }
-        toast.error(err.response.data.errors.message)
       });
   };
   const inputCreator = (data, tabName) => {
