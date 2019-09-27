@@ -497,24 +497,6 @@ export const guarantor = {
     value: '',
     valid: true
   },
-  grt_surname: {
-    elementType: 'input',
-    name: 'grt_surname',
-    type: 'text',
-    labelName: 'Surname',
-    value: '',
-    valid: false,
-    touched: false
-  },
-  grt_first_name: {
-    elementType: 'input',
-    name: 'grt_first_name',
-    type: 'text',
-    labelName: 'First Name',
-    value: '',
-    valid: false,
-    touched: false
-  },
   grt_gender: {
     elementType: 'select',
     placeholder: 'Please Select',
@@ -552,6 +534,24 @@ export const guarantor = {
     name: 'grt_relations',
     type: 'text',
     labelName: 'Relations',
+    value: '',
+    valid: false,
+    touched: false
+  },
+  grt_surname: {
+    elementType: 'input',
+    name: 'grt_surname',
+    type: 'text',
+    labelName: 'Surname',
+    value: '',
+    valid: false,
+    touched: false
+  },
+  grt_first_name: {
+    elementType: 'input',
+    name: 'grt_first_name',
+    type: 'text',
+    labelName: 'First Name',
     value: '',
     valid: false,
     touched: false

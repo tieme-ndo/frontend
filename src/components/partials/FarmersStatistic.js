@@ -58,7 +58,7 @@ const FarmersStatistic = ({ farmersStatistic }) => {
   }
 
   return (
-    <Segment style={{ marginBottom: '50px', boxShadow: 'none', border: '0' }}>
+    <Segment style={{ marginBottom: '50px', boxShadow: 'none', border: '0', zIndex: '1' }}>
       <Dimmer active inverted>
         <Loader inverted>Loading farmers statistic</Loader>
       </Dimmer>

@@ -119,7 +119,7 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
     });
 
     //scrolls to the height of the Menu whenever the tab is changed.
-    window.scrollTo(0, 75);
+    window.scrollTo(0, 0);
   };
   const formHandler = e => {
     e.preventDefault();
@@ -223,9 +223,6 @@ const AddFarmer = ({ history, appStateShouldUpdate }) => {
       </Segment>
       <Form
         onSubmit={formHandler}
-        style={{
-          marginBottom: `${window.innerHeight / 2}px`
-        }}
       >
         <Segment
           style={{ width: '100%', padding: '2.5rem 1rem' }}
