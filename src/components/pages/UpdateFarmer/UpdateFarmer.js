@@ -200,15 +200,16 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
       })
       .catch(err => {
         setStateLoading(false);
-
-        if (Array.isArray(err.response.data.errors)) {
-          err.response.data.errors.forEach(element => {
-            toast.error(element.message);
-          });
-        } else if (err.response.data.errors.message) {
-          toast.error(err.response.data.errors.message);
-        } else {
-          toast.error('There was a problem in your request');
+        if (err.response) {
+          if (Array.isArray(err.response.data.errors)) {
+            err.response.data.errors.forEach(element => {
+              toast.error(element.message);
+            });
+          } else if (err.response.data.errors.message) {
+            toast.error(err.response.data.errors.message);
+          } else {
+            toast.error('There was a problem in your request');
+          }
         }
       });
   };
