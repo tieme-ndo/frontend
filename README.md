@@ -7,6 +7,7 @@
 # Tieme Ndo: A Custom Inventory Management System
 
 You can find the deployed project at [Tieme Ndo](https://tieme-ndo.netlify.com/).
+Staging [link]()
 
 ## Project Overview
 
