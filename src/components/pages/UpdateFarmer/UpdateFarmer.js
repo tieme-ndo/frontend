@@ -208,7 +208,7 @@ const UpdateFarmer = ({ location, history, appStateShouldUpdate, user }) => {
           } else if (err.response.data.errors.message) {
             toast.error(err.response.data.errors.message);
           } else {
-            toast.error('There was a problem in your request');
+            toast.error(err.response.data.message);
           }
         }
       });
